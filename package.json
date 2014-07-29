@@ -1,5 +1,5 @@
 {
-  "name": "node-auth",
+  "name": "sc2-tournaments",
   "version": "0.0.1",
   "main": "server.js",
   "dependencies": {

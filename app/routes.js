@@ -38,7 +38,6 @@ module.exports = function (app, passport) {
     res.render('profile.ejs', {
       message: req.flash('signupSuccess'), //get the message out of the session and pass to template
       user: req.user,//get the user out of session and pass to template
-      typeOfLogin: req.typeOfLogin
     });
   });
 

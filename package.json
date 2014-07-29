@@ -1,6 +1,9 @@
 {
   "name": "node-auth",
   "version": "0.0.1",
+  "scripts": {
+    "start": "node server.js"
+  },
   "main": "server.js",
   "dependencies": {
     "express" : "~4.0.0",

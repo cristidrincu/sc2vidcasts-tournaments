@@ -1,4 +1,8 @@
 var LocalStrategy = require('passport-local').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
+//load the auth variables
+var configOAuth = require('./auth');
 
 // load up the user model
 var User = require('../app/models/user');
@@ -40,7 +44,6 @@ module.exports = function (passport) {
         // asynchronous
         // User.findOne wont fire unless data is sent back
         process.nextTick(function () {
-
           // find a user whose email is the same as the forms email
           // we are checking to see if the user trying to login already exists
           User.findOne({ 'local.email': email }, function (err, user) {
@@ -99,5 +102,53 @@ module.exports = function (passport) {
       return done(null, user);
     });
 
+  }));
+
+
+  // =========================================================================
+  // GOOGLE+ SIGNUP ============================================================
+  // ========================================================================
+
+  passport.use(new GoogleStrategy({
+    clientID: configOAuth.googleAuth.clientID,
+    clientSecret: configOAuth.googleAuth.clientSecret,
+    callbackURL: configOAuth.googleAuth.callbackURL
+  },
+  function (token, refreshToken, profile, done){
+    //make the code asynchronous
+    // User.findOne won't fire until we have all our data back from Google
+
+    //defer the execution of an action till the next pass around the event loop
+    process.nextTick(function(){
+      typeOfLogin = 'googlePlus';
+
+      User.findOne({'google.id': profile.id}, function(err, user){
+        if(err)
+          return done(err);
+
+        if(user){
+          //if a user is found, log them in
+          return done(null, user);
+        }else{
+          //if the user is not in our database, create one
+          var newUser = new User();
+
+          // set all of the relevant information
+          newUser.google.id = profile.id;
+          newUser.google.token = token;
+          newUser.google.name = profile.displayName;
+          newUser.google.email = profile.emails[0].value; //pull the first email
+
+          //save the user
+          newUser.save(function(err){
+            if(err)
+              throw err;
+
+            return done(null, newUser);
+          });
+        }
+
+      })
+    });
   }));
 };

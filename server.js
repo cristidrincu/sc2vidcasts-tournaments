@@ -5,10 +5,11 @@
 // set up ======================================================================
 // get all the tools we need
 
-//use express and set it to run on port 3334
+//use express and set it to run on port 8080
 var express = require('express');
 var app = express();
-var port = process.env.PORT || 3334;
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
 
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -47,5 +48,6 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 require('./app/routes.js')(app, passport); //load our routes and pass in our app and fully configured passport
 
 //launch
-app.listen(port);
-console.log('The magic happens on port: ' + port);
+app.listen(server_port, server_ip_address, function () {
+  console.log( "Listening on " + server_ip_address + ", server_port " + server_port )
+});

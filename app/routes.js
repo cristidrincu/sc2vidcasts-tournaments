@@ -2,6 +2,8 @@
  * Created by cristiandrincu on 7/28/14.
  */
 
+var User = require('./models/user');
+
 //pass the routes to our app, as well as to passport
 module.exports = function (app, passport) {
 
@@ -37,7 +39,36 @@ module.exports = function (app, passport) {
   app.get('/profile', isLoggedIn, function (req, res) {
     res.render('profile.ejs', {
       message: req.flash('signupSuccess'), //get the message out of the session and pass to template
-      user: req.user,//get the user out of session and pass to template
+      user: req.user//get the user out of session and pass to template
+    });
+  });
+
+  //UPDATE PROFILE - get template
+  app.get('/customize-profile:nickname', isLoggedIn, function(req, res){
+    res.render('customize-profile.ejs', {
+      user: req.user//get the user out of session and pass to template
+    });
+  });
+
+  //UPDATE PROFILE - post
+  app.post('/customize-profile:nickname', function(req, res){
+    User.findOne({ 'local.nickname': req.params.nickname}, function(err, user){
+      if(err)
+        res.send('Utilizatorul nu a putut fi gasit');
+
+      user = req.user;
+      user.local.email = req.body.email;
+      user.local.race = req.body.race;
+
+      user.local.league = req.body.league;
+      user.local.nickname = req.body.nickname;
+
+      user.save(function(err){
+        if(err)
+          res.send('failed to update user');
+
+        res.redirect('/profile');
+      });
     });
   });
 

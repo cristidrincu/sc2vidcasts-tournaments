@@ -10,6 +10,8 @@ var User = require('../app/models/user');
 // expose this function to our app using module.exports
 module.exports = function (passport) {
 
+  var typeOfLogin = null;
+
   // =========================================================================
   // passport session setup ==================================================
   // =========================================================================
@@ -65,6 +67,7 @@ module.exports = function (passport) {
               newUser.local.password = newUser.generateHash(password);
               newUser.local.race = req.body.race;
               newUser.local.league = req.body.league;
+              newUser.local.nickname = req.body.nickname;
 
               // save the user
               newUser.save(function (err) {
@@ -82,7 +85,6 @@ module.exports = function (passport) {
     passwordField : 'password',
     passReqToCallback : true // allows us to pass back the entire request to the callback
   }, function(req, email, password, done){
-
     //find a user whose email is the same as the forms email
     // we are checking to see if the user trying to login already exists
     User.findOne({ 'local.email' :  email }, function(err, user) {

@@ -11,9 +11,6 @@
 <body>
 <div class="container">
 
-    <% var leagues = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Master', 'Grandmaster'] %>
-    <% var races = ['Terran', 'Zerg', 'Protoss', 'Random'] %>
-
     <div class="page-header text-center">
         <h1><span class="fa fa-anchor"></span> Aici iti poti face un update la profil</h1>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
@@ -30,35 +27,13 @@
                 <label>Update Nickname</label>
                 <input type="text" class="form-control" name="nickname" value="<%=user.local.nickname%>">
             </div>
-            <!--<div class="form-group">-->
-                <!--<label>Update Password</label>-->
-                <!--<input type="password" class="form-control" name="password">-->
-            <!--</div>-->
             <div class="form-group">
                 <label>Modifica rasa cu care joci</label>
-                <select class="form-control" name="race">
-                    <%
-                        var indexPlayerRace = races.indexOf(user.local.race)
-                        races.splice(1, indexPlayerRace);
-                    %>
-                    <% for(var i=0; i<races.length; i++){%>
-                        <option value="<%=races[i]%>"><%=races[i]%></option>
-                    <%}%>
-                </select>
+                <input type="text" class="form-control" name="race" value="<%=user.local.race%>">
             </div>
             <div class="form-group">
                 <label>Modifica liga din care faci parte</label>
-                <select class="form-control" name="league">
-                    <%
-                        var indexPlayerLeague = leagues.indexOf(user.local.league)
-                        leagues.splice(1, indexPlayerLeague);
-                    %>
-
-                    <%for(var i=0; i<leagues.length; i++){%>
-                        <option value="<%=leagues[i]%>"><%=leagues[i]%></option>
-                    <%}%>
-
-                </select>
+                <input type="text" class="form-control" name="league" value="<%=user.local.league%>">
             </div>
             <button type="submit" class="btn btn-warning btn-lg">Update</button>
         </form>

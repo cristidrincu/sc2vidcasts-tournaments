@@ -58,10 +58,9 @@ module.exports = function (app, passport) {
 
       user = req.user;
       user.local.email = req.body.email;
-      user.local.race = req.body.race;
-
-      user.local.league = req.body.league;
       user.local.nickname = req.body.nickname;
+      user.local.race = req.body.race;
+      user.local.league = req.body.league;
 
       user.save(function(err){
         if(err)
@@ -105,4 +104,8 @@ function isLoggedIn(req, res, next) {
 
   //if they aren't, redirect them to homepage
   res.redirect('/');
+}
+
+function uppercaseFirstChar(text){
+  return text.charAt(0).toUpperCase();
 }

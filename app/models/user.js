@@ -6,6 +6,7 @@ var userSchema = mongoose.Schema({
 
   local : {
     nickname: String,
+    battlenetid: String,
     email: String,
     password: String,
     race: String,

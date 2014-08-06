@@ -30,6 +30,7 @@ mongoose.connect(configDB.url);
 require('./config/passport.js')(passport); //pass passport for configuration
 
 //setup our express application
+app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms

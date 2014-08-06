@@ -1,20 +1,5 @@
-<!doctype html>
-<html>
-<head>
-    <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    <style>
-        body 		{ padding-top:80px; }
-    </style>
-</head>
-<body>
-<div class="container">
-
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Aici iti poti face un update la profil</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </div>
+<%include header%>
+<div class="container" style="margin-top: 150px;">
 
     <div class="col-sm-6 col-sm-offset-3">
         <!-- Update FORM -->
@@ -35,11 +20,14 @@
                 <label>Modifica liga din care faci parte</label>
                 <input type="text" class="form-control" name="league" value="<%=user.local.league%>">
             </div>
-            <button type="submit" class="btn btn-warning btn-lg">Update</button>
+            <button type="submit" class="btn btn-success btn-lg">Update</button>
+            <a href="/profile">
+                <button type="submit" class="btn btn-danger btn-lg">Anuleaza</button>
+            </a>
         </form>
         <hr>
     </div>
 
 </div>
-</body>
-</html>
+
+<%include footer%>

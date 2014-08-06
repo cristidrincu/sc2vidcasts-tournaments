@@ -1,0 +1,75 @@
+<% include header%>
+<% var nrOfPlayers = ['4', '8', '12', '16', '24', '32', '64']%>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#startDatePicker').datepicker();
+        $('#endDatePicker').datepicker();
+
+        $('#startHourPicker').pickatime({
+            formatSubmit: 'HH:i',
+            hiddenName: true
+        });
+
+        $('#endHourPicker').pickatime({
+            formatSubmit: 'HH:i',
+            hiddenName: true
+        });
+    })
+</script>
+<div class="container" style="margin-top: 100px; margin-bottom: 50px;">
+    <div class="col-sm-6 col-sm-offset-3">
+<!-- create tournament FORM -->
+<form action="/create-tournament" method="post">
+    <div class="form-group">
+        <label>Numele turneului</label>
+        <input type="text" class="form-control" name="tournamentName">
+    </div>
+    <div class="form-group">
+        <label>Locuri disponibile</label>
+        <select class="form-control" name="nrOfPlayers">
+            <%for (var i = 0; i<nrOfPlayers.length; i++){%>
+            <option value="<%=nrOfPlayers[i]%>"><%=nrOfPlayers[i]%></option>
+            <%}%>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Editia turneului(1, 2, 3 etc)</label>
+        <input type="text" class="form-control" name="edition">
+    </div>
+    <div class="form-group">
+        <label>Descrierea turneului(informatii suplimentare)</label>
+        <textarea class="form-control" name="description" rows="5"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Data inceperii turneului</label>
+        <input type="text" class="form-control" id="startDatePicker" name="startDate">
+    </div>
+    <div class="form-group">
+        <label>Data terminarii turneului</label>
+        <input type="text" class="form-control" id="endDatePicker" name="endDate">
+    </div>
+    <div class="form-group">
+        <label>Ora inceperii turneului</label>
+        <input type="text" class="form-control" id="startHourPicker" name="startHour">
+    </div>
+    <div class="form-group">
+        <label>Se ofera premii in cadrul acestui turneu?</label>
+        <label>
+            <input type="radio" name="prize" id="optionsPremii1" value="true" checked>
+            Da
+        </label>
+        <label>
+            <input type="radio" name="prize" id="optionsPremii2" value="false">
+            Nu
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Sponsori pentru acest turneu, daca exista</label>
+        <input type="text" class="form-control" name="sponsors">
+    </div>
+
+    <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+</form>
+        </div>
+</div>
+<% include footer%>

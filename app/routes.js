@@ -100,7 +100,7 @@ module.exports = function (app, passport) {
   });
 
   app.get('/create-tournament-results', isLoggedIn, function(req, res){
-    res.render('createTournamentResults.ejs', {
+    res.render('create-tournament-results.ejs', {
       user: req.user,
       errorMessage: req.flash('infoError'),
       successMessage: req.flash('infoSuccess')

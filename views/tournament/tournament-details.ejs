@@ -1,0 +1,36 @@
+<%include ../partials/header.ejs%>
+<%include ../partials/sidebar.ejs%>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Panou de administrare</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- /.panel -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-clock-o fa-fw"></i> Detalii turneu <%=tournament.tournamentName%>, editia a <%=tournament.edition%>-a
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <p><%=tournament.description%></p>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-8 -->
+
+
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<%include ../partials/footer.ejs%>

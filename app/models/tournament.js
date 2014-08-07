@@ -2,8 +2,6 @@ var mongoose = require('mongoose');
 
 //define the schema for our user model
 var tournamentSchema = mongoose.Schema({
-
-  tournament: {
     tournamentName: String,
     nrOfPlayers: String,
     edition: String,
@@ -13,7 +11,6 @@ var tournamentSchema = mongoose.Schema({
     startHour: String,
     prize: Boolean,
     sponsors: String
-  }
 });
 
 //create the model for users and expose it to our app

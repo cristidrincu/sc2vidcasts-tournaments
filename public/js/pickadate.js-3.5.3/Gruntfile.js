@@ -67,7 +67,7 @@ module.exports = function( grunt ) {
         },
 
 
-        // Generate static HTML templates.
+        // Generate public HTML templates.
         htmlify: {
             docs: {
                 expand: true,
@@ -206,7 +206,7 @@ module.exports = function( grunt ) {
         },
 
 
-        // Any extra data needed in rendering static files.
+        // Any extra data needed in rendering public files.
         meta: {
 
             // The sanitized github repo url.
@@ -234,8 +234,8 @@ module.exports = function( grunt ) {
 
 
 
-    // Create and register the task to build out the static HTML files.
-    grunt.registerMultiTask( 'htmlify', 'Recursively build static HTML files', function() {
+    // Create and register the task to build out the public HTML files.
+    grunt.registerMultiTask( 'htmlify', 'Recursively build public HTML files', function() {
 
         var task = this,
             // options = task.options(),

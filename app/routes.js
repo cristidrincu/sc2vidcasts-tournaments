@@ -4,6 +4,8 @@
 
 var User = require('./models/user');
 var Tournament = require('./models/tournament');
+var moment = require('moment');
+var mongoose = require('mongoose');
 
 //pass the routes to our app, as well as to passport
 module.exports = function (app, passport) {
@@ -21,8 +23,20 @@ module.exports = function (app, passport) {
   app.post('/login', passport.authenticate('local-login', {
     failureRedirect: '/login',
     failureFlash: true
-  }), function(req, res){
-    res.redirect('/backend-user');
+  }), function(req, res, user){
+    user = req.user;
+    switch (user.local.role){
+      case 'admin':
+        res.redirect('/backend-admin');
+      break;
+      case 'User':
+        res.redirect('/backend-user');
+      break;
+      case 'Organizator':
+        res.redirect('/backend-organizer');
+      break;
+    }
+
   });
 
   app.get('/signup', function (req, res) {
@@ -30,36 +44,67 @@ module.exports = function (app, passport) {
   });
 
   app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/profile',
     failureRedirect: '/signup',
     failureFlash: true // allow flash messages
-  }));
+  }), function(req, res, user){
+    user = req.user;
+    switch (user.local.role){
+      case 'admin':
+        res.redirect('/backend-admin');
+        break;
+      case 'User':
+        res.redirect('/backend-user');
+        break;
+      case 'Organizator':
+        res.redirect('/backend-organizer');
+        break;
+    }
+  });
 
   //PROFILE SELECTION
   // we will want this protected so you have to be logged in to visit
   // we will use route middleware to verify this (the isLoggedIn function)
   app.get('/profile', isLoggedIn, function (req, res) {
-    res.render('profile.ejs', {
+    res.render('profile/profile.ejs', {
       message: req.flash('signupSuccess'), //get the message out of the session and pass to template
       user: req.user, //get the user out of session and pass to template
     });
   });
 
-  app.get('/backend-user', isLoggedIn, function(req, res){
-    res.render('backend-user.ejs', {
+  app.get('/backend-admin', isLoggedIn, function(req, res){
+      res.render('backend/backend-admin.ejs', {
+        user: req.user
+      });
+  });
+
+  app.get('/backend-organizer', isLoggedIn, function(req, res){
+    res.render('backend/backend-organizer.ejs', {
       user: req.user
     });
   });
 
+  app.get('/backend-user', isLoggedIn, function(req, res){
+    Tournament.find(function(err, tournaments){
+      if(err)
+        res.send('Error while retrieving tournaments');
+
+      res.render('backend/backend-user.ejs', {
+        user: req.user,
+        tournaments: tournaments,
+        moment: moment
+      });
+    });
+  });
+
   //UPDATE PROFILE - get template
-  app.get('/customize-profile:nickname', isLoggedIn, function(req, res){
-    res.render('customize-profile.ejs', {
+  app.get('/customize-profile/:nickname', isLoggedIn, function(req, res){
+    res.render('profile/customize-profile.ejs', {
       user: req.user//get the user out of session and pass to template
     });
   });
 
   //UPDATE PROFILE - post
-  app.post('/customize-profile:nickname', function(req, res){
+  app.post('/customize-profile/:nickname', function(req, res){
     User.findOne({ 'local.nickname': req.params.nickname}, function(err, user){
       if(err)
         res.send('Utilizatorul nu a putut fi gasit');
@@ -87,20 +132,14 @@ module.exports = function (app, passport) {
 
 
   ///////// - TOURNAMENT ROUTES- //////////
-  app.get('/tournaments', function(req, res){
-    res.render('backend-user.ejs', {
-      tournament: req.tournament
-    });
-  });
-
   app.get('/create-tournament', isLoggedIn, function(req, res){
-    res.render('create-tournament.ejs', {
+    res.render('tournament/create-tournament.ejs', {
       user: req.user
     });
   });
 
   app.get('/create-tournament-results', isLoggedIn, function(req, res){
-    res.render('create-tournament-results.ejs', {
+    res.render('tournament/create-tournament-results.ejs', {
       user: req.user,
       errorMessage: req.flash('infoError'),
       successMessage: req.flash('infoSuccess')
@@ -114,15 +153,15 @@ module.exports = function (app, passport) {
           req.flash('infoError', 'O editie a acestui turneu exista deja')
       else
         newTournament = new Tournament();
-        newTournament.tournament.tournamentName = req.body.tournamentName;
-        newTournament.tournament.nrOfPlayers = req.body.nrOfPlayers;
-        newTournament.tournament.edition = req.body.edition;
-        newTournament.tournament.description = req.body.description;
-        newTournament.tournament.startDate = req.body.startDate;
-        newTournament.tournament.endDate = req.body.endDate;
-        newTournament.tournament.startHour = req.body.startHour;
-        newTournament.tournament.prize = req.body.prize;
-        newTournament.tournament.sponsors = req.body.sponsors;
+        newTournament.tournamentName = req.body.tournamentName;
+        newTournament.nrOfPlayers = req.body.nrOfPlayers;
+        newTournament.edition = req.body.edition;
+        newTournament.description = req.body.description;
+        newTournament.startDate = req.body.startDate;
+        newTournament.endDate = req.body.endDate;
+        newTournament.startHour = req.body.startHour;
+        newTournament.prize = req.body.prize;
+        newTournament.sponsors = req.body.sponsors;
 
         newTournament.save(function(err){
           if(err)
@@ -132,6 +171,19 @@ module.exports = function (app, passport) {
 
           res.redirect('/create-tournament-results');
       });
+    });
+  });
+
+  app.get('/tournament-details/:_id', isLoggedIn, function(req, res){
+//    var id = mongoose.Types.ObjectId(req.params._id);
+    Tournament.findById(req.params._id, function(err, tournament){
+      if(err)
+        res.send(err)
+      else
+        res.render('tournament/tournament-details.ejs', {
+          user: req.user,
+          tournament: tournament
+        });
     });
   });
   //////// - END TOURNAMENT ROUTES - //////

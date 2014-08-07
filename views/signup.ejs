@@ -1,8 +1,9 @@
-<% include header %>
+<% include partials/header %>
 
 <%
     var races = ['Terran', 'Zerg', 'Protoss'];
     var leagues = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Master', 'Grand Master'];
+    var roles = ['User', 'Organizator'];
 %>
 <div class="container">
     <div class="col-sm-6 col-sm-offset-3">
@@ -26,6 +27,14 @@
             <div class="form-group">
                 <label>Nickname</label>
                 <input type="text" class="form-control" name="nickname">
+            </div>
+            <div class="form-group">
+                <label>Doresc un cont de</label>
+                <select class="form-control" name="role">
+                    <%for(var i=0; i<roles.length; i++){%>
+                        <option value="<%=roles[i]%>"><%=roles[i]%></option>
+                    <%}%>
+                </select>
             </div>
             <div class="form-group">
                 <label>Battle.net ID (fara #)</label>
@@ -56,4 +65,4 @@
     </div>
 </div>
 
-<% include footer %>
+<% include partials/footer %>

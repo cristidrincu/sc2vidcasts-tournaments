@@ -1618,7 +1618,7 @@ jQuery.support = (function() {
         }
 
         container = document.createElement("div");
-        container.style.cssText = vb + "width:0;height:0;position:static;top:0;margin-top:" + conMarginTop + "px";
+        container.style.cssText = vb + "width:0;height:0;position:public;top:0;margin-top:" + conMarginTop + "px";
         body.insertBefore( container, body.firstChild );
 
         // Construct a test element
@@ -9085,7 +9085,7 @@ jQuery.offset = {
     setOffset: function( elem, options, i ) {
         var position = jQuery.css( elem, "position" );
 
-        // set position first, in-case top/left are set even on static elem
+        // set position first, in-case top/left are set even on public elem
         if ( position === "static" ) {
             elem.style.position = "relative";
         }

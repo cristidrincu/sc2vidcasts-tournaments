@@ -18,19 +18,19 @@
         <form action="/signup" method="post">
             <div class="form-group">
                 <label>Email</label>
-                <input type="text" class="form-control" name="email">
+                <input type="text" class="form-control" name="email" required>
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" class="form-control" name="password">
+                <input type="password" class="form-control" name="password" required>
             </div>
             <div class="form-group">
                 <label>Nickname</label>
-                <input type="text" class="form-control" name="nickname">
+                <input type="text" class="form-control" name="nickname" required>
             </div>
             <div class="form-group">
                 <label>Doresc un cont de</label>
-                <select class="form-control" name="role">
+                <select class="form-control" name="role" required>
                     <%for(var i=0; i<roles.length; i++){%>
                         <option value="<%=roles[i]%>"><%=roles[i]%></option>
                     <%}%>
@@ -38,11 +38,11 @@
             </div>
             <div class="form-group">
                 <label>Battle.net ID (fara #)</label>
-                <input type="text" class="form-control" name="battlenetid">
+                <input type="text" class="form-control" name="battlenetid" required>
             </div>
             <div class="form-group">
                 <label>Rasa cu care joci</label>
-                <select class="form-control" name="race">
+                <select class="form-control" name="race" required>
                     <% for (var i=0; i<races.length; i++){%>
                     <option value="<%=races[i]%>"><%=races[i]%></option>
                     <%}%>
@@ -50,11 +50,15 @@
             </div>
             <div class="form-group">
                 <label>Liga din care faci parte</label>
-                <select class="form-control" name="league">
+                <select class="form-control" name="league" required>
                     <%for (var i = 0; i<leagues.length; i++){%>
                     <option value="<%=leagues[i]%>"><%=leagues[i]%></option>
                     <%}%>
                 </select>
+            </div>
+            <div class="form-group">
+                <label>Website</label>
+                <input type="text" class="form-control" name="website"/>
             </div>
 
             <button type="submit" class="btn btn-warning btn-lg">Signup</button>

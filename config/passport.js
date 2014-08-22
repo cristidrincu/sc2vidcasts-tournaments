@@ -6,11 +6,10 @@ var configOAuth = require('./auth');
 
 // load up the user model
 var User = require('../app/models/user');
+var Tournament = require('../app/models/tournament');
 
 // expose this function to our app using module.exports
 module.exports = function (passport) {
-
-  var typeOfLogin = null;
 
   // =========================================================================
   // passport session setup ==================================================
@@ -67,6 +66,7 @@ module.exports = function (passport) {
               newUser.local.nickname = req.body.nickname;
               newUser.local.battlenetid = req.body.battlenetid;
               newUser.local.role = req.body.role;
+              newUser.local.website = req.body.website;
 
               // save the user
               newUser.save(function (err) {

@@ -18,15 +18,9 @@
             <li>
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Turnee<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li>
-                        <a href="/random-tournament">RANDOM if you can't</a>
-                    </li>
-                    <li>
-                        <a href="/botr">Battle of the Races</a>
-                    </li>
-                    <li>
-                        <a href="/rsc">Romanian Season Cup</a>
-                    </li>
+                    <%tournaments.forEach(function(tournament){%>
+                        <li><a href="/tournament-details/<%=tournament._id%>"><%=tournament.tournamentName%></a></li>
+                    <%})%>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

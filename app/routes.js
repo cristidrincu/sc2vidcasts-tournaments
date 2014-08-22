@@ -2,14 +2,29 @@
  * Created by cristiandrincu on 7/28/14.
  */
 
+/*HELPER FUNCTIONS FOR MONGOOSE QUERIES*/
+var retrievedTournaments = null;
+
+/*MODELS AND OTHER MODULES*/
 var User = require('./models/user');
 var Tournament = require('./models/tournament');
 var moment = require('moment');
 var mongoose = require('mongoose');
+var ObjectId = require('mongodb').ObjectID;
+var helperFunctions = require('./helpers-mongoose.js');
+var async = require('async');
 
-//pass the routes to our app, as well as to passport
 module.exports = function (app, passport) {
 
+  /*RULES FOR ACCESS*/
+  app.all('/profile/*', isLoggedIn);
+  app.all('/customize-profile/*', isLoggedIn);
+
+      helperFunctions.retrieveAllTournaments(function(tournaments){
+        retrievedTournaments = tournaments;
+      });
+
+  /*HOME AND LOGIN ROUTES*/
   app.get('/', function (req, res) {
     res.render('index.ejs', {
       user: null
@@ -21,24 +36,27 @@ module.exports = function (app, passport) {
   });
 
   app.post('/login', passport.authenticate('local-login', {
+    successRedirect: '/profile',
     failureRedirect: '/login',
     failureFlash: true
-  }), function(req, res, user){
-    user = req.user;
-    switch (user.local.role){
-      case 'admin':
-        res.redirect('/backend-admin');
-      break;
-      case 'User':
-        res.redirect('/backend-user');
-      break;
-      case 'Organizator':
-        res.redirect('/backend-organizer');
-      break;
-    }
+  }));
 
-  });
+//  ), function(req, res, user){
+//    user = req.user;
+//    switch (user.local.role){
+//      case 'admin':
+//        res.redirect('/backend-admin');
+//        break;
+//      case 'User':
+//        res.redirect('/backend-user');
+//        break;
+//      case 'Organizator':
+//        res.redirect('/backend-organizer');
+//        break;
+//    }
 
+
+  /*SIGN-UP ROUTES*/
   app.get('/signup', function (req, res) {
     res.render('signup.ejs', { message: req.flash('signupMessage'), user: null});
   });
@@ -50,34 +68,25 @@ module.exports = function (app, passport) {
     user = req.user;
     switch (user.local.role){
       case 'admin':
-        res.redirect('/backend-admin');
+        res.redirect('/backend-admin/');
         break;
       case 'User':
         res.redirect('/backend-user');
         break;
       case 'Organizator':
-        res.redirect('/backend-organizer');
+        res.redirect('/backend-organizer/');
         break;
     }
   });
 
-  //PROFILE SELECTION
-  // we will want this protected so you have to be logged in to visit
-  // we will use route middleware to verify this (the isLoggedIn function)
-  app.get('/profile', isLoggedIn, function (req, res) {
-    res.render('profile/profile.ejs', {
-      message: req.flash('signupSuccess'), //get the message out of the session and pass to template
-      user: req.user, //get the user out of session and pass to template
-    });
-  });
-
-  app.get('/backend-admin', isLoggedIn, function(req, res){
+  /*BACK-END ROUTES*/
+  app.get('/backend-admin', requireRoleAdmin('admin'), function(req, res){
       res.render('backend/backend-admin.ejs', {
         user: req.user
       });
   });
 
-  app.get('/backend-organizer', isLoggedIn, function(req, res){
+  app.get('/backend-organizer', requireRoleOrganizator('Organizator'), requireRoleAdmin('admin'), function(req, res){
     res.render('backend/backend-organizer.ejs', {
       user: req.user
     });
@@ -96,14 +105,20 @@ module.exports = function (app, passport) {
     });
   });
 
-  //UPDATE PROFILE - get template
-  app.get('/customize-profile/:nickname', isLoggedIn, function(req, res){
+  /* PROFILE ROUTES */
+  app.get('/profile', function (req, res) {
+    res.render('profile/profile.ejs', {
+      message: req.flash('signupSuccess'), //get the message out of the session and pass to template
+      user: req.user //get the user out of session and pass to template
+    });
+  });
+
+  app.get('/customize-profile/:nickname', function(req, res){
     res.render('profile/customize-profile.ejs', {
       user: req.user//get the user out of session and pass to template
     });
   });
 
-  //UPDATE PROFILE - post
   app.post('/customize-profile/:nickname', function(req, res){
     User.findOne({ 'local.nickname': req.params.nickname}, function(err, user){
       if(err)
@@ -124,21 +139,14 @@ module.exports = function (app, passport) {
     });
   });
 
-  //LOGOUT
-  app.get('/logout', function (req, res) {
-    req.logout();
-    res.redirect('/');
-  });
-
-
-  ///////// - TOURNAMENT ROUTES- //////////
-  app.get('/create-tournament', isLoggedIn, function(req, res){
+  /* TOURNAMENT ROUTES */
+  app.get('/create-tournament', function(req, res){
     res.render('tournament/create-tournament.ejs', {
       user: req.user
     });
   });
 
-  app.get('/create-tournament-results', isLoggedIn, function(req, res){
+  app.get('/create-tournament-results', function(req, res){
     res.render('tournament/create-tournament-results.ejs', {
       user: req.user,
       errorMessage: req.flash('infoError'),
@@ -146,7 +154,7 @@ module.exports = function (app, passport) {
     });
   });
 
-  app.post('/create-tournament', isLoggedIn, function(req, res){
+  app.post('/create-tournament', function(req, res){
 
     Tournament.findOne({ 'tournament.edition': req.body.edition, 'tournament.tournamentName' : req.body.tournamentName }, function(err, newTournament){
       if(newTournament)
@@ -155,6 +163,7 @@ module.exports = function (app, passport) {
         newTournament = new Tournament();
         newTournament.tournamentName = req.body.tournamentName;
         newTournament.nrOfPlayers = req.body.nrOfPlayers;
+        newTournament.openForLeagues.leagues = req.body.leagues;
         newTournament.edition = req.body.edition;
         newTournament.description = req.body.description;
         newTournament.startDate = req.body.startDate;
@@ -162,6 +171,8 @@ module.exports = function (app, passport) {
         newTournament.startHour = req.body.startHour;
         newTournament.prize = req.body.prize;
         newTournament.sponsors = req.body.sponsors;
+        newTournament.ingameChatChannel = req.body.ingameChatChannel;
+        newTournament.twitchStreamChannel = 'http://www.twitch.tv/' + req.body.twitchStreamChannel;
 
         newTournament.save(function(err){
           if(err)
@@ -174,32 +185,169 @@ module.exports = function (app, passport) {
     });
   });
 
+  //TODO - REFACTOR MONGOOSE QUERY METHODS FOR TOURNAMENT INTO METHODS THAT RESIDE INSIDE NODE MODULES - SEE HELPER-MONGOOSE.JS
   app.get('/tournament-details/:_id', isLoggedIn, function(req, res){
-//    var id = mongoose.Types.ObjectId(req.params._id);
+
+    Tournament.findById(req.params._id).populate('players').exec( function(err, tournament){
+      if(err)
+        res.send(err)
+      else
+        res.render('tournament/tournament-details.ejs',{
+          user: req.user,
+          tournament: tournament,
+          tournaments: retrievedTournaments,
+          moment: moment
+        });
+    });
+  });
+
+  app.get('/signup-tournament/:_id/:_userId', isLoggedIn, function(req, res){
+
     Tournament.findById(req.params._id, function(err, tournament){
       if(err)
         res.send(err)
       else
-        res.render('tournament/tournament-details.ejs', {
+        res.render('tournament/signup-tournament.ejs', {
           user: req.user,
-          tournament: tournament
+          tournament: tournament,
+          tournaments: retrievedTournaments,
+          moment: moment
         });
     });
   });
-  //////// - END TOURNAMENT ROUTES - //////
+
+  app.post('/signup-tournament/:_id/:userId', isLoggedIn, function(req, res){
+    var playerId = req.params.userId;
+
+    //TODO - incearca sa folosesti async.series([]) pentru a lega metoda de find si apoi insrierea jucatorului in baza de date
+    if(validateObjectId(req.params._id) && validateObjectId(req.params.userId)){
+      User.find({_id: req.params.userId}, function(err, docs){
+        var ids = docs.map(function(doc) {
+          return doc._id;
+        });
+
+        Tournament.find( {players: {$in: ids}}, function(err, docs){
+          if(err){
+            res.send('no player found');
+          }
+
+          if(docs){
+            //TODO - replace with proper error view - present other tournaments that the user can enlist into
+            res.send('Esti deja inscris in cadrul acestui turneu!');
+          }else if(!docs){
+            Tournament.findById(req.params._id, function(err, tournament){
+              if(err){
+                res.send(err);
+              }
+
+              if(tournament){
+                var placesForPlayers = tournament.nrOfPlayers;
+                var playerPlacesTaken = tournament.players.length;
+
+                if(playerPlacesTaken >= placesForPlayers){
+                  //TODO - replace with proper error view - present other tournaments that the user can enlist into
+                  res.send(403);
+                }else{
+                  Tournament.findByIdAndUpdate(req.params._id, {$pushAll: {
+                    players: [playerId]
+                  }}, function(err, tournament){
+                    if(err)
+                      res.send(err)
+                    else
+                      res.redirect('/signup-tournament/' + req.params._id + '/' + req.params.userId);
+                  });
+                }
+              }
+            });
+          }
+        });
+      });
+    }
+  });
+
+  app.get('/signup-tournament-result/:_id', isLoggedIn, function(req, res){
+    res.render('tournament/signup-tournament-result.ejs', {
+      user: req.user
+    })
+  });
+
+  /*PLAYER ROUTES*/
+  app.get('/jucatori-terran', function(req, res){
+    helperFunctions.retrieveAllTerranPlayers(function(terrans){
+      res.render('players/jucatori-terran.ejs', {
+        user: req.user,
+        tournaments: retrievedTournaments,
+        terranPlayers: terrans
+      });
+    });
+  });
+
+  app.get('/jucatori-zerg', function(req, res){
+    helperFunctions.retrieveAllZergPlayers(function(zergs){
+      res.render('players/jucatori-zerg.ejs', {
+        user: req.user,
+        tournaments: retrievedTournaments,
+        zergPlayers: zergs
+      });
+    });
+  });
+
+  app.get('/jucatori-protoss', function(req, res){
+    helperFunctions.retrieveAllProtossPlayers(function(protosses){
+      res.render('players/jucatori-protoss.ejs', {
+        user: req.user,
+        tournaments: retrievedTournaments,
+        protossPlayers: protosses
+      });
+    });
+  })
+
+  /* LOGOUT ROUTE */
+  app.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/');
+  });
 };
 
-//route middleware to make sure a user is logged in
+/*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/
 function isLoggedIn(req, res, next) {
-  //if user is authenticated in the session, carry on
   if (req.isAuthenticated()) {
     return next();
   }
 
-  //if they aren't, redirect them to homepage
   res.redirect('/');
 }
 
 function uppercaseFirstChar(text){
   return text[0].toUpperCase() + text.slice(1);
+}
+
+function requireRoleOrganizator(role){
+  return function(req, res, next){
+    if(req.session.user && req.session.user.local.role === role){
+      next();
+    }
+    else{
+      res.send(403);
+    }
+  }
+}
+
+function requireRoleAdmin(role){
+  return function(req, res, next){
+    if(req.session.user && req.session.user.local.role === role){
+      next();
+    }
+    else{
+      res.send(403);
+    }
+  }
+}
+
+function validateObjectId(param){
+  if(ObjectId.isValid(param)){
+    return true;
+  }
+
+  return false;
 }

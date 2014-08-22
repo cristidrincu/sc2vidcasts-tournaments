@@ -48,7 +48,14 @@
                             </table>
 
                             <a href="/customize-profile/<%= user.local.nickname %>" class="btn btn-primary">Modifica Profilul</a>
-                            <a href="/backend-user" class="btn btn-primary">Panou administrare turnee</a>
+                            <%if(user.local.role == 'admin'){%>
+                                <a href="/backend-admin" class="btn btn-primary">Panou administrare turnee</a>
+                            <%}else if(user.local.role == 'Organizator'){%>
+                                <a href="/backend-organizer" class="btn btn-primary">Panou administrare turnee</a>
+                            <%}else{%>
+                                <a href="/backend-user" class="btn btn-primary">Panou administrare turnee</a>
+                            <%}%>
+
                         </div>
                     </div>
                 </div>

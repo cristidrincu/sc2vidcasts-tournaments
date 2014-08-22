@@ -1,74 +1,73 @@
 <% include ../partials/header %>
-<% include ../partials/sidebar%>
+<% tournaments.forEach(function(tournament){ %>
+<% include ../partials/sidebar %>
+<% }); %>
 
 <div id="page-wrapper">
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">Panou de administrare</h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Turnee active</h1>
+        </div>
+        <!-- /.col-lg-12 -->
     </div>
-    <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-<div class="row">
-<div class="col-lg-12">
-<!-- /.panel -->
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <i class="fa fa-clock-o fa-fw"></i> Lista turnee active
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- /.panel -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-clock-o fa-fw"></i> Lista turnee active
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Numele turneului</th>
+                            <th>Locuri disponibile</th>
+                            <th>Editia</th>
+                            <th>Data inceperii</th>
+                            <th>Data terminarii</th>
+                            <th>Ora inceperii</th>
+                            <th>Premii</th>
+                            <th>Detalii</th>
+                            <th>Inscriere</th>
+                        </tr>
+
+                        <% tournaments.forEach(function(tournament){ %>
+                        <tr>
+                            <td><%= tournament.tournamentName %></td>
+                            <td><%= tournament.nrOfPlayers %></td>
+                            <td><%= tournament.edition %></td>
+                            <td><%= moment(tournament.startDate).format("DD MMMM YYYY") %></td>
+                            <td><%= moment(tournament.endDate).format("DD MMMM YYYY") %></td>
+                            <td><%= tournament.startHour %></td>
+                            <td>
+                                <% if(tournament.prize){ %>
+                                <%= 'Da' %>
+                                <% }else { %>
+                                <%= 'Nu' %>
+                                <% } %>
+                            </td>
+                            <td>
+                                <a href="/tournament-details/<%= tournament._id %>">
+                                    <button class="btn btn-danger">Detalii</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/signup-tournament/<%= tournament._id %>/<%= user._id %>">
+                                    <button class="btn btn-success">Inscrie-te</button>
+                                </a>
+                            </td>
+                        </tr>
+                        <% }); %>
+
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- /.panel-heading -->
-    <div class="panel-body">
-        <table class="table table-hover">
-            <tr>
-                <th>Numele turneului</th>
-                <th>Locuri disponibile</th>
-                <th>Editia</th>
-                <th>Data inceperii</th>
-                <th>Data terminarii</th>
-                <th>Ora inceperii</th>
-                <th>Premii</th>
-                <th>Detalii</th>
-                <th>Inscriere</th>
-            </tr>
-
-            <%tournaments.forEach(function(tournament){%>
-            <tr>
-                <td><%=tournament.tournamentName%></td>
-                <td><%=tournament.nrOfPlayers%></td>
-                <td><%=tournament.edition%></td>
-                <td><%=moment(tournament.startDate).format("DD MMMM YYYY")%></td>
-                <td><%=moment(tournament.endDate).format("DD MMMM YYYY")%></td>
-                <td><%=tournament.startHour%></td>
-                <td>
-                    <%if(tournament.prize){%>
-                        <%='Da'%>
-                    <%}else {%>
-                        <%='Nu'%>
-                    <%}%>
-                </td>
-                <td><a href="/tournament-details/<%=tournament._id%>"><button class="btn btn-danger">Detalii</button></a></td>
-                <td><a href="/signup-tournament">
-                        <button class="btn btn-success">Inscrie-te</button>
-                    </a>
-                </td>
-            </tr>
-            <%});%>
-
-        </table>
-    </div>
-    <!-- /.panel-body -->
 </div>
-<!-- /.panel -->
 </div>
-<!-- /.col-lg-8 -->
 
-
-</div>
-<!-- /.row -->
-</div>
-<!-- /#page-wrapper -->
-
-</div>
-<!-- /#wrapper -->
 
 <% include ../partials/footer %>

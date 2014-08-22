@@ -11,9 +11,9 @@ var userSchema = mongoose.Schema({
     password: String,
     race: String,
     league: String,
-    role: String
+    role: String,
+    website: String
   }
-
 });
 
 //generating a hash

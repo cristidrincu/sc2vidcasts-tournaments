@@ -5,7 +5,7 @@
   "dependencies": {
     "express" : "~4.0.0",
     "ejs" : "~0.8.5",
-    "mongoose" : "~3.8.1",
+    "mongoose" : "~3.8.15",
     "passport" : "~0.1.17",
     "passport-local" : "~0.1.6",
     "passport-facebook" : "~1.0.2",
@@ -14,6 +14,11 @@
     "connect-flash" : "~0.1.1",
     "bcrypt-nodejs" : "latest",
     "moment" : "2.8.1",
+    "async":"0.9.0",
+    "repository" : {
+      "type" : "git",
+      "url" : "https://github.com/caolan/async.git"
+    },
 
     "morgan": "~1.0.0",
     "body-parser": "~1.0.0",

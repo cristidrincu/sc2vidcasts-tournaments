@@ -5,14 +5,19 @@ var mongoose = require('mongoose');
 require('./user');
 
 var messageSchema = mongoose.Schema({
+  messageSubject: String,
   messageBody: String,
   sentBy: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }],
   receiver: [{
-    type: mongoose.Schema.Types.ObjectId, ref:'User'
+    type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }]
 });
+
+messageSchema.path('messageSubject').validate(function(messageSubject){
+  return messageSubject.length > 5
+}, 'Mesajul trebuie sa contina minim 5 caractere');
 
 messageSchema.path('messageBody').validate(function(messageBody){
   return messageBody.length > 10

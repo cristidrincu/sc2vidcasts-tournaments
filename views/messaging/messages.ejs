@@ -1,0 +1,57 @@
+<% include ../partials/header %>
+<% tournaments.forEach(function(tournament){ %>
+<% include ../partials/sidebar %>
+<% }); %>
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Mesaje primite</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- /.panel -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-clock-o fa-fw"></i> Lista mesaje
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+
+                    <table class="table table-hover">
+                        <table class="table table-hover">
+                            <%if(messages.length == 0){%>
+                            <p>Nu am gasit mesaje in baza de date</p>
+                            <%}else{%>
+                            <tr>
+                                <th>Subiect mesaj</th>
+                                <th>Citeste mesaj</th>
+                                <th>Sterge mesaj</th>
+                                <th>Trimis de</th>
+                                <th>Raspunde</th>
+                            </tr>
+                            <% messages.forEach(function(message){ %>
+                            <tr>
+                                <td><%= message.messageSubject.replace(/(<([^>]+)>)/ig, "") %></td>
+                                <td><a href="/message-details/<%= message._id%>"><button class="btn btn-success">Citeste mesaj</button></a></td>
+                                <td><a href="/messages/<%= message._id%>"><button class="btn btn-danger">Sterge mesaj</button></a></td>
+                                <%message.sentBy.forEach(function(sender){%>
+                                    <td><a href="/profile-details/<%=sender._id%>"><%=sender.local.nickname %></a></td>
+                                    <td><a href="/send-message/<%= sender._id%>"><button class="btn btn-info">Raspunde - se muta in message detail</button></a></td>
+                                <%})%>
+                            </tr>
+                            <% }); %>
+                            <%}%>
+                        </table>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<% include ../partials/footer %>

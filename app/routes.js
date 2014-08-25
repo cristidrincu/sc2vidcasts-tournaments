@@ -8,11 +8,13 @@ var retrievedTournaments = null;
 /*MODELS AND OTHER MODULES*/
 var User = require('./models/user');
 var Tournament = require('./models/tournament');
+var Message = require('./models/message');
 var moment = require('moment');
 var mongoose = require('mongoose');
 var ObjectId = require('mongodb').ObjectID;
 var helperFunctions = require('./helpers-mongoose.js');
 var async = require('async');
+var ErrorHandler = require('./helpers-error-handlers.js');
 
 module.exports = function (app, passport) {
 
@@ -151,10 +153,40 @@ module.exports = function (app, passport) {
 
   /*MESSAGING ROUTES*/
   app.get('/send-message/:_id', function(req, res){
-    res.render('messaging/send-message.ejs', {
-      user: req.user,
-      tournaments: retrievedTournaments
-    })
+    User.findById(req.params._id, function(err, user){
+      if(err)
+        ErrorHandler.handle('Nu a fost gasit un jucator cu acest ID ' + err)
+      else
+        var retrievedPlayer = user;
+        res.render('messaging/send-message.ejs', {
+          user: req.user,
+          tournaments: retrievedTournaments,
+          player: retrievedPlayer
+        })
+      });
+  });
+
+  app.post('/send-message/:_id', function(req, res){
+    var message = new Message( {messageBody: req.body.message, messageSubject: req.body.messageSubject, sentBy: req.user, receiver: req.params._id} );
+    message.save(function(err){
+      if(err)
+        ErrorHandler.handle('A aparut o eroare la trimiterea mesajului' + err);
+      else
+        res.redirect('/backend-user');
+    });
+  });
+
+  app.get('/user-messages', function(req, res){
+    Message.find( {receiver: req.user._id}).populate('sentBy').exec(function(err, messages){
+      if(err)
+        ErrorHandler.handle('A intervenit o eroare la preluarea mesajelor din baza de date: ' + err);
+      else
+        res.render('messaging/messages.ejs', {
+          user: req.user,
+          tournaments: retrievedTournaments,
+          messages: messages
+        });
+    });
   });
 
   /* TOURNAMENT ROUTES */

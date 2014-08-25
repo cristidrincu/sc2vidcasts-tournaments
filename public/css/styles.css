@@ -1,5 +1,68 @@
-.informatii-jucator-signup{
-    list-style: none;
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+.top-nav-bar-landing-page{
+    width: 100%;
+    height: 40px;
     padding-top: 20px;
-    padding-bottom: 0;
+    background-color: #000;
+    position: absolute;
+    position: fixed;
+}
+
+.top-nav-bar-landing-page a{
+    margin-left: 15px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.top-nav-bar-landing-page a:last-child{
+    margin-right: 50px;
+}
+
+.main-landing-page-container{
+    background: url('../images/sc2-tournaments-background-2.jpg') no-repeat center center;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.text-landing-page{
+    padding-top: 200px;
+    padding-bottom: 350px;
+}
+
+p.paragraph-landing-page{
+    width: 600px;
+    color: #fff;
+    padding-top: 20px;
+}
+
+p.last-item{
+    padding-bottom: 30px;
+}
+
+h1.huge-h1-landing-page, h1.medium-h1-landing-page{
+    color: #fff;
+    text-shadow: 2px 2px #000;
+}
+
+h1.huge-h1-landing-page{
+    font-size:50px;
+}
+
+h1.medium-h1-landing-page{
+    font-size: 70px;
+    margin-top: -20px;
+}
+
+#proiect, #echipa, #turnee-active{
+    padding-top: 100px;
+    padding-bottom: 100px;
 }

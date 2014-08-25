@@ -10,6 +10,9 @@ var tournamentSchema = mongoose.Schema({
     openForLeagues: {
         "leagues" : []
     },
+    organizer: [{
+      type: mongoose.Schema.Types.String, ref: "User"
+    }],
     edition: String,
     description: String,
     startDate: Date,

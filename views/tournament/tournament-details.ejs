@@ -5,7 +5,14 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Detalii pentru turneul <i><%=tournament.tournamentName%>, editia <%=tournament.edition > 1 ? 'a ' + tournament.edition + '-a' : ''%></i></h1>
+            <div class="col-lg-8">
+                <h1 class="page-header">Detalii pentru turneul <i><%=tournament.tournamentName%>, editia <%=tournament.edition > 1 ? 'a ' + tournament.edition + '-a' : ''%></i></h1>
+            </div>
+            <div class="col-lg-4">
+                <form class="btn-signup-turneu-detalii" action="/signup-tournament/<%=tournament._id%>/<%=user._id%>" method="post">
+                    <button class="btn btn-success">Inscrie-te</button>
+                </form>
+            </div>
         </div>
     </div>
     <div class="row">

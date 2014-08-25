@@ -1,0 +1,12 @@
+ul.titlu-turneu-signup{
+    list-style: none;
+    display: inline;
+}
+
+ul.titlu-turneu-signup li {
+    display: inline;
+}
+
+.btn-signup-turneu-detalii{
+    margin-top: 45px;
+}

@@ -46,6 +46,7 @@ app.use(bodyParser.urlencoded({ extended: true })); //to support URL-encoded bod
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('public/js', express.static(path.join(__dirname, 'public/js')));
 app.use('public/css', express.static(path.join(__dirname, 'public/css')));
+app.use('public/images', express.static(path.join(__dirname, 'public/images')));
 app.use('public/css/plugins', express.static(path.join(__dirname, 'public/css/plugins')));
 app.use('public/js/plugins/', express.static(path.join(__dirname, 'public/js/plugins/')));
 

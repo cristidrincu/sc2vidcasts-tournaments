@@ -13,10 +13,10 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a class="active" href="/backend-user:<%=user.local.nickname%>"><i class="fa fa-dashboard fa-fw"></i> Panou de administrare</a>
+                <a class="active" href="/backend-user"><i class="fa fa-dashboard fa-fw"></i> Panou de administrare</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Turnee<span class="fa arrow"></span></a>
+                <a href="/backend-user"><i class="fa fa-bar-chart-o fa-fw"></i> Turnee<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <%tournaments.forEach(function(tournament){%>
                         <li><a href="/tournament-details/<%=tournament._id%>"><%=tournament.tournamentName%></a></li>

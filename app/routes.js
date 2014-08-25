@@ -26,7 +26,7 @@ module.exports = function (app, passport) {
 
   /*HOME AND LOGIN ROUTES*/
   app.get('/', function (req, res) {
-    res.render('index.ejs', {
+    res.render('landing-page-index.ejs', {
       user: null
     });
   });
@@ -113,6 +113,16 @@ module.exports = function (app, passport) {
     });
   });
 
+  app.get('/profile-details/:_id', function(req, res){
+    helperFunctions.getUserDetails(req.params._id, function(user){
+      res.render('profile/profile-details.ejs', {
+        user: req.user,
+        tournaments: retrievedTournaments,
+        detailedUser: user
+      });
+    });
+  });
+
   app.get('/customize-profile/:nickname', function(req, res){
     res.render('profile/customize-profile.ejs', {
       user: req.user//get the user out of session and pass to template
@@ -137,6 +147,14 @@ module.exports = function (app, passport) {
         res.redirect('/profile');
       });
     });
+  });
+
+  /*MESSAGING ROUTES*/
+  app.get('/send-message/:_id', function(req, res){
+    res.render('messaging/send-message.ejs', {
+      user: req.user,
+      tournaments: retrievedTournaments
+    })
   });
 
   /* TOURNAMENT ROUTES */
@@ -273,7 +291,7 @@ module.exports = function (app, passport) {
 
   /*PLAYER ROUTES*/
   app.get('/jucatori-terran', function(req, res){
-    helperFunctions.retrieveAllTerranPlayers(function(terrans){
+    helperFunctions.retrieveTerranPlayers(function(terrans){
       res.render('players/jucatori-terran.ejs', {
         user: req.user,
         tournaments: retrievedTournaments,
@@ -283,7 +301,7 @@ module.exports = function (app, passport) {
   });
 
   app.get('/jucatori-zerg', function(req, res){
-    helperFunctions.retrieveAllZergPlayers(function(zergs){
+    helperFunctions.retrieveZergPlayers(function(zergs){
       res.render('players/jucatori-zerg.ejs', {
         user: req.user,
         tournaments: retrievedTournaments,
@@ -293,14 +311,85 @@ module.exports = function (app, passport) {
   });
 
   app.get('/jucatori-protoss', function(req, res){
-    helperFunctions.retrieveAllProtossPlayers(function(protosses){
+    helperFunctions.retrieveProtossPlayers(function(protosses){
       res.render('players/jucatori-protoss.ejs', {
         user: req.user,
         tournaments: retrievedTournaments,
         protossPlayers: protosses
       });
     });
-  })
+  });
+
+  /*PLAYER ROUTES FOR LEAGUE RESULTS - GOLD PLAYERS, SILVER PLAYERS ETC*/
+  app.get('/jucatori-liga-bronze', function(req, res){
+    helperFunctions.retrieveBronzePlayers(function(jucatoriBronze){
+      res.render('players/leagues/jucatori-liga-bronze.ejs', {
+        user: req.user,
+        tournaments: retrievedTournaments,
+        bronzePlayers: jucatoriBronze
+      })
+    })
+  });
+
+  app.get('/jucatori-liga-silver', function(req, res){
+    helperFunctions.retrieveSilverPlayers(function(jucatoriSilver){
+      res.render('players/leagues/jucatori-liga-silver.ejs', {
+        user: req.user,
+        tournaments: retrievedTournaments,
+        silverPlayers: jucatoriSilver
+      })
+    })
+  });
+
+  app.get('/jucatori-liga-gold', function(req, res){
+    helperFunctions.retrieveGoldPlayers(function(jucatoriGold){
+      res.render('players/leagues/jucatori-liga-gold.ejs', {
+        user: req.user,
+        tournaments: retrievedTournaments,
+        goldPlayers: jucatoriGold
+      })
+    })
+  });
+
+  app.get('/jucatori-liga-platinum', function(req, res){
+    helperFunctions.retrievePlatinumPlayers(function(jucatoriPlatinum){
+      res.render('players/leagues/jucatori-liga-platinum.ejs', {
+        user: req.user,
+        tournaments: retrievedTournaments,
+        platinumPlayers: jucatoriPlatinum
+      })
+    })
+  });
+
+  app.get('/jucatori-liga-diamond', function(req, res){
+    helperFunctions.retrieveDiamondPlayers(function(jucatoriDiamond){
+      res.render('players/leagues/jucatori-liga-diamond.ejs', {
+        user: req.user,
+        tournaments: retrievedTournaments,
+        diamondPlayers: jucatoriDiamond
+      })
+    })
+  });
+
+  app.get('/jucatori-liga-master', function(req, res){
+    helperFunctions.retrieveMasterPlayers(function(jucatoriMaster){
+      res.render('players/leagues/jucatori-liga-master.ejs', {
+        user: req.user,
+        tournaments: retrievedTournaments,
+        masterPlayers: jucatoriMaster
+      })
+    })
+  });
+
+  app.get('/jucatori-liga-grand-master', function(req, res){
+    helperFunctions.retrieveGMPlayers(function(jucatoriGM){
+      res.render('players/leagues/jucatori-liga-grand-master.ejs', {
+        user: req.user,
+        tournaments: retrievedTournaments,
+        jucatoriGM: jucatoriGM
+      });
+    });
+  });
 
   /* LOGOUT ROUTE */
   app.get('/logout', function (req, res) {

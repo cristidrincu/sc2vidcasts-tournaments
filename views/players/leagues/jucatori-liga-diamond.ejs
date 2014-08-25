@@ -1,0 +1,51 @@
+<% include ../../partials/header %>
+<% tournaments.forEach(function(tournament){ %>
+<% include ../../partials/sidebar %>
+<% }); %>
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">JUCATORI LIGA DIAMOND</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- /.panel -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-clock-o fa-fw"></i> Lista jucatori Diamond
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <table class="table table-hover">
+                            <%if(diamondPlayers.length == 0){%>
+                            <p>Nu am gasit jucatori de Diamond in baza de date</p>
+                            <%}else{%>
+                            <tr>
+                                <th>Nickname jucator</th>
+                                <th>Battle.net ID</th>
+                                <th>Rasa</th>
+                            </tr>
+                            <% diamondPlayers.forEach(function(player){ %>
+                            <tr>
+                                <td><%= player.local.nickname %></td>
+                                <td><%= player.local.battlenetid %></td>
+                                <td><%= player.local.race %></td>
+                            </tr>
+                            <% }); %>
+                            <%}%>
+                        </table>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<% include ../../partials/footer %>

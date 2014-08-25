@@ -1,0 +1,58 @@
+<% include ../partials/header %>
+<div class="container" style="margin-top: 150px;">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><%=detailedUser.local.nickname%></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100" class="img-circle"> </div>
+                        <div class=" col-md-9 col-lg-9 ">
+                            <table class="table table-user-information">
+                                <tbody>
+                                <tr>
+                                    <td>Nickname:</td>
+                                    <td><%=detailedUser.local.nickname%></td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td><%=detailedUser.local.email%></td>
+                                </tr>
+                                <tr>
+                                    <td>Battle.Net ID:</td>
+                                    <td><%=detailedUser.local.battlenetid%></td>
+                                </tr>
+
+                                <tr>
+                                <tr>
+                                    <td>Race:</td>
+                                    <td><%=detailedUser.local.race%></td>
+                                </tr>
+                                <tr>
+                                    <td>Liga</td>
+                                    <td><%=detailedUser.local.league%></td>
+                                </tr>
+                                <tr>
+                                    <td>Rol</td>
+                                    <td><%=detailedUser.local.role%></td>
+                                </tr>
+                                <tr>
+                                    <td>Te putem ajuta?</td>
+                                    <td><a href="mailto:turnee@starcraft2-vidcasts.ro">turnee@starcraft2-vidcasts.ro</a></td>
+                                </tr>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <a href="/send-message/<%= detailedUser._id %>" class="btn btn-primary">Trimite-i un mesaj</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="/backend-user">Inapoi la contul tau</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

@@ -11,7 +11,7 @@ var tournamentSchema = mongoose.Schema({
         "leagues" : []
     },
     organizer: [{
-      type: mongoose.Schema.Types.String, ref: "User"
+      type: mongoose.Schema.Types.ObjectId, ref: "User"
     }],
     edition: String,
     description: String,

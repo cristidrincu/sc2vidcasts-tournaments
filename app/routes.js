@@ -166,6 +166,22 @@ module.exports = function (app, passport) {
       });
   });
 
+  app.get('/send-reply/:_receiverId/:_messageId', function(req, res){
+    Message.findById(req.params._messageId).exec(function(err, messages){
+      if(err)
+        ErrorHandler.handle('A aparut o eroare la extragerea mesajului din baza de date ' + err);
+      else
+        res.render('messaging/send-reply.ejs', {
+          user: req.user,
+          tournaments: retrievedTournaments,
+          messages: messages,
+          receiverId: req.params._receiverId
+        });
+    });
+  });
+
+  /*TODO - UPDATE the message that is being sent as a reply instead of creating a new one - create a POST method for send-reply*/
+
   app.post('/send-message/:_id', function(req, res){
     var message = new Message( {messageBody: req.body.message, messageSubject: req.body.messageSubject, sentBy: req.user, receiver: req.params._id} );
     message.save(function(err){
@@ -186,6 +202,27 @@ module.exports = function (app, passport) {
           tournaments: retrievedTournaments,
           messages: messages
         });
+    });
+  });
+
+  app.get('/message-details/:_id', function(req, res){
+    Message.findById(req.params._id).populate('sentBy').exec(function(err, message){
+      if(err)
+        ErrorHandler.handle('A aparut o eroare la extragerea mesajului din baza de date: ' + err);
+      res.render('messaging/message-details.ejs', {
+        user: req.user,
+        tournaments: retrievedTournaments,
+        messageDetails: message
+      });
+    });
+  });
+
+  app.post('/delete-message/:_id', function(req, res){
+    Message.findById(req.params._id).remove(function(err){
+      if(err)
+        ErrorHandler.handle('A aparut o eroare la stergerea mesajului din baza de date: ' + err);
+      else
+        res.redirect('/user-messages');
     });
   });
 
@@ -223,6 +260,7 @@ module.exports = function (app, passport) {
         newTournament.sponsors = req.body.sponsors;
         newTournament.ingameChatChannel = req.body.ingameChatChannel;
         newTournament.twitchStreamChannel = 'http://www.twitch.tv/' + req.body.twitchStreamChannel;
+        newTournament.organizer = req.user._id;
 
         newTournament.save(function(err){
           if(err)
@@ -238,17 +276,42 @@ module.exports = function (app, passport) {
   //TODO - REFACTOR MONGOOSE QUERY METHODS FOR TOURNAMENT INTO METHODS THAT RESIDE INSIDE NODE MODULES - SEE HELPER-MONGOOSE.JS
   app.get('/tournament-details/:_id', isLoggedIn, function(req, res){
 
-    Tournament.findById(req.params._id).populate('players').exec( function(err, tournament){
-      if(err)
-        res.send(err)
-      else
-        res.render('tournament/tournament-details.ejs',{
-          user: req.user,
-          tournament: tournament,
-          tournaments: retrievedTournaments,
-          moment: moment
-        });
+    var enlistedInTournament = false;
+
+    User.find( {_id: req.user._id}, function(err, players){
+      var ids = players.map(function(player){
+        return player._id;
+      });
+
+      Tournament.findOne( { _id: req.params._id, players: {$in: ids}}, function(err, players){
+        if(players)
+          enlistedInTournament = true
+      });
+
+      Tournament.findById(req.params._id).populate('players').exec( function(err, tournament){
+        if(err)
+          res.send(err)
+        else
+          res.render('tournament/tournament-details.ejs',{
+            user: req.user,
+            tournament: tournament,
+            tournaments: retrievedTournaments,
+            moment: moment,
+            enlistedInTournament: enlistedInTournament
+          });
+      });
     });
+
+//    helperFunctions.retrieveTournamentLeagues(req.params._id, function(leagues){
+//      leagues.forEach(function(league){
+//        //TODO - CHECK PLAYER LEAGUE AND PREVENT ENLISTING IN THE TOURNAMENT IF THE LEAGUE IS NOT PRESENT IN THE LEAGUES ARRAY FOR THE TOURNAMENT MODEL
+//        if(league === 'Free for all'){
+//
+//        }else{
+//          res.send('Nu te poti inscrie in cadrul acestui turneu!');
+//        }
+//      });
+//    });
   });
 
   app.get('/signup-tournament/:_id/:_userId', isLoggedIn, function(req, res){
@@ -271,20 +334,20 @@ module.exports = function (app, passport) {
 
     //TODO - incearca sa folosesti async.series([]) pentru a lega metoda de find si apoi insrierea jucatorului in baza de date
     if(validateObjectId(req.params._id) && validateObjectId(req.params.userId)){
-      User.find({_id: req.params.userId}, function(err, docs){
-        var ids = docs.map(function(doc) {
-          return doc._id;
+      User.find({_id: req.params.userId}, function(err, players){
+        var ids = players.map(function(player) {
+          return player._id;
         });
 
-        Tournament.find( {players: {$in: ids}}, function(err, docs){
+        Tournament.findOne( {_id: req.params._id, players: {$in: ids}}, function(err, players){
           if(err){
-            res.send('no player found');
+            res.send(ErrorHandler.handle('A aparut o eroare: ' + err));
           }
 
-          if(docs){
+          if(players){
             //TODO - replace with proper error view - present other tournaments that the user can enlist into
             res.send('Esti deja inscris in cadrul acestui turneu!');
-          }else if(!docs){
+          }else if(!players){
             Tournament.findById(req.params._id, function(err, tournament){
               if(err){
                 res.send(err);
@@ -304,7 +367,7 @@ module.exports = function (app, passport) {
                     if(err)
                       res.send(err)
                     else
-                      res.redirect('/signup-tournament/' + req.params._id + '/' + req.params.userId);
+                      res.redirect('/user-tournaments/' + req.params.userId);
                   });
                 }
               }
@@ -319,6 +382,30 @@ module.exports = function (app, passport) {
     res.render('tournament/signup-tournament-result.ejs', {
       user: req.user
     })
+  });
+
+  app.get('/user-tournaments/:_userId', function(req, res){
+    User.find({_id: req.params._userId}, function(err, docs){
+      var ids = docs.map(function(doc) {
+        return doc._id;
+      });
+
+      Tournament.find( { players: {$in: ids} }).exec(function(err, playerTournaments){
+        if(err)
+          ErrorHandler.handle('A aparut o problema in extragerea turneelor in care esti inscris! ' + err);
+
+        if(!playerTournaments)
+          res.send('Nu am gasit niciun turneu in care esti inscris');
+        else
+          res.render('tournament/user-tournaments.ejs', {
+            user: req.user,
+            tournaments: retrievedTournaments,
+            playerTournaments: playerTournaments,
+            moment: moment
+          });
+      });
+
+    });
   });
 
   /*PLAYER ROUTES*/

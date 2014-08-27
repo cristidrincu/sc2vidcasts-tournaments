@@ -9,9 +9,13 @@
                 <h1 class="page-header">Detalii pentru turneul <i><%=tournament.tournamentName%>, editia <%=tournament.edition > 1 ? 'a ' + tournament.edition + '-a' : ''%></i></h1>
             </div>
             <div class="col-lg-4">
-                <form class="btn-signup-turneu-detalii" action="/signup-tournament/<%=tournament._id%>/<%=user._id%>" method="post">
-                    <button class="btn btn-success">Inscrie-te</button>
-                </form>
+                <% if(enlistedInTournament){%>
+                   <p style="padding-top: 55px; color: red">Esti deja inscris in cadrul acestui turneu</p>
+                <%} else {%>
+                    <form class="btn-signup-turneu-detalii" action="/signup-tournament/<%=tournament._id%>/<%=user._id%>" method="post">
+                        <button class="btn btn-success">Inscrie-te</button>
+                    </form>
+                <%}%>
             </div>
         </div>
     </div>
@@ -64,7 +68,7 @@
                 <div class="panel-body">
                     <ul style="list-style: none">
                         <%tournament.players.forEach(function(player){%>
-                            <li><%=player.local.nickname + ', ' + player.local.race + ', ' + player.local.league%></li>
+                            <li><%=player.local.nickname + ', ' + player.local.race + ', ' + player.local.league%>, <a href="/profile-details/<%= player._id%>">Profil jucator</a></li>
                         <%})%>
                     </ul>
                 </div>
@@ -111,7 +115,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-clock-o fa-fw"></i> Canal Stream
@@ -119,6 +123,18 @@
                 <div class="panel-body">
                     <p style="text-align: center;">
                         <a href="<%=tournament.twitchStreamChannel%>" target="_blank"><%=tournament.twitchStreamChannel%></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-clock-o fa-fw"></i> Premii
+                </div>
+                <div class="panel-body">
+                    <p style="text-align: center;">
+                        <%= tournament.prize ? 'Da': 'Nu'%>
                     </p>
                 </div>
             </div>

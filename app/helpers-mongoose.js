@@ -20,8 +20,17 @@ exports.retrieveAllTournaments = function(cb){
   });
 }
 
+exports.retrieveTournamentLeagues = function(tournamentId, cb){
+  Tournament.findById(tournamentId).exec(function(err, tournaments){
+    if(err)
+      ErrorHandler.handle('A aparut o eroare in preluarea ligilor pentru acest turneu' + err);
+    else
+      cb(tournaments.openForLeagues.leagues);
+  });
+}
+
 exports.retrieveTerranPlayers = function(cb){
-  User.find( { 'local.race': 'Terran', 'local.role': 'User' } ).exec(function(err, terrans){
+  User.find( { 'local.race': 'Terran', 'local.role': 'User' }).limit(10).exec(function(err, terrans){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor terrani din baza de date' + err);
     cb(terrans);

@@ -10,3 +10,10 @@ ul.titlu-turneu-signup li {
 .btn-signup-turneu-detalii{
     margin-top: 45px;
 }
+
+.two-button-set-list, .two-button-set-list li{
+    margin: 0;
+    padding: 0;
+    display:inline-block;
+    list-style: none;
+}

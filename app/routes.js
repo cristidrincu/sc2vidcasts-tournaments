@@ -321,7 +321,7 @@ module.exports = function (app, passport) {
     var playerId = req.params.userId;
 
     //TODO - incearca sa folosesti async.series([]) pentru a lega metoda de find si apoi insrierea jucatorului in baza de date
-    if(validateObjectId(req.params._id) && validateObjectId(req.params.userId)){
+
       User.find({_id: req.params.userId}, function(err, players){
         var ids = players.map(function(player) {
           return player._id;
@@ -363,7 +363,6 @@ module.exports = function (app, passport) {
           }
         });
       });
-    }
   });
 
   app.get('/signup-tournament-result/:_id', isLoggedIn, function(req, res){

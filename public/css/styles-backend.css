@@ -17,3 +17,15 @@ ul.titlu-turneu-signup li {
     display:inline-block;
     list-style: none;
 }
+
+.tournaments-list, .players-list{
+    display:none;
+}
+
+.success-message-flash{
+    color: green;
+}
+
+.error-message-flash{
+    color: red;
+}

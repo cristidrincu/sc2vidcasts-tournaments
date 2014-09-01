@@ -7,6 +7,11 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Lista turneelor in care te-ai inscris</h1>
+            <%if(errorMessage.length == 0){%>
+                <p class="success-message-flash"><%= successMessage%></p>
+            <%}else{%>
+                <p class="error-message-flash"><%= errorMessage%></p>
+            <%}%>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -29,6 +34,7 @@
                             <th>Data terminarii</th>
                             <th>Premii</th>
                             <th>Detalii</th>
+                            <th>Retrage-te din turneu</th>
                         </tr>
 
                         <% playerTournaments.forEach(function(tournament){ %>
@@ -43,8 +49,13 @@
                             </td>
                             <td>
                                 <a href="/tournament-details/<%= tournament._id %>">
-                                    <button class="btn btn-danger">Detalii</button>
+                                    <button class="btn btn-success">Detalii</button>
                                 </a>
+                            </td>
+                            <td>
+                                <form method="post" action="/retragere-din-turneu/<%=user._id%>/<%= tournament._id%> ">
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#modalRetragere">Retrage-te din acest turneu</button>
+                                </form>
                             </td>
                         </tr>
                         <% }); %>
@@ -55,6 +66,5 @@
     </div>
 </div>
 </div>
-
 
 <% include ../partials/footer %>

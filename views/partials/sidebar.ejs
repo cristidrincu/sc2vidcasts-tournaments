@@ -22,8 +22,8 @@
                 <a href="/user-tournaments/<%= user._id%>"><i class="fa fa-bar-chart-o fa-fw"></i> Turneele tale<span class="fa arrow"></span></a>
             </li>
             <li>
-                <a href="/backend-user"><i class="fa fa-bar-chart-o fa-fw"></i> Turnee deschise<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
+                <a href="#" class="display-active-tournaments"><i class="fa fa-bar-chart-o fa-fw"></i> Turnee deschise<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level tournaments-list">
                     <%tournaments.forEach(function(tournament){%>
                         <li><a href="/tournament-details/<%=tournament._id%>"><%=tournament.tournamentName%></a></li>
                     <%})%>
@@ -31,23 +31,8 @@
                 <!-- /.nav-second-level -->
             </li>
             <li>
-                <a href="#"><i class="fa fa-wrench fa-fw"></i> Jucatori pe rase<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="/jucatori-terran">Terran</a>
-                    </li>
-                    <li>
-                        <a href="/jucatori-zerg">Zerg</a>
-                    </li>
-                    <li>
-                        <a href="/jucatori-protoss">Protoss</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-files-o fa-fw"></i> Jucatori pe ligi<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
+                <a href="#" class="display-leagues-players"><i class="fa fa-files-o fa-fw"></i> Jucatori pe ligi<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level players-list">
                     <li>
                         <a href="/jucatori-liga-bronze">Bronze</a>
                     </li>

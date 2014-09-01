@@ -20,6 +20,15 @@ exports.retrieveAllTournaments = function(cb){
   });
 }
 
+exports.retrieveTournamentDetails = function(tournamentId, cb){
+  Tournament.findOne( {'_id': tournamentId }).exec(function(err, tournament){
+    if(err)
+      ErrorHandler.handle('Nu am putut sa iti scoatem turneul din baza de date ' + err);
+    else
+      cb(tournament);
+  });
+}
+
 exports.retrieveTournamentLeagues = function(tournamentId, cb){
   Tournament.findById(tournamentId).exec(function(err, tournaments){
     if(err)
@@ -29,32 +38,8 @@ exports.retrieveTournamentLeagues = function(tournamentId, cb){
   });
 }
 
-exports.retrieveTerranPlayers = function(cb){
-  User.find( { 'local.race': 'Terran', 'local.role': 'User' }).limit(10).exec(function(err, terrans){
-    if(err)
-      ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor terrani din baza de date' + err);
-    cb(terrans);
-  });
-}
-
-exports.retrieveZergPlayers = function(cb){
-  User.find( { 'local.race': 'Zerg', 'local.role': 'User' } ).exec(function(err, zergs){
-    if(err)
-      ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor zergi din baza de date' + err);
-    cb(zergs);
-  });
-}
-
-exports.retrieveProtossPlayers = function(cb){
-  User.find( { 'local.race': 'Protoss', 'local.role': 'User' } ).exec(function(err, protosses){
-    if(err)
-      ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor protoss din baza de date' + err);
-    cb(protosses);
-  });
-}
-
 exports.retrieveBronzePlayers = function(cb){
-  User.find( {'local.league': 'Bronze', 'local.role': 'User'}).exec(function(err, bronzers){
+  User.find( {'local.league': 'Bronze', 'local.role': 'User'}).limit(10).exec(function(err, bronzers){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor bronze din baza de date' + err);
     cb(bronzers);

@@ -9,6 +9,7 @@ var retrievedTournaments = null;
 var User = require('./models/user');
 var Tournament = require('./models/tournament');
 var Message = require('./models/message');
+
 var moment = require('moment');
 var mongoose = require('mongoose');
 var ObjectId = require('mongodb').ObjectID;
@@ -43,21 +44,6 @@ module.exports = function (app, passport) {
     failureFlash: true
   }));
 
-//  ), function(req, res, user){
-//    user = req.user;
-//    switch (user.local.role){
-//      case 'admin':
-//        res.redirect('/backend-admin');
-//        break;
-//      case 'User':
-//        res.redirect('/backend-user');
-//        break;
-//      case 'Organizator':
-//        res.redirect('/backend-organizer');
-//        break;
-//    }
-
-
   /*SIGN-UP ROUTES*/
   app.get('/signup', function (req, res) {
     res.render('signup.ejs', { message: req.flash('signupMessage'), user: null});
@@ -82,15 +68,17 @@ module.exports = function (app, passport) {
   });
 
   /*BACK-END ROUTES*/
-  app.get('/backend-admin', requireRoleAdmin('admin'), function(req, res){
+  app.get('/backend-admin', requireRole('admin'), function(req, res){
       res.render('backend/backend-admin.ejs', {
-        user: req.user
+        user: req.user,
+        tournaments: retrievedTournaments
       });
   });
 
-  app.get('/backend-organizer', requireRoleOrganizator('Organizator'), requireRoleAdmin('admin'), function(req, res){
+  app.get('/backend-organizer', requireRole('Organizator'), function(req, res){
     res.render('backend/backend-organizer.ejs', {
-      user: req.user
+      user: req.user,
+      tournaments: retrievedTournaments
     });
   });
 
@@ -108,14 +96,14 @@ module.exports = function (app, passport) {
   });
 
   /* PROFILE ROUTES */
-  app.get('/profile', function (req, res) {
+  app.get('/profile', isLoggedIn, function (req, res) {
     res.render('profile/profile.ejs', {
       message: req.flash('signupSuccess'), //get the message out of the session and pass to template
       user: req.user //get the user out of session and pass to template
     });
   });
 
-  app.get('/profile-details/:_id', function(req, res){
+  app.get('/profile-details/:_id', isLoggedIn, function(req, res){
     helperFunctions.getUserDetails(req.params._id, function(user){
       res.render('profile/profile-details.ejs', {
         user: req.user,
@@ -125,13 +113,13 @@ module.exports = function (app, passport) {
     });
   });
 
-  app.get('/customize-profile/:nickname', function(req, res){
+  app.get('/customize-profile/:nickname', isLoggedIn, function(req, res){
     res.render('profile/customize-profile.ejs', {
       user: req.user//get the user out of session and pass to template
     });
   });
 
-  app.post('/customize-profile/:nickname', function(req, res){
+  app.post('/customize-profile/:nickname', isLoggedIn, function(req, res){
     User.findOne({ 'local.nickname': req.params.nickname}, function(err, user){
       if(err)
         res.send('Utilizatorul nu a putut fi gasit');
@@ -152,7 +140,7 @@ module.exports = function (app, passport) {
   });
 
   /*MESSAGING ROUTES*/
-  app.get('/send-message/:_id', function(req, res){
+  app.get('/send-message/:_id', isLoggedIn, function(req, res){
     User.findById(req.params._id, function(err, user){
       if(err)
         ErrorHandler.handle('Nu a fost gasit un jucator cu acest ID ' + err)
@@ -166,7 +154,7 @@ module.exports = function (app, passport) {
       });
   });
 
-  app.get('/send-reply/:_receiverId/:_messageId', function(req, res){
+  app.get('/send-reply/:_receiverId/:_messageId', isLoggedIn, function(req, res){
     Message.findById(req.params._messageId).exec(function(err, messages){
       if(err)
         ErrorHandler.handle('A aparut o eroare la extragerea mesajului din baza de date ' + err);
@@ -182,7 +170,7 @@ module.exports = function (app, passport) {
 
   /*TODO - UPDATE the message that is being sent as a reply instead of creating a new one - create a POST method for send-reply*/
 
-  app.post('/send-message/:_id', function(req, res){
+  app.post('/send-message/:_id', isLoggedIn, function(req, res){
     var message = new Message( {messageBody: req.body.message, messageSubject: req.body.messageSubject, sentBy: req.user, receiver: req.params._id} );
     message.save(function(err){
       if(err)
@@ -192,7 +180,7 @@ module.exports = function (app, passport) {
     });
   });
 
-  app.get('/user-messages', function(req, res){
+  app.get('/user-messages', isLoggedIn, function(req, res){
     Message.find( {receiver: req.user._id}).populate('sentBy').exec(function(err, messages){
       if(err)
         ErrorHandler.handle('A intervenit o eroare la preluarea mesajelor din baza de date: ' + err);
@@ -205,7 +193,7 @@ module.exports = function (app, passport) {
     });
   });
 
-  app.get('/message-details/:_id', function(req, res){
+  app.get('/message-details/:_id', isLoggedIn, function(req, res){
     Message.findById(req.params._id).populate('sentBy').exec(function(err, message){
       if(err)
         ErrorHandler.handle('A aparut o eroare la extragerea mesajului din baza de date: ' + err);
@@ -217,7 +205,7 @@ module.exports = function (app, passport) {
     });
   });
 
-  app.post('/delete-message/:_id', function(req, res){
+  app.post('/delete-message/:_id', isLoggedIn, function(req, res){
     Message.findById(req.params._id).remove(function(err){
       if(err)
         ErrorHandler.handle('A aparut o eroare la stergerea mesajului din baza de date: ' + err);
@@ -227,13 +215,13 @@ module.exports = function (app, passport) {
   });
 
   /* TOURNAMENT ROUTES */
-  app.get('/create-tournament', function(req, res){
+  app.get('/create-tournament', isLoggedIn, requireRole('Organizator'), function(req, res){
     res.render('tournament/create-tournament.ejs', {
       user: req.user
     });
   });
 
-  app.get('/create-tournament-results', function(req, res){
+  app.get('/create-tournament-results', isLoggedIn, requireRole('Organizator'), function(req, res){
     res.render('tournament/create-tournament-results.ejs', {
       user: req.user,
       errorMessage: req.flash('infoError'),
@@ -241,7 +229,7 @@ module.exports = function (app, passport) {
     });
   });
 
-  app.post('/create-tournament', function(req, res){
+  app.post('/create-tournament', isLoggedIn, requireRole('Organizator'), function(req, res){
 
     Tournament.findOne({ 'tournament.edition': req.body.edition, 'tournament.tournamentName' : req.body.tournamentName }, function(err, newTournament){
       if(newTournament)
@@ -384,7 +372,7 @@ module.exports = function (app, passport) {
     })
   });
 
-  app.get('/user-tournaments/:_userId', function(req, res){
+  app.get('/user-tournaments/:_userId', isLoggedIn, function(req, res){
     User.find({_id: req.params._userId}, function(err, docs){
       var ids = docs.map(function(doc) {
         return doc._id;
@@ -401,46 +389,42 @@ module.exports = function (app, passport) {
             user: req.user,
             tournaments: retrievedTournaments,
             playerTournaments: playerTournaments,
-            moment: moment
+            moment: moment,
+            errorMessage: req.flash('infoError'),
+            successMessage: req.flash('infoSuccess')
           });
       });
 
     });
   });
 
+  app.post('/retragere-din-turneu/:_userId/:_tournamentId', function(req, res){
+
+    console.log(req.params._userId);
+    console.log(req.params._tournamentId);
+
+    Tournament.findById(req.params._tournamentId).exec(function(err, tournament){
+      if(!err){
+        var playerId = tournament.players.indexOf(req.params._userId);
+        if(playerId != -1)
+          tournament.players.splice(playerId, 1);
+        tournament.save(function(err){
+          if(err)
+            req.flash('infoError', 'A aparut o eroare la scoaterea ta din turneu. Mai incearca!');
+          else
+            req.flash('infoSuccess', 'Te-ai retras cu succes din cadrul turneului!');
+
+          res.redirect('/user-tournaments/' + req.params._userId);
+        });
+      }else{
+        res.send(err);
+      }
+    });
+  });
+
   /*PLAYER ROUTES*/
-  app.get('/jucatori-terran', function(req, res){
-    helperFunctions.retrieveTerranPlayers(function(terrans){
-      res.render('players/jucatori-terran.ejs', {
-        user: req.user,
-        tournaments: retrievedTournaments,
-        terranPlayers: terrans
-      });
-    });
-  });
-
-  app.get('/jucatori-zerg', function(req, res){
-    helperFunctions.retrieveZergPlayers(function(zergs){
-      res.render('players/jucatori-zerg.ejs', {
-        user: req.user,
-        tournaments: retrievedTournaments,
-        zergPlayers: zergs
-      });
-    });
-  });
-
-  app.get('/jucatori-protoss', function(req, res){
-    helperFunctions.retrieveProtossPlayers(function(protosses){
-      res.render('players/jucatori-protoss.ejs', {
-        user: req.user,
-        tournaments: retrievedTournaments,
-        protossPlayers: protosses
-      });
-    });
-  });
-
   /*PLAYER ROUTES FOR LEAGUE RESULTS - GOLD PLAYERS, SILVER PLAYERS ETC*/
-  app.get('/jucatori-liga-bronze', function(req, res){
+  app.get('/jucatori-liga-bronze', isLoggedIn, function(req, res){
     helperFunctions.retrieveBronzePlayers(function(jucatoriBronze){
       res.render('players/leagues/jucatori-liga-bronze.ejs', {
         user: req.user,
@@ -450,7 +434,7 @@ module.exports = function (app, passport) {
     })
   });
 
-  app.get('/jucatori-liga-silver', function(req, res){
+  app.get('/jucatori-liga-silver', isLoggedIn, function(req, res){
     helperFunctions.retrieveSilverPlayers(function(jucatoriSilver){
       res.render('players/leagues/jucatori-liga-silver.ejs', {
         user: req.user,
@@ -460,7 +444,7 @@ module.exports = function (app, passport) {
     })
   });
 
-  app.get('/jucatori-liga-gold', function(req, res){
+  app.get('/jucatori-liga-gold', isLoggedIn, function(req, res){
     helperFunctions.retrieveGoldPlayers(function(jucatoriGold){
       res.render('players/leagues/jucatori-liga-gold.ejs', {
         user: req.user,
@@ -470,7 +454,7 @@ module.exports = function (app, passport) {
     })
   });
 
-  app.get('/jucatori-liga-platinum', function(req, res){
+  app.get('/jucatori-liga-platinum', isLoggedIn, function(req, res){
     helperFunctions.retrievePlatinumPlayers(function(jucatoriPlatinum){
       res.render('players/leagues/jucatori-liga-platinum.ejs', {
         user: req.user,
@@ -480,7 +464,7 @@ module.exports = function (app, passport) {
     })
   });
 
-  app.get('/jucatori-liga-diamond', function(req, res){
+  app.get('/jucatori-liga-diamond', isLoggedIn, function(req, res){
     helperFunctions.retrieveDiamondPlayers(function(jucatoriDiamond){
       res.render('players/leagues/jucatori-liga-diamond.ejs', {
         user: req.user,
@@ -490,7 +474,7 @@ module.exports = function (app, passport) {
     })
   });
 
-  app.get('/jucatori-liga-master', function(req, res){
+  app.get('/jucatori-liga-master', isLoggedIn, function(req, res){
     helperFunctions.retrieveMasterPlayers(function(jucatoriMaster){
       res.render('players/leagues/jucatori-liga-master.ejs', {
         user: req.user,
@@ -500,7 +484,7 @@ module.exports = function (app, passport) {
     })
   });
 
-  app.get('/jucatori-liga-grand-master', function(req, res){
+  app.get('/jucatori-liga-grand-master', isLoggedIn, function(req, res){
     helperFunctions.retrieveGMPlayers(function(jucatoriGM){
       res.render('players/leagues/jucatori-liga-grand-master.ejs', {
         user: req.user,
@@ -530,20 +514,9 @@ function uppercaseFirstChar(text){
   return text[0].toUpperCase() + text.slice(1);
 }
 
-function requireRoleOrganizator(role){
+function requireRole(role){
   return function(req, res, next){
-    if(req.session.user && req.session.user.local.role === role){
-      next();
-    }
-    else{
-      res.send(403);
-    }
-  }
-}
-
-function requireRoleAdmin(role){
-  return function(req, res, next){
-    if(req.session.user && req.session.user.local.role === role){
+    if(req.user.local.role === role){
       next();
     }
     else{

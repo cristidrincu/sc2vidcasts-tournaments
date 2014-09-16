@@ -1,6 +1,12 @@
 <% include ../partials/header %>
 <% tournaments.forEach(function(tournament){ %>
-<% include ../partials/sidebar %>
+    <%if(user.local.role == 'admin'){%>
+        <% include ../partials/sidebar-admin %>
+    <%}else if(user.local.role == 'Organizator'){%>
+        <% include ../partials/sidebar-organizer %>
+    <%}else{%>
+        <% include ../partials/sidebar %>
+    <%}%>
 <% }); %>
 
 <script>
@@ -23,7 +29,13 @@
                 </div>
                 <div class="form-group">
                     <input class="btn btn-success" type="submit" value="Trimite mesajul"/>
-                    <a href="/backend-user"><input class="btn btn-danger" value="Anuleaza"/></a>
+                    <%if(user.local.role == 'admin'){%>
+                        <a href="/backend-admin"><input class="btn btn-danger" value="Anuleaza"/></a>
+                    <%}else if(user.local.role == 'Organizator'){%>
+                        <a href="/backend-organizers"><input class="btn btn-danger" value="Anuleaza"/></a>
+                    <%}else{%>
+                        <a href="/backend-user"><input class="btn btn-danger" value="Anuleaza"/></a>
+                    <%}%>
                 </div>
 
             </div>

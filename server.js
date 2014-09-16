@@ -60,7 +60,32 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 //routes
-require('./app/routes.js')(app, passport); //load our routes and pass in our app and fully configured passport
+require('./app/routes.js')(app); //load our routes and pass in our app and fully configured passport
+
+var login = require('./app/routes/login/login-route');
+var home = require('./app/routes/home/home-route');
+var signup = require('./app/routes/signup/signup-route');
+var profile = require('./app/routes/profile/profile-route');
+var backend = require('./app/routes/backend/backend-route');
+var messages = require('./app/routes/messages/messages-route');
+var players = require('./app/routes/players/players-route');
+var tournaments = require('./app/routes/tournaments/tournaments-route');
+var admin = require('./app/routes/admin/admin-routes');
+
+var logout = require('./app/routes/logout/logout-route');
+
+app.use(home);
+app.use(login);
+app.use(signup);
+app.use(profile);
+app.use(backend);
+app.use(messages);
+app.use(players);
+app.use(tournaments);
+app.use(admin);
+
+app.use(logout);
+
 
 //launch
 app.listen(server_port, server_ip_address, function () {

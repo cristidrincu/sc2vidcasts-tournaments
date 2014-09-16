@@ -1,21 +1,22 @@
 <%include ../partials/header.ejs%>
 <%tournaments.forEach(function(tournament){%>
-<% include ../partials/sidebar%>
+<% include ../partials/sidebar-admin%>
 <%});%>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <div class="col-lg-8">
-                <h1 class="page-header">Detalii pentru turneul <i><%=tournament.tournamentName%>, editia <%=tournament.edition > 1 ? 'a ' + tournament.edition + '-a' : ''%></i></h1>
+            <div class="col-lg-6">
+                <h1 class="page-header">Detalii pentru turneul <i><%=tournament.tournamentName%>, editia <%=tournament.edition > 1 ? 'a ' + tournament.edition + '-a' : '1'%></i></h1>
             </div>
-            <div class="col-lg-4">
-                <% if(enlistedInTournament){%>
-                   <p style="padding-top: 55px; color: red">Esti deja inscris in cadrul acestui turneu</p>
-                <%} else {%>
-                    <form class="btn-signup-turneu-detalii" action="/signup-tournament/<%=tournament._id%>/<%=user._id%>" method="post">
-                        <button class="btn btn-success">Inscrie-te</button>
-                    </form>
-                <%}%>
+            <div class="col-lg-3">
+                <form class="btn-signup-turneu-detalii" action="/delete-tournament/<%=tournament._id%>" method="post">
+                    <button class="btn btn-danger">Sterge turneul</button>
+                </form>
+            </div>
+            <div class="col-lg-3">
+                <form class="btn-signup-turneu-detalii" action="/edit-tournament/<%=tournament._id%>" method="post">
+                    <button class="btn btn-info">Modifica detaliile turneului</button>
+                </form>
             </div>
         </div>
     </div>
@@ -68,7 +69,7 @@
                 <div class="panel-body">
                     <ul style="list-style: none">
                         <%tournament.players.forEach(function(player){%>
-                            <li><%=player.local.nickname + ', ' + player.local.race + ', ' + player.local.league%>, <a href="/profile-details/<%= player._id%>">Profil jucator</a></li>
+                        <li><%=player.local.nickname + ', ' + player.local.race + ', ' + player.local.league%>, <a href="/profile-details/<%= player._id%>">Profil jucator</a></li>
                         <%})%>
                     </ul>
                 </div>
@@ -93,7 +94,7 @@
                 </div>
                 <div class="panel-body">
                     <%tournament.organizer.forEach(function(organizer){%>
-                        <p><%= organizer.local.nickname%>, <a href="/profile-details/<%= organizer._id%>">Profil organizator</a></p>
+                    <p><%= organizer.local.nickname%>, <a href="/profile-details/<%= organizer._id%>">Profil organizator</a></p>
                     <%});%>
                 </div>
             </div>
@@ -107,9 +108,10 @@
                 </div>
                 <div class="panel-body">
                     <p>
-                    <%for(var i = 0; i< tournament.openForLeagues.leagues.length; i++){%>
-                            <%=tournament.openForLeagues.leagues[i]%>
-                    <%};%>
+                        <%for(var i = 0; i< tournament.openForLeagues.leagues.length; i++){%>
+
+                        <%=tournament.openForLeagues.leagues[i]%>
+                        <%};%>
                     </p>
                 </div>
             </div>

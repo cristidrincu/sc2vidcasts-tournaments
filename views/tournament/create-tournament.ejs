@@ -31,7 +31,7 @@
 <form action="/create-tournament" method="post">
     <div class="form-group">
         <label>Numele turneului</label>
-        <input type="text" class="form-control" name="tournamentName">
+        <input type="text" class="form-control" name="tournamentName" placeholder="<%= placeholders.placeholderTournamentName%>" required>
     </div>
     <div class="form-group">
         <label>Locuri disponibile</label>
@@ -51,7 +51,7 @@
     </div>
     <div class="form-group">
         <label>Editia turneului(1, 2, 3 etc)</label>
-        <input type="text" class="form-control" name="edition">
+        <input type="text" class="form-control" name="edition" required>
     </div>
     <div class="form-group">
         <label>Canal Ingame pentru CHAT</label>
@@ -59,23 +59,23 @@
     </div>
     <div class="form-group">
         <label>Canalul de Twitch pentru LIVE STREAM</label>
-        <input type="text" class="form-control" name="twitchStreamChannel" required>
+        <input type="text" class="form-control" name="twitchStreamChannel" placeholder="<%= placeholders.placeholderTwitchChannelLength%>" required>
     </div>
     <div class="form-group">
         <label>Descrierea turneului(informatii suplimentare)</label>
-        <textarea class="form-control" name="description" rows="5"></textarea>
+        <textarea class="form-control" name="description" rows="5" placeholder="<%= placeholders.placeholderTournamentDescription%>" required></textarea>
     </div>
     <div class="form-group">
         <label>Data inceperii turneului</label>
-        <input type="text" class="form-control" id="startDatePicker" name="startDate">
+        <input type="text" class="form-control" id="startDatePicker" name="startDate" required>
     </div>
     <div class="form-group">
         <label>Data terminarii turneului</label>
-        <input type="text" class="form-control" id="endDatePicker" name="endDate">
+        <input type="text" class="form-control" id="endDatePicker" name="endDate" required>
     </div>
     <div class="form-group">
         <label>Ora inceperii turneului</label>
-        <input type="text" class="form-control" id="startHourPicker" name="startHour">
+        <input type="text" class="form-control" id="startHourPicker" name="startHour" required>
     </div>
     <div class="form-group">
         <label>Se ofera premii in cadrul acestui turneu?</label>

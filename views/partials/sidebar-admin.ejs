@@ -1,0 +1,41 @@
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="sidebar-search">
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                </div>
+                <!-- /input-group -->
+            </li>
+            <li>
+                <a class="active" href="/backend-admin"><i class="fa fa-dashboard fa-fw"></i> Panou de administrare</a>
+            </li>
+            <li>
+                <a class="active" href="/user-messages"><i class="fa fa-fw"></i> Mesajele tale</a>
+            </li>
+            <li>
+                <a href="/admin-players"><i class="fa fa-bar-chart-o fa-fw"></i> Jucatori<span class="fa arrow"></span></a>
+            </li>
+            <li>
+                <a href="/admin-organizers"><i class="fa fa-bar-chart-o fa-fw"></i> Organizatori<span class="fa arrow"></span></a>
+            </li>
+            <li>
+                <a href="#" class="display-active-tournaments"><i class="fa fa-bar-chart-o fa-fw"></i> Turnee deschise<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level tournaments-list">
+                    <%tournaments.forEach(function(tournament){%>
+                    <li><a href="/admin-tournaments/<%=tournament._id%>"><%=tournament.tournamentName%></a></li>
+                    <%})%>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>
+<!-- /.navbar-public-side -->
+</nav>

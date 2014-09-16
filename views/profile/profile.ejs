@@ -65,7 +65,13 @@
                             <a href="/customize-profile/<%= user.local.nickname %>" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
                         </span>
                 </div>
-                <a href="/backend-user">Inapoi la contul tau</a>
+                <%if(user.local.role == 'admin'){%>
+                    <a href="/backend-admin">Inapoi la contul tau</a>
+                <%}else if(user.local.role == 'Organizator'){%>
+                    <a href="/backend-organizers">Inapoi la contul tau</a>
+                <%}else {%>
+                    <a href="/backend-user">Inapoi la contul tau</a>
+                <%}%>
             </div>
         </div>
     </div>

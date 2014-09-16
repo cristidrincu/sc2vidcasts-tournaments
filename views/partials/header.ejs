@@ -63,7 +63,7 @@
     <%}else if(user !=null && user.local.role == 'Organizator'){%>
         <a class="navbar-brand" href="/profile-organizer">Bine ai venit, <%=user.local.nickname%> </a>
     <%}else if(user != null && user.local.role == 'admin'){%>
-        <a class="navbar-brand" href="/profile-admin">Bine ai venit, <%=user.local.nickname%></a>
+        <a class="navbar-brand" href="/profile">Bine ai venit, <%=user.local.nickname%></a>
     <%}%>
 
 </div>
@@ -216,9 +216,9 @@
     </a>
     <%if(user != null){%>
     <ul class="dropdown-menu dropdown-user">
-        <li><a href="/profile"><i class="fa fa-user fa-fw"></i> User Profile</a>
+        <li><a href="/profile"><i class="fa fa-user fa-fw"></i> Profil</a>
         </li>
-        <li><a href="/customize-profile:<%=user.local.nickname%>"><i class="fa fa-gear fa-fw"></i> Setari</a>
+        <li><a href="/customize-profile/<%=user.local.nickname%>"><i class="fa fa-gear fa-fw"></i> Setari</a>
         </li>
         <li class="divider"></li>
         <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>

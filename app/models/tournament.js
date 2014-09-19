@@ -22,6 +22,10 @@ var tournamentSchema = mongoose.Schema({
     sponsors: String,
     ingameChatChannel: String,
     twitchStreamChannel: String
+//  TODO - add maps to tournament
+//    mapPool:[{
+//      mapName: String
+//    }]
 });
 
 tournamentSchema.path('tournamentName').validate(function(tournamentName){

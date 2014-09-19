@@ -15,6 +15,8 @@ helperFunctions.retrieveAllTournaments(function(tournaments){
   retrievedTournaments = tournaments;
 });
 
+
+
 /* TOURNAMENT ROUTES */
 app.get('/create-tournament', isLoggedIn, requireRole('Organizator'), function(req, res){
   res.render('tournament/create-tournament.ejs', {
@@ -67,6 +69,7 @@ app.post('/create-tournament', isLoggedIn, requireRole('Organizator'), function(
 app.get('/tournament-details/:_id', isLoggedIn, function(req, res){
 
   var enlistedInTournament = false;
+  var eligibleForTournament = false;
 
   User.find( {_id: req.user._id}, function(err, players){
     var ids = players.map(function(player){
@@ -74,34 +77,33 @@ app.get('/tournament-details/:_id', isLoggedIn, function(req, res){
     });
 
     Tournament.findOne( { _id: req.params._id, players: {$in: ids}}, function(err, players){
-      if(players)
+      if(players){
         enlistedInTournament = true
+        return enlistedInTournament;
+      }
     });
 
     Tournament.findById(req.params._id).populate('players').populate('organizer').exec( function(err, tournament){
       if(err)
         res.send(err)
       else
+        tournament.openForLeagues.leagues.forEach(function(league){
+          if(req.user.local.league === league || league === 'Free for all'){
+            eligibleForTournament = true;
+            return eligibleForTournament;
+          }
+        });
+
         res.render('tournament/tournament-details.ejs',{
           user: req.user,
           tournament: tournament,
           tournaments: retrievedTournaments,
           moment: moment,
-          enlistedInTournament: enlistedInTournament
+          enlistedInTournament: enlistedInTournament,
+          eligibleForTournament: eligibleForTournament
         });
     });
   });
-
-//    helperFunctions.retrieveTournamentLeagues(req.params._id, function(leagues){
-//      leagues.forEach(function(league){
-//        //TODO - CHECK PLAYER LEAGUE AND PREVENT ENLISTING IN THE TOURNAMENT IF THE LEAGUE IS NOT PRESENT IN THE LEAGUES ARRAY FOR THE TOURNAMENT MODEL
-//        if(league === 'Free for all'){
-//
-//        }else{
-//          res.send('Nu te poti inscrie in cadrul acestui turneu!');
-//        }
-//      });
-//    });
 });
 
 app.get('/signup-tournament/:_id/:_userId', isLoggedIn, function(req, res){
@@ -122,7 +124,7 @@ app.get('/signup-tournament/:_id/:_userId', isLoggedIn, function(req, res){
 app.post('/signup-tournament/:_id/:userId', isLoggedIn, function(req, res){
   var playerId = req.params.userId;
 
-  //TODO - incearca sa folosesti async.series([]) pentru a lega metoda de find si apoi insrierea jucatorului in baza de date
+  //TODO - incearca sa folosesti async.series([]) pentru a lega metoda de find si apoi inscirierea jucatorului in baza de date
 
   User.find({_id: req.params.userId}, function(err, players){
     var ids = players.map(function(player) {
@@ -250,4 +252,12 @@ function requireRole(role){
       res.send(403);
     }
   }
+}
+
+function getUserLeague(userLeague, league){
+  if(userLeague === league){
+    return true
+  }
+
+  return false;
 }

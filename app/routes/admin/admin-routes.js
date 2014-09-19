@@ -9,21 +9,54 @@ var moment = require('moment');
 var app = module.exports = express();
 
 var retrievedTournaments = null;
+var retrievedPlayers = null;
+
 helperFunctions.retrieveAllTournaments(function(tournaments){
   retrievedTournaments = tournaments;
 });
 
+helperFunctions.retrieveAllPlayers(function(players){
+  retrievedPlayers = players;
+});
+
 app.get('/admin-players', function(req, res){
-  res.render('backend/admin-players', {
-    user: req.user,
-    tournaments: retrievedTournaments
+
+  helperFunctions.retrieveTournamentsAndPlayers(function(players, tournaments){
+    res.render('backend/admin-players.ejs', {
+      user: req.user,
+      tournaments: tournaments,
+      players: players,
+      errorDeleteAccountMessage: req.flash('infoError'),
+      successDeleteAccountMessage: req.flash('infoSuccess')
+    });
   });
 });
 
 app.get('/admin-organizers', function(req, res){
-  res.render('backend/admin-organizers.ejs', {
-    user: req.user,
-    tournaments: retrievedTournaments
+  helperFunctions.retrieveTournamentsAndOrganizers(function(tournaments, organizers){
+    res.render('backend/admin-organizers.ejs', {
+      user: req.user,
+      tournaments: tournaments,
+      organizers: organizers,
+      errorDeleteAccountMessage: req.flash('infoError'),
+      successDeleteAccountMessage: req.flash('infoSuccess')
+    });
+  });
+});
+
+app.get('/organized-tournaments/:organizerId', function(req, res){
+  helperFunctions.retrieveTournamentsByOrganizer(req.params.organizerId, function(tournamentsOrganized){
+    helperFunctions.retrieveAllTournaments(function(tournaments){
+      helperFunctions.getUserDetails(req.params.organizerId, function(organizer){
+        res.render('backend/tournaments-by-organizer.ejs', {
+          user: req.user,
+          organizer: organizer,
+          tournaments: tournaments,
+          organizedTournaments: tournamentsOrganized,
+          moment: moment
+        });
+      });
+    });
   });
 });
 
@@ -39,4 +72,16 @@ app.get('/admin-tournaments/:_id', function(req,res){
         moment: moment
       });
   });
+});
+
+app.post('/delete-account/:userId', function(req, res){
+  User.remove({ _id: req.params.userId}, function(err){
+    if(err){
+      req.flash('infoError', 'A aparut o eroare la stergerea utilizatorului!');
+    }else{
+      req.flash('infoSuccess', 'Contul a fost sters cu success!');
+    }
+
+    res.redirect('/admin-players');
+  })
 });

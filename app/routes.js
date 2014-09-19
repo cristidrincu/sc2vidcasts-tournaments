@@ -1,11 +1,33 @@
 /**
  * Created by cristiandrincu on 7/28/14.
  */
+var express = require('express');
+var fs = require('fs');
 module.exports = function (app) {
 
   /*RULES FOR ACCESS*/
   app.all('/profile/*', isLoggedIn);
   app.all('/customize-profile/*', isLoggedIn);
+
+  //TODO - PARTEA DE UPLOAD VA PUTEA FI FOLOSITA DOAR DE CATRE ADMIN. USERII NU VOR PUTEA SA ISI INCARCE AVATARURI - VOR PUTEA SA ALEAGA DINTR-O COLECTIE DE AVATARE PENTRU FIECARE RASA
+  //TODO - LA MODELUL DE USER VA TREBUI SA BAGAM SI UN PATH CATRE IMAGINE(SI IN MONGO), DUPA CE SI-O ALEGE DIN COLECTIA DE AVATARE
+  //TODO - avatarele o sa fie in 2 dimensiuni: 200x200 pentru pagina de turnee, 100x100 pentru pagina de profil
+  app.post('/upload-user-image/:userId', function(req, res){
+    var fstream;
+    req.pipe(req.busboy);
+    req.busboy.on('file', function(fieldname, file, filename){
+      console.log('Uploading: ' + filename);
+      fstream = fs.createWriteStream(__dirname + '/../public/uploads/user-profile-images/' + filename);
+      file.pipe(fstream);
+      fstream.on('close', function(err){
+        if(err){
+          console.log(err);
+        }else{
+          res.redirect('/backend-user');
+        }
+      })
+    });
+  });
 };
 
 /*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/

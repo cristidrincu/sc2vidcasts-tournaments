@@ -45,6 +45,7 @@
     <script type="text/javascript" src="/js/pickadate.js-3.5.3/lib/compressed/picker.time.js"></script>
     <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
     <script type="text/javascript" src="/js/sidebar-menus.js"></script>
+    <script type="text/javascript" src="/js/flash-messages.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -59,7 +60,7 @@
         <span class="icon-bar"></span>
     </button>
     <%if(user != null && user.local.role == 'User'){%>
-        <a class="navbar-brand" href="/profile">Bine ai venit, <%=user.local.nickname%></a>
+        <a style="margin-left:15px;" class="navbar-brand" href="/profile">Bine ai venit, <%=user.local.nickname%></a>
     <%}else if(user !=null && user.local.role == 'Organizator'){%>
         <a class="navbar-brand" href="/profile-organizer">Bine ai venit, <%=user.local.nickname%> </a>
     <%}else if(user != null && user.local.role == 'admin'){%>

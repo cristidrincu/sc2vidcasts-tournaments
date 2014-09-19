@@ -8,7 +8,9 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100" class="img-circle"> </div>
+                        <div class="col-md-3 col-lg-3 " align="center">
+                            <img alt="User Pic" src="../../uploads/user-profile-images/tychus-full-portrait-100x100.jpg" class="img-circle main-profile-image"/>
+                        </div>
                         <div class=" col-md-9 col-lg-9 ">
                             <table class="table table-user-information">
                                 <tbody>
@@ -47,16 +49,24 @@
                                 </tbody>
                             </table>
 
-                            <a href="/customize-profile/<%= user.local.nickname %>" class="btn btn-primary">Modifica Profilul</a>
+                            <a href="/customize-profile/<%= user.local.nickname %>" class="btn btn-primary btn-modifica-profilul">Modifica Profilul</a>
                             <%if(user.local.role == 'admin'){%>
-                                <a href="/backend-admin" class="btn btn-primary">Panou administrare turnee</a>
+                                <a href="/backend-admin" class="btn btn-primary btn-modifica-profilul">Panou administrare turnee</a>
                             <%}else if(user.local.role == 'Organizator'){%>
-                                <a href="/backend-organizer" class="btn btn-primary">Panou administrare turnee</a>
+                                <a href="/backend-organizer" class="btn btn-primary btn-modifica-profilul">Panou administrare turnee</a>
                             <%}else{%>
-                                <a href="/backend-user" class="btn btn-primary">Panou administrare turnee</a>
+                                <a href="/backend-user" class="btn btn-primary btn-modifica-profilul">Panou administrare turnee</a>
                             <%}%>
 
                         </div>
+                        <form class="form-horizontal" role="form" action="/upload-user-image/<%= user._id%>" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <div class="col-lg-10">
+                                    <input type="file" class="btn btn-default" name="userProfileImage" required/>
+                                    <input type="submit" class="btn btn-success" value="Incarca imaginea"/>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="panel-footer">

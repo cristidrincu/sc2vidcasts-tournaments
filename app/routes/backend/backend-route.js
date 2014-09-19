@@ -9,15 +9,24 @@ var helperFunctions = require('../../../app/helpers-mongoose.js');
 var app = module.exports = express();
 
 var retrievedTournaments = null;
+var retrievedPlayers = null;
+
 helperFunctions.retrieveAllTournaments(function(tournaments){
   retrievedTournaments = tournaments;
 });
 
+helperFunctions.retrieveAllPlayers(function(players){
+  retrievedPlayers = players;
+});
+
 /*BACK-END ROUTES*/
 app.get('/backend-admin', isLoggedIn, requireRole('admin'), function(req, res){
-  res.render('backend/backend-admin.ejs', {
-    user: req.user,
-    tournaments: retrievedTournaments
+  helperFunctions.retrieveTournamentsAndPlayers(function(players, tournaments){
+    res.render('backend/backend-admin.ejs', {
+      user: req.user,
+      tournaments: tournaments,
+      players: players
+    });
   });
 });
 

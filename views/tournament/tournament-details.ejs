@@ -9,9 +9,15 @@
                 <h1 class="page-header">Detalii pentru turneul <i><%=tournament.tournamentName%>, editia <%=tournament.edition > 1 ? 'a ' + tournament.edition + '-a' : ''%></i></h1>
             </div>
             <div class="col-lg-4">
+                <% if(!eligibleForTournament){%>
+                    <p style="padding-top: 55px; color: red">Acest concurs nu este deschis ligii din care faci parte. Ne pare rau!</p>
+                <%}%>
+
                 <% if(enlistedInTournament){%>
-                   <p style="padding-top: 55px; color: red">Esti deja inscris in cadrul acestui turneu</p>
-                <%} else {%>
+                    <p style="padding-top: 55px; color: red">Esti deja inscris in cadrul acestui turneu</p>
+                <%}%>
+
+                <% if(eligibleForTournament && !enlistedInTournament){%>
                     <form class="btn-signup-turneu-detalii" action="/signup-tournament/<%=tournament._id%>/<%=user._id%>" method="post">
                         <button class="btn btn-success">Inscrie-te</button>
                     </form>
@@ -63,7 +69,7 @@
         <div class="col-lg-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Jucatori inscrisi
+                    <i class="fa fa-clock-o fa-fw"></i> Jucatori inscrisi: <%= tournament.players.length%>
                 </div>
                 <div class="panel-body">
                     <ul style="list-style: none">

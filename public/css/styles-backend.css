@@ -29,3 +29,16 @@ ul.titlu-turneu-signup li {
 .error-message-flash{
     color: red;
 }
+
+.container-image-user{
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.btn-modifica-profilul{
+    margin-bottom: 10px;
+}
+
+.main-profile-image{
+    box-shadow: 2px 2px 2px #888888;
+}

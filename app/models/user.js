@@ -12,7 +12,10 @@ var userSchema = mongoose.Schema({
     race: String,
     league: String,
     role: String,
-    website: String
+    website: String,
+    userImage: String
+
+    //TODO - ADAUGA PROPRIETATE DE PATH DUPA CE ISI ALEGE IMAGINEA DIN COLECTIA DE AVATARE PROPUSA DE NOI
   }
 });
 

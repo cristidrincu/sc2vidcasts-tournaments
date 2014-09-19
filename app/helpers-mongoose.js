@@ -11,8 +11,18 @@ exports.getUserDetails = function(id, cb){
   });
 }
 
+exports.retrieveAllOrganizers = function(cb){
+  User.find( {'local.role': 'Organizator'}).exec(function(err, organizers){
+    if(err){
+      ErrorHandler.handle('A aparut o eroare in preluarea organizatorilor din baza de date' + err);
+    }else{
+      cb(organizers);
+    }
+  });
+}
+
 exports.retrieveAllTournaments = function(cb){
-  Tournament.find().exec(function(err, tournaments){
+  Tournament.find().sort( {tournamentName : 1} ).exec(function(err, tournaments){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea turneelor din baza de date' + err);
     else
@@ -20,17 +30,43 @@ exports.retrieveAllTournaments = function(cb){
   });
 }
 
-exports.retrieveTournamentDetails = function(tournamentId, cb){
-  Tournament.findOne( {'_id': tournamentId }).exec(function(err, tournament){
+exports.retrieveAllPlayers = function(cb){
+  User.find( {'local.role' : 'User'}).sort({ 'local.nickname': 1 }).exec(function(err, players){
     if(err)
-      ErrorHandler.handle('Nu am putut sa iti scoatem turneul din baza de date ' + err);
+      ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor din baza de date' + err);
     else
-      cb(tournament);
+      cb(players);
+  });
+}
+
+exports.retrieveTournamentsAndPlayers = function(cb){
+  exports.retrieveAllPlayers(function(players){
+    exports.retrieveAllTournaments(function(tournaments){
+      cb(players, tournaments);
+    })
+  });
+}
+
+exports.retrieveTournamentsAndOrganizers = function(cb){
+  exports.retrieveAllTournaments(function(tournaments){
+    exports.retrieveAllOrganizers(function(organizers){
+      cb(tournaments, organizers);
+    });
+  });
+}
+
+exports.retrieveTournamentsByOrganizer = function(organizerId, cb){
+  Tournament.find( {'organizer': organizerId}).exec(function(err, tournaments){
+    if(err){
+      ErrorHandler.handle('A aparut o eroare in preluarea din baza de date a turneelor organizate')
+    }else{
+      cb(tournaments);
+    }
   });
 }
 
 exports.retrieveTournamentLeagues = function(tournamentId, cb){
-  Tournament.findById(tournamentId).exec(function(err, tournaments){
+  Tournament.findById(tournamentId).populate('players').exec(function(err, tournaments){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea ligilor pentru acest turneu' + err);
     else
@@ -39,7 +75,7 @@ exports.retrieveTournamentLeagues = function(tournamentId, cb){
 }
 
 exports.retrieveBronzePlayers = function(cb){
-  User.find( {'local.league': 'Bronze', 'local.role': 'User'}).limit(10).exec(function(err, bronzers){
+  User.find( {'local.league': 'Bronze', 'local.role': 'User'}).sort( {'local.nickname': 1} ).limit(10).exec(function(err, bronzers){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor bronze din baza de date' + err);
     cb(bronzers);
@@ -47,7 +83,7 @@ exports.retrieveBronzePlayers = function(cb){
 }
 
 exports.retrieveSilverPlayers = function(cb){
-  User.find( {'local.league': 'Silver', 'local.role': 'User'}).exec(function(err, silvers){
+  User.find( {'local.league': 'Silver', 'local.role': 'User'}).sort( { 'local.nickname': 1 } ).exec(function(err, silvers){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor silver din baza de date' + err);
     cb(silvers);
@@ -55,7 +91,7 @@ exports.retrieveSilverPlayers = function(cb){
 }
 
 exports.retrieveGoldPlayers = function(cb){
-  User.find( {'local.league': 'Gold', 'local.role': 'User'}).exec(function(err, golds){
+  User.find( {'local.league': 'Gold', 'local.role': 'User'}).sort( { 'local.nickname': 1} ).exec(function(err, golds){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor gold din baza de date' + err);
     cb(golds);
@@ -63,7 +99,7 @@ exports.retrieveGoldPlayers = function(cb){
 }
 
 exports.retrievePlatinumPlayers = function(cb){
-  User.find( {'local.league': 'Platinum', 'local.role': 'User'}).exec(function(err, platinums){
+  User.find( {'local.league': 'Platinum', 'local.role': 'User'}).sort( { 'local.nickname': 1}).exec(function(err, platinums){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor platinum din baza de date' + err);
     cb(platinums);
@@ -71,7 +107,7 @@ exports.retrievePlatinumPlayers = function(cb){
 }
 
 exports.retrieveDiamondPlayers = function(cb){
-  User.find( {'local.league': 'Diamond', 'local.role': 'User'}).exec(function(err, diamonds){
+  User.find( {'local.league': 'Diamond', 'local.role': 'User'}).sort( { 'local.nickname': 1}).exec(function(err, diamonds){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor diamond din baza de date' + err);
     cb(diamonds);
@@ -79,7 +115,7 @@ exports.retrieveDiamondPlayers = function(cb){
 }
 
 exports.retrieveMasterPlayers = function(cb){
-  User.find( {'local.league': 'Master', 'local.role': 'User'}).exec(function(err, masters){
+  User.find( {'local.league': 'Master', 'local.role': 'User'}).sort( { 'local.nickname': 1}).exec(function(err, masters){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor master din baza de date' + err);
     cb(masters);
@@ -87,7 +123,7 @@ exports.retrieveMasterPlayers = function(cb){
 }
 
 exports.retrieveGMPlayers = function(cb){
-  User.find( {'local.league': 'Grand Master', 'local.role': 'User'}).exec(function(err, gm){
+  User.find( {'local.league': 'Grand Master', 'local.role': 'User'}).sort( { 'local.nickname': 1} ).exec(function(err, gm){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor grand master din baza de date' + err);
     cb(gm);

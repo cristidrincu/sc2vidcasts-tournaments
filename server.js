@@ -12,6 +12,7 @@ var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var path = require('path');
 var fs = require('fs');
+var busboy = require('connect-busboy');
 
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -42,13 +43,9 @@ app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); //to support URL-encoded bodies, from forms
+app.use(busboy());
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('public/js', express.static(path.join(__dirname, 'public/js')));
-app.use('public/css', express.static(path.join(__dirname, 'public/css')));
-app.use('public/images', express.static(path.join(__dirname, 'public/images')));
-app.use('public/css/plugins', express.static(path.join(__dirname, 'public/css/plugins')));
-app.use('public/js/plugins/', express.static(path.join(__dirname, 'public/js/plugins/')));
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');

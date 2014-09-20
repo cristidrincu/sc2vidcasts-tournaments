@@ -1,0 +1,19 @@
+<%include ../partials/header%>
+<% include ../partials/sidebar-admin%>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Incarca o noua imagine pentru colectia de avatars user</h1>
+            <form class="form-horizontal form-avatars" role="form" action="/upload-avatar" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <div class="col-lg-10">
+                        <input style="margin-bottom: 10px;" type="file" class="btn btn-default" name="userProfileImage" required/>
+                        <input type="submit" class="btn btn-success" value="Incarca imaginea"/>
+                    </div>
+                </div>
+            </form>
+         </div>
+    </div>
+</div>
+
+<%include ../partials/footer%>

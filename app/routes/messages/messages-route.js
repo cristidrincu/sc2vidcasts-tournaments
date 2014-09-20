@@ -16,16 +16,11 @@ helperFunctions.retrieveAllTournaments(function(tournaments){
 
 /*MESSAGING ROUTES*/
 app.get('/send-message/:_id', isLoggedIn, function(req, res){
-  User.findById(req.params._id, function(err, user){
-    if(err)
-      ErrorHandler.handle('Nu a fost gasit un jucator cu acest ID ' + err)
-    else
-      var retrievedPlayer = user;
+  helperFunctions.getUserDetails(req.params._id, function(player){
     res.render('messaging/send-message.ejs', {
       user: req.user,
-      tournaments: retrievedTournaments,
-      player: retrievedPlayer
-    })
+      player: player
+    });
   });
 });
 
@@ -36,7 +31,6 @@ app.get('/send-reply/:_receiverId/:_messageId', isLoggedIn, function(req, res){
     else
       res.render('messaging/send-reply.ejs', {
         user: req.user,
-        tournaments: retrievedTournaments,
         messages: messages,
         receiverId: req.params._receiverId
       });
@@ -44,6 +38,7 @@ app.get('/send-reply/:_receiverId/:_messageId', isLoggedIn, function(req, res){
 });
 
 /*TODO - UPDATE the message that is being sent as a reply instead of creating a new one - create a POST method for send-reply*/
+//TODO - save all messages inside in array and use it as messages history
 
 app.post('/send-message/:_id', isLoggedIn, function(req, res){
   var message = new Message( {messageBody: req.body.message, messageSubject: req.body.messageSubject, sentBy: req.user, receiver: req.params._id} );
@@ -62,7 +57,6 @@ app.get('/user-messages', isLoggedIn, function(req, res){
     else
       res.render('messaging/messages.ejs', {
         user: req.user,
-        tournaments: retrievedTournaments,
         messages: messages
       });
   });
@@ -74,7 +68,6 @@ app.get('/message-details/:_id', isLoggedIn, function(req, res){
       ErrorHandler.handle('A aparut o eroare la extragerea mesajului din baza de date: ' + err);
     res.render('messaging/message-details.ejs', {
       user: req.user,
-      tournaments: retrievedTournaments,
       messageDetails: message
     });
   });

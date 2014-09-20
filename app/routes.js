@@ -3,16 +3,27 @@
  */
 var express = require('express');
 var fs = require('fs');
+var helperFunctions = require('./helpers-mongoose');
 module.exports = function (app) {
 
   /*RULES FOR ACCESS*/
   app.all('/profile/*', isLoggedIn);
   app.all('/customize-profile/*', isLoggedIn);
 
+
+  app.get('/upload-avatar', isLoggedIn, requireRole('admin'), function(req, res){
+    helperFunctions.retrieveAllTournaments(function(tournaments){
+      res.render('backend/admin-upload-avatars.ejs', {
+        user: req.user,
+        tournaments: tournaments
+      });
+    });
+  });
+
   //TODO - PARTEA DE UPLOAD VA PUTEA FI FOLOSITA DOAR DE CATRE ADMIN. USERII NU VOR PUTEA SA ISI INCARCE AVATARURI - VOR PUTEA SA ALEAGA DINTR-O COLECTIE DE AVATARE PENTRU FIECARE RASA
   //TODO - LA MODELUL DE USER VA TREBUI SA BAGAM SI UN PATH CATRE IMAGINE(SI IN MONGO), DUPA CE SI-O ALEGE DIN COLECTIA DE AVATARE
   //TODO - avatarele o sa fie in 2 dimensiuni: 200x200 pentru pagina de turnee, 100x100 pentru pagina de profil
-  app.post('/upload-user-image/:userId', function(req, res){
+  app.post('/upload-avatar', isLoggedIn, requireRole('admin'), function(req, res){
     var fstream;
     req.pipe(req.busboy);
     req.busboy.on('file', function(fieldname, file, filename){
@@ -23,7 +34,7 @@ module.exports = function (app) {
         if(err){
           console.log(err);
         }else{
-          res.redirect('/backend-user');
+          res.redirect('/backend-admin');
         }
       })
     });
@@ -37,4 +48,15 @@ function isLoggedIn(req, res, next) {
   }
 
   res.redirect('/');
+}
+
+function requireRole(role){
+  return function(req, res, next){
+    if(req.user.local.role === role){
+      next();
+    }
+    else{
+      res.send(403);
+    }
+  }
 }

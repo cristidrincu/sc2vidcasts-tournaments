@@ -42,3 +42,12 @@ ul.titlu-turneu-signup li {
 .main-profile-image{
     box-shadow: 2px 2px 2px #888888;
 }
+
+.form-avatars{
+    margin-top: 30px;
+}
+
+.message-no-players-found{
+    margin-top: 20px;
+    margin-left: 15px;
+}

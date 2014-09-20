@@ -23,7 +23,6 @@ app.get('/profile-details/:_id', isLoggedIn, function(req, res){
   helperFunctions.getUserDetails(req.params._id, function(user){
     res.render('profile/profile-details.ejs', {
       user: req.user,
-      tournaments: retrievedTournaments,
       detailedUser: user
     });
   });

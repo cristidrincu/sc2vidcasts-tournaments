@@ -57,16 +57,7 @@
                             <%}else{%>
                                 <a href="/backend-user" class="btn btn-primary btn-modifica-profilul">Panou administrare turnee</a>
                             <%}%>
-
                         </div>
-                        <form class="form-horizontal" role="form" action="/upload-user-image/<%= user._id%>" method="post" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <div class="col-lg-10">
-                                    <input type="file" class="btn btn-default" name="userProfileImage" required/>
-                                    <input type="submit" class="btn btn-success" value="Incarca imaginea"/>
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div>
                 <div class="panel-footer">

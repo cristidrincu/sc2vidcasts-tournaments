@@ -1,14 +1,11 @@
 <% include ../partials/header %>
-<% tournaments.forEach(function(tournament){ %>
-    <%if(user.local.role == 'admin'){%>
-        <% include ../partials/sidebar-admin %>
-    <%}else if(user.local.role == 'Organizator'){%>
-        <% include ../partials/sidebar-organizer %>
-    <%}else{%>
-        <% include ../partials/sidebar %>
-    <%}%>
-<% }); %>
-
+<%if(user.local.role == 'admin'){%>
+    <% include ../partials/sidebar-admin %>
+<%}else if(user.local.role == 'Organizator'){%>
+    <% include ../partials/sidebar-organizer %>
+<%}else{%>
+    <% include ../partials/sidebar %>
+<%}%>
 <script>
     tinymce.init({selector:'textarea'});
 </script>

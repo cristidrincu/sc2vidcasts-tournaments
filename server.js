@@ -30,10 +30,10 @@ var configDB = require('./config/database.js');
 mongoose.connect(configDB.url);
 
 //bootstrap models
-var models_path = __dirname + '/app/models'
-fs.readdirSync(models_path).forEach(function (file) {
-  if (~file.indexOf('.js')) require(models_path + '/' + file)
-})
+//var models_path = __dirname + '/app/models'
+//fs.readdirSync(models_path).forEach(function (file) {
+//  if (~file.indexOf('.js')) require(models_path + '/' + file)
+//})
 
 //pass passport for configuration
 require('./config/passport.js')(passport); //pass passport for configuration

@@ -18,6 +18,17 @@ helperFunctions.retrieveAllTournaments(function(tournaments){
 
 
 /* TOURNAMENT ROUTES */
+app.get('/open-tournaments', function(req, res){
+  helperFunctions.retrieveAllTournaments(function(tournaments){
+    res.render('tournament/open-tournaments.ejs', {
+      user: req.user,
+      tournaments: tournaments,
+      moment: moment
+    });
+  });
+});
+
+
 app.get('/create-tournament', isLoggedIn, requireRole('Organizator'), function(req, res){
   res.render('tournament/create-tournament.ejs', {
     user: req.user,
@@ -97,10 +108,10 @@ app.get('/tournament-details/:_id', isLoggedIn, function(req, res){
         res.render('tournament/tournament-details.ejs',{
           user: req.user,
           tournament: tournament,
-          tournaments: retrievedTournaments,
           moment: moment,
           enlistedInTournament: enlistedInTournament,
-          eligibleForTournament: eligibleForTournament
+          eligibleForTournament: eligibleForTournament,
+          procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers)) + '%'
         });
     });
   });
@@ -115,7 +126,6 @@ app.get('/signup-tournament/:_id/:_userId', isLoggedIn, function(req, res){
       res.render('tournament/signup-tournament.ejs', {
         user: req.user,
         tournament: tournament,
-        tournaments: retrievedTournaments,
         moment: moment
       });
   });
@@ -190,7 +200,6 @@ app.get('/user-tournaments/:_userId', isLoggedIn, function(req, res){
       else
         res.render('tournament/user-tournaments.ejs', {
           user: req.user,
-          tournaments: retrievedTournaments,
           playerTournaments: playerTournaments,
           moment: moment,
           errorMessage: req.flash('infoError'),

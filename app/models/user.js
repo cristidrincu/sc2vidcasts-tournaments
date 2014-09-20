@@ -1,3 +1,4 @@
+require('./avatar');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
@@ -13,7 +14,9 @@ var userSchema = mongoose.Schema({
     league: String,
     role: String,
     website: String,
-    userImage: String
+    userImage: [{
+      type: mongoose.Schema.Types.ObjectId, ref: "Avatar"
+    }]
 
     //TODO - ADAUGA PROPRIETATE DE PATH DUPA CE ISI ALEGE IMAGINEA DIN COLECTIA DE AVATARE PROPUSA DE NOI
   }

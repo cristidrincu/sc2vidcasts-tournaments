@@ -13,25 +13,23 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a class="active" href="/backend-admin"><i class="fa fa-dashboard fa-fw"></i> Panou de administrare</a>
+                <a class="active" href="/backend-admin"><i class="fa fa-tachometer fa-fw"></i> Panou de administrare</a>
+                <a href="/avatars-user"><i class="fa fa-picture-o fa-fw"></i> Colectie avatare users</a>
             </li>
             <li>
-                <a class="active" href="/user-messages"><i class="fa fa-fw"></i> Mesajele tale</a>
+                <a class="active" href="/user-messages"><i class="fa fa-envelope fa-fw"></i> Mesajele tale</a>
             </li>
             <li>
-                <a href="/admin-players"><i class="fa fa-bar-chart-o fa-fw"></i> Jucatori<span class="fa arrow"></span></a>
+                <a href="/admin-players"><i class="fa fa-gamepad fa-fw"></i> Jucatori<span class="fa arrow"></span></a>
             </li>
             <li>
-                <a href="/admin-organizers"><i class="fa fa-bar-chart-o fa-fw"></i> Organizatori<span class="fa arrow"></span></a>
+                <a href="/admin-organizers"><i class="fa fa-users fa-fw"></i> Organizatori<span class="fa arrow"></span></a>
             </li>
             <li>
-                <a href="#" class="display-active-tournaments"><i class="fa fa-bar-chart-o fa-fw"></i> Turnee deschise<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level tournaments-list">
-                    <%tournaments.forEach(function(tournament){%>
-                    <li><a href="/admin-tournaments/<%=tournament._id%>"><%=tournament.tournamentName%></a></li>
-                    <%})%>
-                </ul>
-                <!-- /.nav-second-level -->
+                <a href="/open-tournaments" class="display-active-tournaments"><i class="fa fa-trophy fa-fw"></i> Turnee deschise<span class="fa arrow"></span></a>
+            </li>
+            <li>
+                <a href="/upload-avatar"><i class="fa fa-cog fa-fw"></i>Adauga imagini pentru avatar</a>
             </li>
         </ul>
     </div>

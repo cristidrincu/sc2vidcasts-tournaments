@@ -21,10 +21,9 @@ helperFunctions.retrieveAllPlayers(function(players){
 
 /*BACK-END ROUTES*/
 app.get('/backend-admin', isLoggedIn, requireRole('admin'), function(req, res){
-  helperFunctions.retrieveTournamentsAndPlayers(function(players, tournaments){
+  helperFunctions.retrieveAllPlayers(function(players){
     res.render('backend/backend-admin.ejs', {
       user: req.user,
-      tournaments: tournaments,
       players: players
     });
   });
@@ -32,16 +31,12 @@ app.get('/backend-admin', isLoggedIn, requireRole('admin'), function(req, res){
 
 app.get('/backend-organizer', isLoggedIn, requireRole('Organizator'), function(req, res){
   res.render('backend/backend-organizer.ejs', {
-    user: req.user,
-    tournaments: retrievedTournaments
+    user: req.user
   });
 });
 
 app.get('/backend-user', isLoggedIn, function(req, res){
-  Tournament.find(function(err, tournaments){
-    if(err)
-      res.send('Error while retrieving tournaments');
-
+  helperFunctions.retrieveAllTournaments(function(tournaments){
     res.render('backend/backend-user.ejs', {
       user: req.user,
       tournaments: tournaments,

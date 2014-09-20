@@ -21,48 +21,18 @@
                 <a class="active" href="/backend-user"><i class="fa fa-dashboard fa-fw"></i> Panou de administrare</a>
             </li>
             <li>
-                <a class="active" href="/user-messages"><i class="fa fa-fw"></i> Mesajele tale</a>
+                <a href="/open-tournaments" class="display-active-tournaments"><i class="fa fa-trophy fa-fw"></i> Turnee deschise<span class="fa arrow"></span></a>
             </li>
             <li>
-                <a href="/user-tournaments/<%= user._id%>"><i class="fa fa-bar-chart-o fa-fw"></i> Turneele tale<span class="fa arrow"></span></a>
+                <a href="/players" class="display-leagues-players"><i class="fa fa-gamepad fa-fw"></i> Jucatori<span class="fa arrow"></span></a>
             </li>
             <li>
-                <a href="#" class="display-active-tournaments"><i class="fa fa-bar-chart-o fa-fw"></i> Turnee deschise<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level tournaments-list">
-                    <%tournaments.forEach(function(tournament){%>
-                        <li><a href="/tournament-details/<%=tournament._id%>"><%=tournament.tournamentName%></a></li>
-                    <%})%>
-                </ul>
-                <!-- /.nav-second-level -->
+                <a href="/user-messages"><i class="fa fa-envelope fa-fw"></i> Mesajele tale <span class="fa arrow"></span>
+                </a>
             </li>
             <li>
-                <a href="#" class="display-leagues-players"><i class="fa fa-files-o fa-fw"></i> Jucatori pe ligi<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level players-list">
-                    <li>
-                        <a href="/jucatori-liga-bronze">Bronze</a>
-                    </li>
-                    <li>
-                        <a href="/jucatori-liga-silver">Silver</a>
-                    </li>
-                    <li>
-                        <a href="/jucatori-liga-gold">Gold</a>
-                    </li>
-                    <li>
-                        <a href="/jucatori-liga-platinum">Platinum</a>
-                    </li>
-                    <li>
-                        <a href="/jucatori-liga-diamond">Diamond</a>
-                    </li>
-                    <li>
-                        <a href="/jucatori-liga-master">Master</a>
-                    </li>
-                    <li>
-                        <a href="/jucatori-liga-grand-master">Grand Master</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
+                <a href="/user-tournaments/<%= user._id%>"><i class="fa fa-briefcase fa-fw"></i> Turneele tale<span class="fa arrow"></span></a>
             </li>
-
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

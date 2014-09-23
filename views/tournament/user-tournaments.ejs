@@ -24,7 +24,7 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <table class="table table-hover">
-                        <% if(playerTournaments.length == 0){%>
+                        <% if(playerTournamentsUser.local.tournaments.length == 0){%>
                             <p>Momentan, nu esti inscris in cadrul vreunui turneu!</p>
                         <%}else{%>
                         <tr>
@@ -37,7 +37,7 @@
                             <th>Detalii</th>
                             <th>Retrage-te din turneu</th>
                         </tr>
-                        <% playerTournaments.forEach(function(tournament){ %>
+                        <% playerTournamentsUser.local.tournaments.forEach(function(tournament){ %>
                         <tr>
                             <td><%= tournament.tournamentName %></td>
                             <td><%= tournament.nrOfPlayers %></td>

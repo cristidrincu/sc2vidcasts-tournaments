@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Tournament = require('./models/tournament.js');
 var User = require('./models/user.js');
+var Avatar = require('./models/avatar.js');
 var ErrorHandler = require('./helpers-error-handlers.js');
 
 exports.getUserDetails = function(id, cb){
@@ -127,6 +128,15 @@ exports.retrieveGMPlayers = function(cb){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor grand master din baza de date' + err);
     cb(gm);
+  });
+}
+
+exports.retrieveTerranAvatars = function(cb){
+  Avatar.find( {'imageRaceCategory': 'terran'}).exec(function(err, avatars){
+    if(err)
+      throw err
+    else
+      cb(avatars);
   });
 }
 

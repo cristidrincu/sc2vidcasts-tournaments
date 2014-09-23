@@ -7,6 +7,22 @@
             <form class="form-horizontal form-avatars" role="form" action="/upload-avatar" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="col-lg-10">
+                        <label for="raceAvatarCategory">Alege rasa la care sa apartina acest avatar</label>
+                        <select class="form-control" name="race" required>
+                            <option value="terran">Terran</option>
+                            <option value="zerg">Zerg</option>
+                            <option value="protoss">Protoss</option>
+                        </select>
+                    </div>
+                </div>
+                <!--<div class="form-group">-->
+                    <!--<div class="col-lg-10">-->
+                        <!--<label for="avatar-name">Numele avatarului - Bad ass marine, de exemplu</label>-->
+                        <!--<input type="text" name="image-name" class="form-control"/>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="form-group">
+                    <div class="col-lg-10">
                         <input style="margin-bottom: 10px;" type="file" class="btn btn-default" name="userProfileImage" required/>
                         <input type="submit" class="btn btn-success" value="Incarca imaginea"/>
                     </div>

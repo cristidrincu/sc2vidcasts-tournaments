@@ -81,6 +81,7 @@ app.get('/tournament-details/:_id', isLoggedIn, function(req, res){
 
   var enlistedInTournament = false;
   var eligibleForTournament = false;
+  var allPlacesTaken = false;
 
   User.find( {_id: req.user._id}, function(err, players){
     var ids = players.map(function(player){
@@ -95,9 +96,9 @@ app.get('/tournament-details/:_id', isLoggedIn, function(req, res){
     });
 
     Tournament.findById(req.params._id).populate('players').populate('organizer').exec( function(err, tournament){
-      if(err)
+      if(err){
         res.send(err)
-      else
+      }else{
         tournament.openForLeagues.leagues.forEach(function(league){
           if(req.user.local.league === league || league === 'Free for all'){
             eligibleForTournament = true;
@@ -111,28 +112,15 @@ app.get('/tournament-details/:_id', isLoggedIn, function(req, res){
           moment: moment,
           enlistedInTournament: enlistedInTournament,
           eligibleForTournament: eligibleForTournament,
+          allPlacesTaken: allPlacesTaken,
           procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers)) + '%'
         });
+      }
     });
   });
 });
 
-app.get('/signup-tournament/:_id/:_userId', isLoggedIn, function(req, res){
-
-  Tournament.findById(req.params._id, function(err, tournament){
-    if(err)
-      res.send(err)
-    else
-      res.render('tournament/signup-tournament.ejs', {
-        user: req.user,
-        tournament: tournament,
-        moment: moment
-      });
-  });
-});
-
 app.post('/signup-tournament/:_id/:userId', isLoggedIn, function(req, res){
-  var playerId = req.params.userId;
 
   //TODO - incearca sa folosesti async.series([]) pentru a lega metoda de find si apoi inscirierea jucatorului in baza de date
 
@@ -161,15 +149,17 @@ app.post('/signup-tournament/:_id/:userId', isLoggedIn, function(req, res){
 
             if(playerPlacesTaken >= placesForPlayers){
               //TODO - replace with proper error view - present other tournaments that the user can enlist into
-              res.send(403);
+              req.flash('infoError', 'Toate locurile au fost ocupate!');
             }else{
-              Tournament.findByIdAndUpdate(req.params._id, {$pushAll: {
-                players: [playerId]
-              }}, function(err, tournament){
+              Tournament.findByIdAndUpdate(req.params._id, { $pushAll: { players: [req.params.userId] }}, function(err){
                 if(err)
                   res.send(err)
                 else
-                  res.redirect('/user-tournaments/' + req.params.userId);
+                  User.findByIdAndUpdate(req.params.userId, { $pushAll: { 'local.tournaments': [req.params._id] }}, function(err){
+                    if(err)
+                      res.send(err)
+                    res.redirect('/user-tournaments/' + req.params.userId);
+                  });
               });
             }
           }
@@ -179,34 +169,25 @@ app.post('/signup-tournament/:_id/:userId', isLoggedIn, function(req, res){
   });
 });
 
-app.get('/signup-tournament-result/:_id', isLoggedIn, function(req, res){
-  res.render('tournament/signup-tournament-result.ejs', {
-    user: req.user
-  })
-});
+//app.get('/signup-tournament-result/:_id', isLoggedIn, function(req, res){
+//  res.render('tournament/signup-tournament-result.ejs', {
+//    user: req.user
+//  })
+//});
 
-app.get('/user-tournaments/:_userId', isLoggedIn, function(req, res){
-  User.find({_id: req.params._userId}, function(err, docs){
-    var ids = docs.map(function(doc) {
-      return doc._id;
-    });
-
-    Tournament.find( { players: {$in: ids} }).exec(function(err, playerTournaments){
-      if(err)
-        ErrorHandler.handle('A aparut o problema in extragerea turneelor in care esti inscris! ' + err);
-
-      if(!playerTournaments)
-        res.send('Nu am gasit niciun turneu in care esti inscris');
-      else
-        res.render('tournament/user-tournaments.ejs', {
-          user: req.user,
-          playerTournaments: playerTournaments,
-          moment: moment,
-          errorMessage: req.flash('infoError'),
-          successMessage: req.flash('infoSuccess')
-        });
-    });
-
+app.get('/user-tournaments/:userId', isLoggedIn, function(req, res){
+  User.findById(req.params.userId).populate('local.tournaments').exec(function(err, user){
+    if(err)
+      res.send(err)
+    else
+      console.log(user.tournaments);
+      res.render('tournament/user-tournaments.ejs', {
+        user: req.user,
+        playerTournamentsUser: user,
+        moment: moment,
+        errorMessage: req.flash('infoError'),
+        successMessage: req.flash('infoSuccess')
+      });
   });
 });
 
@@ -221,7 +202,20 @@ app.post('/retragere-din-turneu/:_userId/:_tournamentId', isLoggedIn, function(r
         if(err)
           req.flash('infoError', 'A aparut o eroare la scoaterea ta din turneu. Mai incearca!');
         else
-          req.flash('infoSuccess', 'Te-ai retras cu succes din cadrul turneului!');
+          User.findById(req.params._userId).exec(function(err, user){
+            if(!err){
+              var tournamentId = user.local.tournaments.indexOf(req.params._tournamentId);
+              if(tournamentId != -1){
+                user.local.tournaments.splice(tournamentId, 1);
+                user.save(function(err){
+                  if(err)
+                    res.send(err)
+                  else
+                    req.flash('infoSuccess', 'Te-ai retras cu succes din cadrul turneului!');
+                })
+              }
+            }
+          });
 
         res.redirect('/user-tournaments/' + req.params._userId);
       });
@@ -261,12 +255,4 @@ function requireRole(role){
       res.send(403);
     }
   }
-}
-
-function getUserLeague(userLeague, league){
-  if(userLeague === league){
-    return true
-  }
-
-  return false;
 }

@@ -4,6 +4,8 @@
 var express = require('express');
 var fs = require('fs');
 var helperFunctions = require('./helpers-mongoose');
+var Avatar = require('./models/avatar.js');
+
 module.exports = function (app) {
 
   /*RULES FOR ACCESS*/
@@ -20,21 +22,41 @@ module.exports = function (app) {
     });
   });
 
-  //TODO - PARTEA DE UPLOAD VA PUTEA FI FOLOSITA DOAR DE CATRE ADMIN. USERII NU VOR PUTEA SA ISI INCARCE AVATARURI - VOR PUTEA SA ALEAGA DINTR-O COLECTIE DE AVATARE PENTRU FIECARE RASA
-  //TODO - LA MODELUL DE USER VA TREBUI SA BAGAM SI UN PATH CATRE IMAGINE(SI IN MONGO), DUPA CE SI-O ALEGE DIN COLECTIA DE AVATARE
-  //TODO - avatarele o sa fie in 2 dimensiuni: 200x200 pentru pagina de turnee, 100x100 pentru pagina de profil
   app.post('/upload-avatar', isLoggedIn, requireRole('admin'), function(req, res){
+
+    var avatarRaceCategory = null;
+
+    req.busboy.on('field', function(fieldname, value){
+      avatarRaceCategory = value;
+      return avatarRaceCategory;
+    });
+
     var fstream;
     req.pipe(req.busboy);
     req.busboy.on('file', function(fieldname, file, filename){
       console.log('Uploading: ' + filename);
-      fstream = fs.createWriteStream(__dirname + '/../public/uploads/user-profile-images/' + filename);
+      fstream = fs.createWriteStream(__dirname + '/../public/uploads/user-profile-images/' + avatarRaceCategory + '/' + filename);
       file.pipe(fstream);
       fstream.on('close', function(err){
         if(err){
           console.log(err);
         }else{
-          res.redirect('/backend-admin');
+          Avatar.findOne({ 'imageName': filename }).exec(function(err, avatar){
+            if(avatar){
+              res.redirect('/backend-admin')
+            }else{
+              var newAvatarImage = new Avatar();
+              newAvatarImage.imageName = filename;
+              newAvatarImage.imageRaceCategory = avatarRaceCategory;
+              newAvatarImage.imagePath = '/uploads/user-profile-images/' + avatarRaceCategory;
+              newAvatarImage.save(function(err){
+                if(err)
+                  throw err;
+                res.redirect('/backend-admin');
+              });
+            }
+          });
+
         }
       })
     });

@@ -2,13 +2,14 @@
  * Created by cristiandrincu on 9/10/14.
  */
 var express = require('express');
+var mongoose = require('mongoose');
 var helperFunctions = require('../../../app/helpers-mongoose.js');
 var User = require('../../../app/models/user');
 var Tournament = require('../../../app/models/tournament');
 var moment = require('moment');
 var app = module.exports = express();
 
-app.get('/admin-players', function(req, res){
+app.get('/admin-players', isLoggedIn, requireRole('admin'), function(req, res){
 
   helperFunctions.retrieveAllPlayers(function(players, tournaments){
     res.render('backend/admin-players.ejs', {
@@ -20,7 +21,7 @@ app.get('/admin-players', function(req, res){
   });
 });
 
-app.get('/admin-organizers', function(req, res){
+app.get('/admin-organizers', isLoggedIn, requireRole('admin'), function(req, res){
   helperFunctions.retrieveTournamentsAndOrganizers(function(tournaments, organizers){
     res.render('backend/admin-organizers.ejs', {
       user: req.user,
@@ -32,7 +33,7 @@ app.get('/admin-organizers', function(req, res){
   });
 });
 
-app.get('/organized-tournaments/:organizerId', function(req, res){
+app.get('/organized-tournaments/:organizerId', isLoggedIn, requireRole('admin'), function(req, res){
   helperFunctions.retrieveTournamentsByOrganizer(req.params.organizerId, function(tournamentsOrganized){
       helperFunctions.getUserDetails(req.params.organizerId, function(organizer){
         res.render('backend/tournaments-by-organizer.ejs', {
@@ -45,7 +46,7 @@ app.get('/organized-tournaments/:organizerId', function(req, res){
   });
 });
 
-app.get('/admin-tournaments/:_id', function(req,res){
+app.get('/admin-tournaments/:_id', isLoggedIn, requireRole('admin'), function(req,res){
   Tournament.findById(req.params._id).populate('players').populate('organizer').exec( function(err, tournament){
     if(err)
       res.send(err)
@@ -59,14 +60,55 @@ app.get('/admin-tournaments/:_id', function(req,res){
   });
 });
 
-app.post('/delete-account/:userId', function(req, res){
-  User.remove({ _id: req.params.userId}, function(err){
-    if(err){
-      req.flash('infoError', 'A aparut o eroare la stergerea utilizatorului!');
-    }else{
-      req.flash('infoSuccess', 'Contul a fost sters cu success!');
-    }
-
-    res.redirect('/admin-players');
-  })
+app.get('/avatars-users-admin', isLoggedIn, requireRole('admin'), function(req, res){
+  helperFunctions.retrieveTerranAvatars(function(terranAvatars){
+    res.render('avatars/avatars-users-admin.ejs', {
+      user: req.user,
+      dirName: __dirname,
+      terranAvatars: terranAvatars
+    });
+  });
 });
+
+app.post('/delete-account/:userId', isLoggedIn, requireRole('admin'), function(req, res){
+
+  Tournament.collection.update(
+      { tournamentName: 'Battle of the Races' },
+      { $pull: { 'players': { _id: new mongoose.Types.ObjectId(req.params.userId) } } },
+      { multi: true },
+      function(err, result){
+        if(err) throw  err;
+        console.log(result);
+      }
+  );
+
+//  User.remove({ _id: req.params.userId}, function(err){
+//    if(err){
+//      req.flash('infoError', 'A aparut o eroare la stergerea utilizatorului!');
+//    }else{
+//      req.flash('infoSuccess', 'Contul a fost sters cu success!');
+//    }
+//
+//  })
+
+  res.redirect('/admin-players');
+});
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+
+  res.redirect('/');
+}
+
+function requireRole(role){
+  return function(req, res, next){
+    if(req.user.local.role == role){
+      next();
+    }
+    else{
+      res.send(403);
+    }
+  }
+}

@@ -1,4 +1,6 @@
 require('./avatar');
+require('./tournament');
+var tournament = require('./tournament');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
@@ -14,11 +16,10 @@ var userSchema = mongoose.Schema({
     league: String,
     role: String,
     website: String,
-    userImage: [{
-      type: mongoose.Schema.Types.ObjectId, ref: "Avatar"
+    avatarImage: String,
+    tournaments: [{
+       type: mongoose.Schema.Types.ObjectId, ref: "Tournament"
     }]
-
-    //TODO - ADAUGA PROPRIETATE DE PATH DUPA CE ISI ALEGE IMAGINEA DIN COLECTIA DE AVATARE PROPUSA DE NOI
   }
 });
 
@@ -31,6 +32,16 @@ userSchema.methods.generateHash = function(password){
 userSchema.methods.isValid = function(password){
   return bcrypt.compareSync(password, this.local.password);
 };
+
+userSchema.pre('remove', function(userId, next){
+  tournament.update(
+      { 'tournamentName': 'Battle of the Races' },
+      { $pull: { 'players': { _id: userId } } },
+      { multi: true },
+      console.log('user removed from tournament'),
+      next(new Error('Could not delete user from tournament'))
+  );
+});
 
 //create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);

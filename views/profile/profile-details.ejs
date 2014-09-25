@@ -50,11 +50,11 @@
                     </div>
                 </div>
                 <%if(user.local.role == 'admin'){%>
-                    <a href="/backend-admin">Inapoi la contul tau</a>
+                    <a href="/backend-admin/<%=user._id%>">Inapoi la contul tau</a>
                 <%}else if(user.local.role == 'Organizator'){%>
-                    <a href="/backend-organizers">Inapoi la contul tau</a>
+                    <a href="/backend-organizers/<%=user._id%>">Inapoi la contul tau</a>
                 <%}else {%>
-                    <a href="/backend-user">Inapoi la contul tau</a>
+                    <a href="/backend-user/<%=user._id%>">Inapoi la contul tau</a>
                 <%}%>
             </div>
         </div>

@@ -61,6 +61,15 @@ ul.titlu-turneu-signup li {
     margin-top: 20px;
 }
 
+.btn-white-background{
+    background-color: #fff;
+}
+
+.gamepad-icon{
+    position: relative;
+    top:-3px;
+}
+
 .footer{
     padding-top: 20px;
     padding-bottom: 20px;

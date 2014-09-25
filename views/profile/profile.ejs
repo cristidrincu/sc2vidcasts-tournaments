@@ -9,7 +9,9 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-3 col-lg-3 " align="center">
-                            <img alt="User Pic" src="../../uploads/user-profile-images/terran/emil-narud-200x200.jpg" class="img-circle main-profile-image profile-small-pic"/>
+                            <% userAvatar.local.avatar.forEach(function(avatar){%>
+                            <img alt="User Pic" src="../../<%= avatar.imagePath + '/' + avatar.imageName %>" class="img-circle main-profile-image profile-small-pic"/>
+                            <%});%>
                         </div>
                         <div class=" col-md-9 col-lg-9 ">
                             <table class="table table-user-information">
@@ -51,7 +53,7 @@
 
                             <a href="/customize-profile/<%= user.local.nickname %>" class="btn btn-primary btn-modifica-profilul">Modifica Profilul</a>
                             <%if(user.local.role == 'admin'){%>
-                                <a href="/backend-admin" class="btn btn-primary btn-modifica-profilul">Panou administrare turnee</a>
+                                <a href="/backend-admin/<%= user._id%>" class="btn btn-primary btn-modifica-profilul">Panou administrare turnee</a>
                             <%}else if(user.local.role == 'Organizator'){%>
                                 <a href="/backend-organizer" class="btn btn-primary btn-modifica-profilul">Panou administrare turnee</a>
                             <%}else{%>
@@ -67,7 +69,7 @@
                         </span>
                 </div>
                 <%if(user.local.role == 'admin'){%>
-                    <a href="/backend-admin">Inapoi la contul tau</a>
+                    <a href="/backend-admin/<%= user._id%>">Inapoi la contul tau</a>
                 <%}else if(user.local.role == 'Organizator'){%>
                     <a href="/backend-organizers">Inapoi la contul tau</a>
                 <%}else {%>

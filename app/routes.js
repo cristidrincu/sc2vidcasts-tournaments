@@ -13,11 +13,14 @@ module.exports = function (app) {
   app.all('/customize-profile/*', isLoggedIn);
 
 
-  app.get('/upload-avatar', isLoggedIn, requireRole('admin'), function(req, res){
-    helperFunctions.retrieveAllTournaments(function(tournaments){
-      res.render('backend/admin-upload-avatars.ejs', {
-        user: req.user,
-        tournaments: tournaments
+  app.get('/upload-avatar/:userId', isLoggedIn, requireRole('admin'), function(req, res){
+    helperFunctions.getUserDetails(req.params.userId, function(user){
+      helperFunctions.retrieveAllTournaments(function(tournaments){
+        res.render('backend/admin-upload-avatars.ejs', {
+          user: req.user,
+          avatarUser: user,
+          tournaments: tournaments
+        });
       });
     });
   });
@@ -52,7 +55,7 @@ module.exports = function (app) {
               newAvatarImage.save(function(err){
                 if(err)
                   throw err;
-                res.redirect('/backend-admin');
+                res.redirect('/backend-admin/' + req.user._id);
               });
             }
           });

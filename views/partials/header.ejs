@@ -59,12 +59,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-    <%if(user != null && user.local.role == 'User'){%>
-        <a style="margin-left:15px;" class="navbar-brand" href="/profile">Bine ai venit, <%=user.local.nickname%></a>
-    <%}else if(user !=null && user.local.role == 'Organizator'){%>
-        <a class="navbar-brand" href="/profile-organizer">Bine ai venit, <%=user.local.nickname%> </a>
-    <%}else if(user != null && user.local.role == 'admin'){%>
-        <a class="navbar-brand" href="/profile">Bine ai venit, <%=user.local.nickname%></a>
+    <%if(user != null){%>
+        <a style="margin-left:15px;" class="navbar-brand" href="/profile-details/<%= user._id%>">Bine ai venit, <%=user.local.nickname%></a>
     <%}%>
 
 </div>

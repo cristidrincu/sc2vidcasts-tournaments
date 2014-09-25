@@ -13,9 +13,12 @@ helperFunctions.retrieveAllTournaments(function(tournaments){
 
 /* PROFILE ROUTES */
 app.get('/profile', isLoggedIn, function (req, res) {
-  res.render('profile/profile.ejs', {
-    message: req.flash('signupSuccess'), //get the message out of the session and pass to template
-    user: req.user //get the user out of session and pass to template
+  helperFunctions.getUserDetails(req.user._id, function(user){
+    res.render('profile/profile.ejs', {
+      message: req.flash('signupSuccess'), //get the message out of the session and pass to template
+      user: req.user, //get the user out of session and pass to template
+      userAvatar: user
+    });
   });
 });
 

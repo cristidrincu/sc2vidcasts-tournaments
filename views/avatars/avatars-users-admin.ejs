@@ -1,10 +1,12 @@
 <%include ../partials/header%>
+<% userAvatar.local.avatar.forEach(function(avatar){ %>
 <% include ../partials/sidebar-admin%>
+<%});%>
 <div id="page-wrapper">
     <div class="row">
 
         <div class="col-lg-12">
-            <h1 class="page-header">Avatare cont utilizator</h1>
+            <h1 class="page-header"><i class="fa fa-picture-o fa-1x"></i> Avatare</h1>
         </div>
 
         <ul class="nav nav-tabs" role="tablist" style="margin-top: 25px;">
@@ -20,19 +22,61 @@
                     <%}else{%>
                         <%terranAvatars.forEach(function(avatar){%>
                         <div class="col-xs-6 col-md-2 container-user-avatar-admin">
-                            <a href="#">
-                                <img class="img-circle main-profile-image" src="<%= avatar.imagePath + '/' + avatar.imageName%>">
-                            </a>
+                                <form action="/choose-avatar/<%= user._id + '/' + avatar._id%>" method="post">
+                                    <button class="btn btn-white-background">
+                                        <img class="img-circle main-profile-image mouse-pointer-on" src="<%= avatar.imagePath + '/' + avatar.imageName%>">
+                                    </button>
+                                </form>
                             <div class="caption">
                                 <h3></h3>
-                                <p><a href="#" class="btn btn-success" role="button">Alege avatarul</a> <a href="#" class="btn btn-danger" role="button">Sterge</a></p>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <form action="/choose-avatar/<%= user._id + '/' + avatar._id%>" method="post">
+                                            <button class="btn btn-success" role="button">Alege avatarul</button>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <form action="/delete-avatar/<%= user._id + '/' + avatar._id%>" method="post">
+                                            <button class="btn btn-danger" role="button">Sterge</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <%});%>
                     <%}%>
             </div>
             <div class="tab-pane fade" id="zerg">
-                <p>Zerg Avatars</p>
+                <%if(zergAvatars.length == 0){%>
+                <p class="message-no-players-found">Nu am gasit avatare pentru Zerg in baza de date!</p>
+                <%}else{%>
+                <%zergAvatars.forEach(function(avatar){%>
+                <div class="col-xs-6 col-md-2 container-user-avatar-admin">
+                    <form action="/choose-avatar/<%= user._id + '/' + avatar._id%>" method="post">
+                        <button class="btn btn-white-background">
+                            <img class="img-circle main-profile-image mouse-pointer-on" src="<%= avatar.imagePath + '/' + avatar.imageName%>">
+                        </button>
+                    </form>
+                    <div class="caption">
+                        <h3></h3>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <form action="/choose-avatar/<%= user._id + '/' + avatar._id%>" method="post">
+                                    <button class="btn btn-success" role="button">Alege avatarul</button>
+                                </form>
+                            </div>
+                            <div class="col-sm-5">
+                                <form action="/delete-avatar/<%= user._id + '/' + avatar._id%>" method="post">
+                                    <button class="btn btn-danger" role="button">Sterge</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%});%>
+                <%}%>
+
+
             </div>
             <div class="tab-pane fade" id="protoss">
                 <p>Protoss Avatars</p>

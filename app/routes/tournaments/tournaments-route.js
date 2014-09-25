@@ -18,12 +18,15 @@ helperFunctions.retrieveAllTournaments(function(tournaments){
 
 
 /* TOURNAMENT ROUTES */
-app.get('/open-tournaments', function(req, res){
-  helperFunctions.retrieveAllTournaments(function(tournaments){
-    res.render('tournament/open-tournaments.ejs', {
-      user: req.user,
-      tournaments: tournaments,
-      moment: moment
+app.get('/open-tournaments/:userId', function(req, res){
+  helperFunctions.getUserDetails(req.params.userId, function(user){
+    helperFunctions.retrieveAllTournaments(function(tournaments){
+      res.render('tournament/open-tournaments.ejs', {
+        user: req.user,
+        avatarUser: user,
+        tournaments: tournaments,
+        moment: moment
+      });
     });
   });
 });

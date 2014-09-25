@@ -9,28 +9,34 @@ var Tournament = require('../../../app/models/tournament');
 var moment = require('moment');
 var app = module.exports = express();
 
-app.get('/admin-players', isLoggedIn, requireRole('admin'), function(req, res){
-
-  helperFunctions.retrieveAllPlayers(function(players, tournaments){
-    res.render('backend/admin-players.ejs', {
-      user: req.user,
-      players: players,
-      errorDeleteAccountMessage: req.flash('infoError'),
-      successDeleteAccountMessage: req.flash('infoSuccess')
+app.get('/admin-players/:userId', isLoggedIn, requireRole('admin'), function(req, res){
+  helperFunctions.getUserDetails(req.params.userId, function(user){
+    helperFunctions.retrieveAllPlayers(function(players){
+      res.render('backend/admin-players.ejs', {
+        user: req.user,
+        players: players,
+        avatarUser: user,
+        errorDeleteAccountMessage: req.flash('infoError'),
+        successDeleteAccountMessage: req.flash('infoSuccess')
+      });
     });
   });
 });
 
-app.get('/admin-organizers', isLoggedIn, requireRole('admin'), function(req, res){
-  helperFunctions.retrieveTournamentsAndOrganizers(function(tournaments, organizers){
-    res.render('backend/admin-organizers.ejs', {
-      user: req.user,
-      tournaments: tournaments,
-      organizers: organizers,
-      errorDeleteAccountMessage: req.flash('infoError'),
-      successDeleteAccountMessage: req.flash('infoSuccess')
+app.get('/admin-organizers/:userId', isLoggedIn, requireRole('admin'), function(req, res){
+  helperFunctions.getUserDetails(req.params.userId, function(user){
+    helperFunctions.retrieveTournamentsAndOrganizers(function(tournaments, organizers){
+      res.render('backend/admin-organizers.ejs', {
+        user: req.user,
+        tournaments: tournaments,
+        avatarUser: user,
+        organizers: organizers,
+        errorDeleteAccountMessage: req.flash('infoError'),
+        successDeleteAccountMessage: req.flash('infoSuccess')
+      });
     });
   });
+
 });
 
 app.get('/organized-tournaments/:organizerId', isLoggedIn, requireRole('admin'), function(req, res){
@@ -60,12 +66,17 @@ app.get('/admin-tournaments/:_id', isLoggedIn, requireRole('admin'), function(re
   });
 });
 
-app.get('/avatars-users-admin', isLoggedIn, requireRole('admin'), function(req, res){
-  helperFunctions.retrieveTerranAvatars(function(terranAvatars){
-    res.render('avatars/avatars-users-admin.ejs', {
-      user: req.user,
-      dirName: __dirname,
-      terranAvatars: terranAvatars
+app.get('/avatars-users-admin/:adminId', isLoggedIn, requireRole('admin'), function(req, res){
+  helperFunctions.getUserDetails(req.params.adminId, function(user){
+    helperFunctions.retrieveTerranAvatars(function(terranAvatars){
+      helperFunctions.retrieveZergAvatars(function(zergAvatars){
+        res.render('avatars/avatars-users-admin.ejs', {
+          user: req.user,
+          userAvatar: user,
+          terranAvatars: terranAvatars,
+          zergAvatars: zergAvatars
+        });
+      });
     });
   });
 });

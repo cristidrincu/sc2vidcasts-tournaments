@@ -35,6 +35,18 @@ mongoose.connect(configDB.url);
 //  if (~file.indexOf('.js')) require(models_path + '/' + file)
 //})
 
+//app.locals({
+//  site: {
+//    title: 'ExpressBootstrapEJS',
+//    description: 'A boilerplate for a simple web application with a Node.JS and Express backend, with an EJS template with using Twitter Bootstrap.'
+//  },
+//  author: {
+//    name: 'Cory Gross',
+//    contact: 'CoryG89@gmail.com'
+//  }
+//});
+
+
 //pass passport for configuration
 require('./config/passport.js')(passport); //pass passport for configuration
 
@@ -68,6 +80,7 @@ var messages = require('./app/routes/messages/messages-route');
 var players = require('./app/routes/players/players-route');
 var tournaments = require('./app/routes/tournaments/tournaments-route');
 var admin = require('./app/routes/admin/admin-routes');
+var avatar = require('./app/routes/avatar/avatar-routes');
 
 var logout = require('./app/routes/logout/logout-route');
 
@@ -80,6 +93,7 @@ app.use(messages);
 app.use(players);
 app.use(tournaments);
 app.use(admin);
+app.use(avatar);
 
 app.use(logout);
 

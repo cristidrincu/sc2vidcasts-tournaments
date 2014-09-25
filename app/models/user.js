@@ -19,6 +19,9 @@ var userSchema = mongoose.Schema({
     avatarImage: String,
     tournaments: [{
        type: mongoose.Schema.Types.ObjectId, ref: "Tournament"
+    }],
+    avatar: [{
+      type: mongoose.Schema.Types.ObjectId, ref: "Avatar"
     }]
   }
 });

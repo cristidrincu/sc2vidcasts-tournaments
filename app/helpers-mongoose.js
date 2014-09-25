@@ -5,10 +5,24 @@ var Avatar = require('./models/avatar.js');
 var ErrorHandler = require('./helpers-error-handlers.js');
 
 exports.getUserDetails = function(id, cb){
-  User.findById(id).exec(function(err, user){
+  User.findById(id).populate('local.avatar').exec(function(err, user){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea detaliilor pentru utilizator' + err);
     cb(user);
+  });
+}
+
+exports.setAvatarForUser = function(userId, avatarId, cb){
+  User.findByIdAndUpdate(userId, {$set: {'local.avatar': []}}, function(err){
+    if(!err){
+      User.findByIdAndUpdate(userId,  { $push: { 'local.avatar': avatarId} }, function(err, user){
+        if(err){
+          throw new err;
+        }else{
+          cb(user);
+        }
+      });
+    }
   });
 }
 
@@ -133,6 +147,15 @@ exports.retrieveGMPlayers = function(cb){
 
 exports.retrieveTerranAvatars = function(cb){
   Avatar.find( {'imageRaceCategory': 'terran'}).exec(function(err, avatars){
+    if(err)
+      throw err
+    else
+      cb(avatars);
+  });
+}
+
+exports.retrieveZergAvatars = function(cb){
+  Avatar.find( {'imageRaceCategory' : 'zerg'}).exec(function(err, avatars){
     if(err)
       throw err
     else

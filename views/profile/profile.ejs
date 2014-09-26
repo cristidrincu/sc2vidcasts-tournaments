@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-md-3 col-lg-3 " align="center">
                             <% userAvatar.local.avatar.forEach(function(avatar){%>
-                            <img alt="User Pic" src="../../<%= avatar.imagePath + '/' + avatar.imageName %>" class="img-circle main-profile-image profile-small-pic"/>
+                            <img alt="User Pic" src="../..<%= avatar.imagePath + '/' + avatar.imageName %>" class="img-circle main-profile-image profile-small-pic"/>
                             <%});%>
                         </div>
                         <div class=" col-md-9 col-lg-9 ">
@@ -54,10 +54,12 @@
                             <a href="/customize-profile/<%= user.local.nickname %>" class="btn btn-primary btn-modifica-profilul">Modifica Profilul</a>
                             <%if(user.local.role == 'admin'){%>
                                 <a href="/backend-admin/<%= user._id%>" class="btn btn-primary btn-modifica-profilul">Panou administrare turnee</a>
+                                <a href="/avatars-users-admin/<%= user._id%>" class="btn btn-primary">Alege un avatar</a>
                             <%}else if(user.local.role == 'Organizator'){%>
                                 <a href="/backend-organizer" class="btn btn-primary btn-modifica-profilul">Panou administrare turnee</a>
                             <%}else{%>
-                                <a href="/backend-user" class="btn btn-primary btn-modifica-profilul">Panou administrare turnee</a>
+                                <a href="/backend-user/<%= user._id%>" class="btn btn-primary btn-modifica-profilul">Panou administrare turnee</a>
+                                <a href="/avatars-users/<%= user._id%>" class="btn btn-primary">Alege un avatar</a>
                             <%}%>
                         </div>
                     </div>
@@ -73,7 +75,7 @@
                 <%}else if(user.local.role == 'Organizator'){%>
                     <a href="/backend-organizers">Inapoi la contul tau</a>
                 <%}else {%>
-                    <a href="/backend-user">Inapoi la contul tau</a>
+                    <a href="/backend-user/<%= user._id%>">Inapoi la contul tau</a>
                 <%}%>
             </div>
         </div>

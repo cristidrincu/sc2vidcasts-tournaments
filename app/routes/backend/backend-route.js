@@ -38,14 +38,35 @@ app.get('/backend-organizer', isLoggedIn, requireRole('Organizator'), function(r
   });
 });
 
-app.get('/backend-user', isLoggedIn, function(req, res){
-  helperFunctions.retrieveAllTournaments(function(tournaments){
-    res.render('backend/backend-user.ejs', {
-      user: req.user,
-      tournaments: tournaments,
-      moment: moment
-    });
-  });
+app.get('/backend-user/:userId', isLoggedIn, function(req, res){
+	helperFunctions.getUserDetails(req.params.userId, function(user){
+		helperFunctions.retrieveAllTournaments(function(tournaments){
+			checkAvatarArrayLength(function(){
+				if(user.local.avatar.length == 0){
+					helperFunctions.getDefaultAvatar(function(defaultAvatar){
+						helperFunctions.setAvatarForUser(req.params.userId, defaultAvatar._id, function(err, user){
+							if(err){
+								throw new err;
+							}
+							res.render('backend/backend-user.ejs', {
+								user: req.user,
+								userAvatar: user,
+								tournaments: tournaments,
+								moment: moment
+							});
+						});
+					});
+				}else{
+					res.render('backend/backend-user.ejs', {
+						user: req.user,
+						userAvatar: user,
+						tournaments: tournaments,
+						moment: moment
+					});
+				}
+			});
+		});
+	});
 });
 
 /*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/
@@ -66,4 +87,8 @@ function requireRole(role){
       res.send(403);
     }
   }
+}
+
+function checkAvatarArrayLength(cb){
+	cb();
 }

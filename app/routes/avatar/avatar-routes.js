@@ -14,9 +14,9 @@ app.post('/choose-avatar/:userId/:avatarId', isLoggedIn, function(req, res){
     if(user.local.role === 'admin'){
       res.redirect('/backend-admin/' + req.params.userId);
     }else if(user.local.role === 'Organizator'){
-      res.redirect('/backend-organizer')
+      res.redirect('/backend-organizer/' + req.params.userId);
     }else{
-      res.redirect('/backend-user');
+      res.redirect('/backend-user/' + req.params.userId);
     }
   });
 });

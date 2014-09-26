@@ -1,5 +1,13 @@
 <% include ../partials/header %>
-<% include ../partials/sidebar %>
+<% userAvatar.local.avatar.forEach(function(avatar){%>
+    <%if(user.local.role == 'admin'){%>
+    <% include ../partials/sidebar-admin %>
+    <%}else if(user.local.role == 'Organizator'){%>
+    <% include ../partials/sidebar-organizer %>
+    <%}else{%>
+    <% include ../partials/sidebar %>
+    <%}%>
+<%})%>
 <script>
     tinymce.init({selector:'textarea'});
 </script>
@@ -9,7 +17,7 @@
         <div class="col-lg-12">
             <h1 class="page-header">Compune un mesaj</h1>
         </div>
-        <form action="/send-message/<%= receiverId%>" method="post" role="form">
+        <form action="/send-reply/<%= receiverId%>" method="post" role="form">
             <div class="col-lg-12">
                 <div class="form-group">
                     <label for="messageSubject">Subiectul mesajului</label>

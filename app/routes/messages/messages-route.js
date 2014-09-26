@@ -19,6 +19,7 @@ app.get('/send-message/:_id', isLoggedIn, function(req, res){
   helperFunctions.getUserDetails(req.params._id, function(player){
     res.render('messaging/send-message.ejs', {
       user: req.user,
+	    userAvatar: player,
       player: player
     });
   });
@@ -29,11 +30,15 @@ app.get('/send-reply/:_receiverId/:_messageId', isLoggedIn, function(req, res){
     if(err)
       ErrorHandler.handle('A aparut o eroare la extragerea mesajului din baza de date ' + err);
     else
-      res.render('messaging/send-reply.ejs', {
-        user: req.user,
-        messages: messages,
-        receiverId: req.params._receiverId
+      helperFunctions.getUserDetails(req.params.userId, function(user){
+	      res.render('messaging/send-reply.ejs', {
+		      user: req.user,
+		      userAvatar: user,
+		      messages: messages,
+		      receiverId: req.params._receiverId
+	      });
       });
+
   });
 });
 
@@ -46,30 +51,37 @@ app.post('/send-message/:_id', isLoggedIn, function(req, res){
     if(err)
       ErrorHandler.handle('A aparut o eroare la trimiterea mesajului' + err);
     else
-      res.redirect('/backend-user');
+      res.redirect('/backend-user/' + req.params._id);
   });
 });
 
-app.get('/user-messages', isLoggedIn, function(req, res){
-  Message.find( {receiver: req.user._id}).populate('sentBy').exec(function(err, messages){
+app.get('/user-messages/:userId', isLoggedIn, function(req, res){
+  Message.find( {receiver: req.params.userId}).populate('sentBy').exec(function(err, messages){
     if(err)
       ErrorHandler.handle('A intervenit o eroare la preluarea mesajelor din baza de date: ' + err);
     else
-      res.render('messaging/messages.ejs', {
-        user: req.user,
-        messages: messages
+      helperFunctions.getUserDetails(req.params.userId, function(user){
+	      res.render('messaging/messages.ejs', {
+		      user: req.user,
+		      userAvatar: user,
+		      messages: messages
+	      });
       });
   });
 });
 
-app.get('/message-details/:_id', isLoggedIn, function(req, res){
+app.get('/message-details/:_id/:userId', isLoggedIn, function(req, res){
   Message.findById(req.params._id).populate('sentBy').exec(function(err, message){
     if(err)
       ErrorHandler.handle('A aparut o eroare la extragerea mesajului din baza de date: ' + err);
-    res.render('messaging/message-details.ejs', {
-      user: req.user,
-      messageDetails: message
-    });
+
+	  helperFunctions.getUserDetails(req.params.userId, function(user){
+		  res.render('messaging/message-details.ejs', {
+			  user: req.user,
+			  userAvatar: user,
+			  messageDetails: message
+		  });
+	  });
   });
 });
 

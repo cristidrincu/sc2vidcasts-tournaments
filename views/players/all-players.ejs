@@ -1,6 +1,7 @@
 <% include ../partials/header %>
+<% avatarUser.local.avatar.forEach(function(avatar){%>
 <% include ../partials/sidebar %>
-
+<%})%>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -24,6 +25,7 @@
                     <p class="message-no-players-found">Nu am gasit jucatori de Bronze in baza de date!</p>
                     <%}else{%>
                     <tr>
+                        <th>Avatar</th>
                         <th>Nickname</th>
                         <th>Battle.net ID</th>
                         <th>Rasa</th>
@@ -32,6 +34,11 @@
                     </tr>
                     <% bronzePlayers.forEach(function(player){ %>
                     <tr>
+                        <td>
+                            <% player.local.avatar.forEach(function(avatar){%>
+                                <img class="img-circle profile-pic-table-players" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                            <%})%>
+                         </td>
                         <td><%= player.local.nickname %></td>
                         <td><%= player.local.battlenetid %></td>
                         <td><%= player.local.race %></td>
@@ -48,6 +55,7 @@
                     <p class="message-no-players-found">Nu am gasit jucatori de Silver in baza de date!</p>
                     <%}else{%>
                     <tr>
+                        <th>Avatar</th>
                         <th>Nickname</th>
                         <th>Battle.net ID</th>
                         <th>Rasa</th>
@@ -56,6 +64,11 @@
                     </tr>
                     <% silverPlayers.forEach(function(player){ %>
                     <tr>
+                        <td>
+                            <% player.local.avatar.forEach(function(avatar){%>
+                                <img class="img-circle profile-pic-table-players" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                            <%})%>
+                        </td>
                         <td><%= player.local.nickname %></td>
                         <td><%= player.local.battlenetid %></td>
                         <td><%= player.local.race %></td>

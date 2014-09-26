@@ -3,7 +3,7 @@
         <ul class="nav" id="side-menu">
             <li class="container-image-user">
                 <a href="/profile">
-                    <img alt="User Pic" src="../../uploads/user-profile-images/terran/emil-narud-200x200.jpg" class="img-circle main-profile-image"/>
+                   <img alt="User Pic" src="../..<%=avatar.imagePath + '/' + avatar.imageName%>" class="img-circle main-profile-image"/>
                 </a>
             </li>
             <li class="sidebar-search">
@@ -18,16 +18,19 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a class="active" href="/backend-user"><i class="fa fa-dashboard fa-fw"></i> Panou de administrare</a>
+                <a class="active" href="/backend-user/<%=user._id%>"><i class="fa fa-dashboard fa-fw"></i> Panou de administrare</a>
             </li>
             <li>
-                <a href="/open-tournaments" class="display-active-tournaments"><i class="fa fa-trophy fa-fw"></i> Turnee deschise<span class="fa arrow"></span></a>
+                <a href="/avatars-users/<%=user._id%>"><i class="fa fa-picture-o fa-fw"></i> Colectie avatare</a>
             </li>
             <li>
-                <a href="/players" class="display-leagues-players"><i class="fa fa-gamepad fa-fw"></i> Jucatori<span class="fa arrow"></span></a>
+                <a href="/open-tournaments/<%=user._id%>" class="display-active-tournaments"><i class="fa fa-trophy fa-fw"></i> Turnee deschise<span class="fa arrow"></span></a>
             </li>
             <li>
-                <a href="/user-messages"><i class="fa fa-envelope fa-fw"></i> Mesajele tale <span class="fa arrow"></span>
+                <a href="/players/<%=user._id%>" class="display-leagues-players"><i class="fa fa-gamepad fa-fw"></i> Jucatori<span class="fa arrow"></span></a>
+            </li>
+            <li>
+                <a href="/user-messages/<%=user._id%>"><i class="fa fa-envelope fa-fw"></i> Mesajele tale <span class="fa arrow"></span>
                 </a>
             </li>
             <li>

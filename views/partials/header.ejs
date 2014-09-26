@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <title>Starcraft2 Vidcasts Romania - Turnee romanesti de Starcraft 2</title>
-    <script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.11.0.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.0/themes/flick/jquery-ui.css"/>
@@ -44,7 +44,7 @@
     <script type="text/javascript" src="/js/pickadate.js-3.5.3/lib/compressed/picker.js"></script>
     <script type="text/javascript" src="/js/pickadate.js-3.5.3/lib/compressed/picker.time.js"></script>
     <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
-    <script type="text/javascript" src="/js/sidebar-menus.js"></script>
+    <!--<script type="text/javascript" src="/js/sidebar-menus.js"></script>-->
     <script type="text/javascript" src="/js/flash-messages.js"></script>
 </head>
 <body>
@@ -60,7 +60,7 @@
         <span class="icon-bar"></span>
     </button>
     <%if(user != null){%>
-        <a style="margin-left:15px;" class="navbar-brand" href="/profile-details/<%= user._id%>">Bine ai venit, <%=user.local.nickname%></a>
+        <a style="margin-left:15px;" class="navbar-brand" href="/profile">Bine ai venit, <%=user.local.nickname%></a>
     <%}%>
 
 </div>

@@ -6,11 +6,6 @@ var helperFunctions = require('../../../app/helpers-mongoose.js');
 var User = require('../../../app/models/user');
 var app = module.exports = express();
 
-var retrievedTournaments = null;
-helperFunctions.retrieveAllTournaments(function(tournaments){
-  retrievedTournaments = tournaments;
-});
-
 /* PROFILE ROUTES */
 app.get('/profile', isLoggedIn, function (req, res) {
   helperFunctions.getUserDetails(req.user._id, function(user){
@@ -26,7 +21,8 @@ app.get('/profile-details/:_id', isLoggedIn, function(req, res){
   helperFunctions.getUserDetails(req.params._id, function(user){
     res.render('profile/profile-details.ejs', {
       user: req.user,
-      detailedUser: user
+      detailedUser: user,
+	    userAvatar: user
     });
   });
 });
@@ -55,6 +51,24 @@ app.post('/customize-profile/:nickname', isLoggedIn, function(req, res){
       res.redirect('/profile');
     });
   });
+});
+
+app.get('/avatars-users/:userId', isLoggedIn, function(req, res){
+	helperFunctions.getUserDetails(req.params.userId, function(user){
+		helperFunctions.retrieveTerranAvatars(function(terranAvatars){
+			helperFunctions.retrieveZergAvatars(function(zergAvatars){
+				helperFunctions.retrieveProtossAvatars(function(protossAvatars){
+					res.render('avatars/avatars-users.ejs', {
+						user: req.user,
+						avatarUser: user,
+						terranAvatars: terranAvatars,
+						zergAvatars: zergAvatars,
+						protossAvatars: protossAvatars
+					});
+				});
+			});
+		});
+	});
 });
 
 /*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/

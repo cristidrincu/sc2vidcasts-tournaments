@@ -1,5 +1,7 @@
-<% include ../partials/header %>
-<% include ../partials/sidebar %>
+<%include ../partials/header%>
+<% userAvatar.local.avatar.forEach(function(avatar){ %>
+<% include ../partials/sidebar%>
+<%});%>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -40,7 +42,7 @@
                                 <%= tournament.prize ? 'Da' : 'Nu'%>
                             </td>
                             <td>
-                                <a href="/tournament-details/<%= tournament._id %>">
+                                <a href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
                                     <button class="btn btn-danger">Detalii</button>
                                 </a>
                             </td>

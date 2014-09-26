@@ -80,13 +80,13 @@ app.post('/create-tournament', isLoggedIn, requireRole('Organizator'), function(
 });
 
 //TODO - REFACTOR MONGOOSE QUERY METHODS FOR TOURNAMENT INTO METHODS THAT RESIDE INSIDE NODE MODULES - SEE HELPER-MONGOOSE.JS
-app.get('/tournament-details/:_id', isLoggedIn, function(req, res){
+app.get('/tournament-details/:_id/:userId', isLoggedIn, function(req, res){
 
   var enlistedInTournament = false;
   var eligibleForTournament = false;
   var allPlacesTaken = false;
 
-  User.find( {_id: req.user._id}, function(err, players){
+  User.find( {_id: req.params.userId}, function(err, players){
     var ids = players.map(function(player){
       return player._id;
     });
@@ -108,16 +108,18 @@ app.get('/tournament-details/:_id', isLoggedIn, function(req, res){
             return eligibleForTournament;
           }
         });
-
-        res.render('tournament/tournament-details.ejs',{
-          user: req.user,
-          tournament: tournament,
-          moment: moment,
-          enlistedInTournament: enlistedInTournament,
-          eligibleForTournament: eligibleForTournament,
-          allPlacesTaken: allPlacesTaken,
-          procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers)) + '%'
-        });
+				helperFunctions.getUserDetails(req.params.userId, function(user){
+					res.render('tournament/tournament-details.ejs',{
+						user: req.user,
+						tournament: tournament,
+						userAvatar: user,
+						moment: moment,
+						enlistedInTournament: enlistedInTournament,
+						eligibleForTournament: eligibleForTournament,
+						allPlacesTaken: allPlacesTaken,
+						procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers)) + '%'
+					});
+				});
       }
     });
   });
@@ -172,14 +174,8 @@ app.post('/signup-tournament/:_id/:userId', isLoggedIn, function(req, res){
   });
 });
 
-//app.get('/signup-tournament-result/:_id', isLoggedIn, function(req, res){
-//  res.render('tournament/signup-tournament-result.ejs', {
-//    user: req.user
-//  })
-//});
-
 app.get('/user-tournaments/:userId', isLoggedIn, function(req, res){
-  User.findById(req.params.userId).populate('local.tournaments').exec(function(err, user){
+  User.findById(req.params.userId).populate('local.tournaments').populate('local.avatar').exec(function(err, user){
     if(err)
       res.send(err)
     else
@@ -187,6 +183,7 @@ app.get('/user-tournaments/:userId', isLoggedIn, function(req, res){
       res.render('tournament/user-tournaments.ejs', {
         user: req.user,
         playerTournamentsUser: user,
+	      userAvatar: user,
         moment: moment,
         errorMessage: req.flash('infoError'),
         successMessage: req.flash('infoSuccess')

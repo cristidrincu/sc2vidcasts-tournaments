@@ -57,6 +57,11 @@ ul.titlu-turneu-signup li {
     height: 100%;
 }
 
+.profile-pic-table-players{
+    max-width: 60%;
+    max-height: 60%;
+}
+
 .container-user-avatar-admin{
     margin-top: 20px;
 }

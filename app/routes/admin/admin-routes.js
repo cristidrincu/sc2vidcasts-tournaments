@@ -52,17 +52,20 @@ app.get('/organized-tournaments/:organizerId', isLoggedIn, requireRole('admin'),
   });
 });
 
-app.get('/admin-tournaments/:_id', isLoggedIn, requireRole('admin'), function(req,res){
-  Tournament.findById(req.params._id).populate('players').populate('organizer').exec( function(err, tournament){
+app.get('/admin-tournaments/:tournamentId/:userId', isLoggedIn, requireRole('admin'), function(req,res){
+  Tournament.findById(req.params.tournamentId).populate('players').populate('organizer').exec( function(err, tournament){
     if(err)
       res.send(err)
     else
-      res.render('tournament/tournament-details-admin.ejs',{
-        user: req.user,
-        tournament: tournament,
-        procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers)) + '%',
-        moment: moment
-      });
+    helperFunctions.getUserDetails(req.params.userId, function(user){
+	    res.render('tournament/tournament-details-admin.ejs',{
+		    user: req.user,
+		    userAvatar: user,
+		    tournament: tournament,
+		    procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers)) + '%',
+		    moment: moment
+	    });
+    });
   });
 });
 
@@ -70,12 +73,15 @@ app.get('/avatars-users-admin/:adminId', isLoggedIn, requireRole('admin'), funct
   helperFunctions.getUserDetails(req.params.adminId, function(user){
     helperFunctions.retrieveTerranAvatars(function(terranAvatars){
       helperFunctions.retrieveZergAvatars(function(zergAvatars){
-        res.render('avatars/avatars-users-admin.ejs', {
-          user: req.user,
-          userAvatar: user,
-          terranAvatars: terranAvatars,
-          zergAvatars: zergAvatars
-        });
+	      helperFunctions.retrieveProtossAvatars(function(protossAvatars){
+		      res.render('avatars/avatars-users-admin.ejs', {
+			      user: req.user,
+			      userAvatar: user,
+			      terranAvatars: terranAvatars,
+			      zergAvatars: zergAvatars,
+			      protossAvatars: protossAvatars
+		      });
+	      });
       });
     });
   });

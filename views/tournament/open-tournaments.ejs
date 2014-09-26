@@ -1,11 +1,11 @@
-<%include ../partials/header.ejs%>
+<% include ../partials/header.ejs %>
 <% avatarUser.local.avatar.forEach(function(avatar){%>
-    <%if(user.local.role == 'admin'){%>
-        <% include ../partials/sidebar-admin%>
-    <%}else if(user.local.role == 'Organizator'){%>
-        <% include ../partials/sidebar-organizer%>
+    <%if(user.local.role == 'admin'){ %>
+        <% include ../partials/sidebar-admin %>
+    <%}else if(user.local.role == 'Organizator'){ %>
+        <% include ../partials/sidebar-organizer %>
     <%}else{%>
-        <% include ../partials/sidebar%>
+        <% include ../partials/sidebar %>
     <%}%>
 <%});%>
 <div id="page-wrapper">
@@ -34,6 +34,7 @@
                             <th>Data terminarii</th>
                             <th>Premii</th>
                             <th>Detalii</th>
+                            <th>Procentaj ocupare locuri</th>
                         </tr>
                         <% tournaments.forEach(function(tournament){ %>
                         <tr>
@@ -46,19 +47,26 @@
                                 <%= tournament.prize ? 'Da' : 'Nu'%>
                             </td>
                             <td>
-                                <% if( user.local.role == 'User'){%>
-                                    <a href="/tournament-details/<%= tournament._id %>">
-                                        <button class="btn btn-success">Detalii</button>
-                                    </a>
-                                <%}else if( user.local.role == 'admin'){%>
-                                    <a href="/admin-tournaments/<%= tournament._id %>">
-                                        <button class="btn btn-success">Detalii</button>
-                                    </a>
-                                <%}else{%>
-                                    <a href="/organizer-tournaments/<%= tournament._id %>">
-                                        <button class="btn btn-success">Detalii</button>
-                                    </a>
-                                <%}%>
+
+                                    <% if( user.local.role == 'User'){%>
+                                        <a href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
+                                            <button class="btn btn-success">Detalii</button>
+                                        </a>
+                                    <%}else if( user.local.role == 'admin'){%>
+                                        <a href="/admin-tournaments/<%= tournament._id %>/<%= user._id%>">
+                                            <button class="btn btn-success">Detalii</button>
+                                        </a>
+                                    <%}else{%>
+                                        <a href="/organizer-tournaments/<%= tournament._id %>/<%= user._id%>">
+                                            <button class="btn btn-success">Detalii</button>
+                                        </a>
+                                    <%}%>
+
+                            </td>
+                            <td>
+                                <p>
+                                    <%= Math.floor((tournament.players.length * (100 / tournament.nrOfPlayers))) + '%' %>
+                                </p>
                             </td>
                         </tr>
                         <% }); %>

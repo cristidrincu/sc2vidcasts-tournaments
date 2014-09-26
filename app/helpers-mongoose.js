@@ -3,6 +3,7 @@ var Tournament = require('./models/tournament.js');
 var User = require('./models/user.js');
 var Avatar = require('./models/avatar.js');
 var ErrorHandler = require('./helpers-error-handlers.js');
+var _ = require('underscore');
 
 exports.getUserDetails = function(id, cb){
   User.findById(id).populate('local.avatar').exec(function(err, user){
@@ -10,6 +11,21 @@ exports.getUserDetails = function(id, cb){
       ErrorHandler.handle('A aparut o eroare in preluarea detaliilor pentru utilizator' + err);
     cb(user);
   });
+}
+
+exports.getDefaultAvatar = function(cb){
+	Avatar.findOne( { 'imageRaceCategory': 'default' }).exec(function(err, avatar){
+		cb(avatar);
+	});
+}
+
+exports.compareUserId = function(userId, anotherId, cb){
+	var comparisonResult = false;
+	if(userId != anotherId){
+		comparisonResult = true;
+	}
+
+		return cb(comparisonResult);
 }
 
 exports.setAvatarForUser = function(userId, avatarId, cb){
@@ -89,16 +105,22 @@ exports.retrieveTournamentLeagues = function(tournamentId, cb){
   });
 }
 
-exports.retrieveBronzePlayers = function(cb){
-  User.find( {'local.league': 'Bronze', 'local.role': 'User'}).sort( {'local.nickname': 1} ).limit(10).exec(function(err, bronzers){
-    if(err)
+exports.retrieveBronzePlayers = function(userId, cb){
+  User.find( {'local.league': 'Bronze', 'local.role': 'User'}).populate('local.avatar').sort( {'local.nickname': 1} ).limit(10).exec(function(err, bronzers){
+    if(err){
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor bronze din baza de date' + err);
-    cb(bronzers);
+    }
+
+	  var updatedBronzers = _.filter(bronzers, function(player){
+			return player._id.toString() != userId.toString();
+	  });
+
+		cb(updatedBronzers);
   });
 }
 
 exports.retrieveSilverPlayers = function(cb){
-  User.find( {'local.league': 'Silver', 'local.role': 'User'}).sort( { 'local.nickname': 1 } ).exec(function(err, silvers){
+  User.find( {'local.league': 'Silver', 'local.role': 'User'}).populate('local.avatar').sort( { 'local.nickname': 1 } ).exec(function(err, silvers){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor silver din baza de date' + err);
     cb(silvers);
@@ -106,7 +128,7 @@ exports.retrieveSilverPlayers = function(cb){
 }
 
 exports.retrieveGoldPlayers = function(cb){
-  User.find( {'local.league': 'Gold', 'local.role': 'User'}).sort( { 'local.nickname': 1} ).exec(function(err, golds){
+  User.find( {'local.league': 'Gold', 'local.role': 'User'}).populate('local.avatar').sort( { 'local.nickname': 1} ).exec(function(err, golds){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor gold din baza de date' + err);
     cb(golds);
@@ -114,7 +136,7 @@ exports.retrieveGoldPlayers = function(cb){
 }
 
 exports.retrievePlatinumPlayers = function(cb){
-  User.find( {'local.league': 'Platinum', 'local.role': 'User'}).sort( { 'local.nickname': 1}).exec(function(err, platinums){
+  User.find( {'local.league': 'Platinum', 'local.role': 'User'}).populate('local.avatar').sort( { 'local.nickname': 1}).exec(function(err, platinums){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor platinum din baza de date' + err);
     cb(platinums);
@@ -122,7 +144,7 @@ exports.retrievePlatinumPlayers = function(cb){
 }
 
 exports.retrieveDiamondPlayers = function(cb){
-  User.find( {'local.league': 'Diamond', 'local.role': 'User'}).sort( { 'local.nickname': 1}).exec(function(err, diamonds){
+  User.find( {'local.league': 'Diamond', 'local.role': 'User'}).populate('local.avatar').sort( { 'local.nickname': 1}).exec(function(err, diamonds){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor diamond din baza de date' + err);
     cb(diamonds);
@@ -130,7 +152,7 @@ exports.retrieveDiamondPlayers = function(cb){
 }
 
 exports.retrieveMasterPlayers = function(cb){
-  User.find( {'local.league': 'Master', 'local.role': 'User'}).sort( { 'local.nickname': 1}).exec(function(err, masters){
+  User.find( {'local.league': 'Master', 'local.role': 'User'}).populate('local.avatar').sort( { 'local.nickname': 1}).exec(function(err, masters){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor master din baza de date' + err);
     cb(masters);
@@ -138,7 +160,7 @@ exports.retrieveMasterPlayers = function(cb){
 }
 
 exports.retrieveGMPlayers = function(cb){
-  User.find( {'local.league': 'Grand Master', 'local.role': 'User'}).sort( { 'local.nickname': 1} ).exec(function(err, gm){
+  User.find( {'local.league': 'Grand Master', 'local.role': 'User'}).populate('local.avatar').sort( { 'local.nickname': 1} ).exec(function(err, gm){
     if(err)
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor grand master din baza de date' + err);
     cb(gm);
@@ -161,5 +183,14 @@ exports.retrieveZergAvatars = function(cb){
     else
       cb(avatars);
   });
+}
+
+exports.retrieveProtossAvatars = function(cb){
+	Avatar.find( { 'imageRaceCategory': 'protoss' }).exec(function(err, avatars){
+		if(err)
+			throw new err
+		else
+			cb(avatars);
+	});
 }
 

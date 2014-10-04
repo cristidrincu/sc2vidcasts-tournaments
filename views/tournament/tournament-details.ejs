@@ -20,7 +20,7 @@
                     <p style="padding-top: 55px; color: red">Esti deja inscris in cadrul acestui turneu</p>
                 <%}%>
 
-                <% if(eligibleForTournament && !enlistedInTournament && (procentajOcupare != (100 + '%'))){%>
+                <% if(eligibleForTournament && !enlistedInTournament && (procentajOcupare != (100))){%>
                     <form class="btn-signup-turneu-detalii" action="/signup-tournament/<%= tournament._id %>/<%= user._id %>" method="post">
                         <button class="btn btn-success">Inscrie-te</button>
                     </form>

@@ -95,8 +95,8 @@ app.get('/tournament-details/:_id/:userId', isLoggedIn, function(req, res){
       return player._id;
     });
 
-    Tournament.findOne( { _id: req.params._id, players: {$in: ids}}, function(err, players){
-      if(players){
+    Tournament.findOne( { _id: req.params._id, players: {$in: ids}}, function(err, tournament){
+      if(tournament){
         enlistedInTournament = true
         return enlistedInTournament;
       }

@@ -7,7 +7,7 @@
         <div class="col-lg-12">
             <div class="col-lg-8">
                 <h1 class="page-header">Detalii pentru turneul <i>
-                        <%= tournament.tournamentName %>, editia <%= tournament.edition > 1 ? 'a ' + tournament.edition + '-a' : '' %>
+                        <%= tournament.tournamentName %>, editia <%= tournament.edition > 1 ? 'a ' + tournament.edition + '-a' : '1' %>
                     </i>
                 </h1>
             </div>
@@ -30,14 +30,14 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <h4>Gradul de ocupare a locurilor: <%= procentajOcupare%></h4>
+            <h4>Gradul de ocupare a locurilor: <%= Math.floor(procentajOcupare) + '%'%></h4>
             <div class="progress progress-striped active">
-                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= procentajOcupare%>">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= procentajOcupare + '%'%>">
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-2">
+        <div class="col-lg-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-clock-o fa-fw"></i> Data inceperii
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-clock-o fa-fw"></i> Data terminarii
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-clock-o fa-fw"></i> Ora inceperii
@@ -67,7 +67,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-clock-o fa-fw"></i> Locuri disponibile
@@ -77,17 +77,240 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
-            <div class="panel panel-default">
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default" style="border: none;">
                 <div class="panel-heading">
                     <i class="fa fa-clock-o fa-fw"></i> Jucatori inscrisi: <%= tournament.players.length%>
                 </div>
-                <div class="panel-body">
-                    <ul style="list-style: none">
-                        <%tournament.players.forEach(function(player){%>
-                            <li><%=player.local.nickname + ', ' + player.local.race + ', ' + player.local.league%>, <a href="/profile-details/<%= player._id%>">Profil jucator</a></li>
-                        <%})%>
-                    </ul>
+
+                <ul class="nav nav-tabs" role="tablist" style="margin-top: 20px;">
+                    <li class="active"><a href="#bronze" role="tab" data-toggle="tab">Bronze</a></li>
+                    <li><a href="#silver" role="tab" data-toggle="tab">Silver</a></li>
+                    <li><a href="#gold" role="tab" data-toggle="tab">Gold</a></li>
+                    <li><a href="#platinum" role="tab" data-toggle="tab">Platinum</a></li>
+                    <li><a href="#diamond" role="tab" data-toggle="tab">Diamond</a></li>
+                    <li><a href="#masters" role="tab" data-toggle="tab">Master</a></li>
+                    <li><a href="#grand-masters" role="tab" data-toggle="tab">Grand Master</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="bronze">
+                        <table style="margin-top: 20px;" class="table table-hover">
+                            <%if(bronzePlayers.length == 0){%>
+                            <p class="message-no-players-found">Nu am gasit jucatori de Bronze inscrisi in acest turneu!</p>
+                            <%}else{%>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nickname</th>
+                                <th>Battle.net ID</th>
+                                <th>Rasa</th>
+                                <th>Liga</th>
+                                <th>Profil jucator</th>
+                                <th>Trimite-i mesaj</th>
+                            </tr>
+                            <% bronzePlayers.forEach(function(player){ %>
+                            <tr>
+
+                                <td>
+                                    <% player.local.avatar.forEach(function(avatar){%>
+                                    <img class="img-circle profile-pic-table-players" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                                    <%})%>
+                                </td>
+                                <td><%= player.local.nickname %></td>
+                                <td><%= player.local.battlenetid %></td>
+                                <td><%= player.local.race %></td>
+                                <td><%= player.local.league %></td>
+                                <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                                <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+
+                            </tr>
+                            <% }); %>
+                            <%}%>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="silver">
+                        <table style="margin-top: 20px;" class="table table-hover">
+                            <%if(silverPlayers.length == 0){%>
+                            <p class="message-no-players-found">Nu am gasit jucatori de Silver inscrisi in acest turneu!</p>
+                            <%}else{%>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nickname</th>
+                                <th>Battle.net ID</th>
+                                <th>Rasa</th>
+                                <th>Profil jucator</th>
+                                <th>Trimite-i mesaj</th>
+                            </tr>
+                            <% silverPlayers.forEach(function(player){ %>
+                            <tr>
+                                <td>
+                                    <% player.local.avatar.forEach(function(avatar){%>
+                                    <img class="img-circle profile-pic-table-players" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                                    <%})%>
+                                </td>
+                                <td><%= player.local.nickname %></td>
+                                <td><%= player.local.battlenetid %></td>
+                                <td><%= player.local.race %></td>
+                                <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                                <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                            </tr>
+                            <% }); %>
+                            <%}%>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="gold">
+                        <table style="margin-top: 20px;" class="table table-hover">
+                            <%if(goldPlayers.length == 0){%>
+                            <p class="message-no-players-found">Nu am gasit jucatori de Gold inscrisi in acest turneu!</p>
+                            <%}else{%>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nickname</th>
+                                <th>Battle.net ID</th>
+                                <th>Rasa</th>
+                                <th>Profil jucator</th>
+                                <th>Trimite-i mesaj</th>
+                            </tr>
+                            <% goldPlayers.forEach(function(player){ %>
+                            <tr>
+                                <td>
+                                    <% player.local.avatar.forEach(function(avatar){%>
+                                    <img class="img-circle profile-pic-table-players" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                                    <%})%>
+                                </td>
+                                <td><%= player.local.nickname %></td>
+                                <td><%= player.local.battlenetid %></td>
+                                <td><%= player.local.race %></td>
+                                <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                                <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                            </tr>
+                            <% }); %>
+                            <%}%>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="platinum">
+                        <table style="margin-top: 20px;" class="table table-hover">
+                            <%if(platinumPlayers.length == 0){%>
+                            <p class="message-no-players-found">Nu am gasit jucatori de Platinum inscrisi in acest turneu!</p>
+                            <%}else{%>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nickname</th>
+                                <th>Battle.net ID</th>
+                                <th>Rasa</th>
+                                <th>Profil jucator</th>
+                                <th>Trimite-i mesaj</th>
+                            </tr>
+                            <% platinumPlayers.forEach(function(player){ %>
+                            <tr>
+                                <td>
+                                    <% player.local.avatar.forEach(function(avatar){%>
+                                    <img class="img-circle profile-pic-table-players" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                                    <%})%>
+                                </td>
+                                <td><%= player.local.nickname %></td>
+                                <td><%= player.local.battlenetid %></td>
+                                <td><%= player.local.race %></td>
+                                <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                                <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                            </tr>
+                            <% }); %>
+                            <%}%>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="diamond">
+                        <table style="margin-top: 20px;" class="table table-hover">
+                            <%if(diamondPlayers.length == 0){%>
+                            <p class="message-no-players-found">Nu am gasit jucatori de Diamond inscrisi in acest turneu!</p>
+                            <%}else{%>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nickname</th>
+                                <th>Battle.net ID</th>
+                                <th>Rasa</th>
+                                <th>Profil jucator</th>
+                                <th>Trimite-i mesaj</th>
+                            </tr>
+                            <% diamondPlayers.forEach(function(player){ %>
+                            <tr>
+                                <td>
+                                    <% player.local.avatar.forEach(function(avatar){%>
+                                    <img class="img-circle profile-pic-table-players" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                                    <%})%>
+                                </td>
+                                <td><%= player.local.nickname %></td>
+                                <td><%= player.local.battlenetid %></td>
+                                <td><%= player.local.race %></td>
+                                <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                                <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                            </tr>
+                            <% }); %>
+                            <%}%>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="masters">
+                        <table style="margin-top: 20px;" class="table table-hover">
+                            <%if(mastersPlayers.length == 0){%>
+                            <p class="message-no-players-found">Nu am gasit jucatori de Master inscrisi in acest turneu!</p>
+                            <%}else{%>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nickname</th>
+                                <th>Battle.net ID</th>
+                                <th>Rasa</th>
+                                <th>Profil jucator</th>
+                                <th>Trimite-i mesaj</th>
+                            </tr>
+                            <% mastersPlayers.forEach(function(player){ %>
+                            <tr>
+                                <td>
+                                    <% player.local.avatar.forEach(function(avatar){%>
+                                    <img class="img-circle profile-pic-table-players" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                                    <%})%>
+                                </td>
+                                <td><%= player.local.nickname %></td>
+                                <td><%= player.local.battlenetid %></td>
+                                <td><%= player.local.race %></td>
+                                <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                                <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                            </tr>
+                            <% }); %>
+                            <%}%>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="grand-masters">
+                        <table style="margin-top: 20px;" class="table table-hover">
+                            <%if(grandMasterPlayers.length == 0){%>
+                            <p class="message-no-players-found">Nu am gasit jucatori de Grand Master inscrisi in acest turneu!</p>
+                            <%}else{%>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Nickname</th>
+                                <th>Battle.net ID</th>
+                                <th>Rasa</th>
+                                <th>Profil jucator</th>
+                                <th>Trimite-i mesaj</th>
+                            </tr>
+                            <% grandMasterPlayers.forEach(function(player){ %>
+                            <tr>
+                                <td>
+                                    <% player.local.avatar.forEach(function(avatar){%>
+                                    <img class="img-circle profile-pic-table-players" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                                    <%})%>
+                                </td>
+                                <td><%= player.local.nickname %></td>
+                                <td><%= player.local.battlenetid %></td>
+                                <td><%= player.local.race %></td>
+                                <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                                <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                            </tr>
+                            <% }); %>
+                            <%}%>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -125,7 +348,9 @@
                 <div class="panel-body">
                     <p>
                     <%for(var i = 0; i< tournament.openForLeagues.leagues.length; i++){%>
-                            <%=tournament.openForLeagues.leagues[i]%>
+                            <%=tournament.openForLeagues.leagues[i] +
+                                (tournament.openForLeagues.leagues[i] == tournament.openForLeagues.leagues[tournament.openForLeagues.leagues.length-1] ? '.': ', ')
+                            %>
                     <%};%>
                     </p>
                 </div>

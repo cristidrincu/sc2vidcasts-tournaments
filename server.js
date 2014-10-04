@@ -80,6 +80,7 @@ var messages = require('./app/routes/messages/messages-route');
 var players = require('./app/routes/players/players-route');
 var tournaments = require('./app/routes/tournaments/tournaments-route');
 var admin = require('./app/routes/admin/admin-routes');
+var organizer = require('./app/routes/organizer/organizer-routes');
 var avatar = require('./app/routes/avatar/avatar-routes');
 
 var logout = require('./app/routes/logout/logout-route');
@@ -93,6 +94,7 @@ app.use(messages);
 app.use(players);
 app.use(tournaments);
 app.use(admin);
+app.use(organizer);
 app.use(avatar);
 
 app.use(logout);

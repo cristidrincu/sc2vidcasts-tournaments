@@ -32,10 +32,35 @@ app.get('/backend-admin/:adminId', isLoggedIn, requireRole('admin'), function(re
   });
 });
 
-app.get('/backend-organizer', isLoggedIn, requireRole('Organizator'), function(req, res){
-  res.render('backend/backend-organizer.ejs', {
-    user: req.user
-  });
+app.get('/backend-organizer/:organizerId', isLoggedIn, requireRole('Organizator'), function(req, res){
+	helperFunctions.getUserDetails(req.params.organizerId, function(user){
+		helperFunctions.retrieveTournamentsByOrganizer(req.params.organizerId, function(tournaments){
+			checkAvatarArrayLength(function(){
+				if(user.local.avatar.length == 0){
+					helperFunctions.getDefaultAvatar(function(defaultAvatar){
+						helperFunctions.setAvatarForUser(req.params.organizerId, defaultAvatar._id, function(err, user){
+							if(err){
+								throw new err;
+							}
+							res.render('backend/backend-organizer.ejs', {
+								user: req.user,
+								userAvatar: user,
+								tournaments: tournaments,
+								moment: moment
+							});
+						});
+					});
+				}else{
+					res.render('backend/backend-organizer.ejs', {
+						user: req.user,
+						userAvatar: user,
+						tournaments: tournaments,
+						moment: moment
+					});
+				}
+			});
+		});
+	});
 });
 
 app.get('/backend-user/:userId', isLoggedIn, function(req, res){

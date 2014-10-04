@@ -51,29 +51,24 @@
                                 </tbody>
                             </table>
 
-                            <a href="/customize-profile/<%= user.local.nickname %>" class="btn btn-primary btn-modifica-profilul">Modifica Profilul</a>
+                            <a href="/customize-profile/<%= user.local.nickname %>" class="btn btn-danger btn-modifica-profilul">Modifica profilul</a>
                             <%if(user.local.role == 'admin'){%>
-                                <a href="/backend-admin/<%= user._id%>" class="btn btn-primary btn-modifica-profilul">Panou administrare turnee</a>
-                                <a href="/avatars-users-admin/<%= user._id%>" class="btn btn-primary">Alege un avatar</a>
+                                <a href="/backend-admin/<%= user._id%>" class="btn btn-success btn-modifica-profilul">Panou turnee</a>
+                                <a class="btn btn-primary buton-alege-avatar" href="/avatars-users-admin/<%= user._id%>">Alege un avatar</a>
                             <%}else if(user.local.role == 'Organizator'){%>
-                                <a href="/backend-organizer" class="btn btn-primary btn-modifica-profilul">Panou administrare turnee</a>
+                                <a href="/backend-organizer/<%= user._id%>" class="btn btn-success btn-modifica-profilul">Panou turnee</a>
+                                <a class="btn btn-primary buton-alege-avatar" href="/avatars-users/<%= user._id%>">Alege un avatar</a>
                             <%}else{%>
-                                <a href="/backend-user/<%= user._id%>" class="btn btn-primary btn-modifica-profilul">Panou administrare turnee</a>
-                                <a href="/avatars-users/<%= user._id%>" class="btn btn-primary">Alege un avatar</a>
+                                <a href="/backend-user/<%= user._id%>" class="btn btn-success btn-modifica-profilul">Panou turnee</a>
+                                <a class="buton-alege-avatar btn btn-primary" href="/avatars-users/<%= user._id%>">Alege un avatar</a>
                             <%}%>
                         </div>
                     </div>
                 </div>
-                <div class="panel-footer">
-                    <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-                        <span class="pull-right">
-                            <a href="/customize-profile/<%= user.local.nickname %>" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                        </span>
-                </div>
                 <%if(user.local.role == 'admin'){%>
                     <a href="/backend-admin/<%= user._id%>">Inapoi la contul tau</a>
                 <%}else if(user.local.role == 'Organizator'){%>
-                    <a href="/backend-organizers">Inapoi la contul tau</a>
+                    <a href="/backend-organizer/<%= user._id%>">Inapoi la contul tau</a>
                 <%}else {%>
                     <a href="/backend-user/<%= user._id%>">Inapoi la contul tau</a>
                 <%}%>

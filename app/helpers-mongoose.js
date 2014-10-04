@@ -4,6 +4,7 @@ var User = require('./models/user.js');
 var Avatar = require('./models/avatar.js');
 var ErrorHandler = require('./helpers-error-handlers.js');
 var _ = require('underscore');
+var Q = require('q');
 
 exports.getUserDetails = function(id, cb){
   User.findById(id).populate('local.avatar').exec(function(err, user){
@@ -165,6 +166,26 @@ exports.retrieveGMPlayers = function(cb){
       ErrorHandler.handle('A aparut o eroare in preluarea jucatorilor grand master din baza de date' + err);
     cb(gm);
   });
+}
+
+exports.retrievePlayersFromTournament = function(tournamentId){
+	  return Q.Promise(function(resolve, reject){
+		  Tournament.findById(tournamentId).populate('players').exec(function(err, tournament){
+			  if(err)
+				  reject(err);
+			  if(tournament){
+				  User.populate(tournament.players, {path: 'local.avatar'},  function(err, players){
+					  resolve(players);
+				  });
+			  }
+		  });
+	  });
+}
+
+exports.retrieveAllTournamentPlayersBasedOnLeagues = function(tournamentId, cb){
+		return exports.retrievePlayersFromTournament(tournamentId).then(function(players){
+				cb(players);
+		});
 }
 
 exports.retrieveTerranAvatars = function(cb){

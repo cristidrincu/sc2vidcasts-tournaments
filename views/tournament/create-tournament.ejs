@@ -1,7 +1,7 @@
 <% include ../partials/header%>
 <%
     var nrOfPlayers = ['4', '8', '12', '16', '24', '32', '64'],
-        leagues = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Master', 'Grand Master', 'Free for all'];
+        leagues = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Master', 'Grand Master'];
 %>
 
 <script type="text/javascript">
@@ -15,11 +15,6 @@
         $('#endDatePicker').datepicker(pickerOptions);
 
         $('#startHourPicker').pickatime({
-            formatSubmit: 'HH:i',
-            hiddenName: true
-        });
-
-        $('#endHourPicker').pickatime({
             formatSubmit: 'HH:i',
             hiddenName: true
         });
@@ -50,12 +45,12 @@
         <%}%>
     </div>
     <div class="form-group">
-        <label>Editia turneului(1, 2, 3 etc)</label>
-        <input type="text" class="form-control" name="edition" required>
+        <label>Editia turneului</label>
+        <input type="text" class="form-control" name="edition" placeholder="<%= placeholders.placeholderTournamentEdition%>" required>
     </div>
     <div class="form-group">
         <label>Canal Ingame pentru CHAT</label>
-        <input type="text" class="form-control" name="ingameChatChannel" required>
+        <input type="text" class="form-control" name="ingameChatChannel" placeholder="<%= placeholders.placeholderTournamentInGameChat%>" required>
     </div>
     <div class="form-group">
         <label>Canalul de Twitch pentru LIVE STREAM</label>

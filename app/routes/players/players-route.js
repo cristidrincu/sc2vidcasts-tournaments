@@ -10,7 +10,6 @@ var app = module.exports = express();
 app.get('/players/:userId', isLoggedIn, function(req, res){
 	helperFunctions.getUserDetails(req.params.userId, function(user){
 		helperFunctions.retrieveBronzePlayers(req.params.userId, function(bronzePlayers){
-			//TODO - implementeaza filtrarea pe toate colectiile de jucator, astfel incat sa dispara din acele colectii jucatorul care este momentan logat
 			helperFunctions.retrieveSilverPlayers(function(silverPlayers){
 				helperFunctions.retrieveGoldPlayers(function(goldPlayers){
 					helperFunctions.retrievePlatinumPlayers(function(platPlayers){

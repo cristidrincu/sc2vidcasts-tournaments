@@ -1,6 +1,10 @@
 <%include ../partials/header.ejs%>
 <% userAvatar.local.avatar.forEach(function(avatar){%>
-<% include ../partials/sidebar%>
+    <% if(user.local.role == 'Organizator'){ %>
+    <% include ../partials/sidebar-organizer %>
+    <%}else{%>
+    <% include ../partials/sidebar %>
+    <%}%>
 <%});%>
 <div id="page-wrapper">
     <div class="row">

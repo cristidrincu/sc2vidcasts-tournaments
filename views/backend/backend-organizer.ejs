@@ -1,6 +1,81 @@
 <%include ../partials/header%>
-<% include ../partials/sidebar%>
+<% userAvatar.local.avatar.forEach(function(avatar){ %>
+    <% include ../partials/sidebar-organizer%>
+<%});%>
 
-<p>View pentru organizer</p>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"><i class="fa fa-trophy fa-1x"></i> Lista turneelor create de tine</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- /.panel -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-clock-o fa-fw"></i> Lista turnee
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Numele turneului</th>
+                            <th>Locuri disponibile</th>
+                            <th>Editia</th>
+                            <th>Data inceperii</th>
+                            <th>Data terminarii</th>
+                            <th>Premii</th>
+                            <th>Detalii</th>
+                            <th>Procentaj ocupare locuri</th>
+                        </tr>
+                        <% tournaments.forEach(function(tournament){ %>
+                        <tr>
+                            <td><%= tournament.tournamentName %></td>
+                            <td><%= tournament.nrOfPlayers %></td>
+                            <td><%= tournament.edition %></td>
+                            <td><%= moment(tournament.startDate).format("DD MMMM YYYY") %></td>
+                            <td><%= moment(tournament.endDate).format("DD MMMM YYYY") %></td>
+                            <td>
+                                <%= tournament.prize ? 'Da' : 'Nu'%>
+                            </td>
+                            <td>
+
+                                <% if( user.local.role == 'User'){%>
+                                <a href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
+                                    <button class="btn btn-success">Detalii</button>
+                                </a>
+                                <%}else if( user.local.role == 'admin'){%>
+                                <a href="/admin-tournaments/<%= tournament._id %>/<%= user._id%>">
+                                    <button class="btn btn-success">Detalii</button>
+                                </a>
+                                <%}else{%>
+                                <a href="/organizer-tournament/<%= tournament._id %>/<%= user._id%>">
+                                    <button class="btn btn-success">Detalii</button>
+                                </a>
+                                <%}%>
+
+                            </td>
+                            <td>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                         style="width: <%= Math.floor((tournament.players.length * (100 / tournament.nrOfPlayers))) + '%' %>">
+                                    </div>
+                                    <span style="color:#000">
+                                        <%= Math.floor((tournament.players.length * (100 / tournament.nrOfPlayers))) + '%' %>
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                        <% }); %>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 
 <%include ../partials/footer%>

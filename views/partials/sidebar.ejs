@@ -21,20 +21,20 @@
                 <a class="active" href="/backend-user/<%=user._id%>"><i class="fa fa-dashboard fa-fw"></i> Panou de administrare</a>
             </li>
             <li>
-                <a href="/avatars-users/<%=user._id%>"><i class="fa fa-picture-o fa-fw"></i> Colectie avatare</a>
+                <a href="/user-messages/<%=user._id%>"><i class="fa fa-envelope fa-fw"></i> Mesajele tale <span class="fa arrow"></span>
+                </a>
+            </li>
+            <li>
+                <a href="/user-tournaments/<%= user._id%>"><i class="fa fa-briefcase fa-fw"></i> Turneele tale<span class="fa arrow"></span></a>
+            </li>
+            <li>
+                <a href="/avatars-users/<%=user._id%>"><i class="fa fa-picture-o fa-fw"></i> Colectie avatare<span class="fa arrow"></span></a>
             </li>
             <li>
                 <a href="/open-tournaments/<%=user._id%>" class="display-active-tournaments"><i class="fa fa-trophy fa-fw"></i> Turnee deschise<span class="fa arrow"></span></a>
             </li>
             <li>
                 <a href="/players/<%=user._id%>" class="display-leagues-players"><i class="fa fa-gamepad fa-fw"></i> Jucatori<span class="fa arrow"></span></a>
-            </li>
-            <li>
-                <a href="/user-messages/<%=user._id%>"><i class="fa fa-envelope fa-fw"></i> Mesajele tale <span class="fa arrow"></span>
-                </a>
-            </li>
-            <li>
-                <a href="/user-tournaments/<%= user._id%>"><i class="fa fa-briefcase fa-fw"></i> Turneele tale<span class="fa arrow"></span></a>
             </li>
         </ul>
     </div>

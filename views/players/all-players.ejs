@@ -1,6 +1,10 @@
 <% include ../partials/header %>
 <% avatarUser.local.avatar.forEach(function(avatar){%>
-<% include ../partials/sidebar %>
+    <% if(user.local.role == 'Organizator'){%>
+        <% include ../partials/sidebar-organizer %>
+    <%}else{%>
+        <% include ../partials/sidebar %>
+    <%}%>
 <%})%>
 <div id="page-wrapper">
     <div class="row">
@@ -22,7 +26,7 @@
             <div class="tab-pane fade in active" id="bronze">
                 <table style="margin-top: 20px;" class="table table-hover">
                     <%if(bronzePlayers.length == 0){%>
-                    <p class="message-no-players-found">Nu am gasit jucatori de Bronze in baza de date!</p>
+                        <p class="message-no-players-found">Nu am gasit jucatori de Bronze in baza de date!</p>
                     <%}else{%>
                     <tr>
                         <th>Avatar</th>
@@ -52,7 +56,7 @@
             <div class="tab-pane fade" id="silver">
                 <table style="margin-top: 20px;" class="table table-hover">
                     <%if(silverPlayers.length == 0){%>
-                    <p class="message-no-players-found">Nu am gasit jucatori de Silver in baza de date!</p>
+                        <p class="message-no-players-found">Nu am gasit jucatori de Silver in baza de date!</p>
                     <%}else{%>
                     <tr>
                         <th>Avatar</th>
@@ -82,9 +86,10 @@
             <div class="tab-pane fade" id="gold">
                 <table style="margin-top: 20px;" class="table table-hover">
                     <%if(goldPlayers.length == 0){%>
-                    <p class="message-no-players-found">Nu am gasit jucatori de Gold in baza de date!</p>
+                        <p class="message-no-players-found">Nu am gasit jucatori de Gold in baza de date!</p>
                     <%}else{%>
                     <tr>
+                        <th>Avatar</th>
                         <th>Nickname</th>
                         <th>Battle.net ID</th>
                         <th>Rasa</th>
@@ -93,6 +98,11 @@
                     </tr>
                     <% goldPlayers.forEach(function(player){ %>
                     <tr>
+                        <td>
+                            <% player.local.avatar.forEach(function(avatar){%>
+                                <img class="img-circle profile-pic-table-players" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                            <%})%>
+                        </td>
                         <td><%= player.local.nickname %></td>
                         <td><%= player.local.battlenetid %></td>
                         <td><%= player.local.race %></td>
@@ -106,9 +116,10 @@
             <div class="tab-pane fade" id="platinum">
                 <table style="margin-top: 20px;" class="table table-hover">
                     <%if(platPlayers.length == 0){%>
-                    <p class="message-no-players-found">Nu am gasit jucatori de Platinum in baza de date!</p>
+                        <p class="message-no-players-found">Nu am gasit jucatori de Platinum in baza de date!</p>
                     <%}else{%>
                     <tr>
+                        <th>Avatar</th>
                         <th>Nickname</th>
                         <th>Battle.net ID</th>
                         <th>Rasa</th>
@@ -117,6 +128,11 @@
                     </tr>
                     <% platPlayers.forEach(function(player){ %>
                     <tr>
+                        <td>
+                            <% player.local.avatar.forEach(function(avatar){%>
+                                <img class="img-circle profile-pic-table-players" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                            <%})%>
+                        </td>
                         <td><%= player.local.nickname %></td>
                         <td><%= player.local.battlenetid %></td>
                         <td><%= player.local.race %></td>
@@ -130,9 +146,10 @@
             <div class="tab-pane fade" id="diamond">
                 <table style="margin-top: 20px;" class="table table-hover">
                     <%if(diamondPlayers.length == 0){%>
-                    <p class="message-no-players-found">Nu am gasit jucatori de Diamond in baza de date!</p>
+                        <p class="message-no-players-found">Nu am gasit jucatori de Diamond in baza de date!</p>
                     <%}else{%>
                     <tr>
+                        <th>Avatar</th>
                         <th>Nickname</th>
                         <th>Battle.net ID</th>
                         <th>Rasa</th>
@@ -141,6 +158,11 @@
                     </tr>
                     <% diamondPlayers.forEach(function(player){ %>
                     <tr>
+                        <td>
+                            <% player.local.avatar.forEach(function(avatar){%>
+                                <img class="img-circle profile-pic-table-players" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                            <%})%>
+                        </td>
                         <td><%= player.local.nickname %></td>
                         <td><%= player.local.battlenetid %></td>
                         <td><%= player.local.race %></td>
@@ -154,9 +176,10 @@
             <div class="tab-pane fade" id="masters">
                 <table style="margin-top: 20px;" class="table table-hover">
                     <%if(masterPlayers.length == 0){%>
-                    <p class="message-no-players-found">Nu am gasit jucatori de Master in baza de date!</p>
+                        <p class="message-no-players-found">Nu am gasit jucatori de Master in baza de date!</p>
                     <%}else{%>
                     <tr>
+                        <th>Avatar</th>
                         <th>Nickname</th>
                         <th>Battle.net ID</th>
                         <th>Rasa</th>
@@ -165,6 +188,11 @@
                     </tr>
                     <% masterPlayers.forEach(function(player){ %>
                     <tr>
+                        <td>
+                            <% player.local.avatar.forEach(function(avatar){%>
+                                <img class="img-circle profile-pic-table-players" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                            <%})%>
+                        </td>
                         <td><%= player.local.nickname %></td>
                         <td><%= player.local.battlenetid %></td>
                         <td><%= player.local.race %></td>
@@ -178,9 +206,10 @@
             <div class="tab-pane fade" id="grand-masters">
                 <table style="margin-top: 20px;" class="table table-hover">
                     <%if(gmPlayers.length == 0){%>
-                    <p class="message-no-players-found">Nu am gasit jucatori de Grand Master in baza de date!</p>
+                        <p class="message-no-players-found">Nu am gasit jucatori de Grand Master in baza de date!</p>
                     <%}else{%>
                     <tr>
+                        <th>Avatar</th>
                         <th>Nickname</th>
                         <th>Battle.net ID</th>
                         <th>Rasa</th>
@@ -189,6 +218,11 @@
                     </tr>
                     <% gmPlayers.forEach(function(player){ %>
                     <tr>
+                        <td>
+                            <% player.local.avatar.forEach(function(avatar){%>
+                                <img class="img-circle profile-pic-table-players" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                            <%})%>
+                        </td>
                         <td><%= player.local.nickname %></td>
                         <td><%= player.local.battlenetid %></td>
                         <td><%= player.local.race %></td>

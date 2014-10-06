@@ -56,7 +56,7 @@ app.post('/customize-profile/:nickname', isLoggedIn, function(req, res){
 
 app.get('/avatars-users/:userId', isLoggedIn, function(req, res){
 	helperFunctions.getUserDetails(req.params.userId, function(user){
-			helperFunctions.retrieveAvatars(function(avatars){
+			helperFunctions.retrieveAvatars().then(function(avatars){
 				res.render('avatars/avatars-users.ejs', {
 					user: req.user,
 					avatarUser: user,

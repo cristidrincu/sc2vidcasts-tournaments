@@ -12,7 +12,7 @@ var app = module.exports = express();
 
 app.get('/admin-players/:userId', isLoggedIn, requireRole('admin'), function(req, res){
   helperFunctions.getUserDetails(req.params.userId, function(user){
-    helperFunctions.retrieveAllPlayers(function(players){
+    helperFunctions.retrieveAllPlayers().then(function(players){
       res.render('backend/admin-players.ejs', {
         user: req.user,
         players: players,
@@ -72,7 +72,7 @@ app.get('/admin-tournaments/:tournamentId/:userId', isLoggedIn, requireRole('adm
 
 app.get('/avatars-users-admin/:adminId', isLoggedIn, requireRole('admin'), function(req, res){
   helperFunctions.getUserDetails(req.params.adminId, function(user){
-		helperFunctions.retrieveAvatars(function(avatars){
+		helperFunctions.retrieveAvatars().then(function(avatars){
 			res.render('avatars/avatars-users-admin.ejs', {
 				user: req.user,
 				userAvatar: user,

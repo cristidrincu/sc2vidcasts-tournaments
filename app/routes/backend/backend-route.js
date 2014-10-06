@@ -22,7 +22,7 @@ helperFunctions.retrieveAllPlayers(function(players){
 /*BACK-END ROUTES*/
 app.get('/backend-admin/:adminId', isLoggedIn, requireRole('admin'), function(req, res){
   helperFunctions.getUserDetails(req.params.adminId, function(user){
-    helperFunctions.retrieveAllPlayers(function(players){
+    helperFunctions.retrieveAllPlayers().then(function(players){
       res.render('backend/backend-admin.ejs', {
         user: req.user,
         userAvatar: user,

@@ -188,33 +188,6 @@ exports.retrieveAllTournamentPlayersBasedOnLeagues = function(tournamentId, cb){
 		});
 }
 
-exports.retrieveTerranAvatars = function(cb){
-  Avatar.find( {'imageRaceCategory': 'terran'}).exec(function(err, avatars){
-    if(err)
-      throw err
-    else
-      cb(avatars);
-  });
-}
-
-exports.retrieveZergAvatars = function(cb){
-  Avatar.find( {'imageRaceCategory' : 'zerg'}).exec(function(err, avatars){
-    if(err)
-      throw err
-    else
-      cb(avatars);
-  });
-}
-
-exports.retrieveProtossAvatars = function(cb){
-	Avatar.find( { 'imageRaceCategory': 'protoss' }).exec(function(err, avatars){
-		if(err)
-			throw new err
-		else
-			cb(avatars);
-	});
-}
-
 exports.retrieveAvatars = function(cb){
 	return Q.Promise(function(resolve, reject){
 		Avatar.find().exec(function(err, avatars){

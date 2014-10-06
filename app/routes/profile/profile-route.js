@@ -4,6 +4,7 @@
 var express = require('express');
 var helperFunctions = require('../../../app/helpers-mongoose.js');
 var User = require('../../../app/models/user');
+var _ = require('underscore');
 var app = module.exports = express();
 
 /* PROFILE ROUTES */
@@ -55,19 +56,27 @@ app.post('/customize-profile/:nickname', isLoggedIn, function(req, res){
 
 app.get('/avatars-users/:userId', isLoggedIn, function(req, res){
 	helperFunctions.getUserDetails(req.params.userId, function(user){
-		helperFunctions.retrieveTerranAvatars(function(terranAvatars){
-			helperFunctions.retrieveZergAvatars(function(zergAvatars){
-				helperFunctions.retrieveProtossAvatars(function(protossAvatars){
-					res.render('avatars/avatars-users.ejs', {
-						user: req.user,
-						avatarUser: user,
-						terranAvatars: terranAvatars,
-						zergAvatars: zergAvatars,
-						protossAvatars: protossAvatars
-					});
+			helperFunctions.retrieveAvatars(function(avatars){
+				res.render('avatars/avatars-users.ejs', {
+					user: req.user,
+					avatarUser: user,
+					terranAvatars: _.filter(avatars, function(avatar){
+						if(avatar.imageRaceCategory === 'terran'){
+							return avatar;
+						}
+					}),
+					zergAvatars: _.filter(avatars, function(avatar){
+						if(avatar.imageRaceCategory === 'zerg'){
+							return avatar;
+						}
+					}),
+					protossAvatars: _.filter(avatars, function(avatar){
+						if(avatar.imageRaceCategory === 'protoss'){
+							return avatar;
+						}
+					})
 				});
 			});
-		});
 	});
 });
 

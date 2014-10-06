@@ -215,3 +215,14 @@ exports.retrieveProtossAvatars = function(cb){
 	});
 }
 
+exports.retrieveAvatars = function(cb){
+	return Q.Promise(function(resolve, reject){
+		Avatar.find().exec(function(err, avatars){
+			if(err){
+				reject(err);
+			}
+			resolve(cb(avatars));
+		});
+	});
+}
+

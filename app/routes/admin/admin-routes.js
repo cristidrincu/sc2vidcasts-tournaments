@@ -7,6 +7,7 @@ var helperFunctions = require('../../../app/helpers-mongoose.js');
 var User = require('../../../app/models/user');
 var Tournament = require('../../../app/models/tournament');
 var moment = require('moment');
+var _  = require('underscore');
 var app = module.exports = express();
 
 app.get('/admin-players/:userId', isLoggedIn, requireRole('admin'), function(req, res){
@@ -71,20 +72,28 @@ app.get('/admin-tournaments/:tournamentId/:userId', isLoggedIn, requireRole('adm
 
 app.get('/avatars-users-admin/:adminId', isLoggedIn, requireRole('admin'), function(req, res){
   helperFunctions.getUserDetails(req.params.adminId, function(user){
-    helperFunctions.retrieveTerranAvatars(function(terranAvatars){
-      helperFunctions.retrieveZergAvatars(function(zergAvatars){
-	      helperFunctions.retrieveProtossAvatars(function(protossAvatars){
-		      res.render('avatars/avatars-users-admin.ejs', {
-			      user: req.user,
-			      userAvatar: user,
-			      terranAvatars: terranAvatars,
-			      zergAvatars: zergAvatars,
-			      protossAvatars: protossAvatars
-		      });
-	      });
-      });
-    });
-  });
+		helperFunctions.retrieveAvatars(function(avatars){
+			res.render('avatars/avatars-users-admin.ejs', {
+				user: req.user,
+				userAvatar: user,
+				terranAvatars: _.filter(avatars, function(avatar){
+					if(avatar.imageRaceCategory === 'terran'){
+						return avatar;
+					}
+				}),
+				zergAvatars: _.filter(avatars, function(avatar){
+					if(avatar.imageRaceCategory === 'zerg'){
+						return avatar;
+					}
+				}),
+				protossAvatars: _.filter(avatars, function(avatar){
+					if(avatar.imageRaceCategory === 'protoss'){
+						return avatar;
+					}
+				})
+			});
+		});
+	});
 });
 
 app.post('/delete-account/:userId', isLoggedIn, requireRole('admin'), function(req, res){

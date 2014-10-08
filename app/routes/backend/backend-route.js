@@ -5,6 +5,7 @@ var express = require('express');
 var Tournament = require('../../models/tournament');
 var moment = require('moment');
 var helperFunctions = require('../../../app/helpers-mongoose.js');
+var _ = require('underscore');
 
 var app = module.exports = express();
 
@@ -12,11 +13,27 @@ var app = module.exports = express();
 app.get('/backend-admin/:adminId', isLoggedIn, requireRole('admin'), function(req, res){
   helperFunctions.getUserDetails(req.params.adminId).then(function(user){
     helperFunctions.retrieveAllPlayers().then(function(players){
-      res.render('backend/backend-admin.ejs', {
-        user: req.user,
-        userAvatar: user,
-        players: players
-      });
+	    helperFunctions.retrieveAllOrganizers().then(function(organizers){
+		    helperFunctions.retrieveAllTournaments().then(function(tournaments){
+			    helperFunctions.retrieveMessagesForUser(req.params.adminId).then(function(messages){
+				    helperFunctions.retrieveAvatars().then(function(avatars){
+					    res.render('backend/backend-admin.ejs', {
+						    user: req.user,
+						    userAvatar: user,
+						    playersLength: _.size(players),
+						    playersSampled: _.sample(players, 3),
+						    organizersLength: _.size(organizers),
+						    organizersSampled: _.sample(organizers, 3),
+						    tournamentsLength: _.size(tournaments),
+						    tournamentsSampled: _.sample(tournaments, 3),
+						    messages: messages,
+						    avatarsLength: _.size(avatars),
+						    avatarsSampled: _.sample(avatars, 3)
+					    });
+				    });
+			    });
+		    });
+	    });
     });
   });
 });

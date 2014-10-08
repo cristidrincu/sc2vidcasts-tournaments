@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Tournament = require('./models/tournament.js');
 var User = require('./models/user.js');
 var Avatar = require('./models/avatar.js');
+var Message = require('./models/message.js');
 var ErrorHandler = require('./helpers-error-handlers.js');
 var _ = require('underscore');
 var Q = require('q');
@@ -59,7 +60,7 @@ exports.setAvatarForUser = function(userId, avatarId){
 
 exports.retrieveAllOrganizers = function(){
 	var deferred = Q.defer();
-  User.find( {'local.role': 'Organizator'}).exec(function(err, organizers){
+  User.find( {'local.role': 'Organizator'}).populate('local.avatar').exec(function(err, organizers){
     if(err){
       deferred.reject(ErrorHandler.handle('A aparut o eroare in preluarea organizatorilor din baza de date' + err));
     }else{
@@ -172,6 +173,19 @@ exports.retrieveAllTournamentPlayersBasedOnLeagues = function(tournamentId, cb){
 		exports.retrievePlayersFromTournament(tournamentId).then(function(players){
 				cb(players);
 		});
+}
+
+exports.retrieveMessagesForUser = function(userid){
+	var deferred = Q.defer();
+	Message.find( {'reciever._id': userid}).exec(function(err, messages){
+		if(err){
+			deferred.reject(err);
+		}else{
+			deferred.resolve(messages);
+		}
+	});
+
+	return deferred.promise;
 }
 
 exports.retrieveAvatars = function(){

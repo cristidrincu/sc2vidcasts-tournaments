@@ -1,69 +1,116 @@
 <%include ../partials/header%>
 <% userAvatar.local.avatar.forEach(function(avatar){ %>
-<% include ../partials/sidebar-admin%>
+    <% include ../partials/sidebar-admin%>
 <% });%>
-<div id="page-wrapper">
-    <!--TODO - implement a page consisting of a report of how many players are in the DB, how many Organizers, how many tournaments(with percentages showing the progress),
-    <!--how many messages for this user-->
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Jucatori</h1>
-            <h4>Exista <%= players.length > 1 ? players.length + ' jucatori' : players.length + ' jucator'%> in baza de date</h4>
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
-    <!-- /.row -->
-    <div class="row">
-        <div class="col-lg-12">
-            <!-- /.panel -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Lista jucatori
+    <div id="page-wrapper" style="padding-top: 40px;">
+        <!--TODO - implement a page consisting of a report of how many players are in the DB, how many Organizers, how many tournaments(with percentages showing the progress),
+        <!--TODO - how many messages for this user-->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="col-lg-4">
+                    <div class="container-summary">
+                        <h1 style="font-size: 30px"><i class="fa fa-gamepad fa-fw"></i> Jucatori</h1>
+                        <h4 style="color: #000;">
+                            Exista <span style="color:red"><%= playersLength > 1 ? playersLength + ' jucatori' : playersLength + ' jucator'%></span> in baza de date
+                            <a style="margin-left: 5px; position: relative; top: 5px" href="/players/<%= user._id%>"><i class="fa fa-gamepad fa-2x"></i></a>
+                        </h4>
+                            <div class="container-3-players" style="padding-top: 15px;">
+                                <%playersSampled.forEach(function(player){%>
+                                    <%player.local.avatar.forEach(function(avatar){%>
+                                        <a href="/profile-details/<%= player._id%>">
+                                            <div class="col-lg-4">
+                                                <img class="img-circle profile-pic-rezumat-backend" style="margin-bottom: 10px;" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                                                <p style="width:112px;" class="btn btn-info"><%= player.local.nickname%></p>
+                                            </div>
+                                        </a>
+                                    <%});%>
+                                <%});%>
+                            </div>
+                    </div>
                 </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <table class="table table-hover">
-                        <tr>
-                            <th>Nickname</th>
-                            <th>Battle.net ID</th>
-                            <th>Rasa</th>
-                            <th>Liga</th>
-                            <th>Profil</th>
-                            <th>Blacklist</th>
-                            <th>Sterge contul</th>
-                        </tr>
-
-                        <% players.forEach(function(player){ %>
-                        <tr>
-                            <td><%= player.local.nickname %></td>
-                            <td><%= player.local.battlenetid %></td>
-                            <td><%= player.local.race %></td>
-                            <td><%= player.local.league %></td>
-                            <td>
-                                <a href="/profile-details/<%= player._id %>">
-                                    <button class="btn btn-success">Detalii</button>
+                <div class="col-lg-4">
+                    <div class="container-summary">
+                        <h1 style="font-size: 30px"><i class="fa fa-users fa-fw"></i> Organizatori</h1>
+                        <h4>Exista <span style="color:red"><%= organizersLength > 1 ? organizersLength + ' organizatori' : organizersLength + ' organizator'%></span> in baza de date
+                            <a style="margin-left: 5px; position: relative; top: 5px" href="/admin-organizers/<%= user._id%>"><i class="fa fa-users fa-2x"></i></a>
+                        </h4>
+                        <div class="container-3-players" style="padding-top: 15px;">
+                            <%organizersSampled.forEach(function(organizer){%>
+                                <%organizer.local.avatar.forEach(function(avatar){%>
+                                    <a href="/profile-details/<%= organizer._id%>">
+                                        <div class="col-lg-4">
+                                            <img class="img-circle profile-pic-rezumat-backend" style="margin-bottom: 10px;" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                                            <a style="width:112px;" href="/profile-details/<%= organizer._id%>" class="btn btn-warning"><%= organizer.local.nickname%></a>
+                                        </div>
+                                    </a>
+                                <%});%>
+                            <%});%>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="container-summary">
+                        <h1 style="font-size: 30px"><i class="fa fa-trophy fa-fw"></i> Turnee active</h1>
+                        <h4>Exista <span style="color: red"><%= tournamentsLength > 1 ? tournamentsLength + ' turnee' : tournamentsLength + ' turneu'%></span> in baza de date
+                            <a style="margin-left: 5px; position: relative; top: 5px" href="/open-tournaments/<%= user._id%>"><i class="fa fa-trophy fa-2x"></i></a>
+                        </h4>
+                        <div class="container-3-tournaments" style="padding-top: 15px;">
+                            <% tournamentsSampled.forEach(function(tournament){%>
+                                <a href="/tournament-details/<%= tournament._id%>/<%= user._id %>"><%= tournament.tournamentName%> :: locuri ocupate:
+                                    <%= Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) + '%'%>
                                 </a>
-                            </td>
-                            <td>
-                                <form action="/blacklist/<%= player._id %>" method="post">
-                                   <button class="btn btn-primary">Adauga jucatorul in blacklist</button>
-                                </form>
-
-                            </td>
-                            <td>
-                                <form action="/delete-account/<%= player._id %>" method="post">
-                                    <button class="btn btn-danger">Sterge contul</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <% }); %>
-
-                    </table>
+                                <div class="progress progress-striped active" style="margin-top: 5px;">
+                                    <%if(Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) <= 50){%>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                             style="width: <%= Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) + '%'%>">
+                                        </div>
+                                    <%}else if(Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) > 50){%>
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                             style="width: <%= Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) + '%'%>">
+                                        </div>
+                                    <%}%>
+                                 </div>
+                            <%})%>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="col-lg-12">
+                <div class="col-lg-4">
+                    <div class="container-summary">
+                        <h1 style="font-size: 30px"><i class="fa fa-envelope fa-fw"></i> Mesaje</h1>
+                        <h4>Ai <span style="color:red"><%= messages.length > 1 || messages.length == 0  ? messages.length + ' mesaje' : messages.length + ' mesaj'%></span> primite</h4>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="container-summary">
+                        <h1 style="font-size: 30px"><i class="fa fa-picture-o fa-fw"></i> Avatare</h1>
+                        <h4>Exista <span style="color:red"><%= avatarsLength > 1 || avatarsLength == 0 ? avatarsLength + ' de avatare' : avatarsLength + ' avatar'%></span> in baza de date
+                            <a style="margin-left: 5px; position: relative; top: 5px" href="/avatars-users-admin/<%=user._id%>"><i class="fa fa-picture-o fa-2x"></i></a>
+                        </h4>
+                        <div class="container-3-players" style="padding-top: 15px;">
+                            <%avatarsSampled.forEach(function(avatar){%>
+                                <div class="col-lg-4" style="margin-bottom: 20px">
+                                    <img class="img-circle profile-pic-rezumat-backend" style="margin-bottom: 10px;" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                                    <form action="/choose-avatar/<%= user._id%>/<%= avatar._id%>" method="post">
+                                        <button style="width:112px;" class="btn btn-success">Alege-l</button>
+                                    </form>
+                                </div>
+
+                            <%});%>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="container-summary">
+                        <h1 style="font-size: 30px"><i class="fa fa-fire fa-fw"></i> Blacklist</h1>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
         </div>
+        <!-- /.row -->
     </div>
-</div>
 </div>
 
 <%include ../partials/footer%>

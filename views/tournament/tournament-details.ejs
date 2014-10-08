@@ -1,9 +1,11 @@
 <% include ../partials/header.ejs %>
 <% userAvatar.local.avatar.forEach(function(avatar){%>
     <%if(user.local.role == 'User'){%>
-        <% include ../partials/sidebar %>
+        <% include ../partials/sidebar.ejs %>
     <%}else if(user.local.role == 'Organizator'){%>
         <% include ../partials/sidebar-organizer.ejs%>
+    <%}else if(user.local.role == 'admin'){%>
+        <% include ../partials/sidebar-admin.ejs%>
     <%}%>
 
 <%});%>
@@ -45,6 +47,12 @@
                             <button class="btn btn-success">Inscrie-te</button>
                         </form>
                     <%}%>
+                <%}else if(user.local.role == 'admin'){%>
+                    <div class="col-lg-4">
+                        <form class="btn-signup-turneu-detalii" action="/delete-tournament/<%= tournament._id %>/<%= user._id %>" method="post">
+                            <button class="btn btn-danger">Sterge turneul</button>
+                        </form>
+                    </div>
                 <%}%>
             </div>
         </div>

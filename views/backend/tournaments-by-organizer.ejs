@@ -41,7 +41,7 @@
                             <td><%= moment(tournament.endDate).format("DD MMMM YYYY")%></td>
                             <td><%= tournament.ingameChatChannel%></td>
                             <td><a href="http://www.twitch.tv/<%= tournament.twitchStreamChannel%>" target="_blank"><%= tournament.twitchStreamChannel%></a></td>
-                            <td><a class="btn btn-success" href="/admin-tournaments/<%= tournament._id%>/<%= user._id%>">Detalii</a></td>
+                            <td><a class="btn btn-success" href="/tournament-details/<%= tournament._id%>/<%= user._id%>">Detalii</a></td>
                         </tr>
                         <% }); %>
                     </table>

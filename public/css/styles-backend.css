@@ -94,8 +94,20 @@ ul.titlu-turneu-signup li {
     top:-5px;
 }
 
-.container-summary{
-    border-top: 10px solid #c2ccd1;
+.container-summary-players, .container-summary-messages{
+    border-top: 5px solid #c4e3f3;
+    height: 325px;
+    margin-bottom: 20px;
+}
+
+.container-summary-organizers, .container-summary-avatars{
+    border-top: 5px solid #ec971f;
+    height: 325px;
+    margin-bottom: 20px;
+}
+
+.container-summary-tournaments, .container-summary-blacklist{
+    border-top: 5px solid #55cc22;
     height: 325px;
     margin-bottom: 20px;
 }

@@ -8,20 +8,9 @@ var helperFunctions = require('../../../app/helpers-mongoose.js');
 
 var app = module.exports = express();
 
-var retrievedTournaments = null;
-var retrievedPlayers = null;
-
-helperFunctions.retrieveAllTournaments(function(tournaments){
-  retrievedTournaments = tournaments;
-});
-
-helperFunctions.retrieveAllPlayers(function(players){
-  retrievedPlayers = players;
-});
-
 /*BACK-END ROUTES*/
 app.get('/backend-admin/:adminId', isLoggedIn, requireRole('admin'), function(req, res){
-  helperFunctions.getUserDetails(req.params.adminId, function(user){
+  helperFunctions.getUserDetails(req.params.adminId).then(function(user){
     helperFunctions.retrieveAllPlayers().then(function(players){
       res.render('backend/backend-admin.ejs', {
         user: req.user,
@@ -33,12 +22,12 @@ app.get('/backend-admin/:adminId', isLoggedIn, requireRole('admin'), function(re
 });
 
 app.get('/backend-organizer/:organizerId', isLoggedIn, requireRole('Organizator'), function(req, res){
-	helperFunctions.getUserDetails(req.params.organizerId, function(user){
-		helperFunctions.retrieveTournamentsByOrganizer(req.params.organizerId, function(tournaments){
+	helperFunctions.getUserDetails(req.params.organizerId).then(function(user){
+		helperFunctions.retrieveTournamentsByOrganizer(req.params.organizerId).then(function(tournaments){
 			checkAvatarArrayLength(function(){
 				if(user.local.avatar.length == 0){
-					helperFunctions.getDefaultAvatar(function(defaultAvatar){
-						helperFunctions.setAvatarForUser(req.params.organizerId, defaultAvatar._id, function(err, user){
+					helperFunctions.getDefaultAvatar().then(function(defaultAvatar){
+						helperFunctions.setAvatarForUser(req.params.organizerId, defaultAvatar._id).then(function(err, user){
 							if(err){
 								throw new err;
 							}
@@ -64,12 +53,12 @@ app.get('/backend-organizer/:organizerId', isLoggedIn, requireRole('Organizator'
 });
 
 app.get('/backend-user/:userId', isLoggedIn, function(req, res){
-	helperFunctions.getUserDetails(req.params.userId, function(user){
-		helperFunctions.retrieveAllTournaments(function(tournaments){
+	helperFunctions.getUserDetails(req.params.userId).then(function(user){
+		helperFunctions.retrieveAllTournaments().then(function(tournaments){
 			checkAvatarArrayLength(function(){
 				if(user.local.avatar.length == 0){
-					helperFunctions.getDefaultAvatar(function(defaultAvatar){
-						helperFunctions.setAvatarForUser(req.params.userId, defaultAvatar._id, function(err, user){
+					helperFunctions.getDefaultAvatar().then(function(defaultAvatar){
+						helperFunctions.setAvatarForUser(req.params.userId, defaultAvatar._id).then(function(err, user){
 							if(err){
 								throw new err;
 							}

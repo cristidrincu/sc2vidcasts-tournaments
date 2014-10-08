@@ -11,7 +11,7 @@ var _  = require('underscore');
 var app = module.exports = express();
 
 app.get('/admin-players/:userId', isLoggedIn, requireRole('admin'), function(req, res){
-  helperFunctions.getUserDetails(req.params.userId, function(user){
+  helperFunctions.getUserDetails(req.params.userId).then(function(user){
     helperFunctions.retrieveAllPlayers().then(function(players){
       res.render('backend/admin-players.ejs', {
         user: req.user,
@@ -25,7 +25,7 @@ app.get('/admin-players/:userId', isLoggedIn, requireRole('admin'), function(req
 });
 
 app.get('/admin-organizers/:userId', isLoggedIn, requireRole('admin'), function(req, res){
-  helperFunctions.getUserDetails(req.params.userId, function(user){
+  helperFunctions.getUserDetails(req.params.userId).then(function(user){
     helperFunctions.retrieveTournamentsAndOrganizers(function(tournaments, organizers){
       res.render('backend/admin-organizers.ejs', {
         user: req.user,
@@ -41,15 +41,18 @@ app.get('/admin-organizers/:userId', isLoggedIn, requireRole('admin'), function(
 });
 
 app.get('/organized-tournaments/:organizerId', isLoggedIn, requireRole('admin'), function(req, res){
-  helperFunctions.retrieveTournamentsByOrganizer(req.params.organizerId, function(tournamentsOrganized){
-      helperFunctions.getUserDetails(req.params.organizerId, function(organizer){
-        res.render('backend/tournaments-by-organizer.ejs', {
-          user: req.user,
-          organizer: organizer,
-          organizedTournaments: tournamentsOrganized,
-          moment: moment
-        });
-    });
+  helperFunctions.retrieveTournamentsByOrganizer(req.params.organizerId).then(function(tournamentsOrganized){
+	  helperFunctions.getUserDetails(req.user._id).then(function(user){
+		  helperFunctions.getUserDetails(req.params.organizerId).then(function(organizer){
+			  res.render('backend/tournaments-by-organizer.ejs', {
+				  user: req.user,
+				  avatarUser: user,
+				  organizer: organizer,
+				  organizedTournaments: tournamentsOrganized,
+				  moment: moment
+			  });
+		  });
+	  });
   });
 });
 
@@ -58,7 +61,7 @@ app.get('/admin-tournaments/:tournamentId/:userId', isLoggedIn, requireRole('adm
     if(err)
       res.send(err)
     else
-    helperFunctions.getUserDetails(req.params.userId, function(user){
+    helperFunctions.getUserDetails(req.params.userId).then(function(user){
 	    res.render('tournament/tournament-details-admin.ejs',{
 		    user: req.user,
 		    userAvatar: user,
@@ -71,7 +74,7 @@ app.get('/admin-tournaments/:tournamentId/:userId', isLoggedIn, requireRole('adm
 });
 
 app.get('/avatars-users-admin/:adminId', isLoggedIn, requireRole('admin'), function(req, res){
-  helperFunctions.getUserDetails(req.params.adminId, function(user){
+  helperFunctions.getUserDetails(req.params.adminId).then(function(user){
 		helperFunctions.retrieveAvatars().then(function(avatars){
 			res.render('avatars/avatars-users-admin.ejs', {
 				user: req.user,

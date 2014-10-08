@@ -9,14 +9,9 @@ var helperFunctions = require('../../../app/helpers-mongoose.js');
 
 var app = module.exports = express();
 
-var retrievedTournaments = null;
-helperFunctions.retrieveAllTournaments(function(tournaments){
-  retrievedTournaments = tournaments;
-});
-
 /*MESSAGING ROUTES*/
 app.get('/send-message/:_id', isLoggedIn, function(req, res){
-  helperFunctions.getUserDetails(req.params._id, function(player){
+  helperFunctions.getUserDetails(req.params._id).then(function(player){
     res.render('messaging/send-message.ejs', {
       user: req.user,
 	    userAvatar: player,
@@ -30,7 +25,7 @@ app.get('/send-reply/:_receiverId/:_messageId', isLoggedIn, function(req, res){
     if(err)
       ErrorHandler.handle('A aparut o eroare la extragerea mesajului din baza de date ' + err);
     else
-      helperFunctions.getUserDetails(req.params.userId, function(user){
+      helperFunctions.getUserDetails(req.params.userId).then(function(user){
 	      res.render('messaging/send-reply.ejs', {
 		      user: req.user,
 		      userAvatar: user,
@@ -60,7 +55,7 @@ app.get('/user-messages/:userId', isLoggedIn, function(req, res){
     if(err)
       ErrorHandler.handle('A intervenit o eroare la preluarea mesajelor din baza de date: ' + err);
     else
-      helperFunctions.getUserDetails(req.params.userId, function(user){
+      helperFunctions.getUserDetails(req.params.userId).then(function(user){
 	      res.render('messaging/messages.ejs', {
 		      user: req.user,
 		      userAvatar: user,
@@ -75,7 +70,7 @@ app.get('/message-details/:_id/:userId', isLoggedIn, function(req, res){
     if(err)
       ErrorHandler.handle('A aparut o eroare la extragerea mesajului din baza de date: ' + err);
 
-	  helperFunctions.getUserDetails(req.params.userId, function(user){
+	  helperFunctions.getUserDetails(req.params.userId).then(function(user){
 		  res.render('messaging/message-details.ejs', {
 			  user: req.user,
 			  userAvatar: user,

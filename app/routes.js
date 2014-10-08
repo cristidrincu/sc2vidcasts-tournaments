@@ -14,8 +14,8 @@ module.exports = function (app) {
 
 
   app.get('/upload-avatar/:userId', isLoggedIn, requireRole('admin'), function(req, res){
-    helperFunctions.getUserDetails(req.params.userId, function(user){
-      helperFunctions.retrieveAllTournaments(function(tournaments){
+    helperFunctions.getUserDetails(req.params.userId).then(function(user){
+      helperFunctions.retrieveAllTournaments().then(function(tournaments){
         res.render('backend/admin-upload-avatars.ejs', {
           user: req.user,
           avatarUser: user,

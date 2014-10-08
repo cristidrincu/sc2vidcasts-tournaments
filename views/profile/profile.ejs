@@ -65,13 +65,6 @@
                         </div>
                     </div>
                 </div>
-                <%if(user.local.role == 'admin'){%>
-                    <a href="/backend-admin/<%= user._id%>">Inapoi la contul tau</a>
-                <%}else if(user.local.role == 'Organizator'){%>
-                    <a href="/backend-organizer/<%= user._id%>">Inapoi la contul tau</a>
-                <%}else {%>
-                    <a href="/backend-user/<%= user._id%>">Inapoi la contul tau</a>
-                <%}%>
             </div>
         </div>
     </div>

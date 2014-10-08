@@ -10,7 +10,7 @@ var moment = require('moment');
 var app = module.exports = express();
 
 app.get('/organizer-tournaments/:organizerId', isLoggedIn, requireRole('Organizator'), function(req, res){
-	helperFunctions.getUserDetails(req.params.organizerId, function(user){
+	helperFunctions.getUserDetails(req.params.organizerId).then(function(user){
 		res.render('backend/organizer-tournaments.ejs', {
 			user: req.user,
 			userAvatar: user

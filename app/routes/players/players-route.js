@@ -10,7 +10,7 @@ var app = module.exports = express();
 /*PLAYER ROUTES*/
 /*PLAYER ROUTES FOR LEAGUE RESULTS - GOLD PLAYERS, SILVER PLAYERS ETC*/
 app.get('/players/:userId', isLoggedIn, function(req, res){
-	helperFunctions.getUserDetails(req.params.userId, function(user){
+	helperFunctions.getUserDetails(req.params.userId).then(function(user){
 		helperFunctions.retrieveAllPlayers().then(function(players){
 			res.render('players/all-players.ejs', {
 				user: req.user,

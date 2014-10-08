@@ -1,6 +1,11 @@
 <% include ../partials/header.ejs %>
 <% userAvatar.local.avatar.forEach(function(avatar){%>
-    <% include ../partials/sidebar %>
+    <%if(user.local.role == 'User'){%>
+        <% include ../partials/sidebar %>
+    <%}else if(user.local.role == 'Organizator'){%>
+        <% include ../partials/sidebar-organizer.ejs%>
+    <%}%>
+
 <%});%>
 <div id="page-wrapper">
     <div class="row">
@@ -12,18 +17,34 @@
                 </h1>
             </div>
             <div class="col-lg-4">
-                <% if(!eligibleForTournament){%>
-                    <p style="padding-top: 55px; color: red">Acest concurs nu este deschis ligii din care faci parte. Ne pare rau!</p>
-                <%}%>
+                <%if(user.local.role == 'Organizator'){%>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <form class="btn-signup-turneu-detalii" action="/edit-tournament/<%= tournament._id %>/<%= user._id %>" method="post">
+                            <button class="btn btn-success">Editeaza turneul</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-4">
+                        <form class="btn-signup-turneu-detalii" action="/delete-tournament/<%= tournament._id %>/<%= user._id %>" method="post">
+                            <button class="btn btn-danger">Sterge turneul</button>
+                        </form>
+                    </div>
+                </div>
 
-                <% if(enlistedInTournament){%>
-                    <p style="padding-top: 55px; color: red">Esti deja inscris in cadrul acestui turneu</p>
-                <%}%>
+                <%}else if(user.local.role == 'User'){%>
+                    <% if(!eligibleForTournament){%>
+                        <p style="padding-top: 55px; color: red">Acest concurs nu este deschis ligii din care faci parte. Ne pare rau!</p>
+                    <%}%>
 
-                <% if(eligibleForTournament && !enlistedInTournament && (procentajOcupare != (100))){%>
-                    <form class="btn-signup-turneu-detalii" action="/signup-tournament/<%= tournament._id %>/<%= user._id %>" method="post">
-                        <button class="btn btn-success">Inscrie-te</button>
-                    </form>
+                    <% if(enlistedInTournament){%>
+                        <p style="padding-top: 55px; color: red">Esti deja inscris in cadrul acestui turneu</p>
+                    <%}%>
+
+                    <% if(eligibleForTournament && !enlistedInTournament && (procentajOcupare != (100))){%>
+                        <form class="btn-signup-turneu-detalii" action="/signup-tournament/<%= tournament._id %>/<%= user._id %>" method="post">
+                            <button class="btn btn-success">Inscrie-te</button>
+                        </form>
+                    <%}%>
                 <%}%>
             </div>
         </div>
@@ -394,7 +415,7 @@
         </div>
     </div>
 </div>
-<!-- /#page-wrapper -->
+
 
 </div>
 <!-- /#wrapper -->

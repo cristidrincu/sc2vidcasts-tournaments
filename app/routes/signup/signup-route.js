@@ -11,19 +11,7 @@ app.get('/signup', function (req, res) {
 });
 
 app.post('/signup', passport.authenticate('local-signup', {
+	successRedirect: '/profile',
   failureRedirect: '/signup',
   failureFlash: true // allow flash messages
-}), function(req, res, user){
-  user = req.user;
-  switch (user.local.role){
-    case 'admin':
-      res.redirect('/backend-admin/' + req.user._id);
-      break;
-    case 'User':
-      res.redirect('/backend-user/' + req.user._id);
-      break;
-    case 'Organizator':
-      res.redirect('/backend-organizer/' + req.user._id);
-      break;
-  }
-});
+}));

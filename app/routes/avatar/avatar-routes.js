@@ -10,7 +10,7 @@ var moment = require('moment');
 var app = module.exports = express();
 
 app.post('/choose-avatar/:userId/:avatarId', isLoggedIn, function(req, res){
-  helperFunctions.setAvatarForUser(req.params.userId, req.params.avatarId, function(user){
+  helperFunctions.setAvatarForUser(req.params.userId, req.params.avatarId).then(function(user){
     if(user.local.role === 'admin'){
       res.redirect('/backend-admin/' + req.params.userId);
     }else if(user.local.role === 'Organizator'){

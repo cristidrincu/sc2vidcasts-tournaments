@@ -9,7 +9,7 @@ var app = module.exports = express();
 
 /* PROFILE ROUTES */
 app.get('/profile', isLoggedIn, function (req, res) {
-  helperFunctions.getUserDetails(req.user._id, function(user){
+  helperFunctions.getUserDetails(req.user._id).then(function(user){
     res.render('profile/profile.ejs', {
       message: req.flash('signupSuccess'), //get the message out of the session and pass to template
       user: req.user, //get the user out of session and pass to template
@@ -19,7 +19,7 @@ app.get('/profile', isLoggedIn, function (req, res) {
 });
 
 app.get('/profile-details/:_id', isLoggedIn, function(req, res){
-  helperFunctions.getUserDetails(req.params._id, function(user){
+  helperFunctions.getUserDetails(req.params._id).then(function(user){
     res.render('profile/profile-details.ejs', {
       user: req.user,
       detailedUser: user,
@@ -55,7 +55,7 @@ app.post('/customize-profile/:nickname', isLoggedIn, function(req, res){
 });
 
 app.get('/avatars-users/:userId', isLoggedIn, function(req, res){
-	helperFunctions.getUserDetails(req.params.userId, function(user){
+	helperFunctions.getUserDetails(req.params.userId).then(function(user){
 			helperFunctions.retrieveAvatars().then(function(avatars){
 				res.render('avatars/avatars-users.ejs', {
 					user: req.user,

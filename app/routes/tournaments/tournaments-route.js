@@ -13,17 +13,10 @@ var _ = require('underscore');
 
 var app = module.exports = express();
 
-var retrievedTournaments = null;
-helperFunctions.retrieveAllTournaments(function(tournaments){
-  retrievedTournaments = tournaments;
-});
-
-
-
 /* TOURNAMENT ROUTES */
 app.get('/open-tournaments/:userId', function(req, res){
-  helperFunctions.getUserDetails(req.params.userId, function(user){
-    helperFunctions.retrieveAllTournaments(function(tournaments){
+  helperFunctions.getUserDetails(req.params.userId).then(function(user){
+    helperFunctions.retrieveAllTournaments().then(function(tournaments){
       res.render('tournament/open-tournaments.ejs', {
         user: req.user,
         avatarUser: user,
@@ -114,54 +107,54 @@ app.get('/tournament-details/:_id/:userId', isLoggedIn, function(req, res){
       });
 
 			helperFunctions.retrieveAllTournamentPlayersBasedOnLeagues(req.params._id, function(playersFromCollection){
-				helperFunctions.getUserDetails(req.params.userId, function(user){
-					res.render('tournament/tournament-details.ejs',{
-						user: req.user,
-						tournament: tournament,
-						userAvatar: user,
-						bronzePlayers: _.filter(playersFromCollection, function(player){
-							if(player.local.league === 'Bronze'){
-								return player;
-							}
-						}),
-						silverPlayers: _.filter(playersFromCollection, function(player){
-							if(player.local.league === 'Silver'){
-								return player;
-							}
-						}),
-						goldPlayers: _.filter(playersFromCollection, function(player){
-							if(player.local.league === 'Gold'){
-								return player;
-							}
-						}),
-						platinumPlayers: _.filter(playersFromCollection, function(player){
-							if(player.local.league === 'Platinum'){
-								return player;
-							}
-						}),
-						diamondPlayers: _.filter(playersFromCollection, function(player){
-							if(player.local.league === 'Diamond'){
-								return player;
-							}
-						}),
-						mastersPlayers: _.filter(playersFromCollection, function(player){
-							if(player.local.league === 'Master'){
-								return player;
-							}
-						}),
-						grandMasterPlayers: _.filter(playersFromCollection, function(player){
-							if(player.local.league === 'Grand Master'){
-								return player;
-							}
-						}),
-						moment: moment,
-						enlistedInTournament: enlistedInTournament,
-						eligibleForTournament: eligibleForTournament,
-						allPlacesTaken: allPlacesTaken,
-						procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers))
+					helperFunctions.getUserDetails(req.params.userId).then(function(user){
+						res.render('tournament/tournament-details.ejs',{
+							user: req.user,
+							tournament: tournament,
+							userAvatar: user,
+							bronzePlayers: _.filter(playersFromCollection, function(player){
+								if(player.local.league === 'Bronze'){
+									return player;
+								}
+							}),
+							silverPlayers: _.filter(playersFromCollection, function(player){
+								if(player.local.league === 'Silver'){
+									return player;
+								}
+							}),
+							goldPlayers: _.filter(playersFromCollection, function(player){
+								if(player.local.league === 'Gold'){
+									return player;
+								}
+							}),
+							platinumPlayers: _.filter(playersFromCollection, function(player){
+								if(player.local.league === 'Platinum'){
+									return player;
+								}
+							}),
+							diamondPlayers: _.filter(playersFromCollection, function(player){
+								if(player.local.league === 'Diamond'){
+									return player;
+								}
+							}),
+							mastersPlayers: _.filter(playersFromCollection, function(player){
+								if(player.local.league === 'Master'){
+									return player;
+								}
+							}),
+							grandMasterPlayers: _.filter(playersFromCollection, function(player){
+								if(player.local.league === 'Grand Master'){
+									return player;
+								}
+							}),
+							moment: moment,
+							enlistedInTournament: enlistedInTournament,
+							eligibleForTournament: eligibleForTournament,
+							allPlacesTaken: allPlacesTaken,
+							procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers))
+						});
 					});
 				});
-			});
       }
     });
   });
@@ -234,7 +227,6 @@ app.get('/user-tournaments/:userId', isLoggedIn, function(req, res){
 });
 
 app.post('/retragere-din-turneu/:_userId/:_tournamentId', isLoggedIn, function(req, res){
-
   Tournament.findById(req.params._tournamentId).exec(function(err, tournament){
     if(!err){
       var playerId = tournament.players.indexOf(req.params._userId);

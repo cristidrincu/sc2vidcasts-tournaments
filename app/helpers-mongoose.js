@@ -6,18 +6,29 @@ var ErrorHandler = require('./helpers-error-handlers.js');
 var _ = require('underscore');
 var Q = require('q');
 
-exports.getUserDetails = function(id, cb){
+//We use Q.defer when we are dealing with asynchronous callbacks, as the one below: function(err, user).
+exports.getUserDetails = function(id){
+	var deferred = Q.defer();
   User.findById(id).populate('local.avatar').exec(function(err, user){
-    if(err)
-      ErrorHandler.handle('A aparut o eroare in preluarea detaliilor pentru utilizator' + err);
-    cb(user);
+    if(err){
+	    deferred.reject(ErrorHandler.handle('A aparut o eroare in preluarea detaliilor pentru utilizator' + err));
+    }
+    deferred.resolve(user);
   });
+
+	return deferred.promise;
 }
 
-exports.getDefaultAvatar = function(cb){
+exports.getDefaultAvatar = function(){
+	var deferred = Q.defer();
 	Avatar.findOne( { 'imageRaceCategory': 'default' }).exec(function(err, avatar){
-		cb(avatar);
+		if(err){
+			deferred.reject(err);
+		}
+		deferred.resolve(avatar);
 	});
+
+	return deferred.promise;
 }
 
 exports.compareUserId = function(userId, anotherId, cb){
@@ -29,39 +40,46 @@ exports.compareUserId = function(userId, anotherId, cb){
 		return cb(comparisonResult);
 }
 
-exports.setAvatarForUser = function(userId, avatarId, cb){
+exports.setAvatarForUser = function(userId, avatarId){
+	var deferred = Q.defer();
   User.findByIdAndUpdate(userId, {$set: {'local.avatar': []}}, function(err){
     if(!err){
       User.findByIdAndUpdate(userId,  { $push: { 'local.avatar': avatarId} }, function(err, user){
         if(err){
-          throw new err;
+          deferred.reject(err);
         }else{
-          cb(user);
+          deferred.resolve(user);
         }
       });
     }
   });
+
+	return deferred.promise;
 }
 
-exports.retrieveAllOrganizers = function(cb){
-	//TODO - Implement Q.deffered() and use promises
+exports.retrieveAllOrganizers = function(){
+	var deferred = Q.defer();
   User.find( {'local.role': 'Organizator'}).exec(function(err, organizers){
     if(err){
-      ErrorHandler.handle('A aparut o eroare in preluarea organizatorilor din baza de date' + err);
+      deferred.reject(ErrorHandler.handle('A aparut o eroare in preluarea organizatorilor din baza de date' + err));
     }else{
-      cb(organizers);
+      deferred.resolve(organizers);
     }
   });
+
+	return deferred.promise;
 }
 
-exports.retrieveAllTournaments = function(cb){
-	//TODO - Implement Q.deffered() and use promises
+exports.retrieveAllTournaments = function(){
+	var deferred = Q.defer();
   Tournament.find().sort( {tournamentName : 1} ).exec(function(err, tournaments){
     if(err)
-      ErrorHandler.handle('A aparut o eroare in preluarea turneelor din baza de date' + err);
+      deferred.reject(ErrorHandler.handle('A aparut o eroare in preluarea turneelor din baza de date' + err));
     else
-      cb(tournaments);
+      deferred.resolve(tournaments);
   });
+
+	return deferred.promise;
 }
 
 exports.retrieveAllPlayers = function(){
@@ -76,42 +94,64 @@ exports.retrieveAllPlayers = function(){
 	return deferred.promise;
 }
 
-//exports.retrieveTournamentsAndPlayers = function(cb){
-//  exports.retrieveAllPlayers(function(players){
-//    exports.retrieveAllTournaments(function(tournaments){
-//      cb(players, tournaments);
-//    })
-//  });
-//}
-
-//TODO - Implement Q.deffered() and use promises
 exports.retrieveTournamentsAndOrganizers = function(cb){
-  exports.retrieveAllTournaments(function(tournaments){
-    exports.retrieveAllOrganizers(function(organizers){
+  exports.retrieveAllTournaments().then(function(tournaments){
+    exports.retrieveAllOrganizers().then(function(organizers){
       cb(tournaments, organizers);
     });
   });
 }
 
-//TODO - Implement Q.deffered() and use promises
-exports.retrieveTournamentsByOrganizer = function(organizerId, cb){
-  Tournament.find( {'organizer': organizerId}).exec(function(err, tournaments){
-    if(err){
-      ErrorHandler.handle('A aparut o eroare in preluarea din baza de date a turneelor organizate')
-    }else{
-      cb(tournaments);
-    }
-  });
+
+//TODO - refactor method as it does not remove tournaments and users
+exports.retireFromTournament = function(tournamentId, userId){
+	var deferred = Q.defer();
+	Tournament.findById(tournamentId).exec(function(err, tournament){
+		if(!err){
+			tournament.players = _.filter(tournament.players, function(player){
+				if(player._id != userId){
+					return player;
+				}
+			});
+			tournament.save(function(err){
+				if(err)
+					deferred.reject(err);
+				else
+					deferred.resolve(tournament);
+			});
+		}
+	});
+
+	User.findById(userId).populate('tournaments').exec(function(err, user){
+		if(!err){
+			user.local.tournaments = _.filter(user.local.tournaments, function(tournament){
+				if(tournament._id != tournamentId){
+					return tournament;
+				}
+				user.save(function(err){
+					if(err)
+						deferred.reject(err);
+					else
+						deferred.resolve(user);
+				});
+			});
+		}
+	});
+
+	return deferred.promise;
 }
 
-//TODO - Implement Q.deffered() and use promises. We use defer because we are using an asynchronous callback - function(err, tournaments).
-exports.retrieveTournamentLeagues = function(tournamentId, cb){
-  Tournament.findById(tournamentId).populate('players').exec(function(err, tournaments){
-    if(err)
-      ErrorHandler.handle('A aparut o eroare in preluarea ligilor pentru acest turneu' + err);
-    else
-      cb(tournaments.openForLeagues.leagues);
+exports.retrieveTournamentsByOrganizer = function(organizerId){
+	var deferred = Q.defer();
+  Tournament.find( {'organizer': organizerId}).exec(function(err, tournaments){
+    if(err){
+      deferred.reject(ErrorHandler.handle('A aparut o eroare in preluarea din baza de date a turneelor organizate'));
+    }else{
+      deferred.resolve(tournaments);
+    }
   });
+
+	return deferred.promise;
 }
 
 exports.retrievePlayersFromTournament = function(tournamentId){
@@ -125,7 +165,6 @@ exports.retrievePlayersFromTournament = function(tournamentId){
 			  });
 		  }
 	  });
-
 	return deferred.promise;
 }
 
@@ -147,4 +186,3 @@ exports.retrieveAvatars = function(){
 
 	return deferred.promise;
 }
-

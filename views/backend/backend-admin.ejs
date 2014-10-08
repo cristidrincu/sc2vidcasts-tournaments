@@ -11,7 +11,7 @@
                     <div class="container-summary">
                         <h1 style="font-size: 30px"><i class="fa fa-gamepad fa-fw"></i> Jucatori</h1>
                         <h4 style="color: #000;">
-                            Exista <span style="color:red"><%= playersLength > 1 ? playersLength + ' jucatori' : playersLength + ' jucator'%></span> in baza de date
+                            Deja <span style="color:red"><%= playersLength > 1 ? playersLength + ' jucatori' : playersLength + ' jucator'%></span> sunt gata de lupta
                             <a style="margin-left: 5px; position: relative; top: 5px" href="/players/<%= user._id%>"><i class="fa fa-gamepad fa-2x"></i></a>
                         </h4>
                             <div class="container-3-players" style="padding-top: 15px;">
@@ -31,7 +31,7 @@
                 <div class="col-lg-4">
                     <div class="container-summary">
                         <h1 style="font-size: 30px"><i class="fa fa-users fa-fw"></i> Organizatori</h1>
-                        <h4>Exista <span style="color:red"><%= organizersLength > 1 ? organizersLength + ' organizatori' : organizersLength + ' organizator'%></span> in baza de date
+                        <h4>Exista <span style="color:red"><%= organizersLength > 1 ? organizersLength + ' organizatori' : organizersLength + ' organizator'%></span> pregatit de actiune
                             <a style="margin-left: 5px; position: relative; top: 5px" href="/admin-organizers/<%= user._id%>"><i class="fa fa-users fa-2x"></i></a>
                         </h4>
                         <div class="container-3-players" style="padding-top: 15px;">
@@ -51,7 +51,7 @@
                 <div class="col-lg-4">
                     <div class="container-summary">
                         <h1 style="font-size: 30px"><i class="fa fa-trophy fa-fw"></i> Turnee active</h1>
-                        <h4>Exista <span style="color: red"><%= tournamentsLength > 1 ? tournamentsLength + ' turnee' : tournamentsLength + ' turneu'%></span> in baza de date
+                        <h4><span style="color: red"><%= tournamentsLength > 1 ? tournamentsLength + ' turnee' : tournamentsLength + ' turneu'%></span> in baza de date
                             <a style="margin-left: 5px; position: relative; top: 5px" href="/open-tournaments/<%= user._id%>"><i class="fa fa-trophy fa-2x"></i></a>
                         </h4>
                         <div class="container-3-tournaments" style="padding-top: 15px;">
@@ -79,13 +79,15 @@
                 <div class="col-lg-4">
                     <div class="container-summary">
                         <h1 style="font-size: 30px"><i class="fa fa-envelope fa-fw"></i> Mesaje</h1>
-                        <h4>Ai <span style="color:red"><%= messages.length > 1 || messages.length == 0  ? messages.length + ' mesaje' : messages.length + ' mesaj'%></span> primite</h4>
+                        <h4><span style="color:red"><%= messages.length > 1 || messages.length == 0  ? messages.length + ' mesaje' : messages.length + ' mesaj'%></span> primite
+                            <a style="margin-left: 5px; position: relative; top: 5px" href="/user-messages/<%= user._id%>"><i class="fa fa-envelope fa-2x"></i></a>
+                        </h4>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="container-summary">
                         <h1 style="font-size: 30px"><i class="fa fa-picture-o fa-fw"></i> Avatare</h1>
-                        <h4>Exista <span style="color:red"><%= avatarsLength > 1 || avatarsLength == 0 ? avatarsLength + ' de avatare' : avatarsLength + ' avatar'%></span> in baza de date
+                        <h4>Ai <span style="color:red"><%= avatarsLength > 1 || avatarsLength == 0 ? avatarsLength + ' de avatare' : avatarsLength + ' avatar'%></span> din care sa alegi
                             <a style="margin-left: 5px; position: relative; top: 5px" href="/avatars-users-admin/<%=user._id%>"><i class="fa fa-picture-o fa-2x"></i></a>
                         </h4>
                         <div class="container-3-players" style="padding-top: 15px;">

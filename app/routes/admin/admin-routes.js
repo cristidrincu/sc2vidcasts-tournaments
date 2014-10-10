@@ -23,7 +23,6 @@ app.get('/admin-organizers/:userId', isLoggedIn, requireRole('admin'), function(
       });
     });
   });
-
 });
 
 app.get('/organized-tournaments/:organizerId', isLoggedIn, requireRole('admin'), function(req, res){

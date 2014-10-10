@@ -188,6 +188,17 @@ exports.retrieveMessagesForUser = function(userid){
 	return deferred.promise;
 }
 
+exports.retrieveTournamentDetails = function(tournamentId){
+	var deferred = Q.defer();
+	Tournament.findById(tournamentId).populate('players').exec(function(err, tournament){
+		if(err){
+			deferred.reject(tournament)
+		}
+		deferred.resolve(tournament);
+	});
+	return deferred.promise;
+}
+
 exports.retrieveAvatars = function(){
 	var deferred = Q.defer();
 

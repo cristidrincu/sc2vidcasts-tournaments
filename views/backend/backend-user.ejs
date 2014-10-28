@@ -1,19 +1,19 @@
 <%include ../partials/header%>
-<% userAvatar.local.avatar.forEach(function(avatar){ %>
-<% include ../partials/sidebar%>
+    <% userAvatar.local.avatar.forEach(function(avatar){ %>
+    <% include ../partials/sidebar%>
 <%});%>
 <div id="page-wrapper" style="padding-top: 40px;">
     <!--TODO - implement a page consisting of a report of how many players are in the DB, how many Organizers, how many tournaments(with percentages showing the progress),
     <!--TODO - how many messages for this user-->
     <div class="row">
         <div class="col-lg-12">
-            <h1 style="font-size: 63px; color: lightslategrey">May the force be with you, warrior...</h1>
-            <p style="font-size: 21px; margin-bottom: 10px; color: #808080">This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            <p style="margin-right: 50px; font-size: 18px; color: lightslategrey; font-style: italic">Cristian &quot;Warbringer&quot; Drincu</p>
+            <h1 class="welcome-title-summary-backend">May the force be with you, warrior...</h1>
+            <p class="welcome-text-summary-backend">This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            <p class="cristian-drincu-signature">Cristian &quot;Warbringer&quot; Drincu</p>
             <div class="row">
                 <div class="col-lg-8">
                     <div class="container-summary-tournaments">
-                        <h1 style="font-size: 30px"><i class="fa fa-trophy fa-fw"></i> Turnee active</h1>
+                        <h1 class="title-reports-element"><i class="fa fa-trophy fa-fw"></i> Turnee active</h1>
                         <h4><span style="color: red"><%= tournamentsLength > 1 ? tournamentsLength + ' turnee' : tournamentsLength + ' turneu'%></span> in baza de date
                             <a style="margin-left: 5px; position: relative; top: -2px; font-size: 14px;" href="/open-tournaments/<%= user._id%>"><i class="fa fa-trophy fa-1x"></i> Toate turneele</a>
                         </h4>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="container-summary-messages">
-                        <h1 style="font-size: 30px"><i class="fa fa-envelope fa-fw"></i> Mesaje</h1>
+                        <h1 class="title-reports-element"><i class="fa fa-envelope fa-fw"></i> Mesaje</h1>
                         <h4>
                             <span style="color:red"><%= messages.length > 1 || messages.length == 0  ? messages.length + ' mesaje primite' : messages.length + ' mesaj primit'%></span>
                             <a style="margin-left: 5px; position: relative; top: -2px; font-size: 14px;" href="/user-messages/<%= user._id%>"><i class="fa fa-envelope fa-1x"></i> Vezi mesajele</a>
@@ -55,7 +55,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="container-summary-players">
-                    <h1 style="font-size: 30px"><i class="fa fa-gamepad fa-fw"></i> Jucatori</h1>
+                    <h1 class="title-reports-element"><i class="fa fa-gamepad fa-fw"></i> Jucatori</h1>
                     <h4 style="color: #000;">
                         <span style="color:red"><%= playersLength > 1 ? playersLength + ' jucatori sunt' : playersLength + ' jucator e'%></span> gata de lupta
                         <a style="margin-left: 5px; position: relative; top: -2px; font-size: 14px;" href="/players/<%= user._id%>"><i class="fa fa-gamepad fa-1x"></i> Toti jucatorii</a>
@@ -76,7 +76,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="container-summary-organizers">
-                    <h1 style="font-size: 30px"><i class="fa fa-users fa-fw"></i> Organizatori</h1>
+                    <h1 class="title-reports-element"><i class="fa fa-users fa-fw"></i> Organizatori</h1>
                     <h4><span style="color:red"><%= organizersLength > 1 ? organizersLength + ' organizatori pregatiti' : organizersLength + ' organizator pregatit'%></span> de actiune
                         <a style="margin-left: 5px; position: relative; top: -2px; font-size: 14px;" href="/admin-organizers/<%= user._id%>"><i class="fa fa-users fa-1x"></i> Toti organizatorii</a>
                     </h4>
@@ -96,7 +96,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="container-summary-avatars">
-                    <h1 style="font-size: 30px"><i class="fa fa-picture-o fa-fw"></i> Avatare</h1>
+                    <h1 class="title-reports-element"><i class="fa fa-picture-o fa-fw"></i> Avatare</h1>
                     <h4>Ai <span style="color:red"><%= avatarsLength > 1 || avatarsLength == 0 ? avatarsLength + ' de avatare' : avatarsLength + ' avatar'%></span> din care sa alegi
                         <a style="margin-left: 5px; position: relative; top: -2px; font-size: 14px;" href="/avatars-users/<%=user._id%>"><i class="fa fa-picture-o fa-1x"></i> Vezi avatarele</a>
                     </h4>

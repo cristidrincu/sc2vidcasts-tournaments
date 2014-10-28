@@ -7,10 +7,27 @@ var Message = require('../../models/message');
 var Avatar = require('../../models/avatar');
 var ErrorHandler = require('../../../app/helpers-error-handlers.js');
 var helperFunctions = require('../../../app/helpers-mongoose.js');
+var _ = require('underscore');
+var expose = require('express-expose');
 
 var app = module.exports = express();
 
 /*MESSAGING ROUTES*/
+app.get('/send-new-message', isLoggedIn, function(req, res){
+	helperFunctions.getUserDetails(req.user._id).then(function(user){
+		helperFunctions.retrieveAllPlayers().then(function(players){
+			var autoCompletePlayerNames = _.map(players, function(player){
+				return player.local.nickname
+			});
+			res.expose(autoCompletePlayerNames, 'players');
+			res.render('messaging/send-new-message.ejs', {
+				user: req.user,
+				userAvatar: user
+			});
+		});
+	});
+});
+
 app.get('/send-message/:_id', isLoggedIn, function(req, res){
   helperFunctions.getUserDetails(req.user._id).then(function(sender){
 	  helperFunctions.getUserDetails(req.params._id).then(function(receiver){
@@ -45,15 +62,52 @@ app.get('/send-reply/:_receiverId/:_messageId', isLoggedIn, function(req, res){
 app.post('/send-message/:_id', isLoggedIn, function(req, res){
   var message = new Message( {messageBody: req.body.message, messageSubject: req.body.messageSubject, sentBy: req.user._id, receiver: req.params._id} );
   message.save(function(err){
-    if(err)
-      ErrorHandler.handle('A aparut o eroare la trimiterea mesajului' + err);
-    else
+    if(err){
+	    ErrorHandler.handle('A aparut o eroare la trimiterea mesajului' + err);
+	    req.flash('infoError', 'Mesajul nu a putut fi trimis!');
+	    res.redirect('/user-messages/' + req.user._id);
+    }else
+      req.flash('infoSuccess', 'Mesajul a fost trimis cu success!')
       res.redirect('/user-messages/' + req.user._id);
   });
 });
 
-app.post('/send-reply/:receiverId', isLoggedIn, function(req, res){
+app.post('/send-message', isLoggedIn, function(req, res){
+	helperFunctions.getUserIdName(req.body.messageReceiver).then(function(id){
+		var message = new Message( {messageBody: req.body.message, messageSubject: req.body.messageSubject, sentBy: req.user._id, receiver: id} );
+		message.save(function(err){
+			if(err){
+				ErrorHandler.handle('A aparut o eroare la trimiterea mesajului' + err);
+				req.flash('infoError', 'Mesajul nu a putut fi trimis!');
+				res.redirect('/user-messages/' + req.user._id);
+			}else
+				req.flash('infoSuccess', 'Mesajul a fost trimis cu success!')
+			res.redirect('/user-messages/' + req.user._id);
+		});
+	});
+});
 
+app.post('/send-reply/:receiverId/:messageId', isLoggedIn, function(req, res){
+	var replyForSender = new Message( {messageBody: req.body.message, messageSubject: req.body.messageSubject, sentBy: req.user._id, receiver: req.params.receiverId} );
+
+	replyForSender.save(function(err){
+		if(err) throw err;
+	});
+
+	Message.findById(req.params.messageId).exec(function(err, message){
+		if(err) throw err;
+
+		if(message){
+			message.messageSubject = req.body.messageSubject;
+			message.messageBody += req.body.message;
+		}
+
+		message.save(function(err){
+			if(err) throw err;
+		});
+
+		res.redirect('/user-messages/' + req.user._id);
+	});
 });
 
 app.get('/user-messages/:userId', isLoggedIn, function(req, res){

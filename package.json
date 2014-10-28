@@ -24,6 +24,7 @@
     "method-override": "~1.0.0",
     "express-session": "~1.0.0",
     "connect-busboy": "0.0.1",
-	  "sanitize-caja": "0.1.2"
+	  "sanitize-caja": "0.1.2",
+	  "express-expose": ""
   }
 }

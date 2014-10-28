@@ -20,6 +20,19 @@ exports.getUserDetails = function(id){
 	return deferred.promise;
 }
 
+exports.getUserIdName = function(nickname){
+	var deffered = Q.defer();
+	User.findOne( {'local.nickname': nickname}).exec(function(err, user){
+		if(err){
+			deffered.reject(err);
+		}
+
+		deffered.resolve(user._id);
+	});
+
+	return deffered.promise;
+}
+
 exports.getDefaultAvatar = function(){
 	var deferred = Q.defer();
 	Avatar.findOne( { 'imageRaceCategory': 'default' }).exec(function(err, avatar){
@@ -177,7 +190,7 @@ exports.retrieveAllTournamentPlayersBasedOnLeagues = function(tournamentId, cb){
 
 exports.retrieveMessagesForUser = function(userid){
 	var deferred = Q.defer();
-	Message.find( {'receiver': userid}).exec(function(err, messages){
+	Message.find( {'receiver': userid}).populate('sentBy').exec(function(err, messages){
 		if(err){
 			deferred.reject(err);
 		}else{

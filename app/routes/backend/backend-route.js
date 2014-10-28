@@ -31,7 +31,7 @@ app.get('/backend-user/:userId', isLoggedIn, function(req, res){
 													organizersLength: _.size(organizers),
 													organizersSampled: _.sample(organizers, 3),
 													tournamentsLength: _.size(tournaments),
-													tournamentsSampled: _.sample(tournaments, 3),
+													tournamentsSampled: _.sample(tournaments, 4),
 													messages: messages,
 													avatarsLength: _.size(avatars),
 													avatarsSampled: _.sample(avatars, 3)
@@ -55,7 +55,7 @@ app.get('/backend-user/:userId', isLoggedIn, function(req, res){
 											organizersLength: _.size(organizers),
 											organizersSampled: _.sample(organizers, 3),
 											tournamentsLength: _.size(tournaments),
-											tournamentsSampled: _.sample(tournaments, 3),
+											tournamentsSampled: _.sample(tournaments, 4),
 											messages: messages,
 											avatarsLength: _.size(avatars),
 											avatarsSampled: _.sample(avatars, 3)

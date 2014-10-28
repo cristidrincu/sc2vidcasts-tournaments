@@ -1,0 +1,66 @@
+<% include ../partials/header %>
+<% userAvatar.local.avatar.forEach(function(avatar){%>
+<%if(user.local.role == 'admin'){%>
+<% include ../partials/sidebar-admin %>
+<%}else if(user.local.role == 'Organizator'){%>
+<% include ../partials/sidebar-organizer %>
+<%}else{%>
+<% include ../partials/sidebar %>
+<%}%>
+<%})%>
+<script>
+    tinymce.init({selector:'textarea'});
+</script>
+
+<script>
+    <%- javascript %>
+    $(function() {
+//        console.log(players);
+//        if(players instanceof Array){
+//            console.log('players is an array');
+//        }else{
+//            console.log('players is not an array');
+//        }
+        $( "#playerNicks" ).autocomplete({
+            source: $.map(players, function(nickname){
+                return nickname;
+            })
+        });
+    });
+</script>
+
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Compune un mesaj</h1>
+            <form action="/send-message" method="post" role="form">
+                <div class="col-lg-8">
+                    <div class="form-group">
+                        <label for="messageSubject">Catre:</label>
+                        <input type="text" name="messageReceiver" id="playerNicks" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="messageSubject">Subiectul mesajului</label>
+                        <input type="text" name="messageSubject" id="messageSubject" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="10" name="message"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-success" type="submit" value="Trimite mesajul"/>
+                        <%if(user.local.role == 'admin'){%>
+                            <a href="/backend-admin/<%= user._id%>"><input class="btn btn-danger" value="Anuleaza"/></a>
+                        <%}else if(user.local.role == 'Organizator'){%>
+                            <a href="/backend-organizers/<%= user._id%>"><input class="btn btn-danger" value="Anuleaza"/></a>
+                        <%}else{%>
+                            <a href="/user-messages/<%= user._id%>"><input class="btn btn-danger" value="Anuleaza"/></a>
+                        <%}%>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

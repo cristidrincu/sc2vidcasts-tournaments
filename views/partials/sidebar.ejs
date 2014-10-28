@@ -17,8 +17,8 @@
                 </div>
                 <!-- /input-group -->
             </li>
-            <li>
-                <a class="active" href="/backend-user/<%=user._id%>"><i class="fa fa-dashboard fa-fw"></i> Panou de administrare</a>
+            <li class="menu-section-text">
+                <a class="active" href="#"><i class="fa fa-eye fa-fw"></i> Personal</a>
             </li>
             <li>
                 <a href="/user-messages/<%=user._id%>"><i class="fa fa-envelope fa-fw"></i> Mesajele tale <span class="fa arrow"></span>
@@ -27,11 +27,27 @@
             <li>
                 <a href="/user-tournaments/<%= user._id%>"><i class="fa fa-briefcase fa-fw"></i> Turneele tale<span class="fa arrow"></span></a>
             </li>
-            <li>
-                <a href="/avatars-users/<%=user._id%>"><i class="fa fa-picture-o fa-fw"></i> Colectie avatare<span class="fa arrow"></span></a>
+            <li class="menu-section-text">
+                <!--TODO - un panou cu actiunile oferite unui utilizator - notificari and stuff-->
+                <a class="active" href="#"><i class="fa fa-cog fa-fw"></i> Actiuni</a>
             </li>
             <li>
-                <a href="/open-tournaments/<%=user._id%>" class="display-active-tournaments"><i class="fa fa-trophy fa-fw"></i> Turnee deschise<span class="fa arrow"></span></a>
+                <a href="/send-new-message"><i class="fa fa-rocket fa-fw"></i> Trimite un mesaj <span class="fa arrow"></span>
+                </a>
+            </li>
+            <li>
+                <a href="/customize-profile/<%= user.local.nickname%>"><i class="fa fa-wrench"></i> Editeaza profilul <span class="fa arrow"></span>
+                </a>
+            </li>
+            <li>
+                <a href="/open-tournaments/<%=user._id%>" class="display-active-tournaments"><i class="fa fa-trophy fa-fw"></i> Participa in turnee<span class="fa arrow"></span></a>
+            </li>
+
+            <li class="menu-section-text">
+                <a class="active" href="/backend-user/<%=user._id%>"><i class="fa fa-dashboard fa-fw"></i> Informatii</a>
+            </li>
+            <li>
+                <a href="/avatars-users/<%=user._id%>"><i class="fa fa-picture-o fa-fw"></i> Colectie avatare<span class="fa arrow"></span></a>
             </li>
             <li>
                 <a href="/players/<%=user._id%>" class="display-leagues-players"><i class="fa fa-gamepad fa-fw"></i> Jucatori<span class="fa arrow"></span></a>

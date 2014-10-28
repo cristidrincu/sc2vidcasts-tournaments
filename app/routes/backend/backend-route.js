@@ -21,7 +21,7 @@ app.get('/backend-user/:userId', isLoggedIn, function(req, res){
 							}
 							helperFunctions.retrieveAllPlayers().then(function(players){
 								helperFunctions.retrieveAllOrganizers().then(function(organizers){
-										helperFunctions.retrieveMessagesForUser(req.params.adminId).then(function(messages){
+										helperFunctions.retrieveMessagesForUser(req.params.userId).then(function(messages){
 											helperFunctions.retrieveAvatars().then(function(avatars){
 												res.render('backend/backend-user.ejs', {
 													user: req.user,
@@ -45,7 +45,7 @@ app.get('/backend-user/:userId', isLoggedIn, function(req, res){
 				}else{
 					helperFunctions.retrieveAllPlayers().then(function(players){
 						helperFunctions.retrieveAllOrganizers().then(function(organizers){
-								helperFunctions.retrieveMessagesForUser(req.params.adminId).then(function(messages){
+								helperFunctions.retrieveMessagesForUser(req.params.userId).then(function(messages){
 									helperFunctions.retrieveAvatars().then(function(avatars){
 										res.render('backend/backend-user.ejs', {
 											user: req.user,
@@ -102,30 +102,30 @@ app.get('/backend-admin/:adminId', isLoggedIn, requireRole('admin'), function(re
 app.get('/backend-organizer/:organizerId', isLoggedIn, requireRole('Organizator'), function(req, res){
 	helperFunctions.getUserDetails(req.params.organizerId).then(function(user){
 		helperFunctions.retrieveTournamentsByOrganizer(req.params.organizerId).then(function(tournaments){
-			checkAvatarArrayLength(function(){
-				if(user.local.avatar.length == 0){
-					helperFunctions.getDefaultAvatar().then(function(defaultAvatar){
-						helperFunctions.setAvatarForUser(req.params.organizerId, defaultAvatar._id).then(function(err, user){
-							if(err){
-								throw new err;
-							}
-							res.render('backend/backend-organizer.ejs', {
-								user: req.user,
-								userAvatar: user,
-								tournaments: tournaments,
-								moment: moment
+				checkAvatarArrayLength(function(){
+					if(user.local.avatar.length == 0){
+						helperFunctions.getDefaultAvatar().then(function(defaultAvatar){
+							helperFunctions.setAvatarForUser(req.params.organizerId, defaultAvatar._id).then(function(err, user){
+								if(err){
+									throw new err;
+								}
+								res.render('backend/backend-organizer.ejs', {
+									user: req.user,
+									userAvatar: user,
+									tournaments: tournaments,
+									moment: moment
+								});
 							});
 						});
-					});
-				}else{
-					res.render('backend/backend-organizer.ejs', {
-						user: req.user,
-						userAvatar: user,
-						tournaments: tournaments,
-						moment: moment
-					});
-				}
-			});
+					}else{
+						res.render('backend/backend-organizer.ejs', {
+							user: req.user,
+							userAvatar: user,
+							tournaments: tournaments,
+							moment: moment
+						});
+					}
+				});
 		});
 	});
 });

@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-md-3 col-lg-3 " align="center">
                             <%userAvatar.local.avatar.forEach(function(avatar){%>
-                                <img alt="User Pic" src="../..<%= avatar.imagePath + '/' + avatar.imageName %>" class="img-circle main-profile-image profile-small-pic" class="img-circle"> </div>
+                                <img alt="User Pic" src="../..<%= avatar.imagePath + '/' + avatar.imageName %>" class="img-circle main-profile-image profile-small-pic"> </div>
                             <%})%>
                         <div class=" col-md-9 col-lg-9 ">
                             <table class="table table-user-information">
@@ -55,7 +55,7 @@
                 <%if(user.local.role == 'admin'){%>
                     <a href="/backend-admin/<%=user._id%>">Inapoi la contul tau</a>
                 <%}else if(user.local.role == 'Organizator'){%>
-                    <a href="/backend-organizers/<%=user._id%>">Inapoi la contul tau</a>
+                    <a href="/backend-organizer/<%=user._id%>">Inapoi la contul tau</a>
                 <%}else {%>
                     <a href="/backend-user/<%=user._id%>">Inapoi la contul tau</a>
                 <%}%>

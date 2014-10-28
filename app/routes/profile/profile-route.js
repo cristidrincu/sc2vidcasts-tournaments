@@ -56,10 +56,12 @@ app.post('/customize-profile/:nickname', isLoggedIn, function(req, res){
 
 app.get('/avatars-users/:userId', isLoggedIn, function(req, res){
 	helperFunctions.getUserDetails(req.params.userId).then(function(user){
+		helperFunctions.retrieveTournamentsByOrganizer(req.params.userId).then(function(tournaments){
 			helperFunctions.retrieveAvatars().then(function(avatars){
 				res.render('avatars/avatars-users.ejs', {
 					user: req.user,
 					avatarUser: user,
+					avatarsLength: _.size(avatars),
 					terranAvatars: _.filter(avatars, function(avatar){
 						if(avatar.imageRaceCategory === 'terran'){
 							return avatar;
@@ -77,6 +79,7 @@ app.get('/avatars-users/:userId', isLoggedIn, function(req, res){
 					})
 				});
 			});
+		});
 	});
 });
 

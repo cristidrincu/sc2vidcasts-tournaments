@@ -1,0 +1,42 @@
+<% include ../../partials/header%>
+<% include ../../partials/sidebar-edit-tournament%>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        var pickerOptions = {
+            minDate: 0,
+            dateFormat: 'd MM yy'
+        };
+
+        $('#startDatePicker').datepicker(pickerOptions);
+        $('#endDatePicker').datepicker(pickerOptions);
+
+        $('#startHourPicker').pickatime({
+            formatSubmit: 'HH:i',
+            hiddenName: true
+        });
+    })
+</script>
+
+<div class="col-lg-4">
+    <h4 style="padding-top: 15px;">Modifica data terminarii acestui turneu</h4>
+    <% if(errorMessage.length === 0){%>
+        <p class="alert-success"><%= successMessage%></p>
+    <%} else {%>
+        <p class="alert-danger"><%= errorMessage%></p>
+    <%}%>
+    <form action="/tournament-end-date/<%= tournament._id%>/<%= user._id%>" method="post">
+        <div class="form-group">
+            <label>Data terminarii acestui turneu</label>
+            <input type="text" class="form-control" disabled value="<%= moment(tournament.endDate).format("DD MMMM YYYY")%>"/>
+        </div>
+        <div class="form-group">
+            <label>Alege alta data pentru terminarea turneului</label>
+            <input style="margin-bottom: 10px;" type="text" class="form-control" id="endDatePicker" name="endDate" required>
+            <button type="submit" class="btn btn-warning btn-lg">Confirma schimbarile</button>
+        </div>
+    </form>
+</div>
+<% include ../../partials/advice-edit-tournament-basis.ejs%>
+<% include ../../partials/footer%>

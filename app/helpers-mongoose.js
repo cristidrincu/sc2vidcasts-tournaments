@@ -10,7 +10,7 @@ var Q = require('q');
 //We use Q.defer when we are dealing with asynchronous callbacks, as the one below: function(err, user).
 exports.getUserDetails = function(id){
 	var deferred = Q.defer();
-  User.findById(id).populate('local.avatar').exec(function(err, user){
+  User.findById(id).populate('local.avatar local.tournaments').exec(function(err, user){
     if(err){
 	    deferred.reject(ErrorHandler.handle('A aparut o eroare in preluarea detaliilor pentru utilizator' + err));
     }
@@ -177,7 +177,7 @@ exports.retrieveAllTournamentPlayersBasedOnLeagues = function(tournamentId, cb){
 
 exports.retrieveMessagesForUser = function(userid){
 	var deferred = Q.defer();
-	Message.find( {'reciever._id': userid}).exec(function(err, messages){
+	Message.find( {'receiver': userid}).exec(function(err, messages){
 		if(err){
 			deferred.reject(err);
 		}else{

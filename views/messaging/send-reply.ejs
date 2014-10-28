@@ -17,18 +17,18 @@
         <div class="col-lg-12">
             <h1 class="page-header">Compune un mesaj</h1>
         </div>
-        <form action="/send-reply/<%= receiverId%>" method="post" role="form">
+        <form action="/send-reply/<%= receiverId%>/<%= message._id%>" method="post" role="form">
             <div class="col-lg-12">
                 <div class="form-group">
                     <label for="messageSubject">Subiectul mesajului</label>
-                    <input type="text" name="messageSubject" id="messageSubject" class="form-control" required value="Re: <%= messages.messageSubject%>"/>
+                    <input type="text" name="messageSubject" id="messageSubject" class="form-control" required value="Re: <%= message.messageSubject%>"/>
                 </div>
                 <div class="form-group">
-                    <textarea rows="10" name="message"><%=messages.messageBody%></textarea>
+                    <textarea rows="10" name="message"><%=message.messageBody%></textarea>
                 </div>
                 <div class="form-group">
                     <input class="btn btn-success" type="submit" value="Trimite mesajul"/>
-                    <a href="/backend-user"><input class="btn btn-danger" value="Anuleaza"/></a>
+                    <a href="/user-messages/<%= user._id%>"><input class="btn btn-danger" value="Anuleaza"/></a>
                 </div>
 
             </div>

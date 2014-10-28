@@ -1,0 +1,36 @@
+<% include ../../partials/header%>
+
+<%
+var leagues = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Master', 'Grand Master'];
+%>
+
+<% include ../../partials/sidebar-edit-tournament%>
+
+<div class="col-lg-4">
+    <h4 style="padding-top: 15px;">Modifica ligile din cadrul acestui turneu</h4>
+    <% if(errorMessage.length === 0){%>
+        <p class="alert-success"><%= successMessage%></p>
+    <%} else {%>
+        <p class="alert-danger"><%= errorMessage%></p>
+    <%}%>
+    <div class="form-group">
+        <form action="/ligi-turneu/<%= tournament._id%>/<%= user._id%>" method="post">
+            <label>Ligile suportate de actualul turneu</label>
+            <% tournament.openForLeagues.leagues.forEach(function(league){%>
+                <div class="checkbox">
+                    <input type="checkbox" name="leagues" value="<%=league%>" checked disabled/> <%=league%>
+                </div>
+            <%})%>
+            <label>Adauga si alte ligi pentru turneu</label>
+            <% var leaguesUnsupported = underscore.difference(leagues, tournament.openForLeagues.leagues)%>
+            <%for (var i=0; i < leaguesUnsupported.length; i++){%>
+            <div class="checkbox">
+                <input type="checkbox" name="leagues" value="<%=leaguesUnsupported[i]%>"/> <%=leaguesUnsupported[i]%>
+            </div>
+            <%}%>
+            <button type="submit" class="btn btn-warning btn-lg">Confirma schimbarile</button>
+       </form>
+    </div>
+</div>
+<% include ../../partials/advice-edit-leagues-basis.ejs%>
+<% include ../../partials/footer%>

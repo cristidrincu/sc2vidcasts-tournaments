@@ -59,8 +59,14 @@ ul.titlu-turneu-signup li {
 }
 
 .profile-pic-table-players{
-    max-width: 60%;
-    max-height: 60%;
+    max-width: 120px;
+    max-height: 120px;
+    box-shadow: 2px 2px 2px #888888;
+}
+
+.profile-pic-send-message{
+    width: 100px;
+    height: 100px;
     box-shadow: 2px 2px 2px #888888;
 }
 
@@ -80,6 +86,11 @@ ul.titlu-turneu-signup li {
     margin-top: 20px;
 }
 
+.containerNicknameRaceBNet{
+    position: relative;
+    top:-15px;
+}
+
 .btn-white-background{
     background-color: #fff;
 }
@@ -95,21 +106,47 @@ ul.titlu-turneu-signup li {
 }
 
 .container-summary-players, .container-summary-messages{
-    border-top: 5px solid #c4e3f3;
+    /*border-top: 5px solid #c4e3f3;*/
     height: 325px;
     margin-bottom: 20px;
 }
 
 .container-summary-organizers, .container-summary-avatars{
-    border-top: 5px solid #ec971f;
+    /*border-top: 5px solid #ec971f;*/
     height: 325px;
     margin-bottom: 20px;
 }
 
 .container-summary-tournaments, .container-summary-blacklist{
-    border-top: 5px solid #55cc22;
+    /*border: 1px solid #55cc22;*/
     height: 325px;
     margin-bottom: 20px;
+}
+
+.circleNrEntities, .circleNrEntitiesAvatar{
+    display: block;
+    height: 25px;
+    width: 25px;
+    line-height: 25px;
+    float: right;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+
+    background-color: green;
+    color: white;
+    text-align: center;
+}
+
+.circleNrEntitiesAvatar{
+    background-color: orangered;
+}
+
+.send-message-tournament-container{
+    border-bottom: 1px solid gainsboro;
+}
+
+.send-message-tournament-container:last-child{
+    border-bottom: none;
 }
 
 .footer{

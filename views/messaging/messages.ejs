@@ -25,9 +25,7 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-
-                    <table class="table table-hover">
-                        <table class="table table-hover">
+                        <table class="table">
                             <%if(messages.length == 0){%>
                             <p>Nu am gasit mesaje in baza de date</p>
                             <%}else{%>
@@ -47,13 +45,16 @@
                                         </form>
                                     </td>
                                     <%message.sentBy.forEach(function(sender){%>
-                                        <td><a href="/profile-details/<%=sender._id%>"><%=sender.local.nickname %></a></td>
+                                        <td>
+                                            <%sender.local.avatar.forEach(function(avatar){%>
+                                            <img id="tooltipSender" class="img-circle profile-pic-send-message" data-toggle="tooltip" title="<%=sender.local.nickname %>" src="<%=avatar.imagePath + '/' + avatar.imageName%>"/>
+                                            <%})%>
+                                        </td>
                                     <%})%>
                                 </tr>
                             <% }); %>
                             <%}%>
                         </table>
-                    </table>
                 </div>
             </div>
         </div>

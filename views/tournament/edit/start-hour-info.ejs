@@ -1,0 +1,41 @@
+<% include ../../partials/header%>
+<% include ../../partials/sidebar-edit-tournament%>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        var pickerOptions = {
+            dateFormat: 'd MM yy'
+        };
+
+        $('#startDatePicker').datepicker(pickerOptions);
+        $('#endDatePicker').datepicker(pickerOptions);
+
+        $('#startHourPicker').pickatime({
+            formatSubmit: 'HH:i',
+            hiddenName: true
+        });
+    })
+</script>
+
+<div class="col-lg-4">
+    <h4 style="padding-top: 15px;">Modifica ora inceperii acestui turneu</h4>
+    <% if(errorMessage.length === 0){%>
+        <p class="alert-success"><%= successMessage%></p>
+    <%} else {%>
+        <p class="alert-danger"><%= errorMessage%></p>
+    <%}%>
+    <form action="/tournament-start-hour/<%= tournament._id%>/<%= user._id%>" method="post">
+        <div class="form-group">
+            <label>Ora inceperii acestui turneu</label>
+            <input type="text" class="form-control" disabled value="<%= tournament.startHour%>"/>
+        </div>
+        <div class="form-group">
+            <label>Alege alta ora pentru inceperea acestui turneu</label>
+            <input style="margin-bottom: 10px;" type="text" class="form-control" id="startHourPicker" name="startHour" required>
+            <button type="submit" class="btn btn-warning btn-lg">Confirma schimbarile</button>
+        </div>
+    </form>
+</div>
+<% include ../../partials/advice-edit-tournament-basis.ejs%>
+<% include ../../partials/footer%>

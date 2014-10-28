@@ -1,68 +1,39 @@
 <% include ../../partials/header%>
-<%
-var nrOfPlayers = ['4', '8', '12', '16', '24', '32', '64'],
-        leagues = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Master', 'Grand Master'];
-%>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-
-        var pickerOptions = {
-            dateFormat: 'd MM yy'
-        };
-
-        $('#startDatePicker').datepicker(pickerOptions);
-        $('#endDatePicker').datepicker(pickerOptions);
-
-        $('#startHourPicker').pickatime({
-            formatSubmit: 'HH:i',
-            hiddenName: true
-        });
-    })
-</script>
-    <div class="col-lg-2">
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-                <h4 style="margin-left: 15px; "><i style="position: relative; top:2px" class="fa fa-pencil-square-o"></i> Optiuni editare</h4>
-                <ul class="nav" id="side-menu">
-                    <li><a href="#"><i class="fa fa-cogs"></i> Informatii de baza</a></li>
-                    <li><a href="#"><i class="fa fa-users"></i> Locuri disponibile</a></li>
-                    <li><a href="#"><i class="fa fa-pie-chart"></i> Ligi</a></li>
-                    <li><a href="#"><i class="fa fa-calendar"></i> Data inceperii</a></li>
-                    <li><a href="#"><i class="fa fa-calendar-o"></i> Data terminarii</a></li>
-                    <li><a href="#"><i class="fa fa-clock-o"></i> Ora de incepere</a></li>
-                    <li><a href="#"><i class="fa fa-gift"></i> Premii</a></li>
-                    <li><a href="#"><i class="fa fa-building-o"></i> Sponsori</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6">
+    <% include ../../partials/sidebar-edit-tournament%>
+    <div class="col-lg-4">
         <h4 style="padding-top: 15px;">Informatiile de baza pentru turneu</h4>
-        <form action="/create-tournament" method="post">
+
+        <% if(errorMessage.length === 0){%>
+            <p class="alert-success"><%= successMessage%></p>
+        <%} else {%>
+            <p class="alert-danger"><%= errorMessage%></p>
+        <%}%>
+
+        <form action="/informatii-de-baza/<%= tournament._id %>/<%= user._id%>" method="post">
             <div class="form-group">
                 <label>Numele turneului</label>
-                <input type="text" class="form-control" name="tournamentName" placeholder="<%= tournament.tournamentName%>" required>
+                <input type="text" class="form-control" name="tournamentName" value="<%= tournament.tournamentName%>" required>
             </div>
             <div class="form-group">
                 <label>Editia turneului</label>
-                <input type="text" class="form-control" name="edition" placeholder="<%= tournament.edition%>" required>
+                <input type="text" class="form-control" name="edition" value="<%= tournament.edition%>" >
             </div>
             <div class="form-group">
                 <label>Canal Ingame pentru CHAT</label>
-                <input type="text" class="form-control" name="ingameChatChannel" placeholder="<%= tournament.ingameChatChannel%>" required>
+                <input type="text" class="form-control" name="ingameChatChannel" value="<%= tournament.ingameChatChannel%>">
             </div>
             <div class="form-group">
                 <label>Canalul de Twitch pentru LIVE STREAM</label>
-                <input type="text" class="form-control" name="twitchStreamChannel" placeholder="<%= tournament.twitchStreamChannel%>" required>
+                <input type="text" class="form-control" name="twitchStreamChannel" value="<%= tournament.twitchStreamChannel%>"/>
             </div>
             <div class="form-group">
                 <label>Descrierea turneului(informatii suplimentare)</label>
-                <textarea class="form-control" name="description" rows="5" placeholder="<%= tournament.description%>" required></textarea>
+                <textarea class="form-control" name="description" rows="10">
+                    <%= tournament.description%>
+                </textarea>
             </div>
             <button type="submit" class="btn btn-warning btn-lg">Confirma schimbarile</button>
         </form>
     </div>
     <% include ../../partials/advice-edit-tournament-basis.ejs%>
-
 <% include ../../partials/footer%>

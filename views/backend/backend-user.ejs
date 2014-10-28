@@ -88,7 +88,7 @@
                 <div class="container-summary-avatars">
                     <h1 style="font-size: 30px"><i class="fa fa-picture-o fa-fw"></i> Avatare</h1>
                     <h4>Ai <span style="color:red"><%= avatarsLength > 1 || avatarsLength == 0 ? avatarsLength + ' de avatare' : avatarsLength + ' avatar'%></span> din care sa alegi
-                        <a style="margin-left: 5px; position: relative; top: 5px" href="/avatars-users-admin/<%=user._id%>"><i class="fa fa-picture-o fa-2x"></i></a>
+                        <a style="margin-left: 5px; position: relative; top: 5px" href="/avatars-users/<%=user._id%>"><i class="fa fa-picture-o fa-2x"></i></a>
                     </h4>
                     <div class="container-3-players" style="padding-top: 15px;">
                         <%avatarsSampled.forEach(function(avatar){%>
@@ -98,7 +98,6 @@
                                 <button style="width:112px;" class="btn btn-success">Alege-l</button>
                             </form>
                         </div>
-
                         <%});%>
                     </div>
                 </div>

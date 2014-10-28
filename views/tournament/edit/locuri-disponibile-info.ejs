@@ -1,0 +1,32 @@
+<% include ../../partials/header%>
+<%
+    var nrOfPlayers = ['4', '8', '16', '32', '64'];
+%>
+
+<% include ../../partials/sidebar-edit-tournament%>
+<div class="col-lg-4">
+    <h4 style="padding-top: 15px;">Locurile disponibile pentru turneu in acest moment: <%= tournament.nrOfPlayers%></h4>
+    <% if(errorMessage.length === 0){%>
+        <p class="alert-success"><%= successMessage%></p>
+    <%} else {%>
+        <p class="alert-danger"><%= errorMessage%></p>
+    <%}%>
+    <form action="/locuri-disponibile/<%= tournament._id%>/<%= user._id%>" method="post">
+        <label>Modifica locurile disponibile</label>
+        <select class="form-control" name="nrOfPlayers" style="margin-bottom: 10px;">
+            <option disabled>Locuri disponibile in acest moment: <%= tournament.nrOfPlayers%></option>
+            <option disabled>--------------------------</option>
+            <% var filteredNrOfPlayers = underscore.filter(nrOfPlayers, function(nr){
+                if(parseInt(nr) > parseInt(tournament.nrOfPlayers)){
+                    return nr;
+                }
+            })%>
+            <%for (var i = 0; i<filteredNrOfPlayers.length; i++){%>
+            <option value="<%=filteredNrOfPlayers[i]%>"><%=filteredNrOfPlayers[i]%></option>
+            <%}%>
+        </select>
+        <button type="submit" class="btn btn-warning btn-lg">Confirma schimbarile</button>
+    </form>
+</div>
+<% include ../../partials/advice-edit-nrplayers-basis.ejs%>
+<% include ../../partials/footer%>

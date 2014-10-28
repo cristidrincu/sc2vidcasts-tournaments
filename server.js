@@ -13,6 +13,8 @@ var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var path = require('path');
 var fs = require('fs');
 var busboy = require('connect-busboy');
+var _ = require('underscore');
+var moment = require('moment');
 
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -24,6 +26,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 var configDB = require('./config/database.js');
+var helperFunctions = require('./app/helpers-mongoose.js');
 
 //----------CONFIG-----------------------------
 //connect to our database

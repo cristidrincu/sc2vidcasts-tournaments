@@ -12,7 +12,10 @@ var messageSchema = mongoose.Schema({
   }],
   receiver: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
-  }]
+  }],
+	history: {
+		pastMessages: []
+	}
 });
 
 messageSchema.path('messageSubject').validate(function(messageSubject){

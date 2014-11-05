@@ -3,4 +3,34 @@
     <% include ../partials/sidebar-organizer%>
 <%});%>
 
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Detalii </h1>
+            <%tournaments.forEach(function(tournament){%>
+                <div class="col-lg-4 container-organizer-details-tournament">
+                    <h3><%= tournament.tournamentName%> | <%= Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) + '%'%></h3>
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) + '%'%>">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <p>Start: <%= moment(tournament.startDate).format("DD MMMM YYYY")%></p>
+                            <p>Finish: <%= moment(tournament.endDate).format("DD MMMM YYYY")%></p>
+                        </div>
+                        <div class="col-lg-5" style="text-align: center">
+                            <p>Locuri disponibile:</p>
+                            <p><span style="font-size: 40px; font-weight: bold;"><%= tournament.nrOfPlayers%></span></p>
+                        </div>
+                    </div>
+                    <a class="btn btn-success" href="/tournament-details/<%=tournament._id%>/<%=user._id%>">Detalii</a>
+                    <a class="btn btn-info" href="/edit-tournament/<%=tournament._id%>/<%=user._id%>">Editeaza</a>
+                    <a class="btn btn-danger" href="/delete-tournament/<%=tournament._id%>/<%=user._id%>">Sterge turneul</a>
+                </div>
+            <%})%>
+        </div>
+    </div>
+</div>
+
 <%include ../partials/footer%>

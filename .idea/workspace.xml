@@ -23,76 +23,122 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="helpers-mongoose.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/helpers-mongoose.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="102" column="37" selection-start="2655" selection-end="2665" vertical-scroll-proportion="0.0" vertical-offset="2191" max-vertical-offset="4050">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="backend-route.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/routes/backend/backend-route.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="113" column="68" selection-start="4661" selection-end="4661" vertical-scroll-proportion="0.41416568" vertical-offset="1350" max-vertical-offset="2940">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="tournaments-route.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/tournaments/tournaments-route.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="188" column="46" selection-start="6693" selection-end="6704" vertical-scroll-proportion="-23.23077" vertical-offset="2216" max-vertical-offset="3945">
+            <state line="270" column="17" selection-start="9680" selection-end="9680" vertical-scroll-proportion="0.0" vertical-offset="3644" max-vertical-offset="4500">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="all-players.ejs" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/players/all-players.ejs">
+      <file leaf-file-name="backend-organizer.ejs" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/backend/backend-organizer.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="51" selection-start="2173" selection-end="2212" vertical-scroll-proportion="-27.5" vertical-offset="0" max-vertical-offset="2985">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="avatars-users-admin.ejs" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/avatars/avatars-users-admin.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="31" selection-start="601" selection-end="601" vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="720">
+            <state line="31" column="38" selection-start="2551" selection-end="2557" vertical-scroll-proportion="-19.375" vertical-offset="0" max-vertical-offset="1875">
               <folding>
-                <element signature="e#278#303#0" expanded="true" />
+                <marker date="1415026311000" expanded="true" signature="82:133" placeholder="{...}" />
+                <marker date="1415026311000" expanded="true" signature="294:473" placeholder="{...}" />
+                <marker date="1415026311000" expanded="true" signature="1298:2662" placeholder="{...}" />
+                <marker date="1415026311000" expanded="true" signature="1810:2159" placeholder="{...}" />
+                <marker date="1415026311000" expanded="true" signature="2243:2593" placeholder="{...}" />
+                <marker date="1415026311000" expanded="true" signature="3454:3723" placeholder="{...}" />
+                <marker date="1415026311000" expanded="true" signature="3592:3692" placeholder="{...}" />
+                <marker date="1415026311000" expanded="true" signature="4598:5197" placeholder="{...}" />
+                <marker date="1415026311000" expanded="true" signature="4672:5165" placeholder="{...}" />
+                <marker date="1415026311000" expanded="true" signature="6075:6730" placeholder="{...}" />
+                <marker date="1415026311000" expanded="true" signature="6152:6698" placeholder="{...}" />
+                <marker date="1415026311000" expanded="true" signature="7548:8093" placeholder="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="footer.ejs" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/partials/footer.ejs">
+      <file leaf-file-name="tournament-details.ejs" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/tournament/tournament-details.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="150">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="styles-backend.css" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/css/styles-backend.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="1" selection-start="920" selection-end="920" vertical-scroll-proportion="0.9279712" vertical-offset="217" max-vertical-offset="1080">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="helpers-mongoose.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/helpers-mongoose.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="134" column="34" selection-start="4621" selection-end="4621" vertical-scroll-proportion="0.0" vertical-offset="1335" max-vertical-offset="2220">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="avatar.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/avatar.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="20" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/routes.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="34" selection-start="752" selection-end="752" vertical-scroll-proportion="0.0" vertical-offset="7" max-vertical-offset="1350">
-              <folding />
+            <state line="29" column="69" selection-start="1322" selection-end="1322" vertical-scroll-proportion="0.0" vertical-offset="1785" max-vertical-offset="7575">
+              <folding>
+                <marker date="1415216442000" expanded="true" signature="88:395" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="127:184" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="225:291" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="326:388" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="857:1700" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="1734:2557" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="1787:1953" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="2004:2143" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="2251:2535" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="2592:2945" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="6369:6529" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="6533:8816" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="7031:8779" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="7190:7375" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="7632:7836" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="7872:8072" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="8076:8282" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="9082:9242" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="9246:11499" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="9744:11462" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="9902:10087" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="10340:10536" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="10572:10764" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="10768:10966" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="11761:11919" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="11923:14172" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="12419:14135" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="12577:12762" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="13015:13211" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="13247:13439" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="13443:13641" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="14442:14604" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="14608:16865" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="15108:16828" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="15266:15451" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="15704:15900" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="15936:16128" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="16132:16330" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="17133:17294" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="17298:19553" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="17797:19516" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="17955:18140" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="18393:18589" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="18625:18817" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="18821:19019" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="19821:19981" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="19985:22240" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="20484:22203" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="20642:20827" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="21080:21276" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="21312:21504" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="21508:21706" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="22518:22684" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="22688:24952" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="23191:24915" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="23349:23534" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="23787:23983" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="24019:24211" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="24215:24413" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="25864:26024" placeholder="{...}" />
+                <marker date="1415216442000" expanded="true" signature="26503:26795" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -107,56 +153,57 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/views/signup.js" />
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/config/database.js" />
-        <option value="$PROJECT_DIR$/views/index.ejs" />
-        <option value="$PROJECT_DIR$/views/login.ejs" />
-        <option value="$PROJECT_DIR$/views/signup.ejs" />
-        <option value="$PROJECT_DIR$/config/passport.js" />
-        <option value="$PROJECT_DIR$/views/profile.ejs" />
-        <option value="$PROJECT_DIR$/config/auth.js" />
-        <option value="$PROJECT_DIR$/views/players/leagues/jucatori-liga-bronze.ejs" />
-        <option value="$PROJECT_DIR$/views/players/leagues/jucatori-liga-diamond.ejs" />
-        <option value="$PROJECT_DIR$/views/players/leagues/jucatori-liga-gold.ejs" />
         <option value="$PROJECT_DIR$/views/players/leagues/jucatori-liga-grand-master.ejs" />
         <option value="$PROJECT_DIR$/views/players/leagues/jucatori-liga-master.ejs" />
         <option value="$PROJECT_DIR$/views/players/leagues/jucatori-liga-platinum.ejs" />
         <option value="$PROJECT_DIR$/views/players/leagues/jucatori-liga-silver.ejs" />
         <option value="$PROJECT_DIR$/views/backend/admin-organizers.ejs" />
         <option value="$PROJECT_DIR$/views/backend/admin-players.ejs" />
-        <option value="$PROJECT_DIR$/views/backend/backend-admin.ejs" />
-        <option value="$PROJECT_DIR$/views/backend/backend-organizer.ejs" />
-        <option value="$PROJECT_DIR$/views/backend/backend-user.ejs" />
         <option value="$PROJECT_DIR$/views/backend/tournaments-by-organizer.ejs" />
         <option value="$PROJECT_DIR$/app/routes/players/players-route.js" />
         <option value="$PROJECT_DIR$/views/tournament/open-tournaments.ejs" />
-        <option value="$PROJECT_DIR$/app/routes/backend/backend-route.js" />
         <option value="$PROJECT_DIR$/views/messaging/send-message.ejs" />
         <option value="$PROJECT_DIR$/views/messaging/send-reply.ejs" />
         <option value="$PROJECT_DIR$/views/messaging/message-details.ejs" />
         <option value="$PROJECT_DIR$/app/routes/messages/messages-route.js" />
         <option value="$PROJECT_DIR$/app/routes/profile/profile-route.js" />
         <option value="$PROJECT_DIR$/app/models/avatars.js" />
-        <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/views/tournament/tournament-details-admin.ejs" />
         <option value="$PROJECT_DIR$/views/messaging/messages.ejs" />
-        <option value="$PROJECT_DIR$/views/partials/sidebar.ejs" />
         <option value="$PROJECT_DIR$/views/profile/profile.ejs" />
         <option value="$PROJECT_DIR$/views/players/all-players.ejs" />
-        <option value="$PROJECT_DIR$/views/tournament/tournament-details.ejs" />
         <option value="$PROJECT_DIR$/views/tournament/user-tournaments.ejs" />
-        <option value="$PROJECT_DIR$/app/routes/tournaments/tournaments-route.js" />
         <option value="$PROJECT_DIR$/app/models/user.js" />
-        <option value="$PROJECT_DIR$/app/helpers-mongoose.js" />
-        <option value="$PROJECT_DIR$/views/partials/sidebar-admin.ejs" />
         <option value="$PROJECT_DIR$/app/routes/admin/admin-routes.js" />
         <option value="$PROJECT_DIR$/app/routes.js" />
         <option value="$PROJECT_DIR$/app/models/avatar.js" />
         <option value="$PROJECT_DIR$/views/backend/admin-upload-avatars.ejs" />
         <option value="$PROJECT_DIR$/views/partials/footer.ejs" />
         <option value="$PROJECT_DIR$/views/avatars/avatars-users-admin.ejs" />
+        <option value="$PROJECT_DIR$/views/backend/backend-admin.ejs" />
+        <option value="$PROJECT_DIR$/app/models/quote.js" />
+        <option value="$PROJECT_DIR$/public/css/text-styles.css" />
+        <option value="$PROJECT_DIR$/views/partials/sidebar.ejs" />
+        <option value="$PROJECT_DIR$/views/partials/sidebar-admin.ejs" />
+        <option value="$PROJECT_DIR$/views/backend/backend-user.ejs" />
+        <option value="$PROJECT_DIR$/app/routes/backend/backend-route.js" />
+        <option value="$PROJECT_DIR$/views/backend/backend-organizer.ejs" />
+        <option value="$PROJECT_DIR$/views/partials/header.ejs" />
+        <option value="$PROJECT_DIR$/app/routes/organizer/organizer-routes.js" />
+        <option value="$PROJECT_DIR$/views/partials/sidebar-organizer.ejs" />
+        <option value="$PROJECT_DIR$/views/backend/organizer-tournaments.ejs" />
         <option value="$PROJECT_DIR$/public/css/styles-backend.css" />
+        <option value="$PROJECT_DIR$/server.js" />
+        <option value="$PROJECT_DIR$/app/routes/edit/edit-tournament.js" />
+        <option value="$PROJECT_DIR$/app/helpers-mongoose.js" />
+        <option value="$PROJECT_DIR$/app/routes/quote/quote-route.js" />
+        <option value="$PROJECT_DIR$/app/routes/edit/edit-quote.js" />
+        <option value="$PROJECT_DIR$/views/quotes/edit/edit-quote.ejs" />
+        <option value="$PROJECT_DIR$/views/quotes/quotes-list.ejs" />
+        <option value="$PROJECT_DIR$/views/quotes/create-quote.ejs" />
+        <option value="$PROJECT_DIR$/views/tournament/tournament-details.ejs" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/app/routes/tournaments/tournaments-route.js" />
       </list>
     </option>
   </component>
@@ -191,6 +238,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -238,6 +286,68 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="tournament" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NodeAuthentication" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tournaments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tournament" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="edit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NodeAuthentication" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tournaments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="quotes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NodeAuthentication" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tournaments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="quotes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="edit" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -323,65 +433,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="avatars" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NodeAuthentication" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tournaments" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="uploads" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="user-profile-images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NodeAuthentication" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tournaments" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NodeAuthentication" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tournaments" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -396,6 +448,72 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NodeAuthentication" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tournaments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tournaments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NodeAuthentication" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tournaments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="signup" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NodeAuthentication" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tournaments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="quote" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -431,13 +549,78 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="messages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NodeAuthentication" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tournaments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="edit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NodeAuthentication" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tournaments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NodeAuthentication" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tournaments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -456,14 +639,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
-      <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
-      <method />
-    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -474,15 +649,23 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
       <setting name="configLocationType" value="CONFIG_FILE" />
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="CHROME" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
@@ -540,9 +723,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24954791" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -562,106 +745,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="31" selection-start="550" selection-end="550" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="435" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="35" selection-start="296" selection-end="296" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="51" selection-start="112" selection-end="120" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="195" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="31" selection-start="550" selection-end="550" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="435" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="51" selection-start="112" selection-end="120" vertical-scroll-proportion="0.09003601" vertical-offset="0" max-vertical-offset="833" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="813" selection-end="813" vertical-scroll-proportion="0.46353522" vertical-offset="0" max-vertical-offset="809" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/login.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="1" selection-start="1" selection-end="1" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="809" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/auth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="21" selection-start="198" selection-end="198" vertical-scroll-proportion="0.09003601" vertical-offset="0" max-vertical-offset="833" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/header.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3600" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/backend/backend-user.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="33" selection-start="66" selection-end="66" vertical-scroll-proportion="0.018541409" vertical-offset="0" max-vertical-offset="960" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/backend/backend-organizer.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="94" selection-end="94" vertical-scroll-proportion="0.074165635" vertical-offset="0" max-vertical-offset="809" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/sidebar-organizer.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="833" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/backend/admin-players.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="30" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1140" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/backend/admin-organizers.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="10" selection-start="680" selection-end="680" vertical-scroll-proportion="0.035846725" vertical-offset="211" max-vertical-offset="1125" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/tournament/open-tournaments.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="55" selection-start="2718" selection-end="2718" vertical-scroll-proportion="1.0568603" vertical-offset="0" max-vertical-offset="1155" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/backend/backend-admin.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="38" selection-start="69" selection-end="69" vertical-scroll-proportion="0.018541409" vertical-offset="0" max-vertical-offset="1050" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/home/home-route.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="833" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/messaging/send-message.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="5" selection-start="33" selection-end="263" vertical-scroll-proportion="0.12978986" vertical-offset="0" max-vertical-offset="809" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/messaging/send-reply.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="33" selection-start="66" selection-end="66" vertical-scroll-proportion="0.018541409" vertical-offset="0" max-vertical-offset="809" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/message.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="833" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/messaging/message-details.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="33" selection-start="66" selection-end="66" vertical-scroll-proportion="0.018541409" vertical-offset="0" max-vertical-offset="809" />
@@ -669,9 +752,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/players/players-route.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="25" selection-start="1016" selection-end="1016" vertical-scroll-proportion="0.37815127" vertical-offset="0" max-vertical-offset="833">
-          <folding />
-        </state>
+        <state line="21" column="25" selection-start="1016" selection-end="1016" vertical-scroll-proportion="0.37815127" vertical-offset="0" max-vertical-offset="833" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/profile/profile-details.ejs">
@@ -679,200 +760,339 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1050" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/messages/messages-route.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="20" selection-start="2478" selection-end="2482" vertical-scroll-proportion="0.50987655" vertical-offset="622" max-vertical-offset="1455">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/messaging/messages.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="5" selection-start="258" selection-end="258" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="1005" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/tournament/tournament-details-admin.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="14" selection-start="1090" selection-end="1090" vertical-scroll-proportion="0.41457286" vertical-offset="0" max-vertical-offset="2490">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/tournament/tournament-details.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="105" selection-start="907" selection-end="907" vertical-scroll-proportion="0.32988358" vertical-offset="0" max-vertical-offset="2640">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/profile/profile-route.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="41" selection-start="838" selection-end="838" vertical-scroll-proportion="0.1765432" vertical-offset="202" max-vertical-offset="1110">
-          <folding />
-        </state>
+        <state line="23" column="41" selection-start="838" selection-end="838" vertical-scroll-proportion="0.1765432" vertical-offset="202" max-vertical-offset="1110" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/tournament/user-tournaments.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="25" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.4389313" vertical-offset="60" max-vertical-offset="1125">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/backend/backend-route.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="5" selection-start="1219" selection-end="1219" vertical-scroll-proportion="0.5" vertical-offset="255" max-vertical-offset="1065">
-          <folding />
-        </state>
+        <state line="27" column="25" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.4389313" vertical-offset="60" max-vertical-offset="1125" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/login/login-route.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/signup/signup-route.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="24" selection-start="440" selection-end="440" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/backend/tournaments-by-organizer.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="50" selection-start="1581" selection-end="1581" vertical-scroll-proportion="0.65976715" vertical-offset="0" max-vertical-offset="840">
-          <folding />
-        </state>
+        <state line="34" column="50" selection-start="1581" selection-end="1581" vertical-scroll-proportion="0.65976715" vertical-offset="0" max-vertical-offset="840" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/profile/profile.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="93" selection-start="666" selection-end="666" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="1305">
+        <state line="11" column="93" selection-start="666" selection-end="666" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="1305" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/signup.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="72" selection-start="1933" selection-end="1985" vertical-scroll-proportion="0.53435117" vertical-offset="270" max-vertical-offset="1155" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/passport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="42" selection-start="2701" selection-end="2701" vertical-scroll-proportion="0.5678851" vertical-offset="510" max-vertical-offset="1695" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/admin/admin-routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="25" selection-start="2445" selection-end="2445" vertical-scroll-proportion="1.2222222" vertical-offset="0" max-vertical-offset="1785" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/backend/admin-upload-avatars.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="26" selection-start="931" selection-end="1272" vertical-scroll-proportion="0.407911" vertical-offset="0" max-vertical-offset="809" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/players/all-players.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="0" selection-start="2173" selection-end="2212" vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="5805" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/avatars/avatars-users-admin.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="13" selection-start="654" selection-end="654" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="1785" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="771" selection-end="771" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="1395" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/backend/backend-admin.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="101" selection-start="379" selection-end="456" vertical-scroll-proportion="0.17464425" vertical-offset="0" max-vertical-offset="1815" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/tournament/create-tournament.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="86" selection-start="3679" selection-end="3761" vertical-scroll-proportion="0.8235294" vertical-offset="720" max-vertical-offset="1500" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/avatar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="20" selection-start="162" selection-end="162" vertical-scroll-proportion="0.12605043" vertical-offset="0" max-vertical-offset="833" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/text-styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="17" selection-start="49" selection-end="49" vertical-scroll-proportion="0.019132653" vertical-offset="0" max-vertical-offset="784" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/backend/backend-user.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="50" selection-start="0" selection-end="8247" vertical-scroll-proportion="0.16959798" vertical-offset="0" max-vertical-offset="1875" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/partials/sidebar.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="17" selection-start="2237" selection-end="2407" vertical-scroll-proportion="0.67839193" vertical-offset="150" max-vertical-offset="960" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/partials/footer.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="809" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/partials/header.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="27" selection-start="1354" selection-end="1354" vertical-scroll-proportion="0.24809161" vertical-offset="285" max-vertical-offset="3555" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/organizer/organizer-routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="43" selection-start="806" selection-end="826" vertical-scroll-proportion="0.33333334" vertical-offset="0" max-vertical-offset="810" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/backend/organizer-tournaments.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="0" selection-start="1964" selection-end="1994" vertical-scroll-proportion="0.6489493" vertical-offset="0" max-vertical-offset="809" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="24" selection-start="440" selection-end="440" vertical-scroll-proportion="0.2777778" vertical-offset="45" max-vertical-offset="855">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/styles-backend.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="103" column="13" selection-start="1568" selection-end="1568" vertical-scroll-proportion="0.5" vertical-offset="1140" max-vertical-offset="2595" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/tournament/open-tournaments.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="23" selection-start="384" selection-end="384" vertical-scroll-proportion="0.1908397" vertical-offset="0" max-vertical-offset="1290">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="0" selection-start="945" selection-end="1113" vertical-scroll-proportion="0.57623047" vertical-offset="0" max-vertical-offset="1425">
+        <state line="105" column="19" selection-start="3648" selection-end="3648" vertical-scroll-proportion="0.76590633" vertical-offset="937" max-vertical-offset="1800">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/helpers-mongoose.js">
+    <entry file="file://$PROJECT_DIR$/app/routes/edit/edit-tournament.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="134" column="34" selection-start="4621" selection-end="4621" vertical-scroll-proportion="0.0" vertical-offset="1335" max-vertical-offset="2220">
+        <state line="294" column="1" selection-start="10514" selection-end="10826" vertical-scroll-proportion="0.8739496" vertical-offset="3682" max-vertical-offset="4515" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/profile/customize-profile.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="6" selection-start="31" selection-end="1344" vertical-scroll-proportion="0.57251906" vertical-offset="0" max-vertical-offset="786" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/tournament/edit/edit-tournament-basic-info.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="13" selection-start="206" selection-end="397" vertical-scroll-proportion="0.17175573" vertical-offset="0" max-vertical-offset="786" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/quote/quote-route.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="44" selection-start="1564" selection-end="1564" vertical-scroll-proportion="0.4057623" vertical-offset="277" max-vertical-offset="1110" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/quotes/quotes-list.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="39" selection-start="593" selection-end="593" vertical-scroll-proportion="0.09147095" vertical-offset="151" max-vertical-offset="960" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/quotes/create-quote.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="21" selection-start="599" selection-end="599" vertical-scroll-proportion="0.25957972" vertical-offset="0" max-vertical-offset="809" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/edit/edit-quote.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="41" selection-start="782" selection-end="782" vertical-scroll-proportion="0.27971187" vertical-offset="97" max-vertical-offset="930" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/quotes/edit/edit-quote.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="53" selection-start="577" selection-end="586" vertical-scroll-proportion="0.22249691" vertical-offset="0" max-vertical-offset="809" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/quote.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="17" selection-start="144" selection-end="159" vertical-scroll-proportion="0.14405762" vertical-offset="0" max-vertical-offset="833" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/partials/sidebar-admin.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="61" selection-start="789" selection-end="789" vertical-scroll-proportion="0.057788946" vertical-offset="149" max-vertical-offset="945">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/binarybeast/country.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="870" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/messages/messages-route.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="20" selection-start="2478" selection-end="2482" vertical-scroll-proportion="1.242497" vertical-offset="0" max-vertical-offset="2700">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/partials/sidebar-organizer.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="0" selection-start="2191" selection-end="2191" vertical-scroll-proportion="0.592089" vertical-offset="196" max-vertical-offset="1050">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/tournament.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="35" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
-          <folding />
+        <state line="1" column="0" selection-start="36" selection-end="54" vertical-scroll-proportion="0.018007202" vertical-offset="0" max-vertical-offset="833" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/tournament/tournament-details.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="69" selection-start="1322" selection-end="1322" vertical-scroll-proportion="0.0" vertical-offset="1785" max-vertical-offset="7575">
+          <folding>
+            <marker date="1415216442000" expanded="true" signature="88:395" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="127:184" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="225:291" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="326:388" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="857:1700" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="1734:2557" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="1787:1953" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="2004:2143" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="2251:2535" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="2592:2945" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="6369:6529" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="6533:8816" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="7031:8779" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="7190:7375" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="7632:7836" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="7872:8072" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="8076:8282" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="9082:9242" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="9246:11499" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="9744:11462" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="9902:10087" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="10340:10536" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="10572:10764" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="10768:10966" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="11761:11919" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="11923:14172" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="12419:14135" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="12577:12762" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="13015:13211" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="13247:13439" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="13443:13641" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="14442:14604" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="14608:16865" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="15108:16828" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="15266:15451" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="15704:15900" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="15936:16128" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="16132:16330" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="17133:17294" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="17298:19553" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="17797:19516" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="17955:18140" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="18393:18589" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="18625:18817" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="18821:19019" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="19821:19981" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="19985:22240" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="20484:22203" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="20642:20827" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="21080:21276" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="21312:21504" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="21508:21706" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="22518:22684" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="22688:24952" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="23191:24915" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="23349:23534" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="23787:23983" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="24019:24211" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="24215:24413" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="25864:26024" placeholder="{...}" />
+            <marker date="1415216442000" expanded="true" signature="26503:26795" placeholder="{...}" />
+          </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="29" selection-start="763" selection-end="763" vertical-scroll-proportion="0.50061804" vertical-offset="0" max-vertical-offset="809" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/tournaments/tournaments-route.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="46" selection-start="6693" selection-end="6704" vertical-scroll-proportion="-23.23077" vertical-offset="2216" max-vertical-offset="3945">
+        <state line="270" column="17" selection-start="9680" selection-end="9680" vertical-scroll-proportion="0.0" vertical-offset="3644" max-vertical-offset="4500">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/signup.ejs">
+    <entry file="file://$PROJECT_DIR$/views/backend/backend-organizer.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="72" selection-start="1933" selection-end="1985" vertical-scroll-proportion="0.53435117" vertical-offset="270" max-vertical-offset="1155">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/passport.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="42" selection-start="2701" selection-end="2701" vertical-scroll-proportion="0.5678851" vertical-offset="510" max-vertical-offset="1695">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/sidebar-admin.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="45" selection-start="874" selection-end="874" vertical-scroll-proportion="0.29666254" vertical-offset="0" max-vertical-offset="809">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/avatar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="20" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/admin/admin-routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="25" selection-start="2445" selection-end="2445" vertical-scroll-proportion="1.2222222" vertical-offset="0" max-vertical-offset="1785">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/backend/admin-upload-avatars.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="26" selection-start="931" selection-end="1272" vertical-scroll-proportion="0.407911" vertical-offset="0" max-vertical-offset="809">
+        <state line="31" column="38" selection-start="2551" selection-end="2557" vertical-scroll-proportion="-19.375" vertical-offset="0" max-vertical-offset="1875">
           <folding>
-            <element signature="e#1392#1420#0" expanded="true" />
+            <marker date="1415026311000" expanded="true" signature="82:133" placeholder="{...}" />
+            <marker date="1415026311000" expanded="true" signature="294:473" placeholder="{...}" />
+            <marker date="1415026311000" expanded="true" signature="1298:2662" placeholder="{...}" />
+            <marker date="1415026311000" expanded="true" signature="1810:2159" placeholder="{...}" />
+            <marker date="1415026311000" expanded="true" signature="2243:2593" placeholder="{...}" />
+            <marker date="1415026311000" expanded="true" signature="3454:3723" placeholder="{...}" />
+            <marker date="1415026311000" expanded="true" signature="3592:3692" placeholder="{...}" />
+            <marker date="1415026311000" expanded="true" signature="4598:5197" placeholder="{...}" />
+            <marker date="1415026311000" expanded="true" signature="4672:5165" placeholder="{...}" />
+            <marker date="1415026311000" expanded="true" signature="6075:6730" placeholder="{...}" />
+            <marker date="1415026311000" expanded="true" signature="6152:6698" placeholder="{...}" />
+            <marker date="1415026311000" expanded="true" signature="7548:8093" placeholder="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.js">
+    <entry file="file://$PROJECT_DIR$/app/helpers-mongoose.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="34" selection-start="752" selection-end="752" vertical-scroll-proportion="0.0" vertical-offset="7" max-vertical-offset="1350">
+        <state line="102" column="37" selection-start="2655" selection-end="2665" vertical-scroll-proportion="0.0" vertical-offset="1261" max-vertical-offset="4050">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/sidebar.ejs">
+    <entry file="file://$PROJECT_DIR$/app/routes/backend/backend-route.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="146" selection-start="340" selection-end="369" vertical-scroll-proportion="0.092707045" vertical-offset="0" max-vertical-offset="809">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/players/all-players.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="51" selection-start="2173" selection-end="2212" vertical-scroll-proportion="-27.5" vertical-offset="0" max-vertical-offset="2985">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/footer.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="809">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/avatars/avatars-users-admin.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="31" selection-start="601" selection-end="601" vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="720">
-          <folding>
-            <element signature="e#278#303#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/styles-backend.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="1" selection-start="920" selection-end="920" vertical-scroll-proportion="0.9279712" vertical-offset="217" max-vertical-offset="1080">
+        <state line="113" column="68" selection-start="4661" selection-end="4661" vertical-scroll-proportion="0.41416568" vertical-offset="1350" max-vertical-offset="2940">
           <folding />
         </state>
       </provider>

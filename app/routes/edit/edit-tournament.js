@@ -104,7 +104,6 @@ app.get('/ligi-turneu/:tournamentId/:userId', isLoggedIn, requireRole('Organizat
 	});
 });
 
-//TODO - cand se schimba ligile disponibile in turneu, trebuie sa fie scosi din turneu si jucatorii care nu mai sunt in ligile noi selectate
 app.post('/ligi-turneu/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
 	Tournament.findById(req.params.tournamentId).populate('players').exec(function(err, tournament){
 		tournament.openForLeagues.leagues.addToSet(req.body.leagues);

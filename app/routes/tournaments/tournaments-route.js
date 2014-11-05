@@ -161,9 +161,6 @@ app.get('/tournament-details/:_id/:userId', isLoggedIn, function(req, res){
 });
 
 app.post('/signup-tournament/:_id/:userId', isLoggedIn, function(req, res){
-
-  //TODO - incearca sa folosesti async.series([]) pentru a lega metoda de find si apoi inscirierea jucatorului in baza de date
-
   User.find({_id: req.params.userId}, function(err, players){
     var ids = players.map(function(player) {
       return player._id;
@@ -259,16 +256,22 @@ app.post('/retragere-din-turneu/:_userId/:_tournamentId', isLoggedIn, function(r
   });
 });
 
-app.get('/edit-tournament/:_tournamentId', isLoggedIn, requireRole('admin'), requireRole('Organizator'), function(req, res){
+app.post('/create-brackets/:tournamentId', isLoggedIn, requireRole('Organizator'), function(req, res){
+	var players1 = [];
+	var players2 = [];
 
-});
+	Tournament.findById(req.params.tournamentId).populate('players').exec(function(err, tournament){
+		if(err) throw err;
+		tournament.players.forEach(function(player){
+			players1.push(player.local.nickname);
+		});
 
-app.post('/edit-tournament/:_tournamentId', isLoggedIn, requireRole('admin'), requireRole('Organizator'), function(req, res){
+		//Implement bracket generation algorithm sau sa adauge organizatorul manual si apoi embed la bracket?
+		players2 = players1.splice(0, players1.length / 2);
+		console.log(players1, players2);
+	});
 
-});
-
-app.post('/delete-tournament/:_tournamentId', isLoggedIn, requireRole('admin'), requireRole('Organizator'), function(req, res){
-
+	res.redirect('/tournament-details/' + req.params.tournamentId + '/' + req.user._id);
 });
 
 /*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/

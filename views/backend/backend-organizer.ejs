@@ -1,76 +1,114 @@
 <%include ../partials/header%>
 <% userAvatar.local.avatar.forEach(function(avatar){ %>
-    <% include ../partials/sidebar-organizer%>
+<% include ../partials/sidebar-organizer%>
 <%});%>
-
-<div id="page-wrapper">
+<div id="page-wrapper" style="padding-top: 40px;">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><i class="fa fa-trophy fa-1x"></i> Lista turneelor create de tine</h1>
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
-    <!-- /.row -->
-    <div class="row">
-        <div class="col-lg-12">
-            <!-- /.panel -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Lista turnee
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <table class="table table-hover">
-                        <tr>
-                            <th>Numele turneului</th>
-                            <th>Locuri disponibile</th>
-                            <th>Editia</th>
-                            <th>Data inceperii</th>
-                            <th>Data terminarii</th>
-                            <th>Premii</th>
-                            <th>Detalii</th>
-                            <th>Procentaj ocupare locuri</th>
-                        </tr>
-                        <% tournaments.forEach(function(tournament){ %>
-                        <tr>
-                            <td><%= tournament.tournamentName %></td>
-                            <td><%= tournament.nrOfPlayers %></td>
-                            <td><%= tournament.edition %></td>
-                            <td><%= moment(tournament.startDate).format("DD MMMM YYYY") %></td>
-                            <td><%= moment(tournament.endDate).format("DD MMMM YYYY") %></td>
-                            <td>
-                                <%= tournament.prize ? 'Da' : 'Nu'%>
-                            </td>
-                            <td>
-
-                                <% if( user.local.role == 'User'){%>
-                                <a href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
-                                    <button class="btn btn-success">Detalii</button>
-                                </a>
-                                <%}else if( user.local.role == 'admin'){%>
-                                <a href="/admin-tournaments/<%= tournament._id %>/<%= user._id%>">
-                                    <button class="btn btn-success">Detalii</button>
-                                </a>
-                                <%}else{%>
-                                <a href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
-                                    <button class="btn btn-success">Detalii</button>
-                                </a>
-                                <%}%>
-
-                            </td>
-                            <td>
-                                <div class="progress progress-striped active">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-                                         style="width: <%= Math.floor((tournament.players.length * (100 / tournament.nrOfPlayers))) + '%' %>">
-                                    </div>
-                                    <span style="color:#000">
-                                        <%= Math.floor((tournament.players.length * (100 / tournament.nrOfPlayers))) + '%' %>
-                                    </span>
+            <% quoteSampled.forEach(function(quote){%>
+            <h1 class="welcome-title-summary-backend"><%= quote.quoteText%></h1>
+            <h3 class="cristian-drincu-signature"><%= quote.quoteAuthor%></h3>
+            <%})%>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="container-summary-tournaments">
+                        <h1 class="title-reports-element"><i class="fa fa-trophy fa-fw"></i> Turnee organizate de tine</h1>
+                        <h4><span style="color: red"><%= tournamentsLength > 1 ? tournamentsLength + ' turnee' : tournamentsLength + ' turneu'%></span> in baza de date
+                            <a style="margin-left: 5px; position: relative; top: -2px; font-size: 14px;" href="/open-tournaments/<%= user._id%>"><i class="fa fa-trophy fa-1x"></i> Toate turneele</a>
+                        </h4>
+                        <div class="container-3-tournaments" style="padding-top: 15px;">
+                            <% tournamentsSampled.forEach(function(tournament){%>
+                            <a href="/tournament-details/<%= tournament._id%>/<%= user._id %>"><%= tournament.tournamentName%> :: locuri ocupate:
+                                <%= Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) + '%'%>
+                            </a>
+                            <div class="progress progress-striped active" style="margin-top: 5px;">
+                                <%if(Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) <= 50){%>
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                     style="width: <%= Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) + '%'%>">
                                 </div>
-                            </td>
-                        </tr>
-                        <% }); %>
-                    </table>
+                                <%}else if(Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) > 50){%>
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                     style="width: <%= Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) + '%'%>">
+                                </div>
+                                <%}%>
+                            </div>
+                            <%})%>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="container-summary-messages">
+                        <h1 class="title-reports-element"><i class="fa fa-envelope fa-fw"></i> Mesaje</h1>
+                        <h4>
+                            <span style="color:red"><%= messages.length > 1 || messages.length == 0  ? messages.length + ' mesaje primite' : messages.length + ' mesaj primit'%></span>
+                            <a style="margin-left: 5px; position: relative; top: -2px; font-size: 14px;" href="/user-messages/<%= user._id%>"><i class="fa fa-envelope fa-1x"></i> Vezi mesajele</a>
+                        </h4>
+                        <%messages.forEach(function(message){%>
+                        <p>Subiect: <%= message.messageSubject%></p>
+                        <%message.sentBy.forEach(function(sender){%>
+                        <p>Trimis de: <%=sender.local.nickname%></p>
+                        <%})%>
+                        <%})%>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4" style="border-right: 1px dotted orangered">
+                <div class="container-summary-players">
+                    <h1 class="title-reports-element"><i class="fa fa-gamepad fa-fw"></i> Jucatori</h1>
+                    <h4 style="color: #000;">
+                        <span style="color:red"><%= playersLength > 1 ? playersLength + ' jucatori sunt' : playersLength + ' jucator e'%></span> gata de lupta
+                        <a style="margin-left: 5px; position: relative; top: -2px; font-size: 14px;" href="/players/<%= user._id%>"><i class="fa fa-gamepad fa-1x"></i> Toti jucatorii</a>
+                    </h4>
+                    <div class="container-3-players" style="padding-top: 15px;">
+                        <%playersSampled.forEach(function(player){%>
+                        <%player.local.avatar.forEach(function(avatar){%>
+                        <a href="/profile-details/<%= player._id%>">
+                            <div class="col-lg-4">
+                                <img class="img-circle profile-pic-rezumat-backend" style="margin-bottom: 10px;" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                                <p style="width:112px;" class="btn btn-info"><%= player.local.nickname%></p>
+                            </div>
+                        </a>
+                        <%});%>
+                        <%});%>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4" style="border-right: 1px dotted orangered">
+                <div class="container-summary-organizers">
+                    <h1 class="title-reports-element"><i class="fa fa-users fa-fw"></i> Organizatori</h1>
+                    <h4><span style="color:red"><%= organizersLength > 1 ? organizersLength + ' organizatori pregatiti' : organizersLength + ' organizator pregatit'%></span> de actiune
+                        <a style="margin-left: 5px; position: relative; top: -2px; font-size: 14px;" href="/admin-organizers/<%= user._id%>"><i class="fa fa-users fa-1x"></i> Toti organizatorii</a>
+                    </h4>
+                    <div class="container-3-players" style="padding-top: 15px;">
+                        <%organizersSampled.forEach(function(organizer){%>
+                        <%organizer.local.avatar.forEach(function(avatar){%>
+                        <a href="/profile-details/<%= organizer._id%>">
+                            <div class="col-lg-4">
+                                <img class="img-circle profile-pic-rezumat-backend" style="margin-bottom: 10px;" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                                <a style="width:112px;" href="/profile-details/<%= organizer._id%>" class="btn btn-warning"><%= organizer.local.nickname%></a>
+                            </div>
+                        </a>
+                        <%});%>
+                        <%});%>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="container-summary-avatars">
+                    <h1 class="title-reports-element"><i class="fa fa-picture-o fa-fw"></i> Avatare</h1>
+                    <h4>Ai <span style="color:red"><%= avatarsLength > 1 || avatarsLength == 0 ? avatarsLength + ' de avatare' : avatarsLength + ' avatar'%></span> din care sa alegi
+                        <a style="margin-left: 5px; position: relative; top: -2px; font-size: 14px;" href="/avatars-users/<%=user._id%>"><i class="fa fa-picture-o fa-1x"></i> Vezi avatarele</a>
+                    </h4>
+                    <div class="container-3-players" style="padding-top: 15px;">
+                        <%avatarsSampled.forEach(function(avatar){%>
+                        <div class="col-lg-4" style="margin-bottom: 20px">
+                            <img class="img-circle profile-pic-rezumat-backend" style="margin-bottom: 10px;" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                            <form action="/choose-avatar/<%= user._id%>/<%= avatar._id%>" method="post">
+                                <button style="width:112px;" class="btn btn-success">Alege-l</button>
+                            </form>
+                        </div>
+                        <%});%>
+                    </div>
                 </div>
             </div>
         </div>
@@ -78,4 +116,5 @@
 </div>
 </div>
 
-<%include ../partials/footer%>
+
+<% include ../partials/footer %>

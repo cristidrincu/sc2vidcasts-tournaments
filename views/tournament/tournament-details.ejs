@@ -23,10 +23,15 @@
                 <%if(user.local.role == 'Organizator'){%>
                 <div class="row">
                     <div class="col-lg-4">
-                         <a style="margin-top: 45px;" href="/edit-tournament/<%= tournament._id %>/<%= user._id %>" class="btn btn-success">Editeaza turneul</a>
+                         <a style="margin-top: 45px;" href="/edit-tournament/<%= tournament._id %>/<%= user._id %>" class="btn btn-success">Editeaza</a>
                     </div>
                     <div class="col-lg-4">
-                         <a style="margin-top: 45px;" href="/delete-tournament/<%= tournament._id %>/<%= user._id %>" class="btn btn-danger">Sterge turneul</a>
+                        <form action="/create-brackets/<%= tournament._id%>" method="post">
+                            <button class="btn btn-info" type="submit" style="margin-top: 45px;">Creeaza brackets</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-4">
+                         <a style="margin-top: 45px;" href="/delete-tournament/<%= tournament._id %>/<%= user._id %>" class="btn btn-danger">Sterge</a>
                     </div>
                 </div>
 

@@ -8,12 +8,17 @@ var User = require('../../../app/models/user');
 var Tournament = require('../../../app/models/tournament');
 var moment = require('moment');
 var app = module.exports = express();
+var _ = require('underscore');
 
 app.get('/organizer-tournaments/:organizerId', isLoggedIn, requireRole('Organizator'), function(req, res){
 	helperFunctions.getUserDetails(req.params.organizerId).then(function(user){
-		res.render('backend/organizer-tournaments.ejs', {
-			user: req.user,
-			userAvatar: user
+		helperFunctions.retrieveTournamentsByOrganizer(req.params.organizerId).then(function(organizerTournaments){
+				res.render('backend/organizer-tournaments.ejs', {
+					user: req.user,
+					userAvatar: user,
+					tournaments: organizerTournaments,
+					moment: moment
+				});
 		});
 	});
 });

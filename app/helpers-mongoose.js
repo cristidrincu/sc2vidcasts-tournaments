@@ -3,6 +3,7 @@ var Tournament = require('./models/tournament.js');
 var User = require('./models/user.js');
 var Avatar = require('./models/avatar.js');
 var Message = require('./models/message.js');
+var Quote = require('./models/quote.js');
 var ErrorHandler = require('./helpers-error-handlers.js');
 var _ = require('underscore');
 var Q = require('q');
@@ -28,6 +29,19 @@ exports.getUserIdName = function(nickname){
 		}
 
 		deffered.resolve(user._id);
+	});
+
+	return deffered.promise;
+}
+
+exports.getQuoteDetails = function(quoteId){
+	var deffered = Q.defer();
+	Quote.findById(quoteId).exec(function(err, quote){
+		if(err){
+			deffered.reject(err);
+		}
+
+		deffered.resolve(quote);
 	});
 
 	return deffered.promise;
@@ -158,11 +172,11 @@ exports.retireFromTournament = function(tournamentId, userId){
 exports.retrieveTournamentsByOrganizer = function(organizerId){
 	var deferred = Q.defer();
   Tournament.find( {'organizer': organizerId}).exec(function(err, tournaments){
-    if(err){
-      deferred.reject(ErrorHandler.handle('A aparut o eroare in preluarea din baza de date a turneelor organizate'));
-    }else{
-      deferred.resolve(tournaments);
-    }
+	  if(err){
+		  deferred.reject(err);
+	  }else{
+		  deferred.resolve(tournaments);
+	  }
   });
 
 	return deferred.promise;
@@ -224,3 +238,28 @@ exports.retrieveAvatars = function(){
 
 	return deferred.promise;
 }
+
+exports.retrieveQuotes = function(){
+	var deferred = Q.defer();
+	Quote.find().populate('quoteInsertedBy').exec(function(err, quotes){
+		if(err){
+			deferred.reject(err);
+		}else{
+			deferred.resolve(quotes);
+		}
+	});
+
+	return deferred.promise;
+}
+
+//exports.createQuote = function(authorName, quoteText, cb){
+//	var quote = new Quote();
+//	quote.quoteAuthor = authorName;
+//	quote.quoteText = quoteText;
+//
+//	quote.save(function(err){
+//		if(err){
+//			cb(err);
+//		}
+//	});
+//}

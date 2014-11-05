@@ -85,7 +85,9 @@ var tournaments = require('./app/routes/tournaments/tournaments-route');
 var admin = require('./app/routes/admin/admin-routes');
 var organizer = require('./app/routes/organizer/organizer-routes');
 var avatar = require('./app/routes/avatar/avatar-routes');
-var edit = require('./app/routes/edit/edit-tournament');
+var editTournament = require('./app/routes/edit/edit-tournament');
+var editQuote = require('./app/routes/edit/edit-quote');
+var quote = require('./app/routes/quote/quote-route.js');
 
 var logout = require('./app/routes/logout/logout-route');
 
@@ -100,7 +102,9 @@ app.use(tournaments);
 app.use(admin);
 app.use(organizer);
 app.use(avatar);
-app.use(edit);
+app.use(editTournament);
+app.use(editQuote);
+app.use(quote);
 
 app.use(logout);
 

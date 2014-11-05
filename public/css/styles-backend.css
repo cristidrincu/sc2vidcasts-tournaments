@@ -153,6 +153,15 @@ ul.titlu-turneu-signup li {
     border-bottom: none;
 }
 
+.container-organizer-details-tournament{
+    margin-bottom: 25px;
+    border-right: 1px dashed darkgray;
+}
+/*for a more detailed explanation on nth child: http://css-tricks.com/how-nth-child-works/*/
+.container-organizer-details-tournament:nth-child(3n + 1){ /* the last element we need to be without a border is starts at index 4*/
+    border-right: none;
+}
+
 .footer{
     padding-top: 20px;
     padding-bottom: 20px;

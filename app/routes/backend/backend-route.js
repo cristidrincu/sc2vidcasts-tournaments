@@ -23,18 +23,21 @@ app.get('/backend-user/:userId', isLoggedIn, function(req, res){
 								helperFunctions.retrieveAllOrganizers().then(function(organizers){
 										helperFunctions.retrieveMessagesForUser(req.params.userId).then(function(messages){
 											helperFunctions.retrieveAvatars().then(function(avatars){
-												res.render('backend/backend-user.ejs', {
-													user: req.user,
-													userAvatar: user,
-													playersLength: _.size(players),
-													playersSampled: _.sample(players, 3),
-													organizersLength: _.size(organizers),
-													organizersSampled: _.sample(organizers, 3),
-													tournamentsLength: _.size(tournaments),
-													tournamentsSampled: _.sample(tournaments, 4),
-													messages: messages,
-													avatarsLength: _.size(avatars),
-													avatarsSampled: _.sample(avatars, 3)
+												helperFunctions.retrieveQuotes().then(function(quotes){
+													res.render('backend/backend-user.ejs', {
+														user: req.user,
+														userAvatar: user,
+														playersLength: _.size(players),
+														playersSampled: _.sample(players, 3),
+														organizersLength: _.size(organizers),
+														organizersSampled: _.sample(organizers, 3),
+														tournamentsLength: _.size(tournaments),
+														tournamentsSampled: _.sample(tournaments, 3),
+														quoteSampled: _.sample(quotes, 1),
+														messages: messages,
+														avatarsLength: _.size(avatars),
+														avatarsSampled: _.sample(avatars, 3)
+													});
 												});
 											});
 										});
@@ -47,18 +50,21 @@ app.get('/backend-user/:userId', isLoggedIn, function(req, res){
 						helperFunctions.retrieveAllOrganizers().then(function(organizers){
 								helperFunctions.retrieveMessagesForUser(req.params.userId).then(function(messages){
 									helperFunctions.retrieveAvatars().then(function(avatars){
-										res.render('backend/backend-user.ejs', {
-											user: req.user,
-											userAvatar: user,
-											playersLength: _.size(players),
-											playersSampled: _.sample(players, 3),
-											organizersLength: _.size(organizers),
-											organizersSampled: _.sample(organizers, 3),
-											tournamentsLength: _.size(tournaments),
-											tournamentsSampled: _.sample(tournaments, 4),
-											messages: messages,
-											avatarsLength: _.size(avatars),
-											avatarsSampled: _.sample(avatars, 3)
+										helperFunctions.retrieveQuotes().then(function(quotes){
+											res.render('backend/backend-user.ejs', {
+												user: req.user,
+												userAvatar: user,
+												playersLength: _.size(players),
+												playersSampled: _.sample(players, 3),
+												organizersLength: _.size(organizers),
+												organizersSampled: _.sample(organizers, 3),
+												tournamentsLength: _.size(tournaments),
+												tournamentsSampled: _.sample(tournaments, 3),
+												quoteSampled: _.sample(quotes, 1),
+												messages: messages,
+												avatarsLength: _.size(avatars),
+												avatarsSampled: _.sample(avatars, 3)
+											});
 										});
 									});
 								});
@@ -102,30 +108,60 @@ app.get('/backend-admin/:adminId', isLoggedIn, requireRole('admin'), function(re
 app.get('/backend-organizer/:organizerId', isLoggedIn, requireRole('Organizator'), function(req, res){
 	helperFunctions.getUserDetails(req.params.organizerId).then(function(user){
 		helperFunctions.retrieveTournamentsByOrganizer(req.params.organizerId).then(function(tournaments){
-				checkAvatarArrayLength(function(){
-					if(user.local.avatar.length == 0){
-						helperFunctions.getDefaultAvatar().then(function(defaultAvatar){
-							helperFunctions.setAvatarForUser(req.params.organizerId, defaultAvatar._id).then(function(err, user){
-								if(err){
-									throw new err;
-								}
-								res.render('backend/backend-organizer.ejs', {
-									user: req.user,
-									userAvatar: user,
-									tournaments: tournaments,
-									moment: moment
+			helperFunctions.retrieveQuotes().then(function(quotes){
+				helperFunctions.retrieveAvatars().then(function(avatars){
+					helperFunctions.retrieveAllPlayers().then(function(players){
+						helperFunctions.retrieveMessagesForUser(req.params.organizerId).then(function(messages){
+							helperFunctions.retrieveAllOrganizers().then(function(organizers){
+								checkAvatarArrayLength(function(){
+									if(user.local.avatar.length == 0){
+										helperFunctions.getDefaultAvatar().then(function(defaultAvatar){
+											helperFunctions.setAvatarForUser(req.params.organizerId, defaultAvatar._id).then(function(err, user){
+												if(err){
+													throw new err;
+												}
+												res.render('backend/backend-organizer.ejs', {
+													user: req.user,
+													userAvatar: user,
+													tournaments: tournaments,
+													moment: moment,
+													tournamentsLength: _.size(tournaments),
+													tournamentsSampled: _.sample(tournaments, 3),
+													quoteSampled: _.sample(quotes, 1),
+													avatarsLength: _.size(avatars),
+													avatarsSampled: _.sample(avatars, 3),
+													playersLength: _.size(players),
+													playersSampled: _.sample(players, 3),
+													messages: messages,
+													organizersLength: _.size(organizers),
+													organizersSampled: _.sample(organizers, 3)
+												});
+											});
+										});
+									}else{
+										res.render('backend/backend-organizer.ejs', {
+											user: req.user,
+											userAvatar: user,
+											tournaments: tournaments,
+											moment: moment,
+											tournamentsLength: _.size(tournaments),
+											tournamentsSampled: _.sample(tournaments, 3),
+											quoteSampled: _.sample(quotes, 1),
+											avatarsLength: _.size(avatars),
+											avatarsSampled: _.sample(avatars, 3),
+											playersLength: _.size(players),
+											playersSampled: _.sample(players, 3),
+											messages: messages,
+											organizersLength: _.size(organizers),
+											organizersSampled: _.sample(organizers, 3)
+										});
+									}
 								});
 							});
 						});
-					}else{
-						res.render('backend/backend-organizer.ejs', {
-							user: req.user,
-							userAvatar: user,
-							tournaments: tournaments,
-							moment: moment
-						});
-					}
+					});
 				});
+			});
 		});
 	});
 });

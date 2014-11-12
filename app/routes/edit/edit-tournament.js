@@ -8,6 +8,15 @@ var Tournament = require('../../../app/models/tournament');
 var moment = require('moment');
 var _  = require('underscore');
 var Q = require('q');
+var nodemailer = require('nodemailer');
+// create reusable transporter object using SMTP transport
+var transporter = nodemailer.createTransport({
+	service: 'Gmail',
+	auth: {
+		user: 'starcraft2vidcasts@gmail.com',
+		pass: 'crusader22012'
+	}
+});
 
 var app = module.exports = express();
 
@@ -35,16 +44,29 @@ app.get('/informatii-de-baza/:tournamentId/:userId', isLoggedIn, requireRole('Or
 
 app.post('/informatii-de-baza/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
 
-	Tournament.findById(req.params.tournamentId).exec(function(err, tournament){
+	var players = [];
+	var oldTournamentName, oldTournamentEdition, oldIngameChatChannel, oldTwitchStreamChannel, oldDescription;
+
+	Tournament.findById(req.params.tournamentId).populate('players').exec(function(err, tournament){
 		if(err){
 			throw err;
 		}
+
+		oldTournamentName = tournament.tournamentName;
+		oldTournamentEdition = tournament.edition;
+		oldIngameChatChannel = tournament.ingameChatChannel;
+		oldTwitchStreamChannel = tournament.twitchStreamChannel;
+		oldDescription = tournament.description;
 
 		tournament.tournamentName = req.body.tournamentName;
 		tournament.edition = req.body.edition;
 		tournament.ingameChatChannel = req.body.ingameChatChannel;
 		tournament.twitchStreamChannel = req.body.twitchStreamChannel;
 		tournament.description = req.body.description;
+
+		tournament.players.forEach(function(player){
+			players.push(player.local.email);
+		});
 
 		tournament.save(function(err){
 			if(err){
@@ -53,6 +75,30 @@ app.post('/informatii-de-baza/:tournamentId/:userId', isLoggedIn, requireRole('O
 			}
 
 			req.flash('infoSuccess', 'Informatiile de baza pentru acest turneu au fost modificate cu success!');
+
+			//send email to all participants in the tournament
+			var mailOptions = {
+				from: 'Starcraft2 Vidcasts Romania starcraft2vidcasts@gmail.com',
+				to: '' + players.toString() + '', // list of receivers
+				subject: 'Modificari in cadrul turneului ' + tournament.tournamentName,
+				html:
+						'<p>Salut. Te anuntam ca au avut loc schimbari la informatiile de baza ale turneului in care participi:</p> ' +
+						'<br/><b>Numele turneului: </b> ' + checkTournamentUpdatedProps(oldTournamentName, tournament.tournamentName) +
+						'<br/><b>Editia turneului: </b> ' + checkTournamentUpdatedProps(oldTournamentEdition, tournament.edition) +
+						'<br/><b>Canal de chat pentru concurs:</b> ' + checkTournamentUpdatedProps(oldIngameChatChannel, tournament.ingameChatChannel) +
+						'<br/><b>Canalul de twitch: </b> ' + checkTournamentUpdatedProps(oldTwitchStreamChannel, tournament.twitchStreamChannel)
+			};
+
+			// send mail with defined transport object
+			transporter.sendMail(mailOptions, function(error, info){
+				if(error){
+					console.log(error);
+				}else{
+					console.log('Message sent: ' + info.response);
+				}
+			});
+
+
 			res.redirect('/informatii-de-baza/' + req.params.tournamentId + '/' + req.params.userId);
 		});
 	});
@@ -292,4 +338,13 @@ function requireRole(role){
 			res.send(403);
 		}
 	}
+}
+
+function checkTournamentUpdatedProps(oldProp, updatedProp){
+	if(oldProp == updatedProp){
+		return 'Aceasta proprietate nu a fost modificata!' + '(' + oldProp + ')';
+	}
+
+	return updatedProp + '( a fost: ' + oldProp + ')';
+
 }

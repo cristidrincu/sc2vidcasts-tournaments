@@ -21,7 +21,8 @@ var tournamentSchema = mongoose.Schema({
     prize: Boolean,
     sponsors: String,
     ingameChatChannel: String,
-    twitchStreamChannel: String
+    twitchStreamChannel: String,
+		finishedTournament: Boolean
 //  TODO - add maps to tournament
 //    mapPool:[{
 //      mapName: String

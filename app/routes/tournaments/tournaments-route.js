@@ -269,6 +269,25 @@ app.post('/create-brackets/:tournamentId', isLoggedIn, requireRole('Organizator'
 		//Implement bracket generation algorithm sau sa adauge organizatorul manual si apoi embed la bracket?
 		players2 = players1.splice(0, players1.length / 2);
 		console.log(players1, players2);
+
+		var matches = {};
+
+		for(var i = 0; i < players1.length; i++){
+			matches.group1 = {
+				player1: players1[i],
+				player2: players2[i]
+			}
+		}
+
+		for(var i = players2.length; i >= 0; i--){
+			matches.group2 = {
+				player1: players1[i],
+				player2: players2[i]
+			}
+		}
+
+		console.log('Group1:' +  matches.group1.player1, 'Player2:' + matches.group1.player2);
+		console.log('Group2:' +  matches.group2.player1, 'Player2:' + matches.group2.player2);
 	});
 
 	res.redirect('/tournament-details/' + req.params.tournamentId + '/' + req.user._id);

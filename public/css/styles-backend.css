@@ -162,6 +162,25 @@ ul.titlu-turneu-signup li {
     border-right: none;
 }
 
+ul.edit-menu-tournament, ul.edit-menu-tournament li{
+    display: inline-block;
+    font-size: 18px;
+}
+
+ul.edit-menu-tournament li{
+    margin-left: 10px;
+}
+
+ul.edit-menu-tournament{
+    padding-top: 45px;
+}
+
+.no-style-submit-button{
+    border: none;
+    background: none;
+    color: #30487b;
+}
+
 .footer{
     padding-top: 20px;
     padding-bottom: 20px;

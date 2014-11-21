@@ -8,8 +8,8 @@
 //use express and set it to run on port 5000
 var express = require('express');
 var app = express();
-var server_port = process.env.PORT || 5000;
-var server_ip_address = '127.0.0.1';
+//var server_port = process.env.PORT || 5000;
+//var server_ip_address = '127.0.0.1';
 var path = require('path');
 var fs = require('fs');
 var busboy = require('connect-busboy');
@@ -62,6 +62,7 @@ app.use(busboy());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.set('port', (process.env.PORT || 5000))
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
@@ -110,6 +111,6 @@ app.use(logout);
 
 
 //launch
-app.listen(server_port, server_ip_address, function () {
-  console.log( "Listening on " + server_ip_address + ", server_port " + server_port )
-});
+app.listen(app.get('port'), function() {
+	console.log("Node app is running at localhost:" + app.get('port'))
+})

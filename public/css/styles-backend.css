@@ -181,6 +181,15 @@ ul.edit-menu-tournament{
     color: #30487b;
 }
 
+.no-style-button{
+    border: none;
+    background: none;
+}
+
+.details-tournament-user th, .details-tournament-user td{
+    text-align: center;
+}
+
 .footer{
     padding-top: 20px;
     padding-bottom: 20px;

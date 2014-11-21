@@ -9,6 +9,7 @@ var ErrorHandler = require('../../../app/helpers-error-handlers.js');
 var helperFunctions = require('../../../app/helpers-mongoose.js');
 var _ = require('underscore');
 var expose = require('express-expose');
+var escapeHtml = require('escape-html');
 
 var app = module.exports = express();
 
@@ -46,12 +47,16 @@ app.get('/send-reply/:_receiverId/:_messageId', isLoggedIn, function(req, res){
       ErrorHandler.handle('A aparut o eroare la extragerea mesajului din baza de date ' + err);
     else
     helperFunctions.getUserDetails(req.user._id).then(function(sender){
+	    helperFunctions.getUserDetails(req.params._receiverId).then(function(receiver){
 		    res.render('messaging/send-reply.ejs', {
 			    user: req.user,
 			    userAvatar: sender,
+			    receiver: receiver,
 			    message: message,
 			    receiverId: req.params._receiverId
 		    });
+	    });
+
     });
   });
 });
@@ -60,7 +65,8 @@ app.get('/send-reply/:_receiverId/:_messageId', isLoggedIn, function(req, res){
 //TODO - save all messages inside an array and use it as messages history
 
 app.post('/send-message/:_id', isLoggedIn, function(req, res){
-  var message = new Message( {messageBody: req.body.message, messageSubject: req.body.messageSubject, sentBy: req.user._id, receiver: req.params._id} );
+	var messageBody = escapeHtml(req.body.message);
+  var message = new Message( {messageBody: messageBody, messageSubject: req.body.messageSubject, sentBy: req.user._id, receiver: req.params._id} );
   message.save(function(err){
     if(err){
 	    ErrorHandler.handle('A aparut o eroare la trimiterea mesajului' + err);
@@ -88,7 +94,8 @@ app.post('/send-message', isLoggedIn, function(req, res){
 });
 
 app.post('/send-reply/:receiverId/:messageId', isLoggedIn, function(req, res){
-	var replyForSender = new Message( {messageBody: req.body.message, messageSubject: req.body.messageSubject, sentBy: req.user._id, receiver: req.params.receiverId} );
+	var messageBody = escapeHtml(req.body.message);
+	var replyForSender = new Message( {messageBody: messageBody, messageSubject: req.body.messageSubject, sentBy: req.user._id, receiver: req.params.receiverId} );
 
 	replyForSender.save(function(err){
 		if(err) throw err;
@@ -114,7 +121,7 @@ app.get('/user-messages/:userId', isLoggedIn, function(req, res){
   Message.find( {receiver: req.params.userId}).populate('sentBy').exec(function(err, messages){
     if(err){
 	    ErrorHandler.handle('A intervenit o eroare la preluarea mesajelor din baza de date: ' + err);
-    }else if(messages.length == 0){ //temporary solution
+    }else {
 	    helperFunctions.getUserDetails(req.params.userId).then(function(user){
 		    res.render('messaging/messages.ejs', {
 			    user: req.user,

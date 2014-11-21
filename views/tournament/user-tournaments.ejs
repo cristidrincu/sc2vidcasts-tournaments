@@ -28,7 +28,7 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    <table class="table table-hover">
+                    <table class="table table-hover details-tournament-user">
                         <% if(playerTournamentsUser.local.tournaments.length == 0){%>
                             <p>Momentan, nu esti inscris in cadrul vreunui turneu!</p>
                         <%}else{%>
@@ -54,12 +54,16 @@
                             </td>
                             <td>
                                 <a href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
-                                    <button class="btn btn-success">Detalii</button>
+                                    <button class="no-style-button">
+                                        <i style="color: green;" class="fa fa-search fa-1x"></i>
+                                    </button>
                                 </a>
                             </td>
                             <td>
                                 <form method="post" action="/retragere-din-turneu/<%=user._id%>/<%= tournament._id%> ">
-                                    <button class="btn btn-danger" data-toggle="modal" data-target="#modalRetragere">Retrage-te din acest turneu</button>
+                                    <button type="submit" class="no-style-button">
+                                        <i style="color:red;" class="fa fa-times fa-1x"></i>
+                                    </button>
                                 </form>
                             </td>
                         </tr>

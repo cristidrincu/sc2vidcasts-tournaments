@@ -98,7 +98,6 @@ app.post('/informatii-de-baza/:tournamentId/:userId', isLoggedIn, requireRole('O
 				}
 			});
 
-
 			res.redirect('/informatii-de-baza/' + req.params.tournamentId + '/' + req.params.userId);
 		});
 	});

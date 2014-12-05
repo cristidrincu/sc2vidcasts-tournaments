@@ -96,15 +96,6 @@ app.post('/delete-account/:userId', isLoggedIn, requireRole('admin'), function(r
       }
   );
 
-//  User.remove({ _id: req.params.userId}, function(err){
-//    if(err){
-//      req.flash('infoError', 'A aparut o eroare la stergerea utilizatorului!');
-//    }else{
-//      req.flash('infoSuccess', 'Contul a fost sters cu success!');
-//    }
-//
-//  })
-
   res.redirect('/admin-players');
 });
 

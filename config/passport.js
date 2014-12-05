@@ -1,12 +1,8 @@
 var LocalStrategy = require('passport-local').Strategy;
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-
-//load the auth variables
-var configOAuth = require('./auth');
+var mongoose = ('mongoose');
 
 // load up the user model
 var User = require('../app/models/user');
-var Tournament = require('../app/models/tournament');
 
 // expose this function to our app using module.exports
 module.exports = function (passport) {
@@ -58,15 +54,21 @@ module.exports = function (passport) {
               // create the user
               var newUser = new User();
 
+	            if(req.body.password == req.body.PasswordAgain){
+		            newUser.local.password = newUser.generateHash(password);
+	            }else{
+		            return done(null, false, req.flash('signupMessage', 'Passwords do no match'));
+	            }
+
               // set the user's local credentials
               newUser.local.email = email;
-              newUser.local.password = newUser.generateHash(password);
               newUser.local.race = req.body.race;
               newUser.local.league = req.body.league;
               newUser.local.nickname = req.body.nickname;
               newUser.local.battlenetid = req.body.battlenetid;
               newUser.local.role = req.body.role;
               newUser.local.website = req.body.website;
+	            newUser.local.avatar[0] = req.body.defaultAvatar;
 
               // save the user
               newUser.save(function (err) {

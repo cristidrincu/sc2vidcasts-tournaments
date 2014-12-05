@@ -10,13 +10,14 @@ var app = module.exports = express();
 /* PROFILE ROUTES */
 app.get('/profile', isLoggedIn, function (req, res) {
   helperFunctions.getUserDetails(req.user._id).then(function(user){
-    res.render('profile/profile.ejs', {
-      message: req.flash('signupSuccess'), //get the message out of the session and pass to template
-      user: req.user, //get the user out of session and pass to template
-      userAvatar: user
-    });
-  });
+	  res.render('profile/profile.ejs', {
+		  message: req.flash('signupSuccess'), //get the message out of the session and pass to template
+		  user: req.user, //get the user out of session and pass to template
+		  userAvatar: user
+	  });
+	});
 });
+
 
 app.get('/profile-details/:_id', isLoggedIn, function(req, res){
   helperFunctions.getUserDetails(req.params._id).then(function(user){
@@ -94,4 +95,18 @@ function isLoggedIn(req, res, next) {
 
 function uppercaseFirstChar(text){
   return text[0].toUpperCase() + text.slice(1);
+}
+
+function defaultAvatarUser(arrayUserAvatar, userId){
+	if(arrayUserAvatar == 0){
+		helperFunctions.getDefaultAvatar().then(function(defaultAvatar){
+			helperFunctions.setAvatarForUser(userId, defaultAvatar._id).then(function(err, defaultUser){
+				if(err){
+					throw new err;
+				}
+
+				return defaultUser;
+			});
+		});
+	}
 }

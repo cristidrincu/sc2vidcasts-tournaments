@@ -3,7 +3,7 @@
  */
 var express = require('express');
 var passport = require('passport');
-var app = module.exports=express();
+var app = module.exports = express();
 
 /*SIGN-UP ROUTES*/
 app.get('/signup', function (req, res) {

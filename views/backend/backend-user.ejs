@@ -56,7 +56,7 @@
                 <div class="container-summary-players">
                     <h1 class="title-reports-element"><i class="fa fa-gamepad fa-fw"></i> Jucatori</h1>
                     <h4 style="color: #000;">
-                        <span style="color:red"><%= playersLength > 1 ? playersLength + ' jucatori sunt' : playersLength + ' jucator e'%></span> gata de lupta
+                        <span style="color:red"><%= playersLength > 1 || playersLength == 0 ? playersLength + ' jucatori sunt' : playersLength + ' jucator e'%></span> gata de lupta
                         <a style="margin-left: 5px; position: relative; top: -2px; font-size: 14px;" href="/players/<%= user._id%>"><i class="fa fa-gamepad fa-1x"></i> Toti jucatorii</a>
                     </h4>
                     <div class="container-3-players" style="padding-top: 15px;">

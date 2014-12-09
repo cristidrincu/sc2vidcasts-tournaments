@@ -15,6 +15,7 @@ exports.getUserDetails = function(id){
     if(err){
 	    deferred.reject(ErrorHandler.handle('A aparut o eroare in preluarea detaliilor pentru utilizator' + err));
     }
+
     deferred.resolve(user);
   });
 

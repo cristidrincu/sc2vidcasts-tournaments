@@ -112,6 +112,7 @@ app.get('/tournament-details/:_id/:userId', isLoggedIn, function(req, res){
 							user: req.user,
 							tournament: tournament,
 							userAvatar: user,
+							userId: req.params.userId,
 							bronzePlayers: _.filter(playersFromCollection, function(player){
 								if(player.local.league === 'Bronze'){
 									return player;

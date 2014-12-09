@@ -15,6 +15,7 @@ app.get('/players/:userId', isLoggedIn, function(req, res){
 			res.render('players/all-players.ejs', {
 				user: req.user,
 				avatarUser: user,
+				userId: req.params.userId,
 				bronzePlayers: _.filter(players, function(player){
 					if(player.local.league === 'Bronze'){
 						return player;

@@ -2,6 +2,7 @@
  * Created by cristiandrincu on 9/4/14.
  */
 var express = require('express');
+var moment = require('moment');
 var helperFunctions = require('../../../app/helpers-mongoose.js');
 var User = require('../../../app/models/user');
 var _ = require('underscore');
@@ -10,10 +11,15 @@ var app = module.exports = express();
 /* PROFILE ROUTES */
 app.get('/profile', isLoggedIn, function (req, res) {
   helperFunctions.getUserDetails(req.user._id).then(function(user){
-	  res.render('profile/profile.ejs', {
-		  message: req.flash('signupSuccess'), //get the message out of the session and pass to template
-		  user: req.user, //get the user out of session and pass to template
-		  userAvatar: user
+	  helperFunctions.retrieveMessagesForUser(req.user._id).then(function(messages){
+		  res.render('profile/profile.ejs', {
+			  message: req.flash('signupSuccess'), //get the message out of the session and pass to template
+			  user: req.user, //get the user out of session and pass to template - you get id, email and password
+			  userAvatar: user.local.avatar,
+			  detailedUser: user,
+			  moment: moment,
+			  messages: messages
+		  });
 	  });
 	});
 });

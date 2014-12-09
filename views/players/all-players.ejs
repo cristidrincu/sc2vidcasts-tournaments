@@ -54,8 +54,13 @@
                         <td><%= player.local.nickname %></td>
                         <td><%= player.local.battlenetid %></td>
                         <td><%= player.local.race %></td>
-                        <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
-                        <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+
+                        <%if(player._id == userId){%>
+                            <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
+                        <%} else {%>
+                            <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                            <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                        <%}%>
 
                         <%if(user.local.role == 'admin'){%>
                             <td>
@@ -103,8 +108,13 @@
                         <td><%= player.local.nickname %></td>
                         <td><%= player.local.battlenetid %></td>
                         <td><%= player.local.race %></td>
-                        <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
-                        <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+
+                        <%if(player._id == userId){%>
+                            <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
+                        <%} else {%>
+                            <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                            <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                        <%}%>
 
                         <%if(user.local.role == 'admin'){%>
                         <td>
@@ -153,8 +163,13 @@
                         <td><%= player.local.nickname %></td>
                         <td><%= player.local.battlenetid %></td>
                         <td><%= player.local.race %></td>
-                        <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
-                        <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+
+                        <%if(player._id == userId){%>
+                            <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
+                        <%} else {%>
+                            <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                            <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                        <%}%>
 
                         <%if(user.local.role == 'admin'){%>
                         <td>
@@ -203,8 +218,13 @@
                         <td><%= player.local.nickname %></td>
                         <td><%= player.local.battlenetid %></td>
                         <td><%= player.local.race %></td>
-                        <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
-                        <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+
+                        <%if(player._id == userId){%>
+                            <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
+                        <%} else {%>
+                            <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                            <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                        <%}%>
 
                         <%if(user.local.role == 'admin'){%>
                         <td>
@@ -253,8 +273,13 @@
                         <td><%= player.local.nickname %></td>
                         <td><%= player.local.battlenetid %></td>
                         <td><%= player.local.race %></td>
-                        <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
-                        <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+
+                        <%if(player._id == userId){%>
+                            <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
+                        <%} else {%>
+                            <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                            <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                        <%}%>
 
                         <%if(user.local.role == 'admin'){%>
                         <td>
@@ -303,8 +328,13 @@
                         <td><%= player.local.nickname %></td>
                         <td><%= player.local.battlenetid %></td>
                         <td><%= player.local.race %></td>
-                        <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
-                        <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+
+                        <%if(player._id == userId){%>
+                            <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
+                        <%} else {%>
+                            <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                            <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                        <%}%>
 
                         <%if(user.local.role == 'admin'){%>
                         <td>
@@ -353,8 +383,13 @@
                         <td><%= player.local.nickname %></td>
                         <td><%= player.local.battlenetid %></td>
                         <td><%= player.local.race %></td>
-                        <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
-                        <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+
+                        <%if(player._id == userId){%>
+                            <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
+                        <%} else {%>
+                            <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                            <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                        <%}%>
 
                         <%if(user.local.role == 'admin'){%>
                         <td>

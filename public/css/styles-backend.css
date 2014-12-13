@@ -1,6 +1,18 @@
+.header-bar{
+    background-color: #000;
+}
+
 #dateParagraph{
     float: left;
     margin-left: -20px;
+    color: #37beb9;
+    font-size: 13px;
+    padding-top: 20px;
+}
+
+.cristian-drincu-signature{
+    padding-bottom: 25px;
+    border-bottom: 1px solid gainsboro;
 }
 
 .menu-section-text{
@@ -46,6 +58,11 @@ ul.titlu-turneu-signup li {
 
 .btn-modifica-profilul{
     margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.btn-panou-turnee{
+   margin-right: 10px;
 }
 
 .main-profile-image{
@@ -65,6 +82,7 @@ ul.titlu-turneu-signup li {
     width: 100%;
     height: 100%;
     box-shadow: 2px 2px 2px #888888;
+    margin-top: 55px;
 }
 
 .profile-pic-table-players{
@@ -112,6 +130,7 @@ ul.titlu-turneu-signup li {
 .buton-alege-avatar{
     position: relative;
     top:-5px;
+    left: 2px;
 }
 
 .container-summary-players, .container-summary-messages{
@@ -196,7 +215,8 @@ ul.edit-menu-tournament{
 }
 
 .div-gradient, .div-gradient-red, .div-gradient-green{
-    background-color:rgba(255, 255, 255, 0.5);
+    background-color:rgba(0, 0, 0, 0.5);
+    color: #fff;
 }
 
 /*.div-gradient-green{*/
@@ -239,15 +259,15 @@ ul.edit-menu-tournament{
 }
 
 .background-profile-terran{
-    background: url('../images/background-races/terran-background-1.jpg') no-repeat center center fixed;
+    background: url('../images/background-races/terran-background-2.jpg') no-repeat center center fixed;
 }
 
 .background-profile-zerg{
-    background: url('../images/background-races/zerg-background-1.jpg') no-repeat center center fixed;
+    background: url('../images/background-races/zerg-background-2.jpg') no-repeat center center fixed;
 }
 
 .background-profile-protoss{
-    background: url('../images/background-races/protoss-background-1.jpg') no-repeat center center fixed;
+    background: url('../images/background-races/protoss-background-2.jpg') no-repeat center center fixed;
 }
 
 @media screen and (max-width: 1024px) {
@@ -255,6 +275,27 @@ ul.edit-menu-tournament{
         left: 50%;
         margin-left: -512px;   /* 50% */
     }
+}
+
+.sliding-panel-main-profile{
+    padding-top: 230px;
+}
+
+.user-profile-data-list{
+    list-style: none;
+    margin:0;
+    padding: 0;
+}
+
+.user-profile-data-list li {
+    background-color: black;
+    padding: 10px 10px;
+    margin-bottom: 3px;
+    background-color:rgba(0, 0, 0, 0.7);
+}
+
+.user-profile-data-list li:last-child{
+    margin-bottom: 10px;
 }
 
 .footer{

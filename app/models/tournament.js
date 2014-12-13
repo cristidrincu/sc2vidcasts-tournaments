@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-require('./user');
 
 //define the schema for our tournament model
 var tournamentSchema = mongoose.Schema({
@@ -34,7 +33,7 @@ tournamentSchema.path('tournamentName').validate(function(tournamentName){
 }, 'Numele turneului trebuie sa contina mai mult de 4 caractere');
 
 tournamentSchema.path('description').validate(function(description){
-  return description.length > 100
+  return description.length > 10
 }, 'Descrierea turneului trebuie sa contina minim 100 de caractere');
 
 tournamentSchema.path('ingameChatChannel').validate(function(ingameChatChannel){

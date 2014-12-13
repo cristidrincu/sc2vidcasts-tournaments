@@ -1,7 +1,6 @@
-require('./avatar');
-require('./tournament');
-var tournament = require('./tournament');
+//ALWAYS REQUIRE MONGOOSE BEFORE ANY OTHER MODELS. IF NOT, YOU'LL GET OBJECT OBJECT DOES NOT HAVE SCHEMA DEFINED
 var mongoose = require('mongoose');
+var Tournament = mongoose.model('Tournament');
 var bcrypt = require('bcrypt-nodejs');
 
 //define the schema for our user model
@@ -36,14 +35,18 @@ userSchema.methods.isValid = function(password){
   return bcrypt.compareSync(password, this.local.password);
 };
 
-userSchema.pre('remove', function(userId, next){
-  tournament.update(
-      { 'tournamentName': 'Battle of the Races' },
-      { $pull: { 'players': { _id: userId } } },
-      { multi: true },
-      console.log('user removed from tournament'),
-      next(new Error('Could not delete user from tournament'))
-  );
+userSchema.pre('remove', function(next){
+
+	//always have a callback function, function(err, result) - the result holds how many indexes have been affected by the query
+	Tournament.update({ players: this._id }, {$pull: {players: this._id}}, function(err, removeResult){
+		if(err) throw err;
+
+		console.log('Removed player from tournament players array!');
+		console.log(removeResult);
+	});
+
+//	Tournament.remove({ 'players._id' : this._id }).exec();
+	next();
 });
 
 //create the model for users and expose it to our app

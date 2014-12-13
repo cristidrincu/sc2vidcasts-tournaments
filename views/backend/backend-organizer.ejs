@@ -13,7 +13,7 @@
                 <div class="col-lg-8">
                     <div class="container-summary-tournaments">
                         <h1 class="title-reports-element"><i class="fa fa-trophy fa-fw"></i> Turnee organizate de tine</h1>
-                        <h4><span style="color: red"><%= tournamentsLength > 1 ? tournamentsLength + ' turnee' : tournamentsLength + ' turneu'%></span> in baza de date
+                        <h4><span style="color: red"><%= tournamentsLength > 1 || tournaments.length == 0 ? tournamentsLength + ' turnee' : tournamentsLength + ' turneu'%></span> in baza de date
                             <a style="margin-left: 5px; position: relative; top: -2px; font-size: 14px;" href="/open-tournaments/<%= user._id%>"><i class="fa fa-trophy fa-1x"></i> Toate turneele</a>
                         </h4>
                         <div class="container-3-tournaments" style="padding-top: 15px;">

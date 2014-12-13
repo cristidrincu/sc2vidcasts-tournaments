@@ -1,4 +1,7 @@
-
+#dateParagraph{
+    float: left;
+    margin-left: -20px;
+}
 
 .menu-section-text{
     font-size: 20px;
@@ -192,28 +195,9 @@ ul.edit-menu-tournament{
     text-align: center;
 }
 
-/*.div-gradient{*/
-    /*background: #d4e4ef; *//* Old browsers */
-    /*background: -moz-linear-gradient(top,  #d4e4ef 0%, #86aecc 100%); *//* FF3.6+ */
-    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d4e4ef), color-stop(100%,#86aecc)); *//* Chrome,Safari4+ */
-    /*background: -webkit-linear-gradient(top,  #d4e4ef 0%,#86aecc 100%); *//* Chrome10+,Safari5.1+ */
-    /*background: -o-linear-gradient(top,  #d4e4ef 0%,#86aecc 100%); *//* Opera 11.10+ */
-    /*background: -ms-linear-gradient(top,  #d4e4ef 0%,#86aecc 100%); *//* IE10+ */
-    /*background: linear-gradient(to bottom,  #d4e4ef 0%,#86aecc 100%); *//* W3C */
-    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e4ef', endColorstr='#86aecc',GradientType=0 ); *//* IE6-9 */
-/*}*/
-
-/*.div-gradient-red{*/
-    /*background: #febbbb; *//* Old browsers */
-    /*background: -moz-linear-gradient(top,  #febbbb 0%, #fe9090 45%, #ff5c5c 100%); *//* FF3.6+ */
-    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#febbbb), color-stop(45%,#fe9090), color-stop(100%,#ff5c5c)); *//* Chrome,Safari4+ */
-    /*background: -webkit-linear-gradient(top,  #febbbb 0%,#fe9090 45%,#ff5c5c 100%); *//* Chrome10+,Safari5.1+ */
-    /*background: -o-linear-gradient(top,  #febbbb 0%,#fe9090 45%,#ff5c5c 100%); *//* Opera 11.10+ */
-    /*background: -ms-linear-gradient(top,  #febbbb 0%,#fe9090 45%,#ff5c5c 100%); *//* IE10+ */
-    /*background: linear-gradient(to bottom,  #febbbb 0%,#fe9090 45%,#ff5c5c 100%); *//* W3C */
-    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#febbbb', endColorstr='#ff5c5c',GradientType=0 ); *//* IE6-9 */
-
-/*}*/
+.div-gradient, .div-gradient-red, .div-gradient-green{
+    background-color:rgba(255, 255, 255, 0.5);
+}
 
 /*.div-gradient-green{*/
     /*background: #dce3c4; *//* Old browsers */
@@ -225,6 +209,53 @@ ul.edit-menu-tournament{
     /*background: linear-gradient(to bottom,  #dce3c4 0%,#aebf76 100%,#fefefd 100%); *//* W3C */
     /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dce3c4', endColorstr='#fefefd',GradientType=0 ); *//* IE6-9 */
 /*}*/
+
+.createBrackets, .createBrackets:hover{
+    border: none;
+    background: none;
+    color: #428bca;
+}
+
+.createBrackets:hover{
+    text-decoration: underline;
+}
+
+.create-bracket-icon{
+    color: #428bca;
+}
+
+.background-profile-terran, .background-profile-zerg, .background-profile-protoss{
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.background-profile-terran{
+    background: url('../images/background-races/terran-background-1.jpg') no-repeat center center fixed;
+}
+
+.background-profile-zerg{
+    background: url('../images/background-races/zerg-background-1.jpg') no-repeat center center fixed;
+}
+
+.background-profile-protoss{
+    background: url('../images/background-races/protoss-background-1.jpg') no-repeat center center fixed;
+}
+
+@media screen and (max-width: 1024px) {
+    .background-profile-terran, .background-profile-zerg, .background-profile-protoss {
+        left: 50%;
+        margin-left: -512px;   /* 50% */
+    }
+}
 
 .footer{
     padding-top: 20px;

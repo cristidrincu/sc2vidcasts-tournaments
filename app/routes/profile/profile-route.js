@@ -90,6 +90,25 @@ app.get('/avatars-users/:userId', isLoggedIn, function(req, res){
 	});
 });
 
+app.get('/delete-account/:userId', isLoggedIn, function(req, res){
+	helperFunctions.getUserDetails(req.params.userId).then(function(user){
+		res.render('profile/profile-remove', {
+			user: user,
+			userAvatar: user
+		});
+	});
+});
+
+app.post('/delete-account/:userId', isLoggedIn, function(req, res){
+	User.findById(req.params.userId).exec(function(err, user){
+		if(err) throw err;
+
+		user.remove();
+
+		res.redirect('/signup');
+	});
+});
+
 /*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {

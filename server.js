@@ -29,8 +29,8 @@ var helperFunctions = require('./app/helpers-mongoose.js');
 //connect to our database
 mongoose.connect(configDB.url);
 
-//bootstrap models
-//var models_path = __dirname + '/app/models'
+////bootstrap models
+//var models_path = __dirname + '/app/models';
 //fs.readdirSync(models_path).forEach(function (file) {
 //  if (~file.indexOf('.js')) require(models_path + '/' + file)
 //})

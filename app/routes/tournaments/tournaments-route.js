@@ -95,7 +95,7 @@ app.get('/tournament-details/:_id/:userId', isLoggedIn, function(req, res){
       }
     });
 
-    Tournament.findById(req.params._id).populate('players organizer').exec( function(err, tournament){
+    Tournament.findById(req.params._id).populate('players organizer bracket').exec( function(err, tournament){
       if(err){
         res.send(err)
       }else{
@@ -106,56 +106,59 @@ app.get('/tournament-details/:_id/:userId', isLoggedIn, function(req, res){
           }
       });
 
-			helperFunctions.retrieveAllTournamentPlayersBasedOnLeagues(req.params._id, function(playersFromCollection){
-					helperFunctions.getUserDetails(req.params.userId).then(function(user){
-						res.render('tournament/tournament-details.ejs',{
-							user: req.user,
-							tournament: tournament,
-							userAvatar: user,
-							userId: req.params.userId,
-							bronzePlayers: _.filter(playersFromCollection, function(player){
-								if(player.local.league === 'Bronze'){
-									return player;
-								}
-							}),
-							silverPlayers: _.filter(playersFromCollection, function(player){
-								if(player.local.league === 'Silver'){
-									return player;
-								}
-							}),
-							goldPlayers: _.filter(playersFromCollection, function(player){
-								if(player.local.league === 'Gold'){
-									return player;
-								}
-							}),
-							platinumPlayers: _.filter(playersFromCollection, function(player){
-								if(player.local.league === 'Platinum'){
-									return player;
-								}
-							}),
-							diamondPlayers: _.filter(playersFromCollection, function(player){
-								if(player.local.league === 'Diamond'){
-									return player;
-								}
-							}),
-							mastersPlayers: _.filter(playersFromCollection, function(player){
-								if(player.local.league === 'Master'){
-									return player;
-								}
-							}),
-							grandMasterPlayers: _.filter(playersFromCollection, function(player){
-								if(player.local.league === 'Grand Master'){
-									return player;
-								}
-							}),
-							moment: moment,
-							enlistedInTournament: enlistedInTournament,
-							eligibleForTournament: eligibleForTournament,
-							allPlacesTaken: allPlacesTaken,
-							procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers))
-						});
-					});
-				});
+		    helperFunctions.retrieveAllTournamentPlayersBasedOnLeagues(req.params._id, function(playersFromCollection){
+			    helperFunctions.getUserDetails(req.params.userId).then(function(user){
+				    res.render('tournament/tournament-details.ejs',{
+					    user: req.user,
+					    tournament: tournament,
+					    userAvatar: user,
+					    userId: req.params.userId,
+					    bronzePlayers: _.filter(playersFromCollection, function(player){
+						    if(player.local.league === 'Bronze'){
+							    return player;
+						    }
+					    }),
+					    silverPlayers: _.filter(playersFromCollection, function(player){
+						    if(player.local.league === 'Silver'){
+							    return player;
+						    }
+					    }),
+					    goldPlayers: _.filter(playersFromCollection, function(player){
+						    if(player.local.league === 'Gold'){
+							    return player;
+						    }
+					    }),
+					    platinumPlayers: _.filter(playersFromCollection, function(player){
+						    if(player.local.league === 'Platinum'){
+							    return player;
+						    }
+					    }),
+					    diamondPlayers: _.filter(playersFromCollection, function(player){
+						    if(player.local.league === 'Diamond'){
+							    return player;
+						    }
+					    }),
+					    mastersPlayers: _.filter(playersFromCollection, function(player){
+						    if(player.local.league === 'Master'){
+							    return player;
+						    }
+					    }),
+					    grandMasterPlayers: _.filter(playersFromCollection, function(player){
+						    if(player.local.league === 'Grand Master'){
+							    return player;
+						    }
+					    }),
+					    moment: moment,
+					    enlistedInTournament: enlistedInTournament,
+					    eligibleForTournament: eligibleForTournament,
+					    allPlacesTaken: allPlacesTaken,
+					    procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers))
+				    });
+			    });
+		    });
+
+
+
       }
     });
   });
@@ -190,14 +193,12 @@ app.post('/signup-tournament/:_id/:userId', isLoggedIn, function(req, res){
               req.flash('infoError', 'Toate locurile au fost ocupate!');
             }else{
               Tournament.findByIdAndUpdate(req.params._id, { $pushAll: { players: [req.params.userId] }}, function(err){
-                if(err)
-                  res.send(err)
-                else
-                  User.findByIdAndUpdate(req.params.userId, { $pushAll: { 'local.tournaments': [req.params._id] }}, function(err){
-                    if(err)
-                      res.send(err)
-                    res.redirect('/user-tournaments/' + req.params.userId);
-                  });
+	              if(err) throw err
+		              User.findByIdAndUpdate(req.params.userId, { $pushAll: { 'local.tournaments': [req.params._id] }}, function(err){
+			              if(err)
+				              res.send(err)
+			              res.redirect('/user-tournaments/' + req.params.userId);
+		              });
               });
             }
           }
@@ -258,40 +259,7 @@ app.post('/retragere-din-turneu/:_userId/:_tournamentId', isLoggedIn, function(r
 });
 
 app.post('/create-brackets/:tournamentId', isLoggedIn, requireRole('Organizator'), function(req, res){
-	var players1 = [];
-	var players2 = [];
 
-	Tournament.findById(req.params.tournamentId).populate('players').exec(function(err, tournament){
-		if(err) throw err;
-		tournament.players.forEach(function(player){
-			players1.push(player.local.nickname);
-		});
-
-		//Implement bracket generation algorithm sau sa adauge organizatorul manual si apoi embed la bracket?
-		players2 = players1.splice(0, players1.length / 2);
-		console.log(players1, players2);
-
-		var matches = {};
-
-		for(var i = 0; i < players1.length; i++){
-			matches.group1 = {
-				player1: players1[i],
-				player2: players2[i]
-			}
-		}
-
-		for(var i = players2.length; i >= 0; i--){
-			matches.group2 = {
-				player1: players1[i],
-				player2: players2[i]
-			}
-		}
-
-		console.log('Group1:' +  matches.group1.player1, 'Player2:' + matches.group1.player2);
-		console.log('Group2:' +  matches.group2.player1, 'Player2:' + matches.group2.player2);
-	});
-
-	res.redirect('/tournament-details/' + req.params.tournamentId + '/' + req.user._id);
 });
 
 /*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/

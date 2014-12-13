@@ -46,7 +46,8 @@
     <script src="/js/pickadate.js-3.5.3/lib/compressed/picker.time.js"></script>
     <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
     <script src="/js/flash-messages.js"></script>
-    <!--<script src="/js/tooltip.js"></script>-->
+    <script src="/js/slidingProfilePanels.js"></script>
+    <script src="/js/site-date.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -61,7 +62,10 @@
         <span class="icon-bar"></span>
     </button>
     <%if(user != null){%>
-        <a style="margin-left:15px;" class="navbar-brand" href="/profile">Bine ai venit, <%=user.local.nickname%></a>
+        <a style="margin-left:15px; float: left;" class="navbar-brand" href="/profile">Bine ai venit, <%=user.local.nickname%>.</a>
+        <p id="dateParagraph" class="navbar-brand"></p>
+        <p id="timeParagraph" class="navbar-band"></p>
+        <br style="clear:both;"/>
     <%}%>
 
 </div>

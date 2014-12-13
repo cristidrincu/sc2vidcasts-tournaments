@@ -1,120 +1,131 @@
 <% include ../partials/header %>
-<div style="margin-top: 30px; margin-left: 25px;">
-    <div class="row">
-        <div class="col-xs-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Profilul tau</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-3 col-lg-3 " align="center">
-                            <% userAvatar.forEach(function(avatar){ %>
-                            <img alt="User Pic" src="../..<%= avatar.imagePath + '/' + avatar.imageName %>"
-                                 class="img-circle main-profile-image profile-small-pic"/>
-                            <% }); %>
-                        </div>
-                        <div class=" col-md-9 col-lg-9 ">
-                            <table class="table table-user-information">
-                                <tbody>
-                                <tr>
-                                    <td>Nickname:</td>
-                                    <td><%= user.local.nickname %></td>
-                                </tr>
-                                <tr>
-                                    <td>Email:</td>
-                                    <td><%= user.local.email %></td>
-                                </tr>
-                                <tr>
-                                    <td>Battle.Net ID:</td>
-                                    <td><%= user.local.battlenetid %></td>
-                                </tr>
 
-                                <tr>
-                                <tr>
-                                    <td>Race:</td>
-                                    <td><%= user.local.race %></td>
-                                </tr>
-                                <tr>
-                                    <td>Liga</td>
-                                    <td><%= user.local.league %></td>
-                                </tr>
-                                <tr>
-                                    <td>Rol</td>
-                                    <td><%= user.local.role %></td>
-                                </tr>
-                                <tr>
-                                    <td>Te putem ajuta?</td>
-                                    <td>
-                                        <a href="mailto:turnee@starcraft2-vidcasts.ro">turnee@starcraft2-vidcasts.ro</a>
-                                    </td>
-                                </tr>
-                                </tr>
+<!--Change background for profile page based on player race-->
+<% if(detailedUser.local.race == 'Terran'){%>
+    <div class="background-profile-terran">
+<%} else if (detailedUser.local.race == 'Zerg'){%>
+    <div class="background-profile-zerg">
+<%} else {%>
+    <div class="background-profile-protoss">
+<%}%>
 
-                                </tbody>
-                            </table>
+    <div style="margin-top: 30px; margin-left: 25px;">
+        <div class="row">
+            <div class="col-xs-4 sliding-panel-main-profile">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Profilul tau</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3 " align="center">
+                                <% userAvatar.forEach(function(avatar){ %>
+                                <img alt="User Pic" src="../..<%= avatar.imagePath + '/' + avatar.imageName %>"
+                                     class="img-circle main-profile-image profile-small-pic"/>
+                                <% }); %>
+                            </div>
+                            <div class=" col-md-9 col-lg-9 ">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                    <tr>
+                                        <td>Nickname:</td>
+                                        <td><%= user.local.nickname %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email:</td>
+                                        <td><%= user.local.email %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Battle.Net ID:</td>
+                                        <td><%= user.local.battlenetid %></td>
+                                    </tr>
 
-                            <a href="/customize-profile/<%= user.local.nickname %>"
-                               class="btn btn-danger btn-modifica-profilul">Modifica profilul</a>
-                            <% if(user.local.role == 'admin'){ %>
-                            <a href="/backend-admin/<%= user._id %>" class="btn btn-success btn-modifica-profilul">Panou
-                                turnee</a>
-                            <a class="btn btn-primary buton-alege-avatar" href="/avatars-users-admin/<%= user._id %>">Alege
-                                un avatar</a>
-                            <% }else if(user.local.role == 'Organizator'){ %>
-                            <a href="/backend-organizer/<%= user._id %>" class="btn btn-success btn-modifica-profilul">Panou
-                                turnee</a>
-                            <a class="btn btn-primary buton-alege-avatar" href="/avatars-users/<%= user._id %>">Alege un
-                                avatar</a>
-                            <% }else{ %>
-                            <a href="/backend-user/<%= user._id %>" class="btn btn-success btn-modifica-profilul">Panou
-                                turnee</a>
-                            <a class="buton-alege-avatar btn btn-primary" href="/avatars-users/<%= user._id %>">Alege un
-                                avatar</a>
-                            <% } %>
+                                    <tr>
+                                    <tr>
+                                        <td>Race:</td>
+                                        <td><%= user.local.race %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Liga</td>
+                                        <td><%= user.local.league %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Rol</td>
+                                        <td><%= user.local.role %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Te putem ajuta?</td>
+                                        <td>
+                                            <a href="mailto:turnee@starcraft2-vidcasts.ro">turnee@starcraft2-vidcasts.ro</a>
+                                        </td>
+                                    </tr>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+
+                                <a href="/customize-profile/<%= user.local.nickname %>"
+                                   class="btn btn-danger btn-modifica-profilul">Modifica profilul</a>
+                                <% if(user.local.role == 'admin'){ %>
+                                <a href="/backend-admin/<%= user._id %>" class="btn btn-success btn-modifica-profilul">Panou
+                                    turnee</a>
+                                <a class="btn btn-primary buton-alege-avatar" href="/avatars-users-admin/<%= user._id %>">Alege
+                                    un avatar</a>
+                                <% }else if(user.local.role == 'Organizator'){ %>
+                                <a href="/backend-organizer/<%= user._id %>" class="btn btn-success btn-modifica-profilul">Panou
+                                    turnee</a>
+                                <a class="btn btn-primary buton-alege-avatar" href="/avatars-users/<%= user._id %>">Alege un
+                                    avatar</a>
+                                <% }else{ %>
+                                <a href="/backend-user/<%= user._id %>" class="btn btn-success btn-modifica-profilul">Panou
+                                    turnee</a>
+                                <a class="buton-alege-avatar btn btn-primary" href="/avatars-users/<%= user._id %>">Alege un
+                                    avatar</a>
+                                <% } %>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xs-2">
-            <div class="panel panel-info div-gradient" style="padding-bottom: 49px;">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Participi in cadrul <%= detailedUser.local.tournaments.length == 0 || detailedUser.local.tournaments.length > 1 ? 'a...' : 'unui...' %></h3>
-                </div>
-                <div style="text-align: center">
-                    <h1 style="font-size: 150px; padding-top: 30px;"><%= detailedUser.local.tournaments.length %></h1>
-                    <p style="position: relative; top: -30px; font-size: 25px"><%= detailedUser.local.tournaments.length == 0 || detailedUser.local.tournaments.length > 1 ? 'turnee' : 'turneu'%></p>
-                    <a style="position:relative; top: 25px;" class="btn btn-info" href="/user-tournaments/<%= detailedUser._id%>">Turneele tale</a>
+            <div class="col-xs-2">
+                <div class="panel div-gradient" style="padding-bottom: 49px;">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Participi in cadrul <%= detailedUser.local.tournaments.length == 0 || detailedUser.local.tournaments.length > 1 ? 'a...' : 'unui...' %></h3>
+                    </div>
+                    <div style="text-align: center">
+                        <h1 style="font-size: 150px; padding-top: 30px;"><%= detailedUser.local.tournaments.length %></h1>
+                        <p style="position: relative; top: -30px; font-size: 25px"><%= detailedUser.local.tournaments.length == 0 || detailedUser.local.tournaments.length > 1 ? 'turnee' : 'turneu'%></p>
+                        <a style="position:relative; top: 25px;" class="btn btn-info" href="/user-tournaments/<%= detailedUser._id%>">Turneele tale</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xs-2">
-            <div class="panel panel-danger div-gradient-red" style="padding-bottom: 49px;">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Ai strans in inbox...</h3>
-                </div>
-                <div style="text-align: center">
-                    <h1 style="font-size: 150px; padding-top: 30px;"><%= messages.length %></h1>
-                    <p style="position: relative; top: -30px; font-size: 25px"><%= messages.length == 0 || messages.length > 1 ? 'mesaje' : 'mesaj'%></p>
+            <div class="col-xs-2">
+                <div class="panel div-gradient-red" style="padding-bottom: 49px;">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Ai strans in inbox...</h3>
+                    </div>
+                    <div style="text-align: center">
+                        <h1 style="font-size: 150px; padding-top: 30px;"><%= messages.length %></h1>
+                        <p style="position: relative; top: -30px; font-size: 25px"><%= messages.length == 0 || messages.length > 1 ? 'mesaje' : 'mesaj'%></p>
 
-                    <% if(messages.length == 0){%>
+                        <% if(messages.length == 0){%>
                         <p style="position:relative; top: 30px; font-size: 17px;">Pff... <i class="fa fa-frown-o"></i></p>
-                    <%} else {%>
+                        <%} else {%>
                         <a style="position:relative; top: 25px;" class="btn btn-info" href="/user-messages/<%= detailedUser._id%>">Mesajele tale</a>
-                    <%}%>
+                        <%}%>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xs-2">
-            <div class="panel panel-success div-gradient-green" style="padding-bottom: 49px;">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Incep in curand...</h3>
-                </div>
-                <div style="text-align: center">
-                    <h1 style="font-size: 150px; padding-top: 30px;">5</h1>
-                    <p style="position: relative; top: -30px; font-size: 25px">turnee</p>
-                    <a style="position:relative; top: 25px;" class="btn btn-success" href="/user-tournaments/<%= detailedUser._id%>">Upcoming</a>
+            <div class="col-xs-2">
+                <div class="panel div-gradient-green" style="padding-bottom: 49px;">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Incep in curand...</h3>
+                    </div>
+                    <div style="text-align: center">
+                        <h1 style="font-size: 150px; padding-top: 30px;">5</h1>
+                        <p style="position: relative; top: -30px; font-size: 25px">turnee</p>
+                        <a style="position:relative; top: 25px;" class="btn btn-success" href="/user-tournaments/<%= detailedUser._id%>">Upcoming</a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,6 +1,9 @@
 {
   "name": "sc2-tournaments",
   "version": "0.0.1",
+	"engines": {
+		"node": "0.10.24"
+	},
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

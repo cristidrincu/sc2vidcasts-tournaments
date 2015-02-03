@@ -8,7 +8,6 @@ var Avatar = require('../../models/avatar');
 var moment = require('moment');
 var helperFunctions = require('../../../app/helpers-mongoose.js');
 var placeHolderText = require('../../../config/validation-placeholders-text.js');
-var async = require('async');
 var _ = require('underscore');
 
 var app = module.exports = express();

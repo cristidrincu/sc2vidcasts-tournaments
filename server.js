@@ -35,17 +35,6 @@ mongoose.connect(configDB.url);
 //  if (~file.indexOf('.js')) require(models_path + '/' + file)
 //})
 
-//app.locals({
-//  site: {
-//    title: 'ExpressBootstrapEJS',
-//    description: 'A boilerplate for a simple web application with a Node.JS and Express backend, with an EJS template with using Twitter Bootstrap.'
-//  },
-//  author: {
-//    name: 'Cory Gross',
-//    contact: 'CoryG89@gmail.com'
-//  }
-//});
-
 
 //pass passport for configuration
 require('./config/passport.js')(passport); //pass passport for configuration

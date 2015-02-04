@@ -22,8 +22,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
-var compress = require('compression');
-
 var configDB = require('./config/database.js');
 var helperFunctions = require('./app/helpers-mongoose.js');
 
@@ -49,8 +47,6 @@ app.use(bodyParser.urlencoded({ extended: true })); //to support URL-encoded bod
 app.use(busboy());
 
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(compress());
 
 app.set('port', (process.env.PORT || 5000))
 app.set('views', __dirname + '/views');

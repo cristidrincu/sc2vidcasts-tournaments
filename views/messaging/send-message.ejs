@@ -35,7 +35,7 @@
                         <%if(user.local.role == 'admin'){%>
                             <a href="/backend-admin/<%= user._id%>"><input class="btn btn-danger" value="Anuleaza"/></a>
                         <%}else if(user.local.role == 'Organizator'){%>
-                            <a href="/backend-organizers/<%= user._id%>"><input class="btn btn-danger" value="Anuleaza"/></a>
+                            <a href="/backend-organizer/<%= user._id%>"><input class="btn btn-danger" value="Anuleaza"/></a>
                         <%}else{%>
                             <a href="/user-messages/<%= user._id%>"><input class="btn btn-danger" value="Anuleaza"/></a>
                         <%}%>

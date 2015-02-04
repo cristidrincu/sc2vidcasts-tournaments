@@ -22,6 +22,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
+var compress = require('compression');
+
 var configDB = require('./config/database.js');
 var helperFunctions = require('./app/helpers-mongoose.js');
 
@@ -47,6 +49,8 @@ app.use(bodyParser.urlencoded({ extended: true })); //to support URL-encoded bod
 app.use(busboy());
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(compress());
 
 app.set('port', (process.env.PORT || 5000))
 app.set('views', __dirname + '/views');
@@ -74,7 +78,7 @@ var organizer = require('./app/routes/organizer/organizer-routes');
 var avatar = require('./app/routes/avatar/avatar-routes');
 var editTournament = require('./app/routes/edit/edit-tournament');
 var editQuote = require('./app/routes/edit/edit-quote');
-var quote = require('./app/routes/quote/quote-route.js');
+var quote = require('./app/routes/quote/quote-route');
 
 var logout = require('./app/routes/logout/logout-route');
 

@@ -1,6 +1,6 @@
-<%include ../partials/header%>
+<%include ../partials/header.ejs%>
     <% userAvatar.local.avatar.forEach(function(avatar){ %>
-    <% include ../partials/sidebar%>
+    <% include ../partials/sidebar.ejs%>
 <%});%>
 <div id="page-wrapper" style="padding-top: 40px;">
     <div class="row">
@@ -64,7 +64,7 @@
                         <%player.local.avatar.forEach(function(avatar){%>
                         <a href="/profile-details/<%= player._id%>">
                             <div class="col-lg-4">
-                                <img class="img-circle profile-pic-rezumat-backend" style="margin-bottom: 10px;" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                                <img class="img-circle profile-pic-rezumat-backend" width="110" height="110" style="margin-bottom: 10px;" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
                                 <p style="width:112px;" class="btn btn-info"><%= player.local.nickname%></p>
                             </div>
                         </a>
@@ -84,7 +84,7 @@
                         <%organizer.local.avatar.forEach(function(avatar){%>
                         <a href="/profile-details/<%= organizer._id%>">
                             <div class="col-lg-4">
-                                <img class="img-circle profile-pic-rezumat-backend" style="margin-bottom: 10px;" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                                <img class="img-circle profile-pic-rezumat-backend" width="110" height="110" style="margin-bottom: 10px;" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
                                 <a style="width:112px;" href="/profile-details/<%= organizer._id%>" class="btn btn-warning"><%= organizer.local.nickname%></a>
                             </div>
                         </a>
@@ -102,7 +102,7 @@
                     <div class="container-3-players" style="padding-top: 15px;">
                         <%avatarsSampled.forEach(function(avatar){%>
                         <div class="col-lg-4" style="margin-bottom: 20px">
-                            <img class="img-circle profile-pic-rezumat-backend" style="margin-bottom: 10px;" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                            <img class="img-circle profile-pic-rezumat-backend" width="110" height="110" style="margin-bottom: 10px;" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
                             <form action="/choose-avatar/<%= user._id%>/<%= avatar._id%>" method="post">
                                 <button style="width:112px;" class="btn btn-success">Alege-l</button>
                             </form>
@@ -117,4 +117,4 @@
 </div>
 
 
-<% include ../partials/footer %>
+<% include ../partials/footer.ejs %>

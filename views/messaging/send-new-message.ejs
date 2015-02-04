@@ -15,12 +15,6 @@
 <script>
     <%- javascript %>
     $(function() {
-//        console.log(players);
-//        if(players instanceof Array){
-//            console.log('players is an array');
-//        }else{
-//            console.log('players is not an array');
-//        }
         $( "#playerNicks" ).autocomplete({
             source: $.map(players, function(nickname){
                 return nickname;

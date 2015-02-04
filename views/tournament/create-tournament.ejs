@@ -1,10 +1,10 @@
-<% include ../partials/header%>
+<% include ../partials/header.ejs%>
 <%
     var nrOfPlayers = ['4', '8', '16', '32', '64'],
         leagues = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Master', 'Grand Master'];
 %>
 
-<script type="text/javascript">
+<script>
     $(document).ready(function() {
 
         var pickerOptions = {
@@ -92,4 +92,4 @@
 </form>
         </div>
 </div>
-<% include ../partials/footer%>
+<% include ../partials/footer.ejs%>

@@ -45,5 +45,5 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 
 	//grunt.registerTask('default', [ 'concat:css', 'cssmin:css', 'concat:js', 'uglify:js' ]);
-	grunt.registerTask('default', [ 'concat:css', 'concat:js', 'uglify', 'cssmin' ]);
+	grunt.registerTask('default', [ 'concat:css', 'concat:js', 'uglify' ]);
 }

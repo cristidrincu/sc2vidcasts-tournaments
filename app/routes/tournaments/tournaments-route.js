@@ -13,7 +13,7 @@ var _ = require('underscore');
 var app = module.exports = express();
 
 /* TOURNAMENT ROUTES */
-app.get('/open-tournaments/:userId', function(req, res){
+app.get('/open-tournaments/:userId', isLoggedIn, function(req, res){
   helperFunctions.getUserDetails(req.params.userId).then(function(user){
     helperFunctions.retrieveAllTournaments().then(function(tournaments){
       res.render('tournament/open-tournaments.ejs', {
@@ -24,6 +24,22 @@ app.get('/open-tournaments/:userId', function(req, res){
       });
     });
   });
+});
+
+app.get('/closed-tournaments/:userId', isLoggedIn, function(req, res){
+	helperFunctions.getUserDetails(req.params.userId).then(function(user){
+		helperFunctions.retrieveClosedTournaments().then(function(tournaments){
+			res.render('tournament/closed-tournaments.ejs', {
+				user: req.user,
+				avatarUser: user,
+				tournaments: tournaments,
+				moment: moment
+			});
+		});
+
+		console.log(req.user.role);
+
+	});
 });
 
 
@@ -61,6 +77,7 @@ app.post('/create-tournament', isLoggedIn, requireRole('Organizator'), function(
       newTournament.sponsors = req.body.sponsors;
       newTournament.ingameChatChannel = req.body.ingameChatChannel;
       newTournament.twitchStreamChannel = 'http://www.twitch.tv/' + req.body.twitchStreamChannel;
+	    newTournament.finishedTournament = false;
       newTournament.organizer = req.user._id;
 
     newTournament.save(function(err){
@@ -151,13 +168,11 @@ app.get('/tournament-details/:_id/:userId', isLoggedIn, function(req, res){
 					    enlistedInTournament: enlistedInTournament,
 					    eligibleForTournament: eligibleForTournament,
 					    allPlacesTaken: allPlacesTaken,
-					    procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers))
+					    procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers)),
+					    tournamentStatus: tournamentStatus(tournament)
 				    });
 			    });
 		    });
-
-
-
       }
     });
   });
@@ -175,7 +190,6 @@ app.post('/signup-tournament/:_id/:userId', isLoggedIn, function(req, res){
       }
 
       if(players){
-        //TODO - replace with proper error view - present other tournaments that the user can enlist into
         res.send('Esti deja inscris in cadrul acestui turneu!');
       }else if(!players){
         Tournament.findById(req.params._id, function(err, tournament){
@@ -188,7 +202,6 @@ app.post('/signup-tournament/:_id/:userId', isLoggedIn, function(req, res){
             var playerPlacesTaken = tournament.players.length;
 
             if(playerPlacesTaken >= placesForPlayers){
-              //TODO - replace with proper error view - present other tournaments that the user can enlist into
               req.flash('infoError', 'Toate locurile au fost ocupate!');
             }else{
               Tournament.findByIdAndUpdate(req.params._id, { $pushAll: { players: [req.params.userId] }}, function(err){
@@ -212,10 +225,18 @@ app.get('/user-tournaments/:userId', isLoggedIn, function(req, res){
     if(err)
       res.send(err)
     else
-      console.log(user.tournaments);
       res.render('tournament/user-tournaments.ejs', {
         user: req.user,
-        playerTournamentsUser: user,
+        activeTournaments: _.filter(user.local.tournaments, function(tournament){
+	        if(!tournament.finishedTournament){
+		        return tournament;
+	        }
+        }),
+	      inactiveTournaments: _.filter(user.local.tournaments, function(tournament){
+		      if(tournament.finishedTournament){
+			      return tournament;
+		      }
+	      }),
 	      userAvatar: user,
         moment: moment,
         errorMessage: req.flash('infoError'),
@@ -279,4 +300,19 @@ function requireRole(role){
       res.send(403);
     }
   }
+}
+
+function tournamentStatus(tournament){
+	var date = new Date();
+	var completed = 2;
+	var ongoing = 1;
+	var starting = 0;
+
+	if(moment(date).isAfter(tournament.startDate)){
+		return completed;
+	}else if(moment(date).isAfter(tournament.startDate) && moment(date).isBefore(tournament.endDate) ){
+		return ongoing;
+	}else{
+		return starting;
+	}
 }

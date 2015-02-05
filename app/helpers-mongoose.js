@@ -8,6 +8,7 @@ var ErrorHandler = require('./helpers-error-handlers.js');
 var _ = require('underscore');
 var Q = require('q');
 
+
 //We use Q.defer when we are dealing with asynchronous callbacks, as the one below: function(err, user).
 exports.getUserDetails = function(id){
 	var deferred = Q.defer();
@@ -37,7 +38,7 @@ exports.getUserIdName = function(nickname){
 
 exports.getQuoteDetails = function(quoteId){
 	var deffered = Q.defer();
-	Quote.findById(quoteId).exec(function(err, quote){
+	Quote.findById(quoteId).populate('quoteInsertedBy').exec(function(err, quote){
 		if(err){
 			deffered.reject(err);
 		}
@@ -101,12 +102,24 @@ exports.retrieveAllOrganizers = function(){
 
 exports.retrieveAllTournaments = function(){
 	var deferred = Q.defer();
-  Tournament.find().sort( {tournamentName : 1} ).exec(function(err, tournaments){
+  Tournament.find({finishedTournament: false}).sort( {tournamentName : 1} ).exec(function(err, tournaments){
     if(err)
       deferred.reject(ErrorHandler.handle('A aparut o eroare in preluarea turneelor din baza de date' + err));
     else
       deferred.resolve(tournaments);
   });
+
+	return deferred.promise;
+}
+
+exports.retrieveClosedTournaments = function(){
+	var deferred = Q.defer();
+	Tournament.find({finishedTournament: true}).sort({startDate: 1}).exec(function(err, closedTournaments){
+		if(err)
+			deferred.reject(ErrorHandler.handle('A aparut o eroare in preluarea turneelor terminate din baza de date!' + err));
+		else
+			deferred.resolve(closedTournaments);
+	});
 
 	return deferred.promise;
 }
@@ -242,7 +255,7 @@ exports.retrieveAvatars = function(){
 
 exports.retrieveQuotes = function(){
 	var deferred = Q.defer();
-	Quote.find().populate('quoteInsertedBy').exec(function(err, quotes){
+	Quote.find({}).exec(function(err, quotes){
 		if(err){
 			deferred.reject(err);
 		}else{

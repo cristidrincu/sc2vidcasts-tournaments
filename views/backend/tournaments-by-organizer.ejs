@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Turnee organizate de <%= organizer.local.nickname%></h1>
-            <h4>Exista <%= organizedTournaments.length > 1 ? organizedTournaments.length + ' turnee organizate de acest utilizator' : organizedTournaments.length + 'turneu organizat de acest utilizator'%></h4>
+            <h4>Exista <%= organizedTournaments.length > 1 || organizedTournaments.length == 0 ? organizedTournaments.length + ' turnee organizate de acest utilizator' : organizedTournaments.length + 'turneu organizat de acest utilizator'%></h4>
         </div>
         <!-- /.col-lg-12 -->
     </div>

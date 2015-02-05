@@ -20,7 +20,7 @@
                 </h1>
             </div>
             <div class="col-lg-4">
-                <%if(user.local.role == 'Organizator'){%>
+                <%if(user.local.role == 'Organizator' && !tournament.finishedTournament){%>
 
                 <ul class="edit-menu-tournament">
                     <li>
@@ -35,18 +35,24 @@
                 </ul>
 
                 <%}else if(user.local.role == 'User'){%>
-                    <% if(!eligibleForTournament){%>
-                        <p style="padding-top: 55px; color: red">Acest concurs nu este deschis ligii din care faci parte. Ne pare rau!</p>
-                    <%}%>
+                    <%if(tournamentStatus == 1){%>
+                        <h4 style="color: orange; padding-top: 45px">Acest turneu este in desfasurare, iar inscrierile sunt inchise!</h4>
+                    <%} else if(tournamentStatus == 2){%>
+                        <h4 style="color: red; padding-top: 45px">Acest turneu s-a terminat!</h4>
+                    <%} else {%>
+                        <% if(!eligibleForTournament){%>
+                            <p style="padding-top: 55px; color: red">Acest concurs nu este deschis ligii din care faci parte. Ne pare rau!</p>
+                        <%}%>
 
-                    <% if(enlistedInTournament){%>
-                        <p style="padding-top: 55px; color: red">Esti deja inscris in cadrul acestui turneu</p>
-                    <%}%>
+                        <% if(enlistedInTournament){%>
+                            <p style="padding-top: 55px; color: red">Esti deja inscris in cadrul acestui turneu</p>
+                        <%}%>
 
-                    <% if(eligibleForTournament && !enlistedInTournament && (procentajOcupare != (100))){%>
-                        <form class="btn-signup-turneu-detalii" action="/signup-tournament/<%= tournament._id %>/<%= user._id %>" method="post">
-                            <button class="btn btn-success">Inscrie-te</button>
-                        </form>
+                        <% if(eligibleForTournament && !enlistedInTournament && (procentajOcupare != 100) ){%>
+                            <form class="btn-signup-turneu-detalii" action="/signup-tournament/<%= tournament._id %>/<%= user._id %>" method="post">
+                                <button class="btn btn-success">Inscrie-te</button>
+                            </form>
+                        <%}%>
                     <%}%>
                 <%}else if(user.local.role == 'admin'){%>
                     <div class="col-lg-4">
@@ -453,10 +459,10 @@
         <div class="col-lg-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Detalii turneu <%=tournament.tournamentName%>, editia a <%=tournament.edition%>-a
+                    <i class="fa fa-clock-o fa-fw"></i> Detalii turneu <%=tournament.tournamentName%>, <%=tournament.edition == 1 ? 'editia ' + tournament.edition : 'editia a ' + tournament.edition + '-a'%>
                 </div>
                 <div class="panel-body">
-                    <p><%=tournament.description%></p>
+                    <p><%=tournament.description.trim()%></p>
                 </div>
             </div>
         </div>

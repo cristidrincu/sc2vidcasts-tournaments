@@ -1,5 +1,5 @@
-<% include ../../partials/header%>
-    <% include ../../partials/sidebar-edit-tournament%>
+<% include ../../partials/header.ejs%>
+    <% include ../../partials/sidebar-edit-tournament.ejs%>
     <div class="col-lg-4">
         <h4 style="padding-top: 15px;">Informatiile de baza pentru turneu</h4>
 
@@ -9,31 +9,31 @@
             <p class="alert-danger"><%= errorMessage%></p>
         <%}%>
 
-        <form action="/informatii-de-baza/<%= tournament._id %>/<%= user._id%>" method="post">
-            <div class="form-group">
-                <label>Numele turneului</label>
-                <input type="text" class="form-control" name="tournamentName" value="<%= tournament.tournamentName%>" required>
-            </div>
-            <div class="form-group">
-                <label>Editia turneului</label>
-                <input type="text" class="form-control" name="edition" value="<%= tournament.edition%>" >
-            </div>
-            <div class="form-group">
-                <label>Canal Ingame pentru CHAT</label>
-                <input type="text" class="form-control" name="ingameChatChannel" value="<%= tournament.ingameChatChannel%>">
-            </div>
-            <div class="form-group">
-                <label>Canalul de Twitch pentru LIVE STREAM</label>
-                <input type="text" class="form-control" name="twitchStreamChannel" value="<%= tournament.twitchStreamChannel%>"/>
-            </div>
-            <div class="form-group">
-                <label>Descrierea turneului(informatii suplimentare)</label>
-                <textarea class="form-control" name="description" rows="10">
-                    <%= tournament.description%>
-                </textarea>
-            </div>
-            <button type="submit" class="btn btn-warning btn-lg">Confirma schimbarile</button>
-        </form>
+            <form action="/informatii-de-baza/<%= tournament._id %>/<%= user._id%>" method="post">
+                <div class="form-group">
+                    <label for="tournamentName">Numele turneului</label>
+                    <input type="text" class="form-control" name="tournamentName" value="<%= tournament.tournamentName%>" required>
+                </div>
+                <div class="form-group">
+                    <label for="edition">Editia turneului</label>
+                    <input type="text" class="form-control" name="edition" value="<%= tournament.edition%>" >
+                </div>
+                <div class="form-group">
+                    <label for="ingameChatChannel">Canal Ingame pentru CHAT</label>
+                    <input type="text" class="form-control" name="ingameChatChannel" value="<%= tournament.ingameChatChannel%>">
+                </div>
+                <div class="form-group">
+                    <label for="twitchStreamChannel">Canalul de Twitch pentru LIVE STREAM</label>
+                    <input type="text" class="form-control" name="twitchStreamChannel" value="<%= tournament.twitchStreamChannel%>"/>
+                </div>
+                <div class="form-group">
+                    <label for="description">Descrierea turneului(informatii suplimentare)</label>
+                    <textarea class="form-control" name="description" rows="10"><%= tournament.description.trim()%></textarea>
+                </div>
+                <button type="submit" class="btn btn-warning btn-lg">Confirma schimbarile</button>
+            </form>
+
+
     </div>
     <% include ../../partials/advice-edit-tournament-basis.ejs%>
-<% include ../../partials/footer%>
+<% include ../../partials/footer.ejs%>

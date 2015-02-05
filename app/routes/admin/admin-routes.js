@@ -41,23 +41,6 @@ app.get('/organized-tournaments/:organizerId', isLoggedIn, requireRole('admin'),
   });
 });
 
-//app.get('/admin-tournaments/:tournamentId/:userId', isLoggedIn, requireRole('admin'), function(req,res){
-//  Tournament.findById(req.params.tournamentId).populate('players').populate('organizer').exec( function(err, tournament){
-//    if(err)
-//      res.send(err)
-//    else
-//    helperFunctions.getUserDetails(req.params.userId).then(function(user){
-//	    res.render('tournament/tournament-details-admin.ejs',{
-//		    user: req.user,
-//		    userAvatar: user,
-//		    tournament: tournament,
-//		    procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers)) + '%',
-//		    moment: moment
-//	    });
-//    });
-//  });
-//});
-
 app.get('/avatars-users-admin/:adminId', isLoggedIn, requireRole('admin'), function(req, res){
   helperFunctions.getUserDetails(req.params.adminId).then(function(user){
 		helperFunctions.retrieveAvatars().then(function(avatars){

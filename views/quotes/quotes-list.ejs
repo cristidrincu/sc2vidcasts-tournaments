@@ -30,7 +30,6 @@
                         <tr>
                             <th>Autor</th>
                             <th>Citat</th>
-                            <th>Introdus de</th>
                             <th>Editeaza</th>
                             <th>Sterge</th>
                         </tr>
@@ -38,9 +37,6 @@
                         <tr>
                             <td><%= quote.quoteAuthor %></td>
                             <td><%= quote.quoteText %></td>
-                            <%quote.quoteInsertedBy.forEach(function(user){%>
-                                <td><%=user.local.nickname%></td>
-                            <%})%>
                             <td>
                                 <a class="btn btn-success" href="/edit-quote/<%=quote._id%>">Editeaza</a>
                             </td>

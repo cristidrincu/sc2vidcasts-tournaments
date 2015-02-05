@@ -77,49 +77,21 @@ app.get('/backend-organizer/:organizerId', isLoggedIn, requireRole('Organizator'
 					helperFunctions.retrieveAllPlayers().then(function(players){
 						helperFunctions.retrieveMessagesForUser(req.params.organizerId).then(function(messages){
 							helperFunctions.retrieveAllOrganizers().then(function(organizers){
-								checkAvatarArrayLength(function(){
-									if(user.local.avatar.length == 0){
-										helperFunctions.getDefaultAvatar().then(function(defaultAvatar){
-											helperFunctions.setAvatarForUser(req.params.organizerId, defaultAvatar._id).then(function(err, user){
-												if(err){
-													throw new err;
-												}
-												res.render('backend/backend-organizer.ejs', {
-													user: req.user,
-													userAvatar: user,
-													tournaments: tournaments,
-													moment: moment,
-													tournamentsLength: _.size(tournaments),
-													tournamentsSampled: _.sample(tournaments, 3),
-													quoteSampled: _.sample(quotes, 1),
-													avatarsLength: _.size(avatars),
-													avatarsSampled: _.sample(avatars, 3),
-													playersLength: _.size(players),
-													playersSampled: _.sample(players, 3),
-													messages: messages,
-													organizersLength: _.size(organizers),
-													organizersSampled: _.sample(organizers, 3)
-												});
-											});
-										});
-									}else{
-										res.render('backend/backend-organizer.ejs', {
-											user: req.user,
-											userAvatar: user,
-											tournaments: tournaments,
-											moment: moment,
-											tournamentsLength: _.size(tournaments),
-											tournamentsSampled: _.sample(tournaments, 3),
-											quoteSampled: _.sample(quotes, 1),
-											avatarsLength: _.size(avatars),
-											avatarsSampled: _.sample(avatars, 3),
-											playersLength: _.size(players),
-											playersSampled: _.sample(players, 3),
-											messages: messages,
-											organizersLength: _.size(organizers),
-											organizersSampled: _.sample(organizers, 3)
-										});
-									}
+								res.render('backend/backend-organizer.ejs', {
+									user: req.user,
+									userAvatar: user,
+									tournaments: tournaments,
+									moment: moment,
+									tournamentsLength: _.size(tournaments),
+									tournamentsSampled: _.sample(tournaments, 3),
+									quoteSampled: _.sample(quotes, 1),
+									avatarsLength: _.size(avatars),
+									avatarsSampled: _.sample(avatars, 3),
+									playersLength: _.size(players),
+									playersSampled: _.sample(players, 3),
+									messages: messages,
+									organizersLength: _.size(organizers),
+									organizersSampled: _.sample(organizers, 3)
 								});
 							});
 						});

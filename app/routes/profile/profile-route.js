@@ -12,13 +12,19 @@ var app = module.exports = express();
 app.get('/profile', isLoggedIn, function (req, res) {
   helperFunctions.getUserDetails(req.user._id).then(function(user){
 	  helperFunctions.retrieveMessagesForUser(req.user._id).then(function(messages){
-		  res.render('profile/profile.ejs', {
-			  message: req.flash('signupSuccess'), //get the message out of the session and pass to template
-			  user: req.user, //get the user out of session and pass to template - you get id, email and password
-			  userAvatar: user.local.avatar,
-			  detailedUser: user,
-			  moment: moment,
-			  messages: messages
+		  helperFunctions.retrieveTournamentsByOrganizer(req.user._id).then(function(organizerTournaments){
+			  helperFunctions.retrieveAllTournaments().then(function(tournamentsActive){
+				  res.render('profile/profile.ejs', {
+					  message: req.flash('signupSuccess'), //get the message out of the session and pass to template
+					  user: req.user, //get the user out of session and pass to template - you get id, email and password
+					  userAvatar: user.local.avatar,
+					  detailedUser: user,
+					  organizerTournaments: organizerTournaments,
+					  tournamentsActive: tournamentsActive,
+					  moment: moment,
+					  messages: messages
+				  });
+			  });
 		  });
 	  });
 	});

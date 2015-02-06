@@ -51,19 +51,49 @@
             </div>
         </div>
             <div class="col-xs-8" style="padding-top: 230px;">
-                <div class="col-lg-4">
-                    <div class="panel div-gradient" style="padding-bottom: 49px;">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Participi in cadrul <%= detailedUser.local.tournaments.length == 0 || detailedUser.local.tournaments.length > 1 ? 'a...' : 'unui...' %></h3>
-                            <p style="position: absolute; top: 40px; font-size: 12px; width: 250px;">Aici ai toate updaturile despre turneele in care participi &amp; other stuff!</p>
-                        </div>
-                        <div style="text-align: center">
-                            <h1 style="font-size: 150px; padding-top: 30px;"><%= detailedUser.local.tournaments.length %></h1>
-                            <p style="position: relative; top: -30px; font-size: 25px;"><%= detailedUser.local.tournaments.length == 0 || detailedUser.local.tournaments.length > 1 ? 'turnee' : 'turneu'%></p>
-                            <a style="position:relative; top: 25px;" class="btn btn-info" href="/user-tournaments/<%= detailedUser._id%>">Turneele tale</a>
+                <%if(user.local.role == 'User'){%>
+                    <div class="col-lg-4">
+                        <div class="panel div-gradient" style="padding-bottom: 49px;">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Participi in cadrul <%= detailedUser.local.tournaments.length == 0 || detailedUser.local.tournaments.length > 1 ? 'a...' : 'unui...' %></h3>
+                                <p style="position: absolute; top: 40px; font-size: 12px; width: 250px;">Aici ai toate updaturile despre turneele in care participi &amp; other stuff!</p>
+                            </div>
+                            <div style="text-align: center">
+                                <h1 style="font-size: 150px; padding-top: 30px;"><%= detailedUser.local.tournaments.length %></h1>
+                                <p style="position: relative; top: -30px; font-size: 25px;"><%= detailedUser.local.tournaments.length == 0 || detailedUser.local.tournaments.length > 1 ? 'turnee' : 'turneu'%></p>
+                                <a style="position:relative; top: 25px;" class="btn btn-info" href="/user-tournaments/<%= detailedUser._id%>">Turneele tale</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <%} else if(user.local.role == 'Organizator'){%>
+                    <div class="col-lg-4">
+                        <div class="panel div-gradient" style="padding-bottom: 49px;">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Ai organizat pana acum...</h3>
+                                <p style="position: absolute; top: 40px; font-size: 12px; width: 250px;">Aici ai toate updaturile despre turneele pe care le-ai organizat!</p>
+                            </div>
+                            <div style="text-align: center">
+                                <h1 style="font-size: 150px; padding-top: 30px;"><%= organizerTournaments.length %></h1>
+                                <p style="position: relative; top: -30px; font-size: 25px;"><%= organizerTournaments.length == 0 || organizerTournaments.length > 1 ? 'turnee' : 'turneu'%></p>
+                                <a style="position:relative; top: 25px;" class="btn btn-info" href="/organizer-tournaments/<%= detailedUser._id%>">Turneele tale</a>
+                            </div>
+                        </div>
+                    </div>
+                <%}else{%>
+                    <div class="col-lg-4">
+                        <div class="panel div-gradient" style="padding-bottom: 49px;">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Exista... </h3>
+                                <p style="position: absolute; top: 40px; font-size: 12px; width: 250px;">Aici ai toate updaturile despre turneele active!</p>
+                            </div>
+                            <div style="text-align: center">
+                                <h1 style="font-size: 150px; padding-top: 30px;"><%= tournamentsActive.length %></h1>
+                                <p style="position: relative; top: -30px; font-size: 25px;"><%= tournamentsActive.length == 0 || tournamentsActive.length > 1 ? 'turnee' : 'turneu'%></p>
+                                <a style="position:relative; top: 25px;" class="btn btn-info" href="/open-tournaments/<%= detailedUser._id%>">Turnee deschise</a>
+                            </div>
+                        </div>
+                    </div>
+                <%}%>
                 <div class="col-lg-4">
                     <div class="panel div-gradient-red" style="padding-bottom: 49px;">
                         <div class="panel-heading">

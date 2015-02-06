@@ -36,9 +36,6 @@ app.get('/closed-tournaments/:userId', isLoggedIn, function(req, res){
 				moment: moment
 			});
 		});
-
-		console.log(req.user.role);
-
 	});
 });
 

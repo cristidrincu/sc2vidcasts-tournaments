@@ -19,8 +19,8 @@ var transporter = nodemailer.createTransport({
 });
 
 var app = module.exports = express();
-
-app.get('/edit-tournament/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
+//TODO - creaza un modul de middleware pentru functiile folosite pe rute
+app.get('/edit-tournament/:tournamentId/:userId', isLoggedIn, requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	helperFunctions.retrieveTournamentDetails(req.params.tournamentId, req.params.userId).then(function(tournament){
 		res.render('tournament/edit/edit-tournament-basic-info.ejs', {
 			user: req.user,
@@ -334,6 +334,16 @@ function requireRole(role){
 			next();
 		}
 		else{
+			res.send(403);
+		}
+	}
+}
+
+function requireMultipleUserRoles(role1, role2){
+	return function(req, res, next){
+		if(req.user.local.role === role1 || req.user.local.role === role2){
+			next();
+		}else{
 			res.send(403);
 		}
 	}

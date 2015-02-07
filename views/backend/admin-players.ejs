@@ -1,15 +1,15 @@
-<%include ../partials/header%>
+<%include ../partials/header.ejs%>
 <% avatarUser.local.avatar.forEach(function(avatar){ %>
-<% include ../partials/sidebar-admin%>
+<% include ../partials/sidebar-admin.ejs%>
 <% });%>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
 
             <%if(errorDeleteAccountMessage.length == 0){%>
-            <p style="color: green" id="successMessage"><%=successDeleteAccountMessage%></p>
+            <p id="successMessage"><%=successDeleteAccountMessage%></p>
             <%}else{%>
-            <p style="color: red" id="errorMessage"><%=errorDeleteAccountMessage%></p>
+            <p id="errorMessage"><%=errorDeleteAccountMessage%></p>
             <%}%>
 
             <h1 class="page-header"><i class="fa fa-gamepad fa-1x gamepad-icon"></i> Jucatori</h1>
@@ -70,4 +70,4 @@
 </div>
 </div>
 
-<%include ../partials/footer%>
+<%include ../partials/footer.ejs%>

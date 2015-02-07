@@ -1,11 +1,11 @@
-<% include ../partials/header %>
+<% include ../partials/header.ejs %>
 <% userAvatar.local.avatar.forEach(function(avatar){%>
     <% if(user.local.role== 'admin'){%>
-        <% include ../partials/sidebar-admin %>
+        <% include ../partials/sidebar-admin.ejs %>
     <%}else if(user.local.role == 'Organizator'){%>
-        <% include ../partials/sidebar-organizer%>
+        <% include ../partials/sidebar-organizer.ejs%>
     <%}else{%>
-    <% include ../partials/sidebar %>
+        <% include ../partials/sidebar.ejs %>
     <%}%>
 <%})%>
 <div id="page-wrapper">
@@ -13,17 +13,13 @@
         <div class="col-lg-12">
             <h1 class="page-header">Mesaje primite</h1>
         </div>
-        <!-- /.col-lg-12 -->
     </div>
-    <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">
-            <!-- /.panel -->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-clock-o fa-fw"></i> Lista mesaje
                 </div>
-                <!-- /.panel-heading -->
                 <div class="panel-body">
                         <table class="table">
                             <%if(messages.length == 0){%>
@@ -61,4 +57,4 @@
 </div>
 </div>
 
-<% include ../partials/footer %>
+<% include ../partials/footer.ejs %>

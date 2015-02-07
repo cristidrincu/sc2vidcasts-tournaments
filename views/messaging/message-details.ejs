@@ -1,11 +1,11 @@
-<% include ../partials/header %>
+<% include ../partials/header.ejs %>
     <% userAvatar.local.avatar.forEach(function(avatar){%>
-    <%if(user.local.role == 'admin'){%>
-    <% include ../partials/sidebar-admin %>
-    <%}else if(user.local.role == 'Organizator'){%>
-    <% include ../partials/sidebar-organizer %>
-    <%}else{%>
-    <% include ../partials/sidebar %>
+        <%if(user.local.role == 'admin'){%>
+            <% include ../partials/sidebar-admin.ejs %>
+        <%}else if(user.local.role == 'Organizator'){%>
+            <% include ../partials/sidebar-organizer.ejs %>
+        <%}else{%>
+            <% include ../partials/sidebar.ejs %>
     <%}%>
 <%})%>
 <div id="page-wrapper">
@@ -47,4 +47,4 @@
 </div>
 </div>
 
-<% include ../partials/footer %>
+<% include ../partials/footer.ejs %>

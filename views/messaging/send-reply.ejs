@@ -1,11 +1,11 @@
-<% include ../partials/header %>
+<% include ../partials/header.ejs %>
 <% userAvatar.local.avatar.forEach(function(avatar){%>
     <%if(user.local.role == 'admin'){%>
-    <% include ../partials/sidebar-admin %>
+        <% include ../partials/sidebar-admin.ejs %>
     <%}else if(user.local.role == 'Organizator'){%>
-    <% include ../partials/sidebar-organizer %>
+        <% include ../partials/sidebar-organizer.ejs %>
     <%}else{%>
-    <% include ../partials/sidebar %>
+        <% include ../partials/sidebar.ejs %>
     <%}%>
 <%})%>
 <script>
@@ -29,7 +29,7 @@
                     <input type="text" name="messageSubject" id="messageSubject" class="form-control" required value="Re: <%= message.messageSubject%>"/>
                 </div>
                 <div class="form-group">
-                    <p style="font-weight: bold"><%=receiver.local.nickname%> a scris: <%=message.messageBody%></p>
+                    <p class="sender-message-text"><%=receiver.local.nickname%> a scris: <%=message.messageBody%></p>
                     <textarea rows="10" name="message"></textarea>
                 </div>
                 <div class="form-group">
@@ -37,8 +37,8 @@
                     <a href="/user-messages/<%= user._id%>"><input class="btn btn-danger" value="Anuleaza"/></a>
                 </div>
             </div>
-            <div class="col-lg-4" style="margin-top: 22px;">
-                <div class="panel panel-default">
+            <div class="col-lg-4">
+                <div class="panel panel-default message-receiver-container">
                     <div class="panel-heading">
                         <i class="fa fa-clock-o fa-fw"></i> Acest mesaj va ajunge la:
                     </div>
@@ -58,7 +58,7 @@
                         </div>
                     </div>
 
-                    <div class="panel panel-default" style="width: 90%; margin-left: auto; margin-right: auto">
+                    <div class="panel panel-default receiver-tournaments">
                         <div class="panel-heading">
                             <h3 class="panel-title">Turneele in care participa</h3>
                         </div>
@@ -84,4 +84,4 @@
     </div>
 </div>
 
-<% include ../partials/footer %>
+<% include ../partials/footer.ejs %>

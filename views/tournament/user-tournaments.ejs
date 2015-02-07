@@ -1,153 +1,152 @@
-<%include ../partials/header.ejs%>
-<% userAvatar.local.avatar.forEach(function(avatar){%>
+<% include ../partials/header.ejs %>
+<% userAvatar.local.avatar.forEach(function(avatar){ %>
     <% if(user.local.role == 'Organizator'){ %>
-    <% include ../partials/sidebar-organizer %>
-    <%}else{%>
-    <% include ../partials/sidebar %>
-    <%}%>
-<%});%>
+<% include ../partials/sidebar-organizer.ejs %>
+    <% }else{ %>
+<% include ../partials/sidebar.ejs %>
+    <% } %>
+<% }); %>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Lista turneelor in care te-ai inscris</h1>
-            <%if(errorMessage.length == 0){%>
-                <p class="success-message-flash"><%= successMessage%></p>
-            <%}else{%>
-                <p class="error-message-flash"><%= errorMessage%></p>
-            <%}%>
+            <% if(errorMessage.length == 0){ %>
+            <p class="success-message-flash"><%= successMessage %></p>
+            <% }else{ %>
+            <p class="error-message-flash"><%= errorMessage %></p>
+            <% } %>
         </div>
-        <!-- /.col-lg-12 -->
     </div>
-    <!-- /.row -->
-
 
     <div class="row">
-    <div class="col-lg-12">
-    <div class="panel panel-default" style="border: none;">
+        <div class="col-lg-12">
+            <div class="panel panel-default" style="border: none;">
 
-    <ul class="nav nav-tabs" role="tablist" style="margin-top: 20px;">
-        <li class="active"><a href="#turnee-active-jucator" role="tab" data-toggle="tab">Turnee active</a></li>
-        <li><a href="#turnee-inactive-jucator" role="tab" data-toggle="tab">Turnee terminate</a></li>
-    </ul>
+                <ul class="nav nav-tabs" role="tablist" style="margin-top: 20px;">
+                    <li class="active"><a href="#turnee-active-jucator" role="tab" data-toggle="tab">Turnee active</a>
+                    </li>
+                    <li><a href="#turnee-inactive-jucator" role="tab" data-toggle="tab">Turnee terminate</a></li>
+                </ul>
 
-    <div class="tab-content">
-        <div class="tab-pane fade in active" id="turnee-active-jucator">
-        <%if(activeTournaments.length == 0){%>
-            <p class="message-no-players-found">Nu participi in cadrul vreunui turneu activ!</p>
-        <%}else{%>
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-clock-o fa-fw"></i> Lista turnee
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="turnee-active-jucator">
+                        <% if(activeTournaments.length == 0){ %>
+                        <p class="message-no-players-found">Nu participi in cadrul vreunui turneu activ!</p>
+                        <% }else{ %>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <!-- /.panel -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <i class="fa fa-clock-o fa-fw"></i> Lista turnee
+                                    </div>
+                                    <!-- /.panel-heading -->
+                                    <div class="panel-body">
+                                        <table class="table table-hover details-tournament-user">
+                                            <% if(activeTournaments.length == 0){ %>
+                                            <p>Momentan, nu esti inscris in cadrul vreunui turneu activ!</p>
+                                            <% }else{ %>
+                                            <tr>
+                                                <th>Numele turneului</th>
+                                                <th>Locuri disponibile</th>
+                                                <th>Editia</th>
+                                                <th>Data inceperii</th>
+                                                <th>Data terminarii</th>
+                                                <th>Premii</th>
+                                                <th>Detalii</th>
+                                                <th>Retrage-te din turneu</th>
+                                            </tr>
+                                            <% activeTournaments.forEach(function(tournament){ %>
+                                            <tr>
+                                                <td><%= tournament.tournamentName %></td>
+                                                <td><%= tournament.nrOfPlayers %></td>
+                                                <td><%= tournament.edition %></td>
+                                                <td><%= moment(tournament.startDate).format("DD MMMM YYYY") %></td>
+                                                <td><%= moment(tournament.endDate).format("DD MMMM YYYY") %></td>
+                                                <td>
+                                                    <%= tournament.prize ? 'Da' : 'Nu' %>
+                                                </td>
+                                                <td>
+                                                    <a href="/tournament-details/<%= tournament._id %>/<%= user._id %>">
+                                                        <button class="no-style-button">
+                                                            <i style="color: green;" class="fa fa-search fa-1x"></i>
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <form method="post"
+                                                          action="/retragere-din-turneu/<%= user._id %>/<%= tournament._id %> ">
+                                                        <button type="submit" class="no-style-button">
+                                                            <i style="color:red;" class="fa fa-times fa-1x"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            <% })}; %>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <table class="table table-hover details-tournament-user">
-                                <% if(activeTournaments.length == 0){%>
-                                <p>Momentan, nu esti inscris in cadrul vreunui turneu activ!</p>
-                                <%}else{%>
-                                <tr>
-                                    <th>Numele turneului</th>
-                                    <th>Locuri disponibile</th>
-                                    <th>Editia</th>
-                                    <th>Data inceperii</th>
-                                    <th>Data terminarii</th>
-                                    <th>Premii</th>
-                                    <th>Detalii</th>
-                                    <th>Retrage-te din turneu</th>
-                                </tr>
-                                <% activeTournaments.forEach(function(tournament){ %>
-                                <tr>
-                                    <td><%= tournament.tournamentName %></td>
-                                    <td><%= tournament.nrOfPlayers %></td>
-                                    <td><%= tournament.edition %></td>
-                                    <td><%= moment(tournament.startDate).format("DD MMMM YYYY") %></td>
-                                    <td><%= moment(tournament.endDate).format("DD MMMM YYYY") %></td>
-                                    <td>
-                                        <%= tournament.prize ? 'Da' : 'Nu'%>
-                                    </td>
-                                    <td>
-                                        <a href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
-                                            <button class="no-style-button">
-                                                <i style="color: green;" class="fa fa-search fa-1x"></i>
-                                            </button>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <form method="post" action="/retragere-din-turneu/<%=user._id%>/<%= tournament._id%> ">
-                                            <button type="submit" class="no-style-button">
-                                                <i style="color:red;" class="fa fa-times fa-1x"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <% })}; %>
-                            </table>
+                        <% } %>
+                    </div>
+                    <div class="tab-pane fade" id="turnee-inactive-jucator">
+                        <% if(inactiveTournaments.length == 0){ %>
+                        <p class="message-no-players-found">Nu participi in cadrul vreunui turneu activ!</p>
+                        <% }else{ %>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <!-- /.panel -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <i class="fa fa-clock-o fa-fw"></i> Lista turnee
+                                    </div>
+                                    <!-- /.panel-heading -->
+                                    <div class="panel-body">
+                                        <table class="table table-hover details-tournament-user">
+                                            <% if(inactiveTournaments.length == 0){ %>
+                                            <p>Momentan, nu ai fost inscris in turnee inactive!</p>
+                                            <% }else{ %>
+                                            <tr>
+                                                <th>Numele turneului</th>
+                                                <th>Locuri disponibile</th>
+                                                <th>Editia</th>
+                                                <th>Data inceperii</th>
+                                                <th>Data terminarii</th>
+                                                <th>Premii</th>
+                                                <th>Detalii</th>
+                                            </tr>
+                                            <% inactiveTournaments.forEach(function(tournament){ %>
+                                            <tr>
+                                                <td><%= tournament.tournamentName %></td>
+                                                <td><%= tournament.nrOfPlayers %></td>
+                                                <td><%= tournament.edition %></td>
+                                                <td><%= moment(tournament.startDate).format("DD MMMM YYYY") %></td>
+                                                <td><%= moment(tournament.endDate).format("DD MMMM YYYY") %></td>
+                                                <td>
+                                                    <%= tournament.prize ? 'Da' : 'Nu' %>
+                                                </td>
+                                                <td>
+                                                    <a href="/tournament-details/<%= tournament._id %>/<%= user._id %>">
+                                                        <button class="no-style-button">
+                                                            <i style="color: green;" class="fa fa-search fa-1x"></i>
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <% })}; %>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <% } %>
                     </div>
                 </div>
             </div>
-        <%}%>
+        </div>
     </div>
-        <div class="tab-pane fade" id="turnee-inactive-jucator">
-        <%if(inactiveTournaments.length == 0){%>
-            <p class="message-no-players-found">Nu participi in cadrul vreunui turneu activ!</p>
-        <%}else{%>
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-clock-o fa-fw"></i> Lista turnee
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <table class="table table-hover details-tournament-user">
-                                <% if(inactiveTournaments.length == 0){%>
-                                    <p>Momentan, nu ai fost inscris in turnee inactive!</p>
-                                <%}else{%>
-                                <tr>
-                                    <th>Numele turneului</th>
-                                    <th>Locuri disponibile</th>
-                                    <th>Editia</th>
-                                    <th>Data inceperii</th>
-                                    <th>Data terminarii</th>
-                                    <th>Premii</th>
-                                    <th>Detalii</th>
-                                </tr>
-                                <% inactiveTournaments.forEach(function(tournament){ %>
-                                <tr>
-                                    <td><%= tournament.tournamentName %></td>
-                                    <td><%= tournament.nrOfPlayers %></td>
-                                    <td><%= tournament.edition %></td>
-                                    <td><%= moment(tournament.startDate).format("DD MMMM YYYY") %></td>
-                                    <td><%= moment(tournament.endDate).format("DD MMMM YYYY") %></td>
-                                    <td>
-                                        <%= tournament.prize ? 'Da' : 'Nu'%>
-                                    </td>
-                                    <td>
-                                        <a href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
-                                            <button class="no-style-button">
-                                                <i style="color: green;" class="fa fa-search fa-1x"></i>
-                                            </button>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <% })}; %>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <%}%>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-</div>
 </div>
 
-<% include ../partials/footer %>
+
+<% include ../partials/footer.ejs %>

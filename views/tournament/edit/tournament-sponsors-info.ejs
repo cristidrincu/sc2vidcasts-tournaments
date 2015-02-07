@@ -1,15 +1,15 @@
-<% include ../../partials/header%>
-<% include ../../partials/sidebar-edit-tournament%>
+<% include ../../partials/header.ejs%>
+<% include ../../partials/sidebar-edit-tournament.ejs%>
 
 <div class="col-lg-4">
-    <h4 style="padding-top: 15px;">Modifica daca exista sponsori in cadrul acestui turneu</h4>
+    <h4 class="info-editing-tournament-section">Modifica daca exista sponsori in cadrul acestui turneu</h4>
     <% if(errorMessage.length === 0){%>
         <p class="alert-success"><%= successMessage%></p>
     <%} else {%>
         <p class="alert-danger"><%= errorMessage%></p>
     <%}%>
     <div class="form-group">
-        <p style="color:red">Momentan, acest turneu <%= tournament.sponsors.length == 0 ? ' nu are sponsori' : ' are sponsori'%></p>
+        <p class="tournament-sponsors-status">Momentan, acest turneu <%= tournament.sponsors.length == 0 ? ' nu are sponsori' : ' are sponsori'%></p>
         <% if(tournament.sponsors.length > 0){%>
             <p><%= tournament.sponsors %></p>
         <%}%>
@@ -17,11 +17,11 @@
     <div class="form-group">
         <form action="/tournament-sponsors/<%= tournament._id%>/<%= user._id%>" method="post">
             <label>Adauga sponsori pentru acest turneu</label>
-            <input style="margin-bottom: 10px;" type="text" class="form-control" name="sponsors" value="<%= tournament.sponsors%>">
+            <input type="text" class="form-control add-sponsors" name="sponsors" value="<%= tournament.sponsors%>">
             <button type="submit" class="btn btn-warning btn-lg">Confirma schimbarile</button>
         </form>
     </div>
 </div>
 
 <% include ../../partials/advice-edit-tournament-basis.ejs%>
-<% include ../../partials/footer%>
+<% include ../../partials/footer.ejs%>

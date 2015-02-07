@@ -1,5 +1,5 @@
-<% include ../../partials/header%>
-<% include ../../partials/sidebar-edit-tournament%>
+<% include ../../partials/header.ejs%>
+<% include ../../partials/sidebar-edit-tournament.ejs%>
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -24,7 +24,7 @@
 </script>
 
 <div class="col-lg-4">
-    <h4 style="padding-top: 15px;">Modifica data inceperii acestui turneu</h4>
+    <h4 class="info-editing-tournament-section">Modifica data inceperii acestui turneu</h4>
     <% if(errorMessage.length === 0){%>
         <p class="alert-success"><%= successMessage%></p>
     <%} else {%>
@@ -39,10 +39,10 @@
             <!--TODO - schimba rutele de la action cu cele din edit-tournament.js -->
 
                 <label>Alege alta data pentru inceperea turneului</label>
-                    <input style="margin-bottom: 10px;" type="text" class="form-control" id="startDatePicker" name="startDate" required>
+                    <input type="text" class="form-control choose-tournament-date" id="startDatePicker" name="startDate" required>
                 <button type="submit" class="btn btn-warning btn-lg">Confirma schimbarile</button>
         </div>
     </form>
 </div>
 <% include ../../partials/advice-edit-tournament-basis.ejs%>
-<% include ../../partials/footer%>
+<% include ../../partials/footer.ejs%>

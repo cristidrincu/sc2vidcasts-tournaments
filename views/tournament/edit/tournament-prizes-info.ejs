@@ -1,15 +1,15 @@
-<% include ../../partials/header%>
-<% include ../../partials/sidebar-edit-tournament%>
+<% include ../../partials/header.ejs%>
+<% include ../../partials/sidebar-edit-tournament.ejs%>
 
 <div class="col-lg-4">
-    <h4 style="padding-top: 15px;">Modifica daca exista premii in cadrul acestui turneu</h4>
+    <h4 class="info-editing-tournament-section">Modifica daca exista premii in cadrul acestui turneu</h4>
     <% if(errorMessage.length === 0){%>
         <p class="alert-success"><%= successMessage%></p>
     <%} else {%>
         <p class="alert-danger"><%= errorMessage%></p>
     <%}%>
     <div class="form-group">
-        <p style="color:red">Momentan, acest turneu <%= tournament.prize ? ' ACCEPTA premii' : ' NU ACCEPTA premii'%></p>
+        <p class="tournament-prizes-status">Momentan, acest turneu <%= tournament.prize ? ' ACCEPTA premii' : ' NU ACCEPTA premii'%></p>
     </div>
     <div class="form-group">
         <form action="/tournament-prizes/<%= tournament._id%>/<%= user._id%>" method="post">
@@ -28,4 +28,4 @@
 </div>
 
 <% include ../../partials/advice-edit-tournament-basis.ejs%>
-<% include ../../partials/footer%>
+<% include ../../partials/footer.ejs%>

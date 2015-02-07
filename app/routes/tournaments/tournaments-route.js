@@ -305,7 +305,7 @@ function tournamentStatus(tournament){
 	var ongoing = 1;
 	var starting = 0;
 
-	if(moment(date).isAfter(tournament.startDate)){
+	if(moment(date).isAfter(tournament.endDate)){
 		return completed;
 	}else if(moment(date).isAfter(tournament.startDate) && moment(date).isBefore(tournament.endDate) ){
 		return ongoing;

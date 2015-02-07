@@ -1,11 +1,11 @@
-<% include ../partials/header %>
+<% include ../partials/header.ejs %>
 <% avatarUser.local.avatar.forEach(function(avatar){%>
     <% if(user.local.role == 'Organizator'){%>
-        <% include ../partials/sidebar-organizer %>
+        <% include ../partials/sidebar-organizer.ejs %>
     <%}else if(user.local.role == 'admin'){%>
-        <% include ../partials/sidebar-admin %>
+        <% include ../partials/sidebar-admin.ejs %>
     <%}else{%>
-        <% include ../partials/sidebar %>
+        <% include ../partials/sidebar.ejs %>
     <%}%>
 <%})%>
 <div id="page-wrapper">
@@ -26,7 +26,7 @@
 
         <div class="tab-content">
             <div class="tab-pane fade in active" id="bronze">
-                <table style="margin-top: 20px;" class="table">
+                <table class="table table-players">
                     <%if(bronzePlayers.length == 0){%>
                         <p class="message-no-players-found">Nu am gasit jucatori de Bronze in baza de date!</p>
                     <%}else{%>
@@ -80,7 +80,7 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="silver">
-                <table style="margin-top: 20px;" class="table">
+                <table class="table table-players">
                     <%if(silverPlayers.length == 0){%>
                         <p class="message-no-players-found">Nu am gasit jucatori de Silver in baza de date!</p>
                     <%}else{%>
@@ -135,7 +135,7 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="gold">
-                <table style="margin-top: 20px;" class="table">
+                <table class="table table-players">
                     <%if(goldPlayers.length == 0){%>
                         <p class="message-no-players-found">Nu am gasit jucatori de Gold in baza de date!</p>
                     <%}else{%>
@@ -190,7 +190,7 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="platinum">
-                <table style="margin-top: 20px;" class="table">
+                <table class="table table-players">
                     <%if(platPlayers.length == 0){%>
                         <p class="message-no-players-found">Nu am gasit jucatori de Platinum in baza de date!</p>
                     <%}else{%>
@@ -245,7 +245,7 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="diamond">
-                <table style="margin-top: 20px;" class="table">
+                <table class="table table-players">
                     <%if(diamondPlayers.length == 0){%>
                         <p class="message-no-players-found">Nu am gasit jucatori de Diamond in baza de date!</p>
                     <%}else{%>
@@ -300,7 +300,7 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="masters">
-                <table style="margin-top: 20px;" class="table">
+                <table class="table table-players">
                     <%if(masterPlayers.length == 0){%>
                         <p class="message-no-players-found">Nu am gasit jucatori de Master in baza de date!</p>
                     <%}else{%>
@@ -355,7 +355,7 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="grand-masters">
-                <table style="margin-top: 20px;" class="table">
+                <table class="table table-players">
                     <%if(gmPlayers.length == 0){%>
                         <p class="message-no-players-found">Nu am gasit jucatori de Grand Master in baza de date!</p>
                     <%}else{%>
@@ -414,4 +414,4 @@
     </div>
 </div>
 
-<% include ../partials/footer %>
+<% include ../partials/footer.ejs %>

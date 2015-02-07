@@ -1,4 +1,4 @@
-<div class="col-lg-2" style="margin-top: 10px;">
+<div class="col-lg-2 sidebar-edit-tournament">
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
@@ -10,8 +10,12 @@
                 <li><a href="/tournament-start-hour/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-clock-o"></i> Ora de incepere</a></li>
                 <li><a href="/tournament-prizes/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-gift"></i> Premii</a></li>
                 <li><a href="/tournament-sponsors/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-building-o"></i> Sponsori</a></li>
-                <li><a style="color: green" href="/tournament-details/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-arrow-circle-left"></i> Inapoi la detaliile turneului</a></li>
-                <li><a style="color: red" href="/backend-organizer/<%= user._id%>"><i class="fa fa-arrow-circle-left"></i> Inapoi la panoul de administrare</a></li>
+                <li><a class="return-to-tournament-details" href="/tournament-details/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-arrow-circle-left"></i> Inapoi la detaliile turneului</a></li>
+                <%if(user.local.role == 'Organizator'){%>
+                    <li><a class="return-to-control-panel" href="/backend-organizer/<%= user._id%>"><i class="fa fa-arrow-circle-left"></i> Inapoi la panoul de administrare</a></li>
+                <%}else if(user.local.role == 'admin'){%>
+                    <li><a class="return-to-control-panel" href="/backend-admin/<%= user._id%>"><i class="fa fa-arrow-circle-left"></i> Inapoi la panoul de administrare</a></li>
+                <%}%>
             </ul>
         </div>
     </div>

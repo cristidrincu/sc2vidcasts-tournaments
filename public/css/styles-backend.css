@@ -1,5 +1,18 @@
 .header-bar{
     background-color: #000;
+    margin-bottom: 0
+}
+
+.clearFloats{
+    clear: both;
+}
+
+#welcome-user-message{
+    margin-left:15px;
+    float: left;
+    color: #37beb9;
+    font-size: 13px;
+    padding-top: 20px;
 }
 
 #dateParagraph{
@@ -17,6 +30,10 @@
 
 .menu-section-text{
     font-size: 20px;
+}
+
+.main-container-backend-elements{
+    padding-top: 40px;
 }
 
 ul.titlu-turneu-signup{
@@ -101,6 +118,7 @@ ul.titlu-turneu-signup li {
     max-width: 100%;
     max-height: 100%;
     box-shadow: 2px 2px 2px #888888;
+    margin-bottom: 10px;
 }
 
 .profile-pic-table-tournament-details{
@@ -151,6 +169,26 @@ ul.titlu-turneu-signup li {
     margin-bottom: 20px;
 }
 
+.container-summary-players h1, .container-summary-organizers h1, .container-summary-tournaments h1, .container-summary-messages h1, .container-summary-avatars h1, .container-summary-blacklist h1 {
+    font-size: 30px;
+}
+
+.container-summary-players h4 {
+    color: #000;
+}
+
+.container-summary-players h4 > a, .container-summary-organizers h4 > a, .container-summary-tournaments h4 > a, .container-summary-messages h4 > a, .container-summary-avatars h4 > a{
+    margin-left: 5px; position: relative; top: -1px; font-size: 14px;
+}
+
+.container-summary-players h4 > span, .container-summary-organizers h4 > span, .container-summary-tournaments h4 > span, .container-summary-messages h4 > span, .container-summary-avatars h4 > span{
+    color:red;
+}
+
+.container-avatars-sampled{
+    margin-bottom: 20px;
+}
+
 .circleNrEntities, .circleNrEntitiesAvatar{
     display: block;
     height: 25px;
@@ -186,6 +224,22 @@ ul.titlu-turneu-signup li {
     border-right: none;
 }
 
+.container-organizer-details-tournament span.active-tournament-indicator{
+    color: green;
+}
+
+.container-organizer-details-tournament span.finished-tournament-indicator{
+    color: red;
+}
+
+.container-available-player-slots{
+    text-align: center;
+}
+
+.container-available-player-slots p span{
+    font-size: 40px; font-weight: bold;
+}
+
 ul.edit-menu-tournament, ul.edit-menu-tournament li{
     display: inline-block;
     font-size: 18px;
@@ -219,16 +273,9 @@ ul.edit-menu-tournament{
     color: #fff;
 }
 
-/*.div-gradient-green{*/
-    /*background: #dce3c4; *//* Old browsers */
-    /*background: -moz-linear-gradient(top,  #dce3c4 0%, #aebf76 100%, #fefefd 100%); *//* FF3.6+ */
-    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dce3c4), color-stop(100%,#aebf76), color-stop(100%,#fefefd)); *//* Chrome,Safari4+ */
-    /*background: -webkit-linear-gradient(top,  #dce3c4 0%,#aebf76 100%,#fefefd 100%); *//* Chrome10+,Safari5.1+ */
-    /*background: -o-linear-gradient(top,  #dce3c4 0%,#aebf76 100%,#fefefd 100%); *//* Opera 11.10+ */
-    /*background: -ms-linear-gradient(top,  #dce3c4 0%,#aebf76 100%,#fefefd 100%); *//* IE10+ */
-    /*background: linear-gradient(to bottom,  #dce3c4 0%,#aebf76 100%,#fefefd 100%); *//* W3C */
-    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dce3c4', endColorstr='#fefefd',GradientType=0 ); *//* IE6-9 */
-/*}*/
+.div-gradient, .div-gradient-red, .div-gradient-green{
+    padding-bottom: 49px;
+}
 
 .createBrackets, .createBrackets:hover{
     border: none;
@@ -242,6 +289,52 @@ ul.edit-menu-tournament{
 
 .create-bracket-icon{
     color: #428bca;
+}
+
+.container-profile-elements{
+    margin-top: 30px;
+    margin-left: 25px;
+}
+
+.container-general-summary-profile{
+    padding-top: 230px;
+}
+
+.profile-information-container{
+    color:white
+}
+
+.container-summary-information{
+    text-align: center
+}
+
+.container-summary-information h1{
+    font-size: 150px;
+    padding-top: 30px;
+}
+
+.container-summary-information a{
+    position:relative;
+    top: 25px;
+}
+
+.container-summary-information p{
+    position: relative;
+    top: -30px;
+    font-size: 25px;
+}
+
+.teaser-summary-category{
+    position: absolute;
+    top: 40px;
+    font-size: 12px;
+    width: 250px;
+}
+
+p.no-messages{
+    position:relative;
+    top: 30px;
+    font-size: 17px;
 }
 
 .background-profile-terran, .background-profile-zerg, .background-profile-protoss{
@@ -296,6 +389,153 @@ ul.edit-menu-tournament{
 
 .user-profile-data-list li:last-child{
     margin-bottom: 10px;
+}
+
+.container-advice-edit-tournament h4{
+    padding-top: 15px;
+}
+
+.container-advice-edit-tournament p{
+    margin-top: 30px;
+}
+
+.container-advice-edit-tournament span{
+    color: red;
+}
+
+.sidebar-edit-tournament{
+    margin-top: 10px;
+}
+
+a.return-to-tournament-details{
+    color: green;
+}
+
+a.return-to-control-panel{
+    color: red;
+}
+
+.avatar-tabs{
+    margin-top: 25px;
+}
+
+.container-choose-avatar-btn{
+    text-align: center;
+}
+
+#successMessage{
+    color: green;
+}
+
+#errorMessage{
+    color: red;
+}
+
+.upload-avatar-btn{
+    margin-bottom: 10px;
+}
+
+.container-3-players, .container-3-tournaments{
+    padding-top: 15px;
+}
+
+.btn-info-player{
+    width:112px;
+}
+
+.progress-striped{
+    margin-top: 5px;
+}
+
+.border-dotted-container{
+    border-right: 1px dotted orangered;
+}
+
+.message-receiver-container{
+    position: relative; top: 22px;
+}
+
+.containerNicknameRaceBNet h1 > span{
+    color: green;
+}
+
+.receiver-tournaments{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sender-message-text{
+    font-weight: bold;
+}
+
+.table-players{
+    margin-top: 20px;
+}
+
+.container-customize-profile, .container-details-profile, .container-edit-quote{
+    margin-top: 150px;
+}
+
+.container-create-quote h1{
+    font-size: 30px;
+    padding-top: 40px;
+}
+
+.info-editing-tournament-section{
+    padding-top: 15px;
+}
+
+.choose-tournament-date, .choose-tournament-hour, .add-sponsors{
+    margin-bottom: 10px;
+}
+
+.tournament-prizes-status, .tournament-sponsors-status{
+    color: red;
+}
+
+.available-slots-summary-closed-tournament{
+    text-align: center;
+}
+
+.available-slots-summary-closed-tournament p > span{
+    font-size: 40px; font-weight: bold;
+}
+
+.container-create-tournament{
+    margin-top: 100px; margin-bottom: 50px;
+}
+
+.notifier-tournament-status-ongoing, .notifier-tournament-status-completed{
+    padding-top: 45px;
+}
+
+.notifier-tournament-status-ongoing{
+    color: orange;
+}
+
+.notifier-tournament-status-completed{
+    color: red;
+}
+
+.error-eligible-tournament, .error-enlisted-tournament{
+    padding-top: 55px; color: red
+}
+
+.centered-info-tournament{
+    text-align: center;
+}
+
+.enlisted-players-main-container, .container-user-tournaments{
+    border: none;
+}
+
+.tabs-player-enlisted, .table-league-players, .user-ongoing-finished-tournaments{
+    margin-top: 20px;
+}
+
+.list-profile-player{
+    list-style: none;
 }
 
 .footer{

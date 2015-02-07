@@ -1,11 +1,11 @@
-<% include ../partials/header %>
+<% include ../partials/header.ejs %>
 <% userAvatar.local.avatar.forEach(function(avatar){%>
     <%if(user.local.role == 'admin'){%>
-        <% include ../partials/sidebar-admin %>
+        <% include ../partials/sidebar-admin.ejs %>
     <%}else if(user.local.role == 'Organizator'){%>
-        <% include ../partials/sidebar-organizer %>
+        <% include ../partials/sidebar-organizer.ejs %>
     <%}else{%>
-        <% include ../partials/sidebar %>
+        <% include ../partials/sidebar.ejs %>
     <%}%>
 <%})%>
 <script>
@@ -43,7 +43,7 @@
                 </div>
             </form>
             <div class="col-lg-4">
-                <div class="panel panel-default" style="position: relative; top: 22px;">
+                <div class="panel panel-default message-receiver-container">
                     <div class="panel-heading">
                         <h3 class="panel-title">Acest mesaj va ajunge la...</h3>
                     </div>
@@ -55,14 +55,14 @@
                         </div>
                         <div class="col-lg-8">
                             <div class="containerNicknameRaceBNet">
-                                <h1><span style="color: green"> <%=messageReceiver.local.nickname%></span></h1>
+                                <h1><span> <%=messageReceiver.local.nickname%></span></h1>
                                 <h5><%= messageReceiver.local.race%> | BnetID: <%= messageReceiver.local.battlenetid%> | <%= messageReceiver.local.league%></h5>
                                 <a href="/profile-details/<%=messageReceiver._id%>">Profil complet</a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="panel panel-default" style="width: 90%; margin-left: auto; margin-right: auto">
+                    <div class="panel panel-default receiver-tournaments">
                         <div class="panel-heading">
                             <h3 class="panel-title">Turneele in care participa</h3>
                         </div>
@@ -88,4 +88,4 @@
     </div>
 </div>
 
-<% include ../partials/footer %>
+<% include ../partials/footer.ejs %>

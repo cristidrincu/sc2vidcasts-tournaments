@@ -34,7 +34,7 @@
 <div id="wrapper">
 
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-static-top header-bar" role="navigation" style="margin-bottom: 0">
+<nav class="navbar navbar-default navbar-static-top header-bar" role="navigation">
 <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -43,9 +43,9 @@
         <span class="icon-bar"></span>
     </button>
     <%if(user != null){%>
-        <a style="margin-left:15px; float: left; color: #37beb9; font-size: 13px; padding-top: 20px;" class="navbar-brand" href="/profile">Bine ai venit, <%=user.local.nickname%>.</a>
+        <a id="welcome-user-message" class="navbar-brand" href="/profile">Bine ai venit, <%=user.local.nickname%>.</a>
         <p id="dateParagraph" class="navbar-brand"></p>
-        <br style="clear:both;"/>
+        <br class="clearFloats"/>
     <%}%>
 
 </div>

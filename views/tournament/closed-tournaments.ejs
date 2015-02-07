@@ -1,12 +1,12 @@
-<%include ../partials/header%>
+<%include ../partials/header.ejs%>
 <% avatarUser.local.avatar.forEach(function(avatar){%>
     <%if(user.local.role == 'admin'){ %>
-<% include ../partials/sidebar-admin %>
+        <% include ../partials/sidebar-admin.ejs %>
     <%}else if(user.local.role == 'Organizator'){ %>
-<% include ../partials/sidebar-organizer %>
+        <% include ../partials/sidebar-organizer.ejs %>
     <%}else{%>
-<% include ../partials/sidebar %>
-<%}%>
+        <% include ../partials/sidebar.ejs %>
+    <%}%>
 <%});%>
 
 <div id="page-wrapper">
@@ -25,9 +25,9 @@
                         <p>Start: <%= moment(tournament.startDate).format("DD MMMM YYYY")%></p>
                         <p>Finish: <%= moment(tournament.endDate).format("DD MMMM YYYY")%></p>
                     </div>
-                    <div class="col-lg-5" style="text-align: center">
+                    <div class="col-lg-5 available-slots-summary-closed-tournament">
                         <p>Locuri disponibile:</p>
-                        <p><span style="font-size: 40px; font-weight: bold;"><%= tournament.nrOfPlayers%></span></p>
+                        <p><span><%= tournament.nrOfPlayers%></span></p>
                     </div>
                 </div>
                 <%if(user.local.role == 'User' || user.local.role == 'Organizator'){%>
@@ -37,7 +37,6 @@
                     <a class="btn btn-info" href="/edit-tournament/<%=tournament._id%>/<%=user._id%>">Editeaza</a>
                     <a class="btn btn-danger" href="/delete-tournament/<%=tournament._id%>/<%=user._id%>">Sterge turneul</a>
                 <%}%>
-
             </div>
             <%})%>
         </div>

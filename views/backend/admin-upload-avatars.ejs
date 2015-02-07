@@ -1,6 +1,6 @@
-<%include ../partials/header%>
+<%include ../partials/header.ejs%>
 <%avatarUser.local.avatar.forEach(function(avatar){%>
-<% include ../partials/sidebar-admin%>
+<% include ../partials/sidebar-admin.ejs%>
 <%});%>
 <div id="page-wrapper">
     <div class="row">
@@ -20,7 +20,7 @@
                 <div class="form-group">
                         <!--TODO - BULK UPLOADS CU NODE-->
                         <div class="col-lg-10">
-                            <input style="margin-bottom: 10px;" type="file" class="btn btn-default" name="userProfileImage" required/>
+                            <input type="file" class="btn btn-default upload-avatar-btn" name="userProfileImage" required/>
                             <input type="submit" class="btn btn-success" value="Incarca imaginea"/>
                         </div>
                 </div>
@@ -29,4 +29,4 @@
     </div>
 </div>
 
-<%include ../partials/footer%>
+<%include ../partials/footer.ejs%>

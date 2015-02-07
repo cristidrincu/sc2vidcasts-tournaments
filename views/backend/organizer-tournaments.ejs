@@ -1,4 +1,4 @@
-<%include ../partials/header%>
+<%include ../partials/header.ejs%>
 <% userAvatar.local.avatar.forEach(function(avatar){ %>
     <% include ../partials/sidebar-organizer.ejs%>
 <%});%>
@@ -7,15 +7,18 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Detalii </h1>
+            <%if(tournaments.length == 0){%>
+                <p>Nu ai organizat niciun turneu pana acum!</p>
+            <%}%>
             <%tournaments.forEach(function(tournament){%>
                 <div class="col-lg-4 container-organizer-details-tournament">
                     <%if(!tournament.finishedTournament){%>
                         <h3><%= tournament.tournamentName%> | <%= Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) + '% | ' %>
-                            <span style="color: green">Activ</span>
+                            <span class="active-tournament-indicator">Activ</span>
                         </h3>
                     <%}else{%>
                         <h3><%= tournament.tournamentName%> | <%= Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) + '% | ' %>
-                            <span style="color: red">Incheiat</span>
+                            <span class="finished-tournament-indicator">Incheiat</span>
                         </h3>
                     <%}%>
 
@@ -28,9 +31,9 @@
                             <p>Start: <%= moment(tournament.startDate).format("DD MMMM YYYY")%></p>
                             <p>Finish: <%= moment(tournament.endDate).format("DD MMMM YYYY")%></p>
                         </div>
-                        <div class="col-lg-5" style="text-align: center">
+                        <div class="col-lg-5 container-available-player-slots">
                             <p>Locuri disponibile:</p>
-                            <p><span style="font-size: 40px; font-weight: bold;"><%= tournament.nrOfPlayers%></span></p>
+                            <p><span><%= tournament.nrOfPlayers%></span></p>
                         </div>
                     </div>
                     <%if(!tournament.finishedTournament){%>

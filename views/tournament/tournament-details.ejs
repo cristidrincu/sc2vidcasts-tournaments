@@ -20,8 +20,8 @@
                 </h1>
             </div>
             <div class="col-lg-4">
-                <%if(user.local.role == 'Organizator' && !tournament.finishedTournament){%>
-
+                <%if(user.local.role == 'Organizator' && !tournament.finishedTournament && ( user._id.toString() === tournament.organizer[0]._id.toString() )){%>
+                <!--TODO - daca turneul este terminat, arata doar un buton cu care se pot defini castigatorii turneului-->
                 <ul class="edit-menu-tournament">
                     <li>
                         <a href="/edit-tournament/<%= tournament._id %>/<%= user._id %>"><i class="fa fa-pencil-square-o"></i> Editeaza</a>
@@ -36,16 +36,16 @@
 
                 <%}else if(user.local.role == 'User'){%>
                     <%if(tournamentStatus == 1){%>
-                        <h4 style="color: orange; padding-top: 45px">Acest turneu este in desfasurare, iar inscrierile sunt inchise!</h4>
+                        <h4 class="notifier-tournament-status-ongoing">Acest turneu este in desfasurare, iar inscrierile sunt inchise!</h4>
                     <%} else if(tournamentStatus == 2){%>
-                        <h4 style="color: red; padding-top: 45px">Acest turneu s-a terminat!</h4>
+                        <h4 class="notifier-tournament-status-completed">Acest turneu s-a terminat!</h4>
                     <%} else {%>
                         <% if(!eligibleForTournament){%>
-                            <p style="padding-top: 55px; color: red">Acest concurs nu este deschis ligii din care faci parte. Ne pare rau!</p>
+                            <p class="error-eligible-tournament">Acest concurs nu este deschis ligii din care faci parte. Ne pare rau!</p>
                         <%}%>
 
                         <% if(enlistedInTournament){%>
-                            <p style="padding-top: 55px; color: red">Esti deja inscris in cadrul acestui turneu</p>
+                            <p class="error-enlisted-tournament">Esti deja inscris in cadrul acestui turneu</p>
                         <%}%>
 
                         <% if(eligibleForTournament && !enlistedInTournament && (procentajOcupare != 100) ){%>
@@ -79,7 +79,7 @@
                     <i class="fa fa-clock-o fa-fw"></i> Data inceperii
                 </div>
                 <div class="panel-body">
-                    <p style="text-align: center"><%=moment(tournament.startDate).format("DD MMMM YYYY")%></p>
+                    <p class="centered-info-tournament"><%=moment(tournament.startDate).format("DD MMMM YYYY")%></p>
                 </div>
             </div>
         </div>
@@ -89,7 +89,7 @@
                     <i class="fa fa-clock-o fa-fw"></i> Data terminarii
                 </div>
                 <div class="panel-body">
-                    <p style="text-align: center"><%=moment(tournament.endDate).format("DD MMMM YYYY")%></p>
+                    <p class="centered-info-tournament"><%=moment(tournament.endDate).format("DD MMMM YYYY")%></p>
                 </div>
             </div>
         </div>
@@ -99,7 +99,7 @@
                     <i class="fa fa-clock-o fa-fw"></i> Ora inceperii
                 </div>
                 <div class="panel-body">
-                    <p style="text-align: center"><%=tournament.startHour%></p>
+                    <p class="centered-info-tournament"><%=tournament.startHour%></p>
                 </div>
             </div>
         </div>
@@ -109,19 +109,19 @@
                     <i class="fa fa-clock-o fa-fw"></i> Locuri disponibile
                 </div>
                 <div class="panel-body">
-                    <p style="text-align: center"><%=tournament.nrOfPlayers%></p>
+                    <p class="centered-info-tournament"><%=tournament.nrOfPlayers%></p>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default" style="border: none;">
+            <div class="panel panel-default enlisted-players-main-container">
                 <div class="panel-heading">
                     <i class="fa fa-clock-o fa-fw"></i> Jucatori inscrisi: <%= tournament.players.length%>
                 </div>
 
-                <ul class="nav nav-tabs" role="tablist" style="margin-top: 20px;">
+                <ul class="nav nav-tabs tabs-player-enlisted" role="tablist">
                     <li class="active"><a href="#bronze" role="tab" data-toggle="tab">Bronze</a></li>
                     <li><a href="#silver" role="tab" data-toggle="tab">Silver</a></li>
                     <li><a href="#gold" role="tab" data-toggle="tab">Gold</a></li>
@@ -133,7 +133,7 @@
 
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="bronze">
-                        <table style="margin-top: 20px;" class="table table-hover">
+                        <table class="table table-hover table-league-players">
                             <%if(bronzePlayers.length == 0){%>
                             <p class="message-no-players-found">Nu am gasit jucatori de Bronze inscrisi in acest turneu!</p>
                             <%}else{%>
@@ -180,7 +180,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="silver">
-                        <table style="margin-top: 20px;" class="table table-hover">
+                        <table class="table table-hover table-league-players">
                             <%if(silverPlayers.length == 0){%>
                             <p class="message-no-players-found">Nu am gasit jucatori de Silver inscrisi in acest turneu!</p>
                             <%}else{%>
@@ -225,7 +225,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="gold">
-                        <table style="margin-top: 20px;" class="table table-hover">
+                        <table class="table table-hover table-league-players">
                             <%if(goldPlayers.length == 0){%>
                             <p class="message-no-players-found">Nu am gasit jucatori de Gold inscrisi in acest turneu!</p>
                             <%}else{%>
@@ -270,7 +270,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="platinum">
-                        <table style="margin-top: 20px;" class="table table-hover">
+                        <table class="table table-hover table-league-players">
                             <%if(platinumPlayers.length == 0){%>
                             <p class="message-no-players-found">Nu am gasit jucatori de Platinum inscrisi in acest turneu!</p>
                             <%}else{%>
@@ -315,7 +315,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="diamond">
-                        <table style="margin-top: 20px;" class="table table-hover">
+                        <table class="table table-hover table-league-players">
                             <%if(diamondPlayers.length == 0){%>
                             <p class="message-no-players-found">Nu am gasit jucatori de Diamond inscrisi in acest turneu!</p>
                             <%}else{%>
@@ -361,7 +361,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="masters">
-                        <table style="margin-top: 20px;" class="table table-hover">
+                        <table class="table table-hover table-league-players">
                             <%if(mastersPlayers.length == 0){%>
                             <p class="message-no-players-found">Nu am gasit jucatori de Master inscrisi in acest turneu!</p>
                             <%}else{%>
@@ -406,7 +406,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="grand-masters">
-                        <table style="margin-top: 20px;" class="table table-hover">
+                        <table class="table table-hover table-league-players">
                             <%if(grandMasterPlayers.length == 0){%>
                             <p class="message-no-players-found">Nu am gasit jucatori de Grand Master inscrisi in acest turneu!</p>
                             <%}else{%>
@@ -502,7 +502,7 @@
                     <i class="fa fa-clock-o fa-fw"></i> Canal chat SC2
                 </div>
                 <div class="panel-body">
-                    <p style="text-align: center;">
+                    <p class="centered-info-tournament">
                         <%=tournament.ingameChatChannel%>
                     </p>
                 </div>
@@ -514,7 +514,7 @@
                     <i class="fa fa-clock-o fa-fw"></i> Canal Stream
                 </div>
                 <div class="panel-body">
-                    <p style="text-align: center;">
+                    <p class="centered-info-tournament">
                         <a href="<%=tournament.twitchStreamChannel%>" target="_blank"><%=tournament.twitchStreamChannel%></a>
                     </p>
                 </div>
@@ -526,7 +526,7 @@
                     <i class="fa fa-clock-o fa-fw"></i> Premii
                 </div>
                 <div class="panel-body">
-                    <p style="text-align: center;">
+                    <p class="centered-info-tournament">
                         <%= tournament.prize ? 'Da': 'Nu'%>
                     </p>
                 </div>
@@ -535,7 +535,4 @@
     </div>
 </div>
 
-
-</div>
-<!-- /#wrapper -->
 <%include ../partials/footer.ejs%>

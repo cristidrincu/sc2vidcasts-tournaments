@@ -10,6 +10,7 @@
                 <li><a href="/tournament-start-hour/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-clock-o"></i> Ora de incepere</a></li>
                 <li><a href="/tournament-prizes/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-gift"></i> Premii</a></li>
                 <li><a href="/tournament-sponsors/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-building-o"></i> Sponsori</a></li>
+                <li><a href="/declare-winner/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-trophy fa-fw"></i> Modifica castigatorul</a></li>
                 <li><a class="return-to-tournament-details" href="/tournament-details/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-arrow-circle-left"></i> Inapoi la detaliile turneului</a></li>
                 <%if(user.local.role == 'Organizator'){%>
                     <li><a class="return-to-control-panel" href="/backend-organizer/<%= user._id%>"><i class="fa fa-arrow-circle-left"></i> Inapoi la panoul de administrare</a></li>

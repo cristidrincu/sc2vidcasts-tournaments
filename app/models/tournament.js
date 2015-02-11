@@ -12,6 +12,9 @@ var tournamentSchema = mongoose.Schema({
     organizer: [{
       type: mongoose.Schema.Types.ObjectId, ref: "User"
     }],
+		winner: [{
+			type: mongoose.Schema.Types.ObjectId, ref: "User"
+		}],
     edition: String,
     description: String,
     startDate: Date,

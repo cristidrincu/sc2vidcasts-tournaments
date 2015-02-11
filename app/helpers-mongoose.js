@@ -7,6 +7,7 @@ var Quote = require('./models/quote.js');
 var ErrorHandler = require('./helpers-error-handlers.js');
 var _ = require('underscore');
 var Q = require('q');
+var moment = require('moment');
 
 
 //We use Q.defer when we are dealing with asynchronous callbacks, as the one below: function(err, user).
@@ -68,6 +69,24 @@ exports.compareUserId = function(userId, anotherId, cb){
 	}
 
 		return cb(comparisonResult);
+}
+
+exports.checkTournamentsStatus = function(cb){
+	var currentDate = new Date();
+
+	//check to see if the tournament is finished
+	Tournament.find( {} ).exec(function(err, tournaments){
+		tournaments.forEach(function(tournament){
+			if(moment(currentDate).isAfter(tournament.endDate)){
+				tournament.finishedTournament = true;
+				tournament.save(function(err){
+					if(err) throw err;
+				});
+			}
+		});
+
+		cb();
+	});
 }
 
 exports.setAvatarForUser = function(userId, avatarId){
@@ -265,15 +284,3 @@ exports.retrieveQuotes = function(){
 
 	return deferred.promise;
 }
-
-//exports.createQuote = function(authorName, quoteText, cb){
-//	var quote = new Quote();
-//	quote.quoteAuthor = authorName;
-//	quote.quoteText = quoteText;
-//
-//	quote.save(function(err){
-//		if(err){
-//			cb(err);
-//		}
-//	});
-//}

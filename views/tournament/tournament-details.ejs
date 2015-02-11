@@ -66,72 +66,76 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <h4>Gradul de ocupare a locurilor: <%= Math.floor(procentajOcupare) + '%'%></h4>
-            <div class="progress progress-striped active">
-                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= procentajOcupare + '%'%>">
-                </div>
-            </div>
-        </div>
+            <ul class="nav nav-tabs tabs-player-enlisted" role="tablist">
+                <li class="active"><a href="#detalii-turneu" role="tab" data-toggle="tab">Detalii turneu</a></li>
+                <li><a href="#castigator-turneu" role="tab" data-toggle="tab">Castigator turneu</a></li>
+            </ul>
 
-        <div class="col-lg-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Data inceperii
-                </div>
-                <div class="panel-body">
-                    <p class="centered-info-tournament"><%=moment(tournament.startDate).format("DD MMMM YYYY")%></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Data terminarii
-                </div>
-                <div class="panel-body">
-                    <p class="centered-info-tournament"><%=moment(tournament.endDate).format("DD MMMM YYYY")%></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Ora inceperii
-                </div>
-                <div class="panel-body">
-                    <p class="centered-info-tournament"><%=tournament.startHour%></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Locuri disponibile
-                </div>
-                <div class="panel-body">
-                    <p class="centered-info-tournament"><%=tournament.nrOfPlayers%></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default enlisted-players-main-container">
-                <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Jucatori inscrisi: <%= tournament.players.length%>
-                </div>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="detalii-turneu">
+                    <h4>Gradul de ocupare a locurilor: <%= Math.floor(procentajOcupare) + '%'%></h4>
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: <%= procentajOcupare + '%'%>">
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-clock-o fa-fw"></i> Data inceperii
+                            </div>
+                            <div class="panel-body">
+                                <p class="centered-info-tournament"><%=moment(tournament.startDate).format("DD MMMM YYYY")%></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-clock-o fa-fw"></i> Data terminarii
+                            </div>
+                            <div class="panel-body">
+                                <p class="centered-info-tournament"><%=moment(tournament.endDate).format("DD MMMM YYYY")%></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-clock-o fa-fw"></i> Ora inceperii
+                            </div>
+                            <div class="panel-body">
+                                <p class="centered-info-tournament"><%=tournament.startHour%></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-clock-o fa-fw"></i> Locuri disponibile
+                            </div>
+                            <div class="panel-body">
+                                <p class="centered-info-tournament"><%=tournament.nrOfPlayers%></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-lg-12">
+                    <div class="panel panel-default enlisted-players-main-container">
+                    <div class="panel-heading">
+                        <i class="fa fa-clock-o fa-fw"></i> Jucatori inscrisi: <%= tournament.players.length%>
+                    </div>
 
-                <ul class="nav nav-tabs tabs-player-enlisted" role="tablist">
-                    <li class="active"><a href="#bronze" role="tab" data-toggle="tab">Bronze</a></li>
-                    <li><a href="#silver" role="tab" data-toggle="tab">Silver</a></li>
-                    <li><a href="#gold" role="tab" data-toggle="tab">Gold</a></li>
-                    <li><a href="#platinum" role="tab" data-toggle="tab">Platinum</a></li>
-                    <li><a href="#diamond" role="tab" data-toggle="tab">Diamond</a></li>
-                    <li><a href="#masters" role="tab" data-toggle="tab">Master</a></li>
-                    <li><a href="#grand-masters" role="tab" data-toggle="tab">Grand Master</a></li>
-                </ul>
+                    <ul class="nav nav-tabs tabs-player-enlisted" role="tablist">
+                        <li class="active"><a href="#bronze" role="tab" data-toggle="tab">Bronze</a></li>
+                        <li><a href="#silver" role="tab" data-toggle="tab">Silver</a></li>
+                        <li><a href="#gold" role="tab" data-toggle="tab">Gold</a></li>
+                        <li><a href="#platinum" role="tab" data-toggle="tab">Platinum</a></li>
+                        <li><a href="#diamond" role="tab" data-toggle="tab">Diamond</a></li>
+                        <li><a href="#masters" role="tab" data-toggle="tab">Master</a></li>
+                        <li><a href="#grand-masters" role="tab" data-toggle="tab">Grand Master</a></li>
+                    </ul>
 
-                <div class="tab-content">
+                    <div class="tab-content">
                     <div class="tab-pane fade in active" id="bronze">
                         <table class="table table-hover table-league-players">
                             <%if(bronzePlayers.length == 0){%>
@@ -157,21 +161,21 @@
                                 <td><%= player.local.nickname %></td>
                                 <td><%= player.local.battlenetid %></td>
 
-                                    <%if(player.local.race == 'Terran'){%>
-                                        <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/terran/terran-logo-200x200.jpg"/></td>
-                                    <%}else if(player.local.race == 'Zerg'){%>
-                                        <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/zerg/zerg-logo-200x200.jpg"/></td>
-                                    <%}else{%>
-                                        <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/protoss/protoss-logo-200x200.jpg"/></td>
-                                    <%}%>
+                                <%if(player.local.race == 'Terran'){%>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/terran/terran-logo-200x200.jpg"/></td>
+                                <%}else if(player.local.race == 'Zerg'){%>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/zerg/zerg-logo-200x200.jpg"/></td>
+                                <%}else{%>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/protoss/protoss-logo-200x200.jpg"/></td>
+                                <%}%>
 
                                 <td><img class="img-circle profile-pic-table-players" src="../../images/logos-ligi/bronze-logo-ligi-200x200.png"/></td>
 
                                 <%if(player._id == userId){%>
-                                    <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
+                                <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
                                 <%} else {%>
-                                    <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
-                                    <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                                <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                                <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
                                 <%}%>
 
                             </tr>
@@ -204,20 +208,20 @@
                                 <td><%= player.local.battlenetid %></td>
 
                                 <%if(player.local.race == 'Terran'){%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/terran/terran-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/terran/terran-logo-200x200.jpg"/></td>
                                 <%}else if(player.local.race == 'Zerg'){%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/zerg/zerg-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/zerg/zerg-logo-200x200.jpg"/></td>
                                 <%}else{%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/protoss/protoss-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/protoss/protoss-logo-200x200.jpg"/></td>
                                 <%}%>
 
                                 <td><img class="img-circle profile-pic-table-players" src="../../images/logos-ligi/silver-logo-ligi-200x200.png"/></td>
 
                                 <%if(player._id == userId){%>
-                                    <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
+                                <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
                                 <%} else {%>
-                                    <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
-                                    <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                                <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                                <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
                                 <%}%>
                             </tr>
                             <% }); %>
@@ -249,20 +253,20 @@
                                 <td><%= player.local.battlenetid %></td>
 
                                 <%if(player.local.race == 'Terran'){%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/terran/terran-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/terran/terran-logo-200x200.jpg"/></td>
                                 <%}else if(player.local.race == 'Zerg'){%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/zerg/zerg-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/zerg/zerg-logo-200x200.jpg"/></td>
                                 <%}else{%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/protoss/protoss-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/protoss/protoss-logo-200x200.jpg"/></td>
                                 <%}%>
 
                                 <td><img class="img-circle profile-pic-table-players" src="../../images/logos-ligi/gold-logo-ligi-200x200.png"/></td>
 
                                 <%if(player._id == userId){%>
-                                    <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
+                                <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
                                 <%} else {%>
-                                    <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
-                                    <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                                <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                                <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
                                 <%}%>
                             </tr>
                             <% }); %>
@@ -294,20 +298,20 @@
                                 <td><%= player.local.battlenetid %></td>
 
                                 <%if(player.local.race == 'Terran'){%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/terran/terran-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/terran/terran-logo-200x200.jpg"/></td>
                                 <%}else if(player.local.race == 'Zerg'){%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/zerg/zerg-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/zerg/zerg-logo-200x200.jpg"/></td>
                                 <%}else{%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/protoss/protoss-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/protoss/protoss-logo-200x200.jpg"/></td>
                                 <%}%>
 
                                 <td><img class="img-circle profile-pic-table-players" src="../../images/logos-ligi/platinum-logo-ligi-200x200.png"/></td>
 
                                 <%if(player._id == userId){%>
-                                    <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
+                                <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
                                 <%} else {%>
-                                    <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
-                                    <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                                <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                                <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
                                 <%}%>
                             </tr>
                             <% }); %>
@@ -339,21 +343,21 @@
                                 <td><%= player.local.battlenetid %></td>
 
                                 <%if(player.local.race == 'Terran'){%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/terran/terran-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/terran/terran-logo-200x200.jpg"/></td>
                                 <%}else if(player.local.race == 'Zerg'){%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/zerg/zerg-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/zerg/zerg-logo-200x200.jpg"/></td>
                                 <%}else{%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/protoss/protoss-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/protoss/protoss-logo-200x200.jpg"/></td>
                                 <%}%>
 
 
                                 <td><img class="img-circle profile-pic-table-players" src="../../images/logos-ligi/diamond-logo-ligi-200x200.png"/></td>
 
                                 <%if(player._id == userId){%>
-                                    <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
+                                <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
                                 <%} else {%>
-                                    <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
-                                    <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                                <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                                <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
                                 <%}%>
                             </tr>
                             <% }); %>
@@ -385,20 +389,20 @@
                                 <td><%= player.local.battlenetid %></td>
 
                                 <%if(player.local.race == 'Terran'){%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/terran/terran-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/terran/terran-logo-200x200.jpg"/></td>
                                 <%}else if(player.local.race == 'Zerg'){%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/zerg/zerg-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/zerg/zerg-logo-200x200.jpg"/></td>
                                 <%}else{%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/protoss/protoss-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/protoss/protoss-logo-200x200.jpg"/></td>
                                 <%}%>
 
                                 <td><img class="img-circle profile-pic-table-players" src="../../images/logos-ligi/masters-logo-ligi-200x200.png"/></td>
 
                                 <%if(player._id == userId){%>
-                                    <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
+                                <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
                                 <%} else {%>
-                                    <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
-                                    <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                                <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                                <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
                                 <%}%>
                             </tr>
                             <% }); %>
@@ -430,20 +434,20 @@
                                 <td><%= player.local.battlenetid %></td>
 
                                 <%if(player.local.race == 'Terran'){%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/terran/terran-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/terran/terran-logo-200x200.jpg"/></td>
                                 <%}else if(player.local.race == 'Zerg'){%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/zerg/zerg-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/zerg/zerg-logo-200x200.jpg"/></td>
                                 <%}else{%>
-                                    <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/protoss/protoss-logo-200x200.jpg"/></td>
+                                <td><img class="img-circle profile-pic-table-players" src="../../images/race-logo/protoss/protoss-logo-200x200.jpg"/></td>
                                 <%}%>
 
                                 <td><img class="img-circle profile-pic-table-players" src="../../images/logos-ligi/grand-master-logo-ligi-200x200.png"/></td>
 
                                 <%if(player._id == userId){%>
-                                    <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
+                                <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
                                 <%} else {%>
-                                    <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
-                                    <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+                                <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+                                <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
                                 <%}%>
                             </tr>
                             <% }); %>
@@ -451,85 +455,113 @@
                         </table>
                     </div>
 
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="fa fa-clock-o fa-fw"></i> Detalii turneu <%=tournament.tournamentName%>, <%=tournament.edition == 1 ? 'editia ' + tournament.edition : 'editia a ' + tournament.edition + '-a'%>
+                                </div>
+                                <div class="panel-body">
+                                    <p><%=tournament.description.trim()%></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="fa fa-clock-o fa-fw"></i> Organizator
+                                </div>
+                                <div class="panel-body">
+                                    <%tournament.organizer.forEach(function(organizer){%>
+                                    <p><%= organizer.local.nickname%>, <a href="/profile-details/<%= organizer._id%>">Profil organizator</a></p>
+                                    <%});%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="fa fa-clock-o fa-fw"></i> Turneu deschis urmatoarelor ligi
+                                </div>
+                                <div class="panel-body">
+                                    <p>
+                                        <%for(var i = 0; i< tournament.openForLeagues.leagues.length; i++){%>
+                                        <%=tournament.openForLeagues.leagues[i] +
+                                        (tournament.openForLeagues.leagues[i] == tournament.openForLeagues.leagues[tournament.openForLeagues.leagues.length-1] ? '.': ', ')
+                                        %>
+                                        <%};%>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="fa fa-clock-o fa-fw"></i> Canal chat SC2
+                                </div>
+                                <div class="panel-body">
+                                    <p class="centered-info-tournament">
+                                        <%=tournament.ingameChatChannel%>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="fa fa-clock-o fa-fw"></i> Canal Stream
+                                </div>
+                                <div class="panel-body">
+                                    <p class="centered-info-tournament">
+                                        <a href="<%=tournament.twitchStreamChannel%>" target="_blank"><%=tournament.twitchStreamChannel%></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="fa fa-clock-o fa-fw"></i> Premii
+                                </div>
+                                <div class="panel-body">
+                                    <p class="centered-info-tournament">
+                                        <%= tournament.prize ? 'Da': 'Nu'%>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Detalii turneu <%=tournament.tournamentName%>, <%=tournament.edition == 1 ? 'editia ' + tournament.edition : 'editia a ' + tournament.edition + '-a'%>
+
+                <div class="tab-pane fade" id="castigator-turneu">
+                    <h1>Castigator turneu</h1>
+                    <%if( (user.local.role == 'Organizator' && userId == tournament.organizer[0]._id) || user.local.role == 'admin'){%>
+                        <%if(tournament.winner.length == 0){%>
+                            <form action="/declare-winner/<%=tournament._id%>/<%=userId%>" method="post">
+                                <div class="form-group">
+                                    <label>Jucator</label>
+                                    <input type="text" class="form-control" name="winnerName" placeholder="Introdu numele jucatorului" required>
+                                </div>
+                                <button type="submit" class="btn btn-warning btn-lg">Declara castigator</button>
+                            </form>
+                        <%}else{%>
+                            <h3><%=tournament.winner[0].local.nickname%></h3>
+                        <%}%>
+                    <%}else if(tournament.winner.length == 0){%>
+                        <h3>Organizatorul nu a declarat un castigator al acestui concurs!</h3>
+                    <%}else{%>
+                        <h3><%=tournament.winner[0].local.nickname%></h3>
+                    <%}%>
                 </div>
-                <div class="panel-body">
-                    <p><%=tournament.description.trim()%></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Organizator
-                </div>
-                <div class="panel-body">
-                    <%tournament.organizer.forEach(function(organizer){%>
-                        <p><%= organizer.local.nickname%>, <a href="/profile-details/<%= organizer._id%>">Profil organizator</a></p>
-                    <%});%>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Turneu deschis urmatoarelor ligi
-                </div>
-                <div class="panel-body">
-                    <p>
-                    <%for(var i = 0; i< tournament.openForLeagues.leagues.length; i++){%>
-                            <%=tournament.openForLeagues.leagues[i] +
-                                (tournament.openForLeagues.leagues[i] == tournament.openForLeagues.leagues[tournament.openForLeagues.leagues.length-1] ? '.': ', ')
-                            %>
-                    <%};%>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Canal chat SC2
-                </div>
-                <div class="panel-body">
-                    <p class="centered-info-tournament">
-                        <%=tournament.ingameChatChannel%>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Canal Stream
-                </div>
-                <div class="panel-body">
-                    <p class="centered-info-tournament">
-                        <a href="<%=tournament.twitchStreamChannel%>" target="_blank"><%=tournament.twitchStreamChannel%></a>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Premii
-                </div>
-                <div class="panel-body">
-                    <p class="centered-info-tournament">
-                        <%= tournament.prize ? 'Da': 'Nu'%>
-                    </p>
-                </div>
+
             </div>
         </div>
     </div>

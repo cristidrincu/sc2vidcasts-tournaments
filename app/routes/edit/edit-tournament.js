@@ -318,6 +318,8 @@ app.post('/tournament-sponsors/:tournamentId/:userId', isLoggedIn, requireRole('
 	});
 });
 
+//ruta pentru modificarea castigatorului
+
 
 /*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/
 function isLoggedIn(req, res, next) {

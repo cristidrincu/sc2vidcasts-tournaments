@@ -9,6 +9,7 @@ var moment = require('moment');
 var helperFunctions = require('../../../app/helpers-mongoose.js');
 var placeHolderText = require('../../../config/validation-placeholders-text.js');
 var _ = require('underscore');
+var currentDate = new Date();
 
 var app = module.exports = express();
 
@@ -108,7 +109,7 @@ app.get('/tournament-details/:_id/:userId', isLoggedIn, function(req, res){
       }
     });
 
-    Tournament.findById(req.params._id).populate('players organizer bracket').exec( function(err, tournament){
+    Tournament.findById(req.params._id).populate('players organizer bracket winner').exec( function(err, tournament){
       if(err){
         res.send(err)
       }else{
@@ -218,7 +219,7 @@ app.post('/signup-tournament/:_id/:userId', isLoggedIn, function(req, res){
 });
 
 app.get('/user-tournaments/:userId', isLoggedIn, function(req, res){
-  User.findById(req.params.userId).populate('local.tournaments').populate('local.avatar').exec(function(err, user){
+  User.findById(req.params.userId).populate('local.tournaments local.avatar').exec(function(err, user){
     if(err)
       res.send(err)
     else
@@ -275,6 +276,19 @@ app.post('/retragere-din-turneu/:_userId/:_tournamentId', isLoggedIn, function(r
   });
 });
 
+app.post('/declare-winner/:tournamentId/:userId', isLoggedIn, requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
+	helperFunctions.getUserIdName(req.body.winnerName).then(function(userId){
+		Tournament.findById(req.params.tournamentId).exec(function(err, tournament){
+			tournament.winner.push(userId);
+			tournament.save(function(err){
+				if(err) throw err;
+
+				res.redirect('/tournament-details/' + req.params.tournamentId + '/' + req.params.userId);
+			})
+		});
+	});
+});
+
 app.post('/create-brackets/:tournamentId', isLoggedIn, requireRole('Organizator'), function(req, res){
 
 });
@@ -311,5 +325,15 @@ function tournamentStatus(tournament){
 		return ongoing;
 	}else{
 		return starting;
+	}
+}
+
+function requireMultipleUserRoles(role1, role2){
+	return function(req, res, next){
+		if(req.user.local.role === role1 || req.user.local.role === role2){
+			next();
+		}else{
+			res.send(403);
+		}
 	}
 }

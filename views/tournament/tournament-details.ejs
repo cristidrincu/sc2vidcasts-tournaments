@@ -558,7 +558,10 @@
                     <%}else if(tournament.winner.length == 0){%>
                         <h3>Organizatorul nu a declarat un castigator al acestui concurs!</h3>
                     <%}else{%>
-                        <h3><%=tournament.winner[0].local.nickname%></h3>
+                        <div class="tournament-winner-container">
+                            <img src="../../images/trophy/tournament-trophy.jpg" alt="Castigatorul turneului" width="200" height="232"/>
+                            <h3><%=tournament.winner[0].local.nickname%></h3>
+                        </div>
                     <%}%>
                 </div>
 

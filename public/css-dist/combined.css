@@ -1432,6 +1432,11 @@ a.return-to-control-panel{
     list-style: none;
 }
 
+.tournament-winner-container{
+    width: inherit;
+    text-align: center;
+}
+
 .footer{
     padding-top: 20px;
     padding-bottom: 20px;

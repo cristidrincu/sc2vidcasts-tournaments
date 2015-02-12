@@ -16,9 +16,24 @@ app.get('/organizer-tournaments/:organizerId', isLoggedIn, requireRole('Organiza
 				res.render('backend/organizer-tournaments.ejs', {
 					user: req.user,
 					userAvatar: user,
-					tournaments: organizerTournaments,
+					tournaments: _.filter(organizerTournaments, function(tournament){
+						return tournament.finishedTournament == false;
+					}),
 					moment: moment
 				});
+		});
+	});
+});
+
+app.get('/all-organizer-tournaments/:organizerId', isLoggedIn, requireRole('Organizator'), function(req, res){
+	helperFunctions.getUserDetails(req.params.organizerId).then(function(user){
+		helperFunctions.retrieveTournamentsByOrganizer(req.params.organizerId).then(function(organizerTournaments){
+			res.render('backend/organizer-tournaments.ejs', {
+				user: req.user,
+				userAvatar: user,
+				tournaments: organizerTournaments,
+				moment: moment
+			});
 		});
 	});
 });

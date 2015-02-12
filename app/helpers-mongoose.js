@@ -29,9 +29,9 @@ exports.getUserIdName = function(nickname){
 	User.findOne( {'local.nickname': nickname}).exec(function(err, user){
 		if(err){
 			deffered.reject(err);
+		}else{
+			deffered.resolve(user._id);
 		}
-
-		deffered.resolve(user._id);
 	});
 
 	return deffered.promise;
@@ -250,7 +250,7 @@ exports.retrieveMessagesForUser = function(userid){
 
 exports.retrieveTournamentDetails = function(tournamentId){
 	var deferred = Q.defer();
-	Tournament.findById(tournamentId).populate('players').exec(function(err, tournament){
+	Tournament.findById(tournamentId).populate('players winner').exec(function(err, tournament){
 		if(err){
 			deferred.reject(tournament)
 		}

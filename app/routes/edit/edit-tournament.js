@@ -8,6 +8,9 @@ var Tournament = require('../../../app/models/tournament');
 var moment = require('moment');
 var _  = require('underscore');
 var Q = require('q');
+
+require('express-expose');
+
 var nodemailer = require('nodemailer');
 // create reusable transporter object using SMTP transport
 var transporter = nodemailer.createTransport({
@@ -25,6 +28,8 @@ app.get('/edit-tournament/:tournamentId/:userId', isLoggedIn, requireMultipleUse
 		res.render('tournament/edit/edit-tournament-basic-info.ejs', {
 			user: req.user,
 			tournament: tournament,
+			moment: moment,
+			currentDate: new Date(),
 			successMessage: req.flash('infoSuccess'),
 			errorMessage: req.flash('infoError')
 		});
@@ -36,6 +41,8 @@ app.get('/informatii-de-baza/:tournamentId/:userId', isLoggedIn, requireRole('Or
 		res.render('tournament/edit/edit-tournament-basic-info.ejs', {
 			user: req.user,
 			tournament: tournament,
+			moment: moment,
+			currentDate: new Date(),
 			errorMessage: req.flash('infoError'),
 			successMessage: req.flash('infoSuccess')
 		});
@@ -150,19 +157,24 @@ app.get('/ligi-turneu/:tournamentId/:userId', isLoggedIn, requireRole('Organizat
 });
 
 app.post('/ligi-turneu/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
-	Tournament.findById(req.params.tournamentId).populate('players').exec(function(err, tournament){
-		tournament.openForLeagues.leagues.addToSet(req.body.leagues);
+	if(checkEmptyLeagues(req.body.leagues)){
+		req.flash('infoError', 'Alege macar o noua liga inainte de a continua!');
+		res.redirect('/ligi-turneu/' + req.params.tournamentId + '/' + req.params.userId );
+	}else{
+		Tournament.findById(req.params.tournamentId).populate('players').exec(function(err, tournament){
+			tournament.openForLeagues.leagues.addToSet(req.body.leagues);
 
-		tournament.save(function(err){
-			if(err){
-				req.flash('infoError', 'A aparut o eroare la modificarea ligilor pentru acest turneu');
-				res.redirect('/ligi-turneu/' + req.params.tournamentId + '/' + req.params.userId );
-			}else{
-				req.flash('infoSuccess', 'Ligile au fost modificat cu succes!');
-				res.redirect('/ligi-turneu/' + req.params.tournamentId + '/' + req.params.userId );
-			}
+			tournament.save(function(err){
+				if(err){
+					req.flash('infoError', 'A aparut o eroare la modificarea ligilor pentru acest turneu');
+					res.redirect('/ligi-turneu/' + req.params.tournamentId + '/' + req.params.userId );
+				}else{
+					req.flash('infoSuccess', 'Ligile au fost modificat cu succes!');
+					res.redirect('/ligi-turneu/' + req.params.tournamentId + '/' + req.params.userId );
+				}
+			});
 		});
-	});
+	}
 });
 
 app.get('/tournament-start-date/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
@@ -239,23 +251,29 @@ app.get('/tournament-start-hour/:tournamentId/:userId', isLoggedIn, requireRole(
 });
 
 app.post('/tournament-start-hour/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
-	Tournament.findById(req.params.tournamentId).exec(function(err, tournament){
-		if(err){
-			throw err;
-		}
 
-		tournament.startHour = req.body.startHour;
-
-		tournament.save(function(err){
+	if(checkEmptyStartHour(req.body.startHour)){
+		req.flash('infoError', 'Nu ai ales o noua ora de incepere a turneului. Mai incearca!');
+		res.redirect('/tournament-start-hour/' + req.params.tournamentId + '/' + req.params.userId);
+	}else{
+		Tournament.findById(req.params.tournamentId).exec(function(err, tournament){
 			if(err){
-				req.flash('infoError', 'Nu am putut salva modificarile pentru noua ora de incepere a turneului');
-				res.redirect('/tournament-start-hour/' + req.params.tournamentId + '/' + req.params.userId);
-			}else{
-				req.flash('infoSuccess', 'Salvarea unei noi ore de inceperea a turneului a fost facuta cu succes');
-				res.redirect('/tournament-start-hour/' + req.params.tournamentId + '/' + req.params.userId);
+				throw err;
 			}
+
+			tournament.startHour = req.body.startHour;
+
+			tournament.save(function(err){
+				if(err){
+					req.flash('infoError', 'Nu am putut salva modificarile pentru noua ora de incepere a turneului');
+					res.redirect('/tournament-start-hour/' + req.params.tournamentId + '/' + req.params.userId);
+				}else{
+					req.flash('infoSuccess', 'Salvarea unei noi ore de inceperea a turneului a fost facuta cu succes');
+					res.redirect('/tournament-start-hour/' + req.params.tournamentId + '/' + req.params.userId);
+				}
+			});
 		});
-	});
+	}
 });
 
 app.get('/tournament-prizes/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
@@ -318,7 +336,53 @@ app.post('/tournament-sponsors/:tournamentId/:userId', isLoggedIn, requireRole('
 	});
 });
 
-//ruta pentru modificarea castigatorului
+app.get('/declare-winner/:tournamentId/:userId', isLoggedIn, requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
+	helperFunctions.retrieveTournamentDetails(req.params.tournamentId).then(function(tournament){
+		helperFunctions.retrievePlayersFromTournament(req.params.tournamentId).then(function(players){
+			res.render('tournament/edit/tournament-winner.ejs', {
+				user: req.user,
+				tournament: tournament,
+				tournamentPlayers: players,
+				moment: moment,
+				currentDate: new Date(),
+				errorMessage: req.flash('infoError'),
+				successMessage: req.flash('infoSuccess')
+			});
+		});
+	});
+});
+//TODO - In ziua de incepere a turneului, se blocheaza toate optiunile de modificare pentru organizator
+app.post('/modify-tournament-winner/:tournamentId/:userId', isLoggedIn, requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
+		helperFunctions.retrieveTournamentDetails(req.params.tournamentId).then(function(tournament){
+			if(tournament.winner[0].local.nickname == req.body.winnerName){
+				req.flash('infoSuccess', 'Salvarea modificarilor a fost realizata cu succes!');
+				res.redirect('/declare-winner/' + req.params.tournamentId + '/' + req.params.userId);
+			}else{
+				User.findOne({'local.nickname': req.body.winnerName}, function(err, user){
+					if(err){
+						req.flash('infoError', 'A intervenit o eroare in gasirea jucatorului! Mai incearca!');
+						res.redirect('/declare-winner/' + req.params.tournamentId + '/' + req.params.userId);
+					}else if(user == null){
+						req.flash('infoError', 'Nu exista un astfel de utilizator in baza de date! Mai incearca!');
+						res.redirect('/declare-winner/' + req.params.tournamentId + '/' + req.params.userId);
+					}else{
+						tournament.winner = [];
+						tournament.winner.push(user._id);
+						tournament.save(function(err){
+							if(err) {
+								req.flash('infoError', 'Nu am putut salva modificarile pentru castigatorul acestui turneu!');
+							}else{
+								req.flash('infoSuccess', 'Salvarea modificarilor a fost realizata cu succes!');
+							}
+
+							res.redirect('/declare-winner/' + req.params.tournamentId + '/' + req.params.userId);
+						});
+					}
+				});
+			}
+		});
+
+});
 
 
 /*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/
@@ -358,4 +422,22 @@ function checkTournamentUpdatedProps(oldProp, updatedProp){
 
 	return updatedProp + '( a fost: ' + oldProp + ')';
 
+}
+
+function checkEmptyStartHour(editStartHour){
+	var emptyStartHour = false;
+	if(editStartHour == undefined || editStartHour == null || editStartHour == ''){
+		emptyStartHour = true;
+	}
+
+	return emptyStartHour;
+}
+
+function checkEmptyLeagues(leagues){
+	var emptyLeagues = false;
+	if(leagues == undefined || leagues == null){
+		emptyLeagues = true;
+	}
+
+	return emptyLeagues;
 }

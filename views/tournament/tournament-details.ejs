@@ -10,6 +10,17 @@
 
 <%});%>
 
+<script>
+    <%- javascript %>
+    $(function() {
+        $( "#playerNicks" ).autocomplete({
+            source: $.map(playersTournament, function(nickname){
+                return nickname;
+            })
+        });
+    });
+</script>
+
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -544,16 +555,17 @@
                 <div class="tab-pane fade" id="castigator-turneu">
                     <h1>Castigator turneu</h1>
                     <%if( (user.local.role == 'Organizator' && userId == tournament.organizer[0]._id) || user.local.role == 'admin'){%>
-                        <%if(tournament.winner.length == 0){%>
-                            <form action="/declare-winner/<%=tournament._id%>/<%=userId%>" method="post">
-                                <div class="form-group">
-                                    <label>Jucator</label>
-                                    <input type="text" class="form-control" name="winnerName" placeholder="Introdu numele jucatorului" required>
-                                </div>
-                                <button type="submit" class="btn btn-warning btn-lg">Declara castigator</button>
-                            </form>
+                        <%if(moment(currentDate).isSame(tournament.endDate) || moment(currentDate).isAfter(tournament.endDate)){%>
+
+                                <form action="/declare-winner/<%=tournament._id%>/<%=userId%>" method="post">
+                                    <div class="form-group">
+                                        <label>Jucator</label>
+                                        <input type="text" class="form-control" name="winnerName" id="playerNicks" placeholder="Introdu numele jucatorului" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-warning btn-lg">Declara castigator</button>
+                                </form>
                         <%}else{%>
-                            <h3><%=tournament.winner[0].local.nickname%></h3>
+                            <h3>Vei putea declara castigatorul doar in ziua de final de concurs!</h3>
                         <%}%>
                     <%}else if(tournament.winner.length == 0){%>
                         <h3>Organizatorul nu a declarat un castigator al acestui concurs!</h3>

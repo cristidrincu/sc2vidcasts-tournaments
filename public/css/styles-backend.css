@@ -543,6 +543,34 @@ a.return-to-control-panel{
     text-align: center;
 }
 
+.select-tournament-players{
+    margin-bottom: 20px;
+}
+
+.no-edit-options{
+    opacity: 0.9;
+    background-color: #cccccc;
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index:1000;
+}
+
+.no-edit-message{
+    width: 980px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 1001;
+    margin-top: 300px;
+}
+
+.no-edit-message h1, .no-edit-message h4{
+    text-align: center;
+}
+
 .footer{
     padding-top: 20px;
     padding-bottom: 20px;

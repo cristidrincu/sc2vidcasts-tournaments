@@ -9,7 +9,8 @@ var moment = require('moment');
 var helperFunctions = require('../../../app/helpers-mongoose.js');
 var placeHolderText = require('../../../config/validation-placeholders-text.js');
 var _ = require('underscore');
-var currentDate = new Date();
+
+require('express-expose');
 
 var app = module.exports = express();
 
@@ -121,10 +122,15 @@ app.get('/tournament-details/:_id/:userId', isLoggedIn, function(req, res){
       });
 
 		    helperFunctions.retrieveAllTournamentPlayersBasedOnLeagues(req.params._id, function(playersFromCollection){
+			    var autocompletePlayersTournament = _.map(playersFromCollection, function(player){
+				    return player.local.nickname;
+			    });
 			    helperFunctions.getUserDetails(req.params.userId).then(function(user){
+				    res.expose(autocompletePlayersTournament, 'playersTournament');
 				    res.render('tournament/tournament-details.ejs',{
 					    user: req.user,
 					    tournament: tournament,
+					    currentDate: new Date(),
 					    userAvatar: user,
 					    userId: req.params.userId,
 					    bronzePlayers: _.filter(playersFromCollection, function(player){

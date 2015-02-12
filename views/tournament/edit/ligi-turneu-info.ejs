@@ -14,14 +14,14 @@ var leagues = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Master', 'Gra
         <p class="alert-danger"><%= errorMessage%></p>
     <%}%>
     <div class="form-group">
-        <form action="/ligi-turneu/<%= tournament._id%>/<%= user._id%>" method="post">
+        <form id="chooseNewTournamentLeagues" action="/ligi-turneu/<%= tournament._id%>/<%= user._id%>" method="post">
             <label>Ligile suportate de actualul turneu</label>
             <% tournament.openForLeagues.leagues.forEach(function(league){%>
                 <div class="checkbox">
-                    <input type="checkbox" name="leagues" value="<%=league%>" checked disabled/> <%=league%>
+                    <input type="checkbox" name="leaguesSupported" value="<%=league%>" checked disabled/> <%=league%>
                 </div>
             <%})%>
-            <label>Adauga si alte ligi pentru turneu</label>
+            <label for="leagues">Adauga si alte ligi pentru turneu</label>
             <% var leaguesUnsupported = underscore.difference(leagues, tournament.openForLeagues.leagues)%>
             <%for (var i=0; i < leaguesUnsupported.length; i++){%>
             <div class="checkbox">

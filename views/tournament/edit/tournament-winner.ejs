@@ -4,21 +4,26 @@
 <div class="col-lg-4">
     <h4 class="info-editing-tournament-section">Modifica castigatorul acestui turneu</h4>
     <% if(errorMessage.length === 0){%>
-    <p class="alert-success"><%= successMessage%></p>
+        <p class="alert-success"><%= successMessage%></p>
     <%} else {%>
-    <p class="alert-danger"><%= errorMessage%></p>
+        <p class="alert-danger"><%= errorMessage%></p>
     <%}%>
     <div class="form-group">
-        <p class="tournament-sponsors-status">Momentan, acest turneu <%= tournament.sponsors.length == 0 ? ' nu are sponsori' : ' are sponsori'%></p>
-        <% if(tournament.sponsors.length > 0){%>
-        <p><%= tournament.sponsors %></p>
-        <%}%>
-    </div>
-    <div class="form-group">
-        <form action="/tournament-sponsors/<%= tournament._id%>/<%= user._id%>" method="post">
-            <label>Adauga sponsori pentru acest turneu</label>
-            <input type="text" class="form-control add-sponsors" name="sponsors" value="<%= tournament.sponsors%>">
-            <button type="submit" class="btn btn-warning btn-lg">Confirma schimbarile</button>
+        <form action="/modify-tournament-winner/<%= tournament._id%>/<%= user._id%>" method="post">
+            <label>Actualul castigator</label>
+            <input type="text" class="form-control add-sponsors" name="winnerName" value="<%= tournament.winner.length == 0 ? 'Nu a fost declarat vreun castigator' : tournament.winner[0].local.nickname%>" disabled>
+
+            <%if(moment(currentDate).isSame(tournament.endDate)){%>
+                <label for="tournamentPlayers">Alege un castigator din cadrul participantilor in turneu</label>
+                <select class="form-control select-tournament-players" name="winnerName">
+                    <%tournamentPlayers.forEach(function(player){%>
+                    <option value="<%=player.local.nickname%>"><%=player.local.nickname%></option>
+                    <%})%>
+                </select>
+                <button type="submit" class="btn btn-warning btn-lg">Confirma schimbarile</button>
+            <%}else{%>
+                <h4>Vei putea declara castigatorul in ziua de final de concurs!</h4>
+            <%}%>
         </form>
     </div>
 </div>

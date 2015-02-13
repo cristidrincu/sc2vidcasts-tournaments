@@ -57,7 +57,13 @@ module.exports = function (passport) {
 		            return done(null, false, req.flash('signupMessage', email + ' : Adresa de email nu este una valabila! '));
 	            }
 
-	            //validate battlenet id - if valid, save it
+	            //validate nickname - if not valid, stop signup process
+	            if(!utils.validateNickname(req.body.nickname)){
+		            var nickname = req.body.nickname;
+		            return done(null, false, req.flash('signupMessage', nickname + ' : Nickname-ul ales nu a putut fi validat! '));
+	            }
+
+	            //validate battlenet id - if not valid, stop signup process
 	            if(!utils.validateBNetId(req.body.battlenetid)){
 		            var battlenetId = req.body.battlenetid;
 		            return done(null, false, req.flash('bnetMessage', battlenetId + ' : ID-ul pentru Battlenet nu este valid!'));

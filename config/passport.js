@@ -1,5 +1,6 @@
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = ('mongoose');
+var utils = require('../utils/utils.js');
 
 // load up the user model
 var User = require('../app/models/user');
@@ -41,6 +42,7 @@ module.exports = function (passport) {
         // asynchronous
         // User.findOne wont fire unless data is sent back
         process.nextTick(function () {
+
           // find a user whose email is the same as the forms email
           // we are checking to see if the user trying to create an account already exists
           User.findOne({ 'local.email': email }, function (err, user) {
@@ -48,8 +50,19 @@ module.exports = function (passport) {
               return done(err);
 
             if (user) {
-              return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+              return done(null, false, req.flash('signupMessage', email + ' : Aceasta adresa de email este deja luata!'));
             } else {
+		          //validate the email - if email is not valid, redirect to signup form
+	            if(!utils.validateEmail(email)){
+		            return done(null, false, req.flash('signupMessage', email + ' : Adresa de email nu este una valabila! '));
+	            }
+
+	            //validate battlenet id - if valid, save it
+	            if(!utils.validateBNetId(req.body.battlenetid)){
+		            var battlenetId = req.body.battlenetid;
+		            return done(null, false, req.flash('bnetMessage', battlenetId + ' : ID-ul pentru Battlenet nu este valid!'));
+	            }
+
               // if there is no user with that email
               // create the user
               var newUser = new User();
@@ -57,7 +70,7 @@ module.exports = function (passport) {
 	            if(req.body.password == req.body.PasswordAgain){
 		            newUser.local.password = newUser.generateHash(password);
 	            }else{
-		            return done(null, false, req.flash('signupMessage', 'Passwords do no match'));
+		            return done(null, false, req.flash('signupMessage', 'Parolele nu sunt identice!'));
 	            }
 
               // set the user's local credentials
@@ -74,7 +87,7 @@ module.exports = function (passport) {
               newUser.save(function (err) {
                 if (err)
                   throw err;
-                return done(null, newUser, req.flash('signupSuccess', 'You\'ve succesfully created your account!'));
+                return done(null, newUser, req.flash('signupSuccess', 'Contul a fost creat cu succes!'));
               });
             }
           });
@@ -104,6 +117,5 @@ module.exports = function (passport) {
       // all is well, return successful user
       return done(null, user);
     });
-
   }));
 };

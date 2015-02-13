@@ -7,7 +7,7 @@ var app = module.exports = express();
 
 /*SIGN-UP ROUTES*/
 app.get('/signup', function (req, res) {
-  res.render('signup.ejs', { message: req.flash('signupMessage'), user: null});
+  res.render('signup.ejs', { message: req.flash('signupMessage'), messageBNet: req.flash('bnetMessage'), user: null});
 });
 
 app.post('/signup', passport.authenticate('local-signup', {

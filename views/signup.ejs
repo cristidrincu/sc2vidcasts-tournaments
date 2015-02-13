@@ -11,7 +11,11 @@
 
         <!-- show any messages that come back with authentication -->
         <% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
+            <div class="alert alert-danger"><%= message %></div>
+        <% } %>
+
+        <% if (messageBNet.length > 0) { %>
+        <div class="alert alert-danger"><%= messageBNet %></div>
         <% } %>
 
         <!-- LOGIN FORM -->

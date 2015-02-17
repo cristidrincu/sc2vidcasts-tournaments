@@ -232,6 +232,10 @@ ul.titlu-turneu-signup li {
     color: red;
 }
 
+.container-organizer-details-tournament h3{
+    font-size: 16px;
+}
+
 .container-available-player-slots{
     text-align: center;
 }

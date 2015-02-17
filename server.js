@@ -25,6 +25,9 @@ var session = require('express-session');
 var configDB = require('./config/database.js');
 var helperFunctions = require('./app/helpers-mongoose.js');
 
+//use romanian locale for moment.js
+moment.locale('ro');
+
 //----------CONFIG-----------------------------
 //connect to our database
 mongoose.connect(configDB.url);

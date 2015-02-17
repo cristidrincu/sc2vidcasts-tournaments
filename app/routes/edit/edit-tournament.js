@@ -8,6 +8,7 @@ var Tournament = require('../../../app/models/tournament');
 var moment = require('moment');
 var _  = require('underscore');
 var Q = require('q');
+var currentDate = new Date();
 
 require('express-expose');
 
@@ -29,7 +30,6 @@ app.get('/edit-tournament/:tournamentId/:userId', isLoggedIn, requireMultipleUse
 			user: req.user,
 			tournament: tournament,
 			moment: moment,
-			currentDate: new Date(),
 			successMessage: req.flash('infoSuccess'),
 			errorMessage: req.flash('infoError')
 		});
@@ -42,7 +42,6 @@ app.get('/informatii-de-baza/:tournamentId/:userId', isLoggedIn, requireRole('Or
 			user: req.user,
 			tournament: tournament,
 			moment: moment,
-			currentDate: new Date(),
 			errorMessage: req.flash('infoError'),
 			successMessage: req.flash('infoSuccess')
 		});
@@ -83,27 +82,29 @@ app.post('/informatii-de-baza/:tournamentId/:userId', isLoggedIn, requireRole('O
 
 			req.flash('infoSuccess', 'Informatiile de baza pentru acest turneu au fost modificate cu success!');
 
-			//send email to all participants in the tournament
-			var mailOptions = {
-				from: 'Starcraft2 Vidcasts Romania starcraft2vidcasts@gmail.com',
-				to: '' + players.toString() + '', // list of receivers
-				subject: 'Modificari in cadrul turneului ' + tournament.tournamentName,
-				html:
+			if(players.length != 0){
+				//send email to all participants in the tournament
+				var mailOptions = {
+					from: 'Starcraft2 Vidcasts Romania starcraft2vidcasts@gmail.com',
+					to: '' + players.toString() + '', // list of receivers
+					subject: 'Modificari in cadrul turneului ' + tournament.tournamentName,
+					html:
 						'<p>Salut. Te anuntam ca au avut loc schimbari la informatiile de baza ale turneului in care participi:</p> ' +
-						'<br/><b>Numele turneului: </b> ' + checkTournamentUpdatedProps(oldTournamentName, tournament.tournamentName) +
-						'<br/><b>Editia turneului: </b> ' + checkTournamentUpdatedProps(oldTournamentEdition, tournament.edition) +
-						'<br/><b>Canal de chat pentru concurs:</b> ' + checkTournamentUpdatedProps(oldIngameChatChannel, tournament.ingameChatChannel) +
-						'<br/><b>Canalul de twitch: </b> ' + checkTournamentUpdatedProps(oldTwitchStreamChannel, tournament.twitchStreamChannel)
-			};
+							'<br/><b>Numele turneului: </b> ' + checkTournamentUpdatedProps(oldTournamentName, tournament.tournamentName) +
+							'<br/><b>Editia turneului: </b> ' + checkTournamentUpdatedProps(oldTournamentEdition, tournament.edition) +
+							'<br/><b>Canal de chat pentru concurs:</b> ' + checkTournamentUpdatedProps(oldIngameChatChannel, tournament.ingameChatChannel) +
+							'<br/><b>Canalul de twitch: </b> ' + checkTournamentUpdatedProps(oldTwitchStreamChannel, tournament.twitchStreamChannel)
+				};
 
-			// send mail with defined transport object
-			transporter.sendMail(mailOptions, function(error, info){
-				if(error){
-					console.log(error);
-				}else{
-					console.log('Message sent: ' + info.response);
-				}
-			});
+				// send mail with defined transport object
+				transporter.sendMail(mailOptions, function(error, info){
+					if(error){
+						console.log(error);
+					}else{
+						console.log('Message sent: ' + info.response);
+					}
+				});
+			}
 
 			res.redirect('/informatii-de-baza/' + req.params.tournamentId + '/' + req.params.userId);
 		});
@@ -115,6 +116,7 @@ app.get('/locuri-disponibile/:tournamentId/:userId', isLoggedIn, requireRole('Or
 		res.render('tournament/edit/locuri-disponibile-info.ejs', {
 			user: req.user,
 			tournament: tournament,
+			moment: moment,
 			successMessage: req.flash('infoSuccess'),
 			errorMessage: req.flash('infoError'),
 			underscore: _
@@ -149,6 +151,7 @@ app.get('/ligi-turneu/:tournamentId/:userId', isLoggedIn, requireRole('Organizat
 		res.render('tournament/edit/ligi-turneu-info.ejs', {
 			user: req.user,
 			tournament: tournament,
+			moment: moment,
 			successMessage: req.flash('infoSuccess'),
 			errorMessage: req.flash('infoError'),
 			underscore: _
@@ -244,6 +247,7 @@ app.get('/tournament-start-hour/:tournamentId/:userId', isLoggedIn, requireRole(
 		res.render('tournament/edit/start-hour-info.ejs', {
 			user: req.user,
 			tournament: tournament,
+			moment: moment,
 			errorMessage: req.flash('infoError'),
 			successMessage: req.flash('infoSuccess')
 		});
@@ -281,6 +285,7 @@ app.get('/tournament-prizes/:tournamentId/:userId', isLoggedIn, requireRole('Org
 		res.render('tournament/edit/tournament-prizes-info.ejs', {
 			user: req.user,
 			tournament: tournament,
+			moment: moment,
 			errorMessage: req.flash('infoError'),
 			successMessage: req.flash('infoSuccess')
 		});
@@ -311,6 +316,7 @@ app.get('/tournament-sponsors/:tournamentId/:userId', isLoggedIn, requireRole('O
 		res.render('tournament/edit/tournament-sponsors-info.ejs', {
 			user: req.user,
 			tournament: tournament,
+			moment: moment,
 			errorMessage: req.flash('infoError'),
 			successMessage: req.flash('infoSuccess')
 		});

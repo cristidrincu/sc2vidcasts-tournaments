@@ -1,3 +1,12 @@
+<%if(moment().format('MM DD YY') == moment(tournament.startDate).format('MM DD YY')){%>
+    <div class="no-edit-options">
+        <div class="no-edit-message">
+            <h1>Ne pare rau, insa optiunile de modificare a datelor turneului nu mai sunt disponibile in ziua inceperii sale...</h1>
+            <h4>...vei putea sa declari castigatorul in ziua finala a concursului organizat de tine!</h4>
+        </div>
+    </div>
+<%}%>
+
 <% include ../../partials/header.ejs%>
 <% include ../../partials/sidebar-edit-tournament.ejs%>
 

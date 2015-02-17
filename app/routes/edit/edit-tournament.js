@@ -29,6 +29,13 @@ app.get('/edit-tournament/:tournamentId/:userId', isLoggedIn, requireMultipleUse
 		res.render('tournament/edit/edit-tournament-basic-info.ejs', {
 			user: req.user,
 			tournament: tournament,
+			preventTournamentEdit: function(){
+				if(moment().format('MM DD YY') == moment(tournament.startDate).format('MM DD YY')){
+					return true;
+				}
+
+				return false;
+			},
 			moment: moment,
 			successMessage: req.flash('infoSuccess'),
 			errorMessage: req.flash('infoError')
@@ -41,6 +48,13 @@ app.get('/informatii-de-baza/:tournamentId/:userId', isLoggedIn, requireRole('Or
 		res.render('tournament/edit/edit-tournament-basic-info.ejs', {
 			user: req.user,
 			tournament: tournament,
+			preventTournamentEdit: function(){
+				if(moment().format('MM DD YY') == moment(tournament.startDate).format('MM DD YY')){
+					return true;
+				}
+
+				return false;
+			},
 			moment: moment,
 			errorMessage: req.flash('infoError'),
 			successMessage: req.flash('infoSuccess')
@@ -116,6 +130,13 @@ app.get('/locuri-disponibile/:tournamentId/:userId', isLoggedIn, requireRole('Or
 		res.render('tournament/edit/locuri-disponibile-info.ejs', {
 			user: req.user,
 			tournament: tournament,
+			preventTournamentEdit: function(){
+				if(moment().format('MM DD YY') == moment(tournament.startDate).format('MM DD YY')){
+					return true;
+				}
+
+				return false;
+			},
 			moment: moment,
 			successMessage: req.flash('infoSuccess'),
 			errorMessage: req.flash('infoError'),
@@ -151,6 +172,13 @@ app.get('/ligi-turneu/:tournamentId/:userId', isLoggedIn, requireRole('Organizat
 		res.render('tournament/edit/ligi-turneu-info.ejs', {
 			user: req.user,
 			tournament: tournament,
+			preventTournamentEdit: function(){
+				if(moment().format('MM DD YY') == moment(tournament.startDate).format('MM DD YY')){
+					return true;
+				}
+
+				return false;
+			},
 			moment: moment,
 			successMessage: req.flash('infoSuccess'),
 			errorMessage: req.flash('infoError'),
@@ -185,6 +213,13 @@ app.get('/tournament-start-date/:tournamentId/:userId', isLoggedIn, requireRole(
 		res.render('tournament/edit/start-date-info.ejs', {
 			user: req.user,
 			tournament: tournament,
+			preventTournamentEdit: function(){
+				if(moment().format('MM DD YY') == moment(tournament.startDate).format('MM DD YY')){
+					return true;
+				}
+
+				return false;
+			},
 			moment: moment,
 			errorMessage: req.flash('infoError'),
 			successMessage: req.flash('infoSuccess')
@@ -216,6 +251,13 @@ app.get('/tournament-end-date/:tournamentId/:userId', isLoggedIn, requireRole('O
 		res.render('tournament/edit/end-date-info.ejs', {
 			user: req.user,
 			tournament: tournament,
+			preventTournamentEdit: function(){
+				if(moment().format('MM DD YY') == moment(tournament.startDate).format('MM DD YY')){
+					return true;
+				}
+
+				return false;
+			},
 			moment: moment,
 			errorMessage: req.flash('infoError'),
 			successMessage: req.flash('infoSuccess')
@@ -247,6 +289,13 @@ app.get('/tournament-start-hour/:tournamentId/:userId', isLoggedIn, requireRole(
 		res.render('tournament/edit/start-hour-info.ejs', {
 			user: req.user,
 			tournament: tournament,
+			preventTournamentEdit: function(){
+				if(moment().format('MM DD YY') == moment(tournament.startDate).format('MM DD YY')){
+					return true;
+				}
+
+				return false;
+			},
 			moment: moment,
 			errorMessage: req.flash('infoError'),
 			successMessage: req.flash('infoSuccess')
@@ -285,6 +334,13 @@ app.get('/tournament-prizes/:tournamentId/:userId', isLoggedIn, requireRole('Org
 		res.render('tournament/edit/tournament-prizes-info.ejs', {
 			user: req.user,
 			tournament: tournament,
+			preventTournamentEdit: function(){
+				if(moment().format('MM DD YY') == moment(tournament.startDate).format('MM DD YY')){
+					return true;
+				}
+
+				return false;
+			},
 			moment: moment,
 			errorMessage: req.flash('infoError'),
 			successMessage: req.flash('infoSuccess')
@@ -316,6 +372,13 @@ app.get('/tournament-sponsors/:tournamentId/:userId', isLoggedIn, requireRole('O
 		res.render('tournament/edit/tournament-sponsors-info.ejs', {
 			user: req.user,
 			tournament: tournament,
+			preventTournamentEdit: function(){
+				if(moment().format('MM DD YY') == moment(tournament.startDate).format('MM DD YY')){
+					return true;
+				}
+
+				return false;
+			},
 			moment: moment,
 			errorMessage: req.flash('infoError'),
 			successMessage: req.flash('infoSuccess')

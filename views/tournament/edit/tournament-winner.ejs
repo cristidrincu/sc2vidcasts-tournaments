@@ -21,8 +21,16 @@
                     <%})%>
                 </select>
                 <button type="submit" class="btn btn-warning btn-lg">Confirma schimbarile</button>
-            <%}else{%>
+            <%}else if(moment(currentDate).isBefore(tournament.startDate)){%>
                 <h4>Vei putea declara castigatorul in ziua de final de concurs!</h4>
+            <%}else{%>
+                <label for="tournamentPlayers">Alege un castigator din cadrul participantilor in turneu</label>
+                <select class="form-control select-tournament-players" name="winnerName">
+                    <%tournamentPlayers.forEach(function(player){%>
+                    <option value="<%=player.local.nickname%>"><%=player.local.nickname%></option>
+                    <%})%>
+                </select>
+                <button type="submit" class="btn btn-warning btn-lg">Confirma schimbarile</button>
             <%}%>
         </form>
     </div>

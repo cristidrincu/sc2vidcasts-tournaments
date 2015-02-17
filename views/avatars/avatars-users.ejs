@@ -13,91 +13,12 @@
             <h1 class="page-header"><i class="fa fa-picture-o fa-1x"></i> Avatare</h1>
         </div>
 
-        <ul class="nav nav-tabs avatar-tabs" role="tablist">
-            <li class="active"><a href="#terran" role="tab" data-toggle="tab">Terran</a></li>
-            <li><a href="#zerg" role="tab" data-toggle="tab">Zerg</a></li>
-            <li><a href="#protoss" role="tab" data-toggle="tab">Protoss</a></li>
-        </ul>
+        <% include ../avatars/partials-avatars/avatars-tabs.ejs %>
 
         <div class="tab-content">
-            <div class="tab-pane fade in active" id="terran">
-                <%if(terranAvatars.length == 0){%>
-                <p class="message-no-players-found">Nu am gasit avatare pentru Terran in baza de date!</p>
-                <%}else{%>
-                <%terranAvatars.forEach(function(avatar){%>
-                <div class="col-xs-6 col-md-2 container-user-avatar-admin">
-                    <form action="/choose-avatar/<%= user._id + '/' + avatar._id%>" method="post">
-                        <button class="btn btn-white-background">
-                            <img class="img-circle main-profile-image mouse-pointer-on" src="<%= avatar.imagePath + '/' + avatar.imageName%>">
-                        </button>
-                    </form>
-                    <div class="caption">
-                        <h3></h3>
-                        <div class="row">
-                            <!--TODO Fix this, as the choose avatar button does not align correctly-->
-                            <div class="col-sm-12 container-choose-avatar-btn">
-                                <form action="/choose-avatar/<%= user._id + '/' + avatar._id%>" method="post">
-                                    <button class="btn btn-success" role="button">Alege avatarul</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <%});%>
-                <%}%>
-            </div>
-            <div class="tab-pane fade" id="zerg">
-                <%if(zergAvatars.length == 0){%>
-                <p class="message-no-players-found">Nu am gasit avatare pentru Zerg in baza de date!</p>
-                <%}else{%>
-                    <%zergAvatars.forEach(function(avatar){%>
-                    <div class="col-xs-6 col-md-2 container-user-avatar-admin">
-                        <form action="/choose-avatar/<%= user._id + '/' + avatar._id%>" method="post">
-                            <button class="btn btn-white-background">
-                                <img class="img-circle main-profile-image mouse-pointer-on" src="<%= avatar.imagePath + '/' + avatar.imageName%>">
-                            </button>
-                        </form>
-                        <div class="caption">
-                            <h3></h3>
-                            <div class="row">
-                                <!--TODO Fix this, as the choose avatar button does not align correctly-->
-                                <div class="col-sm-12 container-choose-avatar-btn">
-                                    <form action="/choose-avatar/<%= user._id + '/' + avatar._id%>" method="post">
-                                        <button class="btn btn-success" role="button">Alege avatarul</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <%});%>
-                <%}%>
-            </div>
-            <div class="tab-pane fade" id="protoss">
-                <%if(protossAvatars.length == 0){%>
-                <p class="message-no-players-found">Nu am gasit avatare pentru Protoss in baza de date!</p>
-                <%}else{%>
-                <%protossAvatars.forEach(function(avatar){%>
-                <div class="col-xs-6 col-md-2 container-user-avatar-admin">
-                    <form action="/choose-avatar/<%= user._id + '/' + avatar._id%>" method="post">
-                        <button class="btn btn-white-background">
-                            <img class="img-circle main-profile-image mouse-pointer-on" src="<%= avatar.imagePath + '/' + avatar.imageName%>">
-                        </button>
-                    </form>
-                    <div class="caption">
-                        <h3></h3>
-                        <div class="row">
-                            <!--TODO Fix this, as the choose avatar button does not align correctly-->
-                            <div class="col-sm-12 container-choose-avatar-btn">
-                                <form action="/choose-avatar/<%= user._id + '/' + avatar._id%>" method="post">
-                                    <button class="btn btn-success" role="button">Alege avatarul</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <%});%>
-                <%}%>
-            </div>
+            <% include ../avatars/partials-avatars/avatars-terrans.ejs %>
+            <% include ../avatars/partials-avatars/avatars-zerg.ejs %>
+            <% include ../avatars/partials-avatars/avatars-protoss.ejs %>
         </div>
     </div>
 </div>

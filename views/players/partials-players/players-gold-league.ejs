@@ -1,0 +1,55 @@
+<div class="tab-pane fade" id="gold">
+    <table class="table table-players">
+        <%if(goldPlayers.length == 0){%>
+        <p class="message-no-players-found">Nu am gasit jucatori de Gold in baza de date!</p>
+        <%}else{%>
+        <tr>
+            <th>Avatar</th>
+            <th>Nickname</th>
+            <th>Battle.net ID</th>
+            <th>Rasa</th>
+            <th>Profil jucator</th>
+            <th>Trimite-i mesaj</th>
+
+            <%if(user.local.role == 'admin'){%>
+            <th>Adauga in blacklist</th>
+            <th>Sterge contul</th>
+            <%}%>
+
+        </tr>
+        <% goldPlayers.forEach(function(player){ %>
+        <tr>
+            <td>
+                <% player.local.avatar.forEach(function(avatar){%>
+                <img class="img-circle profile-pic-table-players" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                <%})%>
+            </td>
+            <td><%= player.local.nickname %></td>
+            <td><%= player.local.battlenetid %></td>
+            <td><%= player.local.race %></td>
+
+            <%if(player._id == userId){%>
+            <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
+            <%} else {%>
+            <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+            <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+            <%}%>
+
+            <%if(user.local.role == 'admin'){%>
+            <td>
+                <form action="/blacklist-player/<%= player._id%>" method="post">
+                    <button class="btn btn-warning">Adauga </button>
+                </form>
+            </td>
+            <td>
+                <form action="/blacklist-player/<%= player._id%>" method="post">
+                    <button class="btn btn-danger">Sterge </button>
+                </form>
+            </td>
+            <%}%>
+
+        </tr>
+        <% }); %>
+        <%}%>
+    </table>
+</div>

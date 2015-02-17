@@ -1,0 +1,12 @@
+<div class="col-lg-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-clock-o fa-fw"></i> Organizator
+        </div>
+        <div class="panel-body">
+            <%tournament.organizer.forEach(function(organizer){%>
+            <p><%= organizer.local.nickname%>, <a href="/profile-details/<%= organizer._id%>">Profil organizator</a></p>
+            <%});%>
+        </div>
+    </div>
+</div>

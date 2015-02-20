@@ -3,13 +3,16 @@
  */
 var express = require('express');
 var moment = require('moment');
-var helperFunctions = require('../../../app/helpers-mongoose.js');
 var User = require('../../../app/models/user');
 var _ = require('underscore');
+
+var helperFunctions = require('../../helpers-mongoose.js');
+var middleware = require('../../helpers-middleware.js');
+
 var app = module.exports = express();
 
 /* PROFILE ROUTES */
-app.get('/profile', isLoggedIn, function (req, res) {
+app.get('/profile', middleware.isLoggedIn, function (req, res) {
   helperFunctions.getUserDetails(req.user._id).then(function(user){
 	  helperFunctions.retrieveMessagesForUser(req.user._id).then(function(messages){
 		  helperFunctions.retrieveTournamentsByOrganizer(req.user._id).then(function(organizerTournaments){
@@ -32,8 +35,7 @@ app.get('/profile', isLoggedIn, function (req, res) {
 	  });
 });
 
-
-app.get('/profile-details/:_id', isLoggedIn, function(req, res){
+app.get('/profile-details/:_id', middleware.isLoggedIn, function(req, res){
   helperFunctions.getUserDetails(req.params._id).then(function(user){
     res.render('profile/profile-details.ejs', {
       user: req.user,
@@ -43,13 +45,13 @@ app.get('/profile-details/:_id', isLoggedIn, function(req, res){
   });
 });
 
-app.get('/customize-profile/:nickname', isLoggedIn, function(req, res){
+app.get('/customize-profile/:nickname', middleware.isLoggedIn, function(req, res){
   res.render('profile/customize-profile.ejs', {
     user: req.user//get the user out of session and pass to template
   });
 });
 
-app.post('/customize-profile/:nickname', isLoggedIn, function(req, res){
+app.post('/customize-profile/:nickname', middleware.isLoggedIn, function(req, res){
   User.findOne({ 'local.nickname': req.params.nickname}, function(err, user){
     if(err)
       res.send('Utilizatorul nu a putut fi gasit');
@@ -57,8 +59,8 @@ app.post('/customize-profile/:nickname', isLoggedIn, function(req, res){
     user = req.user;
     user.local.email = req.body.email;
     user.local.nickname = req.body.nickname;
-    user.local.race = uppercaseFirstChar(req.body.race);
-    user.local.league = uppercaseFirstChar(req.body.league);
+    user.local.race = middleware.uppercaseFirstChar(req.body.race);
+    user.local.league = middleware.uppercaseFirstChar(req.body.league);
 
     user.save(function(err){
       if(err)
@@ -69,7 +71,7 @@ app.post('/customize-profile/:nickname', isLoggedIn, function(req, res){
   });
 });
 
-app.get('/avatars-users/:userId', isLoggedIn, function(req, res){
+app.get('/avatars-users/:userId', middleware.isLoggedIn, function(req, res){
 	helperFunctions.getUserDetails(req.params.userId).then(function(user){
 		helperFunctions.retrieveTournamentsByOrganizer(req.params.userId).then(function(tournaments){
 			helperFunctions.retrieveAvatars().then(function(avatars){
@@ -98,7 +100,7 @@ app.get('/avatars-users/:userId', isLoggedIn, function(req, res){
 	});
 });
 
-app.get('/delete-account/:userId', isLoggedIn, function(req, res){
+app.get('/delete-account/:userId', middleware.isLoggedIn, function(req, res){
 	helperFunctions.getUserDetails(req.params.userId).then(function(user){
 		res.render('profile/profile-remove', {
 			user: user,
@@ -107,7 +109,7 @@ app.get('/delete-account/:userId', isLoggedIn, function(req, res){
 	});
 });
 
-app.post('/delete-account/:userId', isLoggedIn, function(req, res){
+app.post('/delete-account/:userId', middleware.isLoggedIn, function(req, res){
 	User.findById(req.params.userId).exec(function(err, user){
 		if(err) throw err;
 
@@ -116,30 +118,3 @@ app.post('/delete-account/:userId', isLoggedIn, function(req, res){
 		res.redirect('/signup');
 	});
 });
-
-/*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-
-  res.redirect('/');
-}
-
-function uppercaseFirstChar(text){
-  return text[0].toUpperCase() + text.slice(1);
-}
-
-function defaultAvatarUser(arrayUserAvatar, userId){
-	if(arrayUserAvatar == 0){
-		helperFunctions.getDefaultAvatar().then(function(defaultAvatar){
-			helperFunctions.setAvatarForUser(userId, defaultAvatar._id).then(function(err, defaultUser){
-				if(err){
-					throw new err;
-				}
-
-				return defaultUser;
-			});
-		});
-	}
-}

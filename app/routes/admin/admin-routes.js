@@ -8,9 +8,10 @@ var User = require('../../../app/models/user');
 var Tournament = require('../../../app/models/tournament');
 var moment = require('moment');
 var _  = require('underscore');
+var middleware = require('../../helpers-middleware.js');
 var app = module.exports = express();
 
-app.get('/admin-organizers/:userId', isLoggedIn, requireRole('admin'), function(req, res){
+app.get('/admin-organizers/:userId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
   helperFunctions.getUserDetails(req.params.userId).then(function(user){
     helperFunctions.retrieveTournamentsAndOrganizers(function(tournaments, organizers){
       res.render('backend/admin-organizers.ejs', {
@@ -25,7 +26,7 @@ app.get('/admin-organizers/:userId', isLoggedIn, requireRole('admin'), function(
   });
 });
 
-app.get('/organized-tournaments/:organizerId', isLoggedIn, requireRole('admin'), function(req, res){
+app.get('/organized-tournaments/:organizerId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
   helperFunctions.retrieveTournamentsByOrganizer(req.params.organizerId).then(function(tournamentsOrganized){
 	  helperFunctions.getUserDetails(req.user._id).then(function(user){
 		  helperFunctions.getUserDetails(req.params.organizerId).then(function(organizer){
@@ -41,7 +42,7 @@ app.get('/organized-tournaments/:organizerId', isLoggedIn, requireRole('admin'),
   });
 });
 
-app.get('/avatars-users-admin/:adminId', isLoggedIn, requireRole('admin'), function(req, res){
+app.get('/avatars-users-admin/:adminId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
   helperFunctions.getUserDetails(req.params.adminId).then(function(user){
 		helperFunctions.retrieveAvatars().then(function(avatars){
 			res.render('avatars/avatars-users-admin.ejs', {
@@ -67,8 +68,9 @@ app.get('/avatars-users-admin/:adminId', isLoggedIn, requireRole('admin'), funct
 	});
 });
 
-app.post('/delete-account/:userId', isLoggedIn, requireRole('admin'), function(req, res){
+app.post('/delete-account/:userId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
 
+	//TODO - BAD CODE, THIS WILL THROW AN ERROR
   Tournament.collection.update(
       { tournamentName: 'Battle of the Races' },
       { $pull: { 'players': { _id: new mongoose.Types.ObjectId(req.params.userId) } } },
@@ -82,21 +84,21 @@ app.post('/delete-account/:userId', isLoggedIn, requireRole('admin'), function(r
   res.redirect('/admin-players');
 });
 
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-
-  res.redirect('/');
-}
-
-function requireRole(role){
-  return function(req, res, next){
-    if(req.user.local.role == role){
-      next();
-    }
-    else{
-      res.send(403);
-    }
-  }
-}
+//function isLoggedIn(req, res, next) {
+//  if (req.isAuthenticated()) {
+//    return next();
+//  }
+//
+//  res.redirect('/');
+//}
+//
+//function requireRole(role){
+//  return function(req, res, next){
+//    if(req.user.local.role == role){
+//      next();
+//    }
+//    else{
+//      res.send(403);
+//    }
+//  }
+//}

@@ -3,11 +3,13 @@
  */
 var express = require('express');
 var Quote = require('../../models/quote');
-var helperFunctions = require('../../../app/helpers-mongoose.js');
+
+var helperFunctions = require('../../helpers-mongoose.js');
+var middleware = require('../../helpers-middleware.js');
 
 var app = module.exports = express();
 
-app.get('/create-new-quote/:userId', isLoggedIn, requireRole('admin'), function(req, res){
+app.get('/create-new-quote/:userId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
 	helperFunctions.getUserDetails(req.params.userId).then(function(user){
 		res.render('quotes/create-quote.ejs', {
 			user: req.user,
@@ -18,7 +20,7 @@ app.get('/create-new-quote/:userId', isLoggedIn, requireRole('admin'), function(
 	});
 });
 
-app.post('/create-new-quote/:userId', isLoggedIn, requireRole('admin'), function(req, res){
+app.post('/create-new-quote/:userId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
 	var quote = new Quote( {quoteInsertedBy: req.user._id, quoteAuthor: req.body.quoteAuthorName, quoteText: req.body.quoteText} );
 	quote.save(function(err){
 		if(err){
@@ -31,7 +33,7 @@ app.post('/create-new-quote/:userId', isLoggedIn, requireRole('admin'), function
 	});
 });
 
-app.get('/quotes-admin/:userId', isLoggedIn, requireRole('admin'), function(req, res){
+app.get('/quotes-admin/:userId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
 	helperFunctions.getUserDetails(req.params.userId).then(function(user){
 		helperFunctions.retrieveQuotes().then(function(quotes){
 			res.render('quotes/quotes-list.ejs', {
@@ -44,25 +46,3 @@ app.get('/quotes-admin/:userId', isLoggedIn, requireRole('admin'), function(req,
 		});
 	});
 });
-
-
-
-/*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/
-function isLoggedIn(req, res, next) {
-	if (req.isAuthenticated()) {
-		return next();
-	}
-
-	res.redirect('/');
-}
-
-function requireRole(role){
-	return function(req, res, next){
-		if(req.user.local.role === role){
-			next();
-		}
-		else{
-			res.send(403);
-		}
-	}
-}

@@ -7,6 +7,7 @@ var Message = require('../../models/message');
 var Avatar = require('../../models/avatar');
 var ErrorHandler = require('../../../app/helpers-error-handlers.js');
 var helperFunctions = require('../../../app/helpers-mongoose.js');
+var middleware = require('../../helpers-middleware.js');
 var _ = require('underscore');
 var expose = require('express-expose');
 var escapeHtml = require('escape-html');
@@ -14,7 +15,7 @@ var escapeHtml = require('escape-html');
 var app = module.exports = express();
 
 /*MESSAGING ROUTES*/
-app.get('/send-new-message', isLoggedIn, function(req, res){
+app.get('/send-new-message', middleware.isLoggedIn, function(req, res){
 	helperFunctions.getUserDetails(req.user._id).then(function(user){
 		helperFunctions.retrieveAllPlayers().then(function(players){
 			var autoCompletePlayerNames = _.map(players, function(player){
@@ -29,7 +30,7 @@ app.get('/send-new-message', isLoggedIn, function(req, res){
 	});
 });
 
-app.get('/send-message/:_id', isLoggedIn, function(req, res){
+app.get('/send-message/:_id', middleware.isLoggedIn, function(req, res){
   helperFunctions.getUserDetails(req.user._id).then(function(sender){
 	  helperFunctions.getUserDetails(req.params._id).then(function(receiver){
 		  res.render('messaging/send-message.ejs', {
@@ -41,7 +42,7 @@ app.get('/send-message/:_id', isLoggedIn, function(req, res){
   });
 });
 
-app.get('/send-reply/:_receiverId/:_messageId', isLoggedIn, function(req, res){
+app.get('/send-reply/:_receiverId/:_messageId', middleware.isLoggedIn, function(req, res){
   Message.findById(req.params._messageId).exec(function(err, message){
     if(err)
       ErrorHandler.handle('A aparut o eroare la extragerea mesajului din baza de date ' + err);
@@ -64,7 +65,7 @@ app.get('/send-reply/:_receiverId/:_messageId', isLoggedIn, function(req, res){
 /*TODO - UPDATE the message that is being sent as a reply instead of creating a new one - create a POST method for send-reply*/
 //TODO - save all messages inside an array and use it as messages history
 
-app.post('/send-message/:_id', isLoggedIn, function(req, res){
+app.post('/send-message/:_id', middleware.isLoggedIn, function(req, res){
 	var messageBody = escapeHtml(req.body.message);
   var message = new Message( {messageBody: messageBody, messageSubject: req.body.messageSubject, sentBy: req.user._id, receiver: req.params._id} );
   message.save(function(err){
@@ -78,7 +79,7 @@ app.post('/send-message/:_id', isLoggedIn, function(req, res){
   });
 });
 
-app.post('/send-message', isLoggedIn, function(req, res){
+app.post('/send-message', middleware.isLoggedIn, function(req, res){
 	helperFunctions.getUserIdName(req.body.messageReceiver).then(function(id){
 		var message = new Message( {messageBody: req.body.message, messageSubject: req.body.messageSubject, sentBy: req.user._id, receiver: id} );
 		message.save(function(err){
@@ -93,7 +94,7 @@ app.post('/send-message', isLoggedIn, function(req, res){
 	});
 });
 
-app.post('/send-reply/:receiverId/:messageId', isLoggedIn, function(req, res){
+app.post('/send-reply/:receiverId/:messageId', middleware.isLoggedIn, function(req, res){
 	var messageBody = escapeHtml(req.body.message);
 	var replyForSender = new Message( {messageBody: messageBody, messageSubject: req.body.messageSubject, sentBy: req.user._id, receiver: req.params.receiverId} );
 
@@ -117,7 +118,7 @@ app.post('/send-reply/:receiverId/:messageId', isLoggedIn, function(req, res){
 	});
 });
 
-app.get('/user-messages/:userId', isLoggedIn, function(req, res){
+app.get('/user-messages/:userId', middleware.isLoggedIn, function(req, res){
   Message.find( {receiver: req.params.userId}).populate('sentBy').exec(function(err, messages){
     if(err){
 	    ErrorHandler.handle('A intervenit o eroare la preluarea mesajelor din baza de date: ' + err);
@@ -148,7 +149,7 @@ app.get('/user-messages/:userId', isLoggedIn, function(req, res){
   });
 });
 
-app.get('/message-details/:_id/:userId', isLoggedIn, function(req, res){
+app.get('/message-details/:_id/:userId', middleware.isLoggedIn, function(req, res){
   Message.findById(req.params._id).populate('sentBy').exec(function(err, message){
     if(err)
       ErrorHandler.handle('A aparut o eroare la extragerea mesajului din baza de date: ' + err);
@@ -163,7 +164,7 @@ app.get('/message-details/:_id/:userId', isLoggedIn, function(req, res){
   });
 });
 
-app.post('/delete-message/:_id', isLoggedIn, function(req, res){
+app.post('/delete-message/:_id', middleware.isLoggedIn, function(req, res){
   Message.findById(req.params._id).remove(function(err){
     if(err)
       ErrorHandler.handle('A aparut o eroare la stergerea mesajului din baza de date: ' + err);
@@ -171,12 +172,3 @@ app.post('/delete-message/:_id', isLoggedIn, function(req, res){
       res.redirect('/user-messages/' + req.user._id);
   });
 });
-
-/*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-
-  res.redirect('/');
-}

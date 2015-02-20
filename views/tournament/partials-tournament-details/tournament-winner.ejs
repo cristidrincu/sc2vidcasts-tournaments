@@ -1,5 +1,5 @@
 <h1>Castigator turneu</h1>
-<%if( (user.local.role == 'Organizator' && userId == tournament.organizer[0]._id) || user.local.role == 'admin'){%>
+<%if( (user.local.role == 'Organizator' && userId == tournament.organizer[0]._id)){%>
     <%if(moment(currentDate).isSame(tournament.endDate) || moment(currentDate).isAfter(tournament.endDate) && tournament.winner.length == 0){%>
         <form action="/declare-winner/<%=tournament._id%>/<%=userId%>" method="post">
             <div class="form-group">

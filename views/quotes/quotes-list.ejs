@@ -34,16 +34,16 @@
                             <th>Sterge</th>
                         </tr>
                         <% quotes.forEach(function(quote){ %>
-                        <tr>
-                            <td><%= quote.quoteAuthor %></td>
-                            <td><%= quote.quoteText %></td>
-                            <td>
-                                <a class="btn btn-success" href="/edit-quote/<%=quote._id%>">Editeaza</a>
-                            </td>
-                            <td>
-                                <a class="btn btn-danger" href="/delete-quote/<%=quote._id%>">Sterge</a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td><%= quote.quoteAuthor %></td>
+                                <td><%= quote.quoteText %></td>
+                                <td>
+                                    <a class="btn btn-success" href="/edit-quote/<%=quote._id%>">Editeaza</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-danger" href="/delete-quote/<%=quote._id%>">Sterge</a>
+                                </td>
+                            </tr>
                         <% }); %>
                     </table>
                 </div>

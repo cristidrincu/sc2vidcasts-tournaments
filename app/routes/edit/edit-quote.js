@@ -3,11 +3,12 @@
  */
 var express = require('express');
 var helperFunctions = require('../../../app/helpers-mongoose.js');
+var middleware = require('../../helpers-middleware.js');
 var Quote = require('../../../app/models/quote');
 
 var app = module.exports = express();
 
-app.get('/edit-quote/:quoteId', isLoggedIn, requireRole('admin'), function(req, res){
+app.get('/edit-quote/:quoteId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
 	helperFunctions.getQuoteDetails(req.params.quoteId).then(function(quote){
 		res.render('quotes/edit/edit-quote.ejs', {
 			user: req.user,
@@ -16,7 +17,7 @@ app.get('/edit-quote/:quoteId', isLoggedIn, requireRole('admin'), function(req, 
 	});
 });
 
-app.post('/edit-quote/:quoteId', isLoggedIn, requireRole('admin'), function(req, res){
+app.post('/edit-quote/:quoteId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
 	helperFunctions.getQuoteDetails(req.params.quoteId).then(function(quote){
 		quote.quoteAuthor = req.body.quoteAuthor;
 		quote.quoteText = req.body.quoteText;
@@ -33,24 +34,3 @@ app.post('/edit-quote/:quoteId', isLoggedIn, requireRole('admin'), function(req,
 		});
 	});
 });
-
-
-/*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/
-function isLoggedIn(req, res, next) {
-	if (req.isAuthenticated()) {
-		return next();
-	}
-
-	res.redirect('/');
-}
-
-function requireRole(role){
-	return function(req, res, next){
-		if(req.user.local.role === role){
-			next();
-		}
-		else{
-			res.send(403);
-		}
-	}
-}

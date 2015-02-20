@@ -6,16 +6,18 @@ var Tournament = require('../../models/tournament');
 var User = require('../../models/user');
 var Avatar = require('../../models/avatar');
 var moment = require('moment');
-var helperFunctions = require('../../../app/helpers-mongoose.js');
 var placeHolderText = require('../../../config/validation-placeholders-text.js');
 var _ = require('underscore');
+
+var helperFunctions = require('../../helpers-mongoose.js');
+var middleware = require('../../helpers-middleware.js');
 
 require('express-expose');
 
 var app = module.exports = express();
 
 /* TOURNAMENT ROUTES */
-app.get('/open-tournaments/:userId', isLoggedIn, function(req, res){
+app.get('/open-tournaments/:userId', middleware.isLoggedIn, function(req, res){
   helperFunctions.getUserDetails(req.params.userId).then(function(user){
     helperFunctions.retrieveAllTournaments().then(function(tournaments){
       res.render('tournament/open-tournaments.ejs', {
@@ -28,7 +30,7 @@ app.get('/open-tournaments/:userId', isLoggedIn, function(req, res){
   });
 });
 
-app.get('/closed-tournaments/:userId', isLoggedIn, function(req, res){
+app.get('/closed-tournaments/:userId', middleware.isLoggedIn, function(req, res){
 	helperFunctions.getUserDetails(req.params.userId).then(function(user){
 		helperFunctions.retrieveClosedTournaments().then(function(tournaments){
 			res.render('tournament/closed-tournaments.ejs', {
@@ -42,14 +44,14 @@ app.get('/closed-tournaments/:userId', isLoggedIn, function(req, res){
 });
 
 
-app.get('/create-tournament/:organizerId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.get('/create-tournament/:organizerId', middleware.isLoggedIn, middleware.requireRole('Organizator'), function(req, res){
   res.render('tournament/create-tournament.ejs', {
     user: req.user,
     placeholders: placeHolderText
   });
 });
 
-app.get('/create-tournament-results', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.get('/create-tournament-results', middleware.isLoggedIn, middleware.requireRole('Organizator'), function(req, res){
   res.render('tournament/create-tournament-results.ejs', {
     user: req.user,
     errorMessage: req.flash('infoError'),
@@ -57,7 +59,7 @@ app.get('/create-tournament-results', isLoggedIn, requireRole('Organizator'), fu
   });
 });
 
-app.post('/create-tournament', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.post('/create-tournament', middleware.isLoggedIn, middleware.requireRole('Organizator'), function(req, res){
 
   Tournament.findOne({ 'tournament.edition': req.body.edition, 'tournament.tournamentName' : req.body.tournamentName }, function(err, newTournament){
     if(newTournament)
@@ -91,7 +93,7 @@ app.post('/create-tournament', isLoggedIn, requireRole('Organizator'), function(
 });
 
 //TODO - REFACTOR MONGOOSE QUERY METHODS FOR TOURNAMENT INTO METHODS THAT RESIDE INSIDE NODE MODULES - SEE HELPER-MONGOOSE.JS
-app.get('/tournament-details/:_id/:userId', isLoggedIn, function(req, res){
+app.get('/tournament-details/:_id/:userId', middleware.isLoggedIn, function(req, res){
 
   var enlistedInTournament = false;
   var eligibleForTournament = false;
@@ -173,7 +175,7 @@ app.get('/tournament-details/:_id/:userId', isLoggedIn, function(req, res){
 					    eligibleForTournament: eligibleForTournament,
 					    allPlacesTaken: allPlacesTaken,
 					    procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers)),
-					    tournamentStatus: tournamentStatus(tournament)
+					    tournamentStatus: middleware.tournamentStatus(tournament)
 				    });
 			    });
 		    });
@@ -182,7 +184,7 @@ app.get('/tournament-details/:_id/:userId', isLoggedIn, function(req, res){
   });
 });
 
-app.post('/signup-tournament/:_id/:userId', isLoggedIn, function(req, res){
+app.post('/signup-tournament/:_id/:userId', middleware.isLoggedIn, function(req, res){
   User.find({_id: req.params.userId}, function(err, players){
     var ids = players.map(function(player) {
       return player._id;
@@ -224,7 +226,7 @@ app.post('/signup-tournament/:_id/:userId', isLoggedIn, function(req, res){
   });
 });
 
-app.get('/user-tournaments/:userId', isLoggedIn, function(req, res){
+app.get('/user-tournaments/:userId', middleware.isLoggedIn, function(req, res){
   User.findById(req.params.userId).populate('local.tournaments local.avatar').exec(function(err, user){
     if(err)
       res.send(err)
@@ -249,7 +251,7 @@ app.get('/user-tournaments/:userId', isLoggedIn, function(req, res){
   });
 });
 
-app.post('/retragere-din-turneu/:_userId/:_tournamentId', isLoggedIn, function(req, res){
+app.post('/retragere-din-turneu/:_userId/:_tournamentId', middleware.isLoggedIn, function(req, res){
   Tournament.findById(req.params._tournamentId).exec(function(err, tournament){
     if(!err){
       var playerId = tournament.players.indexOf(req.params._userId);
@@ -282,7 +284,7 @@ app.post('/retragere-din-turneu/:_userId/:_tournamentId', isLoggedIn, function(r
   });
 });
 
-app.post('/declare-winner/:tournamentId/:userId', isLoggedIn, requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
+app.post('/declare-winner/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	helperFunctions.getUserIdName(req.body.winnerName).then(function(userId){
 		Tournament.findById(req.params.tournamentId).exec(function(err, tournament){
 			tournament.winner.push(userId);
@@ -295,51 +297,6 @@ app.post('/declare-winner/:tournamentId/:userId', isLoggedIn, requireMultipleUse
 	});
 });
 
-app.post('/create-brackets/:tournamentId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.post('/create-brackets/:tournamentId', middleware.isLoggedIn, middleware.requireRole('Organizator'), function(req, res){
 
 });
-
-/*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-
-  res.redirect('/');
-}
-
-function requireRole(role){
-  return function(req, res, next){
-    if(req.user.local.role == role){
-      next();
-    }
-    else{
-      res.send(403);
-    }
-  }
-}
-
-function tournamentStatus(tournament){
-	var date = new Date();
-	var completed = 2;
-	var ongoing = 1;
-	var starting = 0;
-
-	if(moment(date).isAfter(tournament.endDate)){
-		return completed;
-	}else if(moment(date).isAfter(tournament.startDate) && moment(date).isBefore(tournament.endDate) ){
-		return ongoing;
-	}else{
-		return starting;
-	}
-}
-
-function requireMultipleUserRoles(role1, role2){
-	return function(req, res, next){
-		if(req.user.local.role === role1 || req.user.local.role === role2){
-			next();
-		}else{
-			res.send(403);
-		}
-	}
-}

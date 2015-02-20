@@ -5,11 +5,12 @@ var express = require('express');
 var Tournament = require('../../models/tournament');
 var moment = require('moment');
 var helperFunctions = require('../../../app/helpers-mongoose.js');
+var middleware = require('../../helpers-middleware.js');
 var _ = require('underscore');
 
 var app = module.exports = express();
 
-app.get('/backend-user/:userId', isLoggedIn, function(req, res){
+app.get('/backend-user/:userId', middleware.isLoggedIn, function(req, res){
 	helperFunctions.getUserDetails(req.params.userId).then(function(user){
 		helperFunctions.retrieveAllTournaments().then(function(tournaments){
 			helperFunctions.retrieveAllPlayers().then(function(players){
@@ -41,7 +42,7 @@ app.get('/backend-user/:userId', isLoggedIn, function(req, res){
 });
 
 /*BACK-END ROUTES*/
-app.get('/backend-admin/:adminId', isLoggedIn, requireRole('admin'), function(req, res){
+app.get('/backend-admin/:adminId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
   helperFunctions.getUserDetails(req.params.adminId).then(function(user){
     helperFunctions.retrieveAllPlayers().then(function(players){
 	    helperFunctions.retrieveAllOrganizers().then(function(organizers){
@@ -69,7 +70,7 @@ app.get('/backend-admin/:adminId', isLoggedIn, requireRole('admin'), function(re
   });
 });
 
-app.get('/backend-organizer/:organizerId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.get('/backend-organizer/:organizerId', middleware.isLoggedIn, middleware.requireRole('Organizator'), function(req, res){
 	helperFunctions.getUserDetails(req.params.organizerId).then(function(user){
 		helperFunctions.retrieveTournamentsByOrganizer(req.params.organizerId).then(function(tournaments){
 			helperFunctions.retrieveQuotes().then(function(quotes){
@@ -101,27 +102,3 @@ app.get('/backend-organizer/:organizerId', isLoggedIn, requireRole('Organizator'
 		});
 	});
 });
-
-/*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-
-  res.redirect('/');
-}
-
-function requireRole(role){
-  return function(req, res, next){
-    if(req.user.local.role === role){
-      next();
-    }
-    else{
-      res.send(403);
-    }
-  }
-}
-
-function checkAvatarArrayLength(cb){
-	cb();
-}

@@ -9,6 +9,7 @@ var moment = require('moment');
 var _  = require('underscore');
 var Q = require('q');
 var currentDate = new Date();
+var middleware = require('../../helpers-middleware.js');
 
 require('express-expose');
 
@@ -23,8 +24,8 @@ var transporter = nodemailer.createTransport({
 });
 
 var app = module.exports = express();
-//TODO - creaza un modul de middleware pentru functiile folosite pe rute
-app.get('/edit-tournament/:tournamentId/:userId', isLoggedIn, requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
+//TODO - creaza un modul de middleware pentru functiile folosite pe rute. Pune pe toate rutele de edit requireMultipleRoles('Organizator', 'admin')
+app.get('/edit-tournament/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	helperFunctions.retrieveTournamentDetails(req.params.tournamentId, req.params.userId).then(function(tournament){
 		res.render('tournament/edit/edit-tournament-basic-info.ejs', {
 			user: req.user,
@@ -43,7 +44,7 @@ app.get('/edit-tournament/:tournamentId/:userId', isLoggedIn, requireMultipleUse
 	});
 });
 
-app.get('/informatii-de-baza/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.get('/informatii-de-baza/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	helperFunctions.retrieveTournamentDetails(req.params.tournamentId, req.params.userId).then(function(tournament){
 		res.render('tournament/edit/edit-tournament-basic-info.ejs', {
 			user: req.user,
@@ -62,7 +63,7 @@ app.get('/informatii-de-baza/:tournamentId/:userId', isLoggedIn, requireRole('Or
 	});
 });
 
-app.post('/informatii-de-baza/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.post('/informatii-de-baza/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 
 	var players = [];
 	var oldTournamentName, oldTournamentEdition, oldIngameChatChannel, oldTwitchStreamChannel, oldDescription;
@@ -104,10 +105,10 @@ app.post('/informatii-de-baza/:tournamentId/:userId', isLoggedIn, requireRole('O
 					subject: 'Modificari in cadrul turneului ' + tournament.tournamentName,
 					html:
 						'<p>Salut. Te anuntam ca au avut loc schimbari la informatiile de baza ale turneului in care participi:</p> ' +
-							'<br/><b>Numele turneului: </b> ' + checkTournamentUpdatedProps(oldTournamentName, tournament.tournamentName) +
-							'<br/><b>Editia turneului: </b> ' + checkTournamentUpdatedProps(oldTournamentEdition, tournament.edition) +
-							'<br/><b>Canal de chat pentru concurs:</b> ' + checkTournamentUpdatedProps(oldIngameChatChannel, tournament.ingameChatChannel) +
-							'<br/><b>Canalul de twitch: </b> ' + checkTournamentUpdatedProps(oldTwitchStreamChannel, tournament.twitchStreamChannel)
+							'<br/><b>Numele turneului: </b> ' + middleware.checkTournamentUpdatedProps(oldTournamentName, tournament.tournamentName) +
+							'<br/><b>Editia turneului: </b> ' + middleware.checkTournamentUpdatedProps(oldTournamentEdition, tournament.edition) +
+							'<br/><b>Canal de chat pentru concurs:</b> ' + middleware.checkTournamentUpdatedProps(oldIngameChatChannel, tournament.ingameChatChannel) +
+							'<br/><b>Canalul de twitch: </b> ' + middleware.checkTournamentUpdatedProps(oldTwitchStreamChannel, tournament.twitchStreamChannel)
 				};
 
 				// send mail with defined transport object
@@ -125,7 +126,7 @@ app.post('/informatii-de-baza/:tournamentId/:userId', isLoggedIn, requireRole('O
 	});
 });
 
-app.get('/locuri-disponibile/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.get('/locuri-disponibile/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	helperFunctions.retrieveTournamentDetails(req.params.tournamentId, req.params.userId).then(function(tournament){
 		res.render('tournament/edit/locuri-disponibile-info.ejs', {
 			user: req.user,
@@ -145,7 +146,7 @@ app.get('/locuri-disponibile/:tournamentId/:userId', isLoggedIn, requireRole('Or
 	});
 });
 
-app.post('/locuri-disponibile/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.post('/locuri-disponibile/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	Tournament.findById(req.params.tournamentId).exec(function(err, tournament){
 		if(err){
 			throw err;
@@ -167,7 +168,7 @@ app.post('/locuri-disponibile/:tournamentId/:userId', isLoggedIn, requireRole('O
 	});
 });
 
-app.get('/ligi-turneu/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.get('/ligi-turneu/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	helperFunctions.retrieveTournamentDetails(req.params.tournamentId, req.params.userId).then(function(tournament){
 		res.render('tournament/edit/ligi-turneu-info.ejs', {
 			user: req.user,
@@ -187,8 +188,8 @@ app.get('/ligi-turneu/:tournamentId/:userId', isLoggedIn, requireRole('Organizat
 	});
 });
 
-app.post('/ligi-turneu/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
-	if(checkEmptyLeagues(req.body.leagues)){
+app.post('/ligi-turneu/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
+	if(middleware.checkEmptyLeagues(req.body.leagues)){
 		req.flash('infoError', 'Alege macar o noua liga inainte de a continua!');
 		res.redirect('/ligi-turneu/' + req.params.tournamentId + '/' + req.params.userId );
 	}else{
@@ -208,7 +209,7 @@ app.post('/ligi-turneu/:tournamentId/:userId', isLoggedIn, requireRole('Organiza
 	}
 });
 
-app.get('/tournament-start-date/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.get('/tournament-start-date/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	helperFunctions.retrieveTournamentDetails(req.params.tournamentId, req.params.userId).then(function(tournament){
 		res.render('tournament/edit/start-date-info.ejs', {
 			user: req.user,
@@ -227,7 +228,7 @@ app.get('/tournament-start-date/:tournamentId/:userId', isLoggedIn, requireRole(
 	});
 });
 
-app.post('/tournament-start-date/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.post('/tournament-start-date/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	Tournament.findById(req.params.tournamentId).exec(function(err, tournament){
 		if(err){
 			throw err;
@@ -246,7 +247,7 @@ app.post('/tournament-start-date/:tournamentId/:userId', isLoggedIn, requireRole
 	});
 });
 
-app.get('/tournament-end-date/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.get('/tournament-end-date/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	helperFunctions.retrieveTournamentDetails(req.params.tournamentId, req.params.userId).then(function(tournament){
 		res.render('tournament/edit/end-date-info.ejs', {
 			user: req.user,
@@ -265,7 +266,7 @@ app.get('/tournament-end-date/:tournamentId/:userId', isLoggedIn, requireRole('O
 	});
 });
 
-app.post('/tournament-end-date/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.post('/tournament-end-date/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	Tournament.findById(req.params.tournamentId).exec(function(err, tournament){
 		if(err){
 			throw err;
@@ -284,7 +285,7 @@ app.post('/tournament-end-date/:tournamentId/:userId', isLoggedIn, requireRole('
 	});
 });
 
-app.get('/tournament-start-hour/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.get('/tournament-start-hour/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	helperFunctions.retrieveTournamentDetails(req.params.tournamentId, req.params.userId).then(function(tournament){
 		res.render('tournament/edit/start-hour-info.ejs', {
 			user: req.user,
@@ -303,9 +304,9 @@ app.get('/tournament-start-hour/:tournamentId/:userId', isLoggedIn, requireRole(
 	});
 });
 
-app.post('/tournament-start-hour/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.post('/tournament-start-hour/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 
-	if(checkEmptyStartHour(req.body.startHour)){
+	if(middleware.checkEmptyStartHour(req.body.startHour)){
 		req.flash('infoError', 'Nu ai ales o noua ora de incepere a turneului. Mai incearca!');
 		res.redirect('/tournament-start-hour/' + req.params.tournamentId + '/' + req.params.userId);
 	}else{
@@ -329,7 +330,7 @@ app.post('/tournament-start-hour/:tournamentId/:userId', isLoggedIn, requireRole
 	}
 });
 
-app.get('/tournament-prizes/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.get('/tournament-prizes/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	helperFunctions.retrieveTournamentDetails(req.params.tournamentId, req.params.userId).then(function(tournament){
 		res.render('tournament/edit/tournament-prizes-info.ejs', {
 			user: req.user,
@@ -348,7 +349,7 @@ app.get('/tournament-prizes/:tournamentId/:userId', isLoggedIn, requireRole('Org
 	});
 });
 
-app.post('/tournament-prizes/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.post('/tournament-prizes/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	Tournament.findById(req.params.tournamentId).exec(function(err, tournament){
 		if(err){
 			throw err;
@@ -367,7 +368,7 @@ app.post('/tournament-prizes/:tournamentId/:userId', isLoggedIn, requireRole('Or
 	});
 });
 
-app.get('/tournament-sponsors/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.get('/tournament-sponsors/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	helperFunctions.retrieveTournamentDetails(req.params.tournamentId, req.params.userId).then(function(tournament){
 		res.render('tournament/edit/tournament-sponsors-info.ejs', {
 			user: req.user,
@@ -386,7 +387,7 @@ app.get('/tournament-sponsors/:tournamentId/:userId', isLoggedIn, requireRole('O
 	});
 });
 
-app.post('/tournament-sponsors/:tournamentId/:userId', isLoggedIn, requireRole('Organizator'), function(req, res){
+app.post('/tournament-sponsors/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	Tournament.findById(req.params.tournamentId).exec(function(err, tournament){
 		if(err){
 			throw err;
@@ -405,7 +406,7 @@ app.post('/tournament-sponsors/:tournamentId/:userId', isLoggedIn, requireRole('
 	});
 });
 
-app.get('/declare-winner/:tournamentId/:userId', isLoggedIn, requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
+app.get('/declare-winner/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 	helperFunctions.retrieveTournamentDetails(req.params.tournamentId).then(function(tournament){
 		helperFunctions.retrievePlayersFromTournament(req.params.tournamentId).then(function(players){
 			res.render('tournament/edit/tournament-winner.ejs', {
@@ -421,7 +422,7 @@ app.get('/declare-winner/:tournamentId/:userId', isLoggedIn, requireMultipleUser
 	});
 });
 
-app.post('/modify-tournament-winner/:tournamentId/:userId', isLoggedIn, requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
+app.post('/modify-tournament-winner/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 		helperFunctions.retrieveTournamentDetails(req.params.tournamentId).then(function(tournament){
 			if(tournament.winner[0].local.nickname == req.body.winnerName){
 				req.flash('infoSuccess', 'Salvarea modificarilor a fost realizata cu succes!');
@@ -450,63 +451,4 @@ app.post('/modify-tournament-winner/:tournamentId/:userId', isLoggedIn, requireM
 				});
 			}
 		});
-
 });
-
-
-/*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/
-function isLoggedIn(req, res, next) {
-	if (req.isAuthenticated()) {
-		return next();
-	}
-
-	res.redirect('/');
-}
-
-function requireRole(role){
-	return function(req, res, next){
-		if(req.user.local.role === role){
-			next();
-		}
-		else{
-			res.send(403);
-		}
-	}
-}
-
-function requireMultipleUserRoles(role1, role2){
-	return function(req, res, next){
-		if(req.user.local.role === role1 || req.user.local.role === role2){
-			next();
-		}else{
-			res.send(403);
-		}
-	}
-}
-
-function checkTournamentUpdatedProps(oldProp, updatedProp){
-	if(oldProp == updatedProp){
-		return 'Aceasta proprietate nu a fost modificata!' + '(' + oldProp + ')';
-	}
-
-	return updatedProp + '( a fost: ' + oldProp + ')';
-
-}
-
-function checkEmptyStartHour(editStartHour){
-	var emptyStartHour = false;
-	if(editStartHour == undefined || editStartHour == null || editStartHour == ''){
-		emptyStartHour = true;
-	}
-
-	return emptyStartHour;
-}
-
-function checkEmptyLeagues(leagues){
-	var emptyLeagues = false;
-	if(leagues == undefined || leagues == null){
-		emptyLeagues = true;
-	}
-
-	return emptyLeagues;
-}

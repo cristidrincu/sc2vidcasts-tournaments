@@ -3,13 +3,16 @@
  */
 require('q');
 var express = require('express');
-var helperFunctions = require('../../../app/helpers-mongoose.js');
 var _ = require('underscore');
+
+var helperFunctions = require('../../helpers-mongoose.js');
+var middleware = require('../../helpers-middleware.js');
+
 var app = module.exports = express();
 
 /*PLAYER ROUTES*/
 /*PLAYER ROUTES FOR LEAGUE RESULTS - GOLD PLAYERS, SILVER PLAYERS ETC*/
-app.get('/players/:userId', isLoggedIn, function(req, res){
+app.get('/players/:userId', middleware.isLoggedIn, function(req, res){
 	helperFunctions.getUserDetails(req.params.userId).then(function(user){
 		helperFunctions.retrieveAllPlayers().then(function(players){
 			res.render('players/all-players.ejs', {
@@ -55,12 +58,3 @@ app.get('/players/:userId', isLoggedIn, function(req, res){
 		});
 	});
 });
-
-/*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-
-  res.redirect('/');
-}

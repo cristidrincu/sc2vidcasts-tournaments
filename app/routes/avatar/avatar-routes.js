@@ -7,9 +7,10 @@ var helperFunctions = require('../../../app/helpers-mongoose.js');
 var User = require('../../../app/models/user');
 var Avatar = require('../../../app/models/avatar');
 var moment = require('moment');
+var middleware = require('../../helpers-middleware.js');
 var app = module.exports = express();
 
-app.post('/choose-avatar/:userId/:avatarId', isLoggedIn, function(req, res){
+app.post('/choose-avatar/:userId/:avatarId', middleware.isLoggedIn, function(req, res){
   helperFunctions.setAvatarForUser(req.params.userId, req.params.avatarId).then(function(user){
     if(user.local.role === 'admin'){
       res.redirect('/backend-admin/' + req.params.userId);
@@ -20,14 +21,6 @@ app.post('/choose-avatar/:userId/:avatarId', isLoggedIn, function(req, res){
     }
   });
 });
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-
-  res.redirect('/');
-}
 
 
 

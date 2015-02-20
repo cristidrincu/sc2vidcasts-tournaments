@@ -21,7 +21,7 @@
                     <%})%>
                 </select>
                 <button type="submit" class="btn btn-warning btn-lg">Confirma schimbarile</button>
-            <%}else if(moment(currentDate).isBefore(tournament.startDate)){%>
+            <%}else if(moment(currentDate).isAfter(tournament.startDate)){%>
                 <h4>Vei putea declara castigatorul in ziua de final de concurs!</h4>
             <%}else{%>
                 <label for="tournamentPlayers">Alege un castigator din cadrul participantilor in turneu</label>

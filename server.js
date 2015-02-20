@@ -64,6 +64,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 //routes
 require('./app/routes.js')(app); //load our routes and pass in our app and fully configured passport
 
+var api = require('./app/routes/api/api-routes');
 var login = require('./app/routes/login/login-route');
 var home = require('./app/routes/home/home-route');
 var signup = require('./app/routes/signup/signup-route');
@@ -81,6 +82,7 @@ var quote = require('./app/routes/quote/quote-route');
 
 var logout = require('./app/routes/logout/logout-route');
 
+app.use(api);
 app.use(home);
 app.use(login);
 app.use(signup);

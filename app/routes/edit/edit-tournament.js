@@ -420,7 +420,7 @@ app.get('/declare-winner/:tournamentId/:userId', isLoggedIn, requireMultipleUser
 		});
 	});
 });
-//TODO - In ziua de incepere a turneului, se blocheaza toate optiunile de modificare pentru organizator
+
 app.post('/modify-tournament-winner/:tournamentId/:userId', isLoggedIn, requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
 		helperFunctions.retrieveTournamentDetails(req.params.tournamentId).then(function(tournament){
 			if(tournament.winner[0].local.nickname == req.body.winnerName){

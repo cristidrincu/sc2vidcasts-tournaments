@@ -46,3 +46,22 @@ app.get('/quotes-admin/:userId', middleware.isLoggedIn, middleware.requireRole('
 		});
 	});
 });
+
+app.get('/delete-quote/:quoteId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
+	helperFunctions.getQuoteDetails(req.params.quoteId).then(function(quote){
+		res.render('quotes/delete/delete-quote.ejs', {
+			user: req.user,
+			quote: quote
+		});
+	});
+});
+
+app.post('/delete-quote/:quoteId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
+	helperFunctions.deleteQuote(req.params.quoteId, function(writeResult){
+		if(writeResult){
+			res.redirect('/quotes-admin/' + req.user._id);
+		}else{
+			res.send('Could not delete quote!');
+		}
+	});
+});

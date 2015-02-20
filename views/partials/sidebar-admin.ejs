@@ -17,6 +17,25 @@
                 </div>
                 <!-- /input-group -->
             </li>
+
+            <!--PERSONAL section of the website-->
+            <li class="menu-section-text"><a class="active" href="#"><i class="fa fa-eye fa-fw"></i> Personal</a></li>
+            <li>
+                <a href="/user-messages/<%= user._id%>"><i class="fa fa-envelope fa-fw"></i> Mesajele tale<span class="fa arrow"></span></a>
+            </li>
+
+            <!--ACTIUNI section of the website-->
+            <li class="menu-section-text">
+                <a class="active" href="#"><i class="fa fa-cog fa-fw"></i> Actiuni</a>
+            </li>
+            <li>
+                <a href="/upload-avatar/<%=user._id%>"><i class="fa fa-cog fa-fw"></i> Adauga imagini avatar<span class="fa arrow"></span></a>
+            </li>
+            <li>
+                <a href="/create-new-quote/<%=user._id%>"><i class="fa fa-university fa-fw"></i> Adauga un citat<span class="fa arrow"></span></a>
+            </li>
+
+            <!--ALTE INFORMATII section of the website-->
             <li class="menu-section-text">
                 <a class="active" href="/backend-admin/<%= user._id%>"><i class="fa fa-tachometer fa-fw"></i> Alte informatii</a>
             </li>
@@ -37,21 +56,6 @@
             </li>
             <li>
                 <a href="/closed-tournaments/<%=user._id%>" class="display-leagues-players"><i class="fa fa-trophy fa-fw"></i> Turnee terminate<span class="fa arrow"></span></a>
-            </li>
-
-            <li class="menu-section-text"><a class="active" href="#"><i class="fa fa-eye fa-fw"></i> Personal</a></li>
-            <li>
-                <a href="/user-messages/<%= user._id%>"><i class="fa fa-envelope fa-fw"></i> Mesajele tale<span class="fa arrow"></span></a>
-            </li>
-
-            <li class="menu-section-text">
-                <a class="active" href="#"><i class="fa fa-cog fa-fw"></i> Actiuni</a>
-            </li>
-            <li>
-                <a href="/upload-avatar/<%=user._id%>"><i class="fa fa-cog fa-fw"></i> Adauga imagini avatar<span class="fa arrow"></span></a>
-            </li>
-            <li>
-                <a href="/create-new-quote/<%=user._id%>"><i class="fa fa-university fa-fw"></i> Adauga un citat<span class="fa arrow"></span></a>
             </li>
         </ul>
     </div>

@@ -50,6 +50,13 @@ exports.getQuoteDetails = function(quoteId){
 	return deffered.promise;
 }
 
+exports.deleteQuote = function(quoteId, cb){
+	Quote.remove( {_id: quoteId} ).exec(function(err, writeResult){
+		if(err) throw err;
+		cb(writeResult);
+	});
+}
+
 exports.getDefaultAvatar = function(){
 	var deferred = Q.defer();
 	Avatar.findOne( { 'imageRaceCategory': 'default' }).exec(function(err, avatar){

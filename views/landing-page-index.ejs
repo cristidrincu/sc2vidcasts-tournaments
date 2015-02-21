@@ -1,5 +1,33 @@
 <% include partials/header-landing-page.ejs %>
-<div class="main-landing-page-container" id="acasa">
+<div class="container-main-menu-landing-page">
+    <div class="main-menu-landing-page row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="col-sm-5 col-md-5 col-lg-5">
+                <ul id="main-menu-left">
+                    <li data-scroll-nav="0"><a class="active" data-scroll-nav="0">ACASA</a></li>
+                    <li data-scroll-nav="1"><a data-scroll-nav="1">DESPRE NOI</a></li>
+                    <li data-scroll-nav="2">JUCATORI</li>
+                    <li data-scroll-nav="3">ORGANIZATORI</li>
+                </ul>
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <div class="container-site-logo">
+                    <img id="logo-sc2-vidcasts-romania" src="../images/logo-sc2-vidcasts/logo_SC2_small_png.png" alt="Starcraft2 Vidcasts Romania Logo" width="155" height="85"/>
+                </div>
+            </div>
+            <div class="col-sm-5 col-md-5 col-lg-5">
+                <ul id="main-menu-right">
+                    <li data-scroll-nav="4">TURNEE</li>
+                    <li data-scroll-nav="5">CONTACT</li>
+                    <li data-scroll-nav="6">PARTENERI</li>
+                    <li><a class="teaser-login-signup" href="/login">LOGIN</a></li>
+                    <li><a class="teaser-login-signup" href="/signup">SIGNUP</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div data-scroll-index="0" class="main-landing-page-container" id="acasa">
     <div class="container text-landing-page">
         <h1 class="huge-h1-landing-page">E-Sports. Turnee. Romania</h1>
 
@@ -20,6 +48,32 @@
         <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Login</a>
         <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Fa-ti un cont</a>
     </div>
+</div>
+<!--HOME container ends here-->
+
+<div data-scroll-index="1" class="container-about-us">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="col-sm-4 col-md-4 col-lg-4 about-us-text">
+                    <h1>CINE SUNTEM?</h1>
+                    <p>
+                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra, tortor sit amet ultricies porta, ante sapien tincidunt mauris,
+                       quis pretium quam dolor ut magna. Quisque id semper urna. Fusce vulputate et ligula eget accumsan. Praesent mattis, risus a pellentesque cursus,
+                       neque risus aliquam diam, sed tempor lectus nulla ut ligula. Aliquam erat volutpat.
+                    </p>
+                    <p>
+                        Aliquam erat volutpat. Donec sodales consequat dolor, ut aliquet erat interdum vitae.
+                        Suspendisse varius mauris mattis mollis consequat. Donec accumsan diam et purus ultrices fermentum.
+                    </p>
+                </div>
+                <div class="col-sm-8 col-md-8 col-lg-8">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 </body>
 </html>

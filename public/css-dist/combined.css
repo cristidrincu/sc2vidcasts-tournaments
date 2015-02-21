@@ -1477,6 +1477,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #fff;
+    font-family: 'Raleway', sans-serif;
 }
 
 .top-nav-bar-landing-page{
@@ -1499,13 +1500,81 @@ body {
     margin-right: 50px;
 }
 
+.main-landing-page-container, .container-about-us{
+    width: 100%;
+    height: 900px;
+}
+
 .main-landing-page-container{
+    /*background-color: #3d4148;*/
     background: url('../images/sc2-tournaments-background-2.jpg') no-repeat center center;
-    background-size: 100%;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    /*background-size: 100%;*/
+    /*-webkit-background-size: cover;*/
+    /*-moz-background-size: cover;*/
+    /*-o-background-size: cover;*/
+    /*background-size: cover;*/
+}
+
+.container-about-us{
+    background-color: #3d4148;
+    padding-top: 200px;
+    padding-left: 75px;
+    color: #fff;
+}
+
+.container-about-us h1{
+    font-size: 50px;
+}
+
+
+.container-main-menu-landing-page{
+    width: 100%;
+    height: 100px;
+    /*background-color: #000;*/
+    position: fixed;
+    color: #fff;
+}
+
+.main-menu-landing-page{
+    padding-top: 35px;
+}
+
+#logo-sc2-vidcasts-romania{
+    position: relative;
+    top: -30px;
+}
+
+#main-menu-left li, #main-menu-right li {
+    display: inline-block;
+    margin-left: 45px;
+    font-size: 16px;
+}
+
+#main-menu-right li{
+    margin-left: 0;
+    margin-right: 45px;
+}
+
+#main-menu-left li a, #main-menu-right li a{
+    color: #fff;
+}
+
+#main-menu-left li a:hover, #main-menu-right li a:hover{
+    cursor: pointer;
+}
+
+#main-menu-left li a.active{
+    color: #6bd7e7;
+}
+
+#main-menu-right li a.teaser-login-signup{
+    /*color: #ff3c1f;*/
+    color: #fff;
+    text-decoration: none;
+}
+
+a.teaser-login-signup:hover{
+    text-decoration: underline;
 }
 
 .text-landing-page{
@@ -1540,6 +1609,15 @@ h1.medium-h1-landing-page{
 #proiect, #echipa, #turnee-active{
     padding-top: 100px;
     padding-bottom: 100px;
+}
+
+/*ABOUT US*/
+.about-us-text h1{
+    margin-bottom: 20px;
+}
+
+.about-us-text p{
+    margin-bottom: 30px;
 }
 .welcome-title-summary-backend{
     font-size: 43px;

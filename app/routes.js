@@ -4,16 +4,17 @@
 var express = require('express');
 var fs = require('fs');
 var helperFunctions = require('./helpers-mongoose');
+var middleware = require('./helpers-middleware.js');
 var Avatar = require('./models/avatar.js');
 
 module.exports = function (app) {
 
   /*RULES FOR ACCESS*/
-  app.all('/profile/*', isLoggedIn);
-  app.all('/customize-profile/*', isLoggedIn);
+  app.all('/profile/*', middleware.isLoggedIn);
+  app.all('/customize-profile/*', middleware.isLoggedIn);
 
 
-  app.get('/upload-avatar/:userId', isLoggedIn, requireRole('admin'), function(req, res){
+  app.get('/upload-avatar/:userId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
     helperFunctions.getUserDetails(req.params.userId).then(function(user){
       helperFunctions.retrieveAllTournaments().then(function(tournaments){
         res.render('backend/admin-upload-avatars.ejs', {
@@ -25,7 +26,7 @@ module.exports = function (app) {
     });
   });
 
-  app.post('/upload-avatar', isLoggedIn, requireRole('admin'), function(req, res){
+  app.post('/upload-avatar', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
 
     var avatarRaceCategory = null;
 
@@ -65,23 +66,3 @@ module.exports = function (app) {
     });
   });
 };
-
-/*ROUTE MIDDLEWARE - MAKE SURE A USER IS LOGGED IN*/
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-
-  res.redirect('/');
-}
-
-function requireRole(role){
-  return function(req, res, next){
-    if(req.user.local.role === role){
-      next();
-    }
-    else{
-      res.send(403);
-    }
-  }
-}

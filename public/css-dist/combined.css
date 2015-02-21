@@ -1516,7 +1516,8 @@ body {
 }
 
 .container-about-us{
-    background-color: #3d4148;
+    /*background-color: #3d4148;*/
+    background-color: #000;
     padding-top: 200px;
     padding-left: 75px;
     color: #fff;
@@ -1612,12 +1613,46 @@ h1.medium-h1-landing-page{
 }
 
 /*ABOUT US*/
-.about-us-text h1{
-    margin-bottom: 20px;
+.container-about-us {
+    background: url('../images/backgrounds-about-us-frontend/terran-background.jpg') no-repeat center center;
+}
+
+.about-us-text h3{
+    margin-top: -10px;
+    margin-bottom: 30px;
 }
 
 .about-us-text p{
     margin-bottom: 30px;
+}
+
+.about-us-images ul li{
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.about-us-images ul li img{
+    border-radius: 20px;
+    -webkit-filter: grayscale(80%);
+    filter: grayscale(80%);
+}
+
+.about-us-images ul li img.active-image{
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+}
+
+.about-us-images ul li img:hover{
+    cursor: pointer;
+}
+
+.about-us-images {
+    padding-top: 25px;
+}
+
+.member-description{
+    display: none;
+    position: relative;
 }
 .welcome-title-summary-backend{
     font-size: 43px;

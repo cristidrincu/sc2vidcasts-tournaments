@@ -14,7 +14,7 @@ $(document).ready(function(){
 	var bouaruDescription = $('.bouaru-description');
 	var digitalDescription = $('.digital-description');
 
-	defaultDescription.stop(true, true).fadeIn(2000).show();
+	defaultDescription.stop(true, true).fadeIn(1000).show();
 
 	$('#cristian').on({
 		click: function(){
@@ -24,7 +24,7 @@ $(document).ready(function(){
 			$(this).css({'-webkit-filter': 'grayscale(0%)','filter': 'grayscale(0%)'}).addClass('.active-image');
 
 			defaultDescription.stop(true, true).hide().removeClass('.active-description');
-			$(cristianDescription).stop(true, true).fadeIn(2000).show().addClass('.active-description');
+			$(cristianDescription).stop(true, true).fadeIn(1000).show().addClass('.active-description');
 			defaultDescription = $(cristianDescription);
 		},
 		mouseenter: function(){
@@ -47,7 +47,7 @@ $(document).ready(function(){
 			$(this).css({'-webkit-filter': 'grayscale(0%)','filter': 'grayscale(0%)'}).addClass('.active-image');
 
 			defaultDescription.stop(true, true).hide().removeClass('.active-description');
-			$(adilaDescription).stop(true, true).fadeIn(2000).show().addClass('.active-description');
+			$(adilaDescription).stop(true, true).fadeIn(1000).show().addClass('.active-description');
 			defaultDescription = $(adilaDescription);
 		},
 		mouseenter: function(){
@@ -70,7 +70,7 @@ $(document).ready(function(){
 			$(this).css({'-webkit-filter': 'grayscale(0%)','filter': 'grayscale(0%)'}).addClass('.active-image');
 
 			defaultDescription.stop(true, true).hide().removeClass('.active-description');
-			$(hundreiDescription).stop(true, true).fadeIn(2000).show().addClass('.active-description');
+			$(hundreiDescription).stop(true, true).fadeIn(1000).show().addClass('.active-description');
 			defaultDescription = $(hundreiDescription);
 		},
 		mouseenter: function(){
@@ -93,7 +93,7 @@ $(document).ready(function(){
 			$(this).css({'-webkit-filter': 'grayscale(0%)','filter': 'grayscale(0%)'}).addClass('.active-image');
 
 			defaultDescription.stop(true, true).hide().removeClass('.active-description');
-			$(bouaruDescription).stop(true, true).fadeIn(2000).show().addClass('.active-description');
+			$(bouaruDescription).stop(true, true).fadeIn(1000).show().addClass('.active-description');
 			defaultDescription = $(bouaruDescription);
 		},
 		mouseenter: function(){
@@ -116,7 +116,7 @@ $(document).ready(function(){
 			$(this).css({'-webkit-filter': 'grayscale(0%)','filter': 'grayscale(0%)'}).addClass('.active-image');
 
 			defaultDescription.stop(true, true).hide().removeClass('.active-description');
-			$(digitalDescription).stop(true, true).fadeIn(2000).show().addClass('.active-description');
+			$(digitalDescription).stop(true, true).fadeIn(1000).show().addClass('.active-description');
 			defaultDescription = $(digitalDescription);
 		},
 		mouseenter: function(){

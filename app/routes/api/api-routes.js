@@ -26,6 +26,12 @@ app.get('/api/organizers', function(req, res){
 	});
 });
 
+app.get('/api/tournaments-by-organizer/:organizerId', function(req, res){
+	helperFunctions.retrieveTournamentsByOrganizer(req.params.organizerId).then(function(tournaments){
+		res.json(tournaments);
+	});
+});
+
 app.get('/api/upcoming-tournaments', function(req, res){
 	helperFunctions.retrieveAllTournaments().then(function(tournaments){
 		var upcoming = _.filter(tournaments, function(tournament){

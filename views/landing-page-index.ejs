@@ -28,27 +28,29 @@
     </div>
 </div>
 <div data-scroll-index="0" class="main-landing-page-container" id="acasa">
-    <div class="container text-landing-page">
-        <h1 class="huge-h1-landing-page">E-Sports. Turnee. Romania</h1>
+    <div class="container-fluid">
+        <div class="text-landing-page">
+            <h1 class="huge-h1-landing-page">E-Sports. Turnee. Starcraft 2</h1>
 
-        <p class="paragraph-landing-page">Salut si bine ai venit pe singura platforma de organizat turnee de Starcraft 2 din Romania!
-        </p>
+            <p class="paragraph-landing-page">Salut si bine ai venit pe singura platforma de organizat turnee de Starcraft 2 din Romania!
+            </p>
 
-        <p class="paragraph-landing-page">
-            Mai tii minte zilele acelea cand vroiai sa organizezi un turneu si nu stiai cu ce sa  incepi si cu ce sa termini? Iata ca noi, cei din cadrul echipei starcraft2-vidcasts.ro, ne-am gandit sa-ti dam o mana de ajutor.
-        </p>
+            <p class="paragraph-landing-page">
+                Mai tii minte zilele acelea cand vroiai sa organizezi un turneu si nu stiai cu ce sa  incepi si cu ce sa termini? Iata ca noi, cei din cadrul echipei starcraft2-vidcasts.ro, ne-am gandit sa-ti dam o mana de ajutor.
+            </p>
 
-        <p class="paragraph-landing-page">
-            Noua noastra platforma iti va da posibilitatea sa te organizezi foarte usor atunci cand vei avea intentia sa-ti creezi propriul turneu.
-            Gata cu metodele  de genul: Google Docs sau comment-uri lasate la posturile de pe Facebook sau de pe site-urile voastre. Acum ai un singur loc cu nenumarate optiuni, iar astfel turneul tau va primii o tenta de profesionalism si seriozitate.
-        </p>
+            <p class="paragraph-landing-page">
+                Noua noastra platforma iti va da posibilitatea sa te organizezi foarte usor atunci cand vei avea intentia sa-ti creezi propriul turneu.
+                Gata cu metodele  de genul: Google Docs sau comment-uri lasate la posturile de pe Facebook sau de pe site-urile voastre. Acum ai un singur loc cu nenumarate optiuni, iar astfel turneul tau va primii o tenta de profesionalism si seriozitate.
+            </p>
 
-        <p class="paragraph-landing-page last-item">
-            Asa ca fa-ti un cont  si lasa sa  inceapa distractia!
-        </p>
+            <p class="paragraph-landing-page last-item">
+                Asa ca fa-ti un cont  si lasa sa  inceapa distractia!
+            </p>
 
-        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Login</a>
-        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Fa-ti un cont</a>
+            <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Login</a>
+            <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Fa-ti un cont</a>
+        </div>
     </div>
 </div>
 <!--HOME container ends here-->
@@ -214,6 +216,9 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
                         <br/>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <a href="#">
+                            <i class="fa fa-video-camera"></i> Urmareste clipul
+                        </a>
                     </div>
                     <div class="container-beneficiu col-sm-4 col-md-4 col-lg-4">
                         <div class="container-icon-beneficiu">
@@ -222,6 +227,9 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
                         <br/>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <a href="#">
+                            <i class="fa fa-video-camera"></i> Urmareste clipul
+                        </a>
                     </div>
                     <div class="container-beneficiu col-sm-4 col-md-4 col-lg-4">
                         <div class="container-icon-beneficiu">
@@ -230,6 +238,9 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
                         <br/>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <a href="#">
+                            <i class="fa fa-video-camera"></i> Urmareste clipul
+                        </a>
                     </div>
                 </div>
             </div>
@@ -239,7 +250,58 @@
 <!--JUCATORI container ends here-->
 
 <div data-scroll-index="3" class="container-organizatori">
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="jucatori-section-intro col-sm-3 col-md-3 col-lg-3">
+                    <h1>Organizatori</h1>
+                    <div ng-controller="OrganizersController" class="main-container-organizers">
+                        <h3>{{ organizersPresent }}</h3>
+                        <ul>
+                            <li ng-repeat="organizer in organizers ">
+                                <p>{{ organizer.local.nickname }} | {{  }}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="jucatori-benefits col-sm-9 col-md-9 col-lg-9">
+                    <div class="container-beneficiu col-sm-4 col-md-4 col-lg-4">
+                        <div class="container-icon-beneficiu">
+                            <i class="fa fa-cogs fa-4x"></i><h3>Panou administrare</h3>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <br/>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <a href="#">
+                            <i class="fa fa-video-camera"></i> Urmareste clipul
+                        </a>
+                    </div>
+                    <div class="container-beneficiu col-sm-4 col-md-4 col-lg-4">
+                        <div class="container-icon-beneficiu">
+                            <i class="fa fa-envelope fa-4x"></i><h3>Notificari prin e-mail</h3>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <br/>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <a href="#">
+                            <i class="fa fa-video-camera"></i> Urmareste clipul
+                        </a>
+                    </div>
+                    <div class="container-beneficiu col-sm-4 col-md-4 col-lg-4">
+                        <div class="container-icon-beneficiu">
+                            <i class="fa fa-diamond fa-4x"></i><h3>Cele mai tari avatare</h3>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <br/>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <a href="#">
+                            <i class="fa fa-video-camera"></i> Urmareste clipul
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!--ORGANIZATORI container ends here-->
 
@@ -251,6 +313,12 @@
 <script src="/js/tournament-frontend-app/modules/players/js/controllers.js"></script>
 <script src="/js/tournament-frontend-app/modules/players/js/services.js"></script>
 <script src="/js/tournament-frontend-app/modules/players/players-module.js"></script>
+
+<script src="/js/tournament-frontend-app/modules/organizers/js/controllers.js"></script>
+<script src="/js/tournament-frontend-app/modules/organizers/js/services.js"></script>
+<script src="/js/tournament-frontend-app/modules/organizers/organizers-module.js"></script>
+
 <script src="/js/tournament-frontend-app/app.js"></script>
+
 </body>
 </html>

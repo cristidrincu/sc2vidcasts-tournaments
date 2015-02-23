@@ -44,6 +44,10 @@ body {
     /*background-size: cover;*/
 }
 
+.text-landing-page{
+    margin-left: 68px;
+}
+
 .container-about-us{
     /*background-color: #3d4148;*/
     background-color: #000;
@@ -209,7 +213,7 @@ h1.medium-h1-landing-page{
 }
 
 /*JUCATORI*/
-.container-jucatori{
+.container-jucatori, .container-organizatori{
     padding-top: 200px;
     padding-left: 60px;
     color: #fff;
@@ -219,6 +223,19 @@ h1.medium-h1-landing-page{
 .main-container-league-players{
     margin-top: 60px;
     margin-left: 30px;
+}
+
+.main-container-organizers h3{
+    margin-left: 120px;
+    font-size: 80px;
+}
+
+.main-container-organizers ul li {
+    list-style: none;
+}
+
+.main-container-organizers ul li p{
+    font-size: 30px;
 }
 
 .container-league-players{

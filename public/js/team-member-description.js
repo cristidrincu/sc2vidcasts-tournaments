@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 	defaultDescription.stop(true, true).fadeIn(1000).show();
 
-	$('#cristian').on({
+	$("#cristian").on({
 		click: function(){
 			$(this).attr('status', 'clicked');
 			$(defaultActiveImage).removeClass('.active-image').attr('status', 'unclicked').css({'-webkit-filter': 'grayscale(80%)','filter': 'grayscale(80%)'});

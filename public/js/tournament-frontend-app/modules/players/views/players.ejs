@@ -1,0 +1,113 @@
+<div class="container-jucatori">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="jucatori-section-intro col-sm-3 col-md-3 col-lg-3">
+                    <h1>Jucatori inscrisi</h1>
+                    <div ng-controller="PlayersController" class="main-container-league-players">
+                        <div class="container-league-players">
+                            <img class="logo-liga" src="/images/logos-ligi/bronze-logo-ligi-200x200.png" alt="Liga Bronze" width="80" height="80"/>
+                            <div ng-if="bronzePlayers.length == 0">
+                                <p class="numberOfPlayers">{{ bronzePlayers.length }}</p>
+                            </div>
+                            <div ng-if="bronzePlayers.length > 0">
+                                <p class="numberOfPlayers">{{ bronzePlayers.length }}</p>
+                            </div>
+                        </div>
+                        <div class="container-league-players">
+                            <img class="logo-liga" src="/images/logos-ligi/silver-logo-ligi-200x200.png" alt="Liga Bronze" width="80" height="80"/>
+                            <div ng-if="silverPlayers.length == 0">
+                                <p class="numberOfPlayers">{{ silverPlayers.length }}</p>
+                            </div>
+                            <div ng-if="silverPlayers.length > 0">
+                                <p class="numberOfPlayers">{{ silverPlayers.length }}</p>
+                            </div>
+                        </div>
+                        <div class="container-league-players">
+                            <img class="logo-liga" src="/images/logos-ligi/gold-logo-ligi-200x200.png" alt="Liga Bronze" width="80" height="80"/>
+                            <div ng-if="goldPlayers.length == 0">
+                                <p class="numberOfPlayers">{{ goldPlayers.length }}</p>
+                            </div>
+                            <div ng-if="goldPlayers.length > 0">
+                                <p class="numberOfPlayers">{{ goldPlayers.length }}</p>
+                            </div>
+                        </div>
+                        <div class="container-league-players">
+                            <img class="logo-liga" src="/images/logos-ligi/platinum-logo-ligi-200x200.png" alt="Liga Bronze" width="80" height="80"/>
+                            <div ng-if="platinumPlayers.length == 0">
+                                <p class="numberOfPlayers">{{ platinumPlayers.length }}</p>
+                            </div>
+                            <div ng-if="platinumPlayers.length > 0">
+                                <p class="numberOfPlayers">{{ platinumPlayers.length }}</p>
+                            </div>
+                        </div>
+                        <div class="container-league-players">
+                            <img class="logo-liga" src="/images/logos-ligi/diamond-logo-ligi-200x200.png" alt="Liga Bronze" width="80" height="80"/>
+                            <div ng-if="diamondPlayers.length == 0">
+                                <p class="numberOfPlayers">{{ platinumPlayers.length }}</p>
+                            </div>
+                            <div ng-if="diamondPlayers.length > 0">
+                                <p class="numberOfPlayers">{{ diamondPlayers.length }}</p>
+                            </div>
+                        </div>
+                        <div class="container-league-players">
+                            <img class="logo-liga" src="/images/logos-ligi/masters-logo-ligi-200x200.png" alt="Liga Bronze" width="80" height="80"/>
+                            <div ng-if="mastersPlayers.length == 0">
+                                <p class="numberOfPlayers">{{ mastersPlayers.length }}</p>
+                            </div>
+                            <div ng-if="mastersPlayers.length > 0">
+                                <p class="numberOfPlayers">{{ mastersPlayers.length }}</p>
+                            </div>
+                        </div>
+                        <div class="container-league-players">
+                            <img class="logo-liga" src="/images/logos-ligi/grand-master-logo-ligi-200x200.png" alt="Liga Bronze" width="80" height="80"/>
+                            <div ng-if="grandMasterPlayers.length == 0">
+                                <p class="numberOfPlayers">{{ grandMasterPlayers.length }}</p>
+                            </div>
+                            <div ng-if="grandMasterPlayers.length > 0">
+                                <p class="numberOfPlayers">{{ grandMasterPlayers.length }}</p>
+                            </div>
+                        </div>
+                        <br class="clearFloats"/>
+                    </div>
+                </div>
+                <div class="jucatori-benefits col-sm-9 col-md-9 col-lg-9">
+                    <div class="container-beneficiu col-sm-4 col-md-4 col-lg-4">
+                        <div class="container-icon-beneficiu">
+                            <i class="fa fa-cogs fa-4x"></i><h3>Panou administrare</h3>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <br/>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <a href="#">
+                            <i class="fa fa-video-camera"></i> Urmareste clipul
+                        </a>
+                    </div>
+                    <div class="container-beneficiu col-sm-4 col-md-4 col-lg-4">
+                        <div class="container-icon-beneficiu">
+                            <i class="fa fa-envelope fa-4x"></i><h3>Notificari prin e-mail</h3>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <br/>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <a href="#">
+                            <i class="fa fa-video-camera"></i> Urmareste clipul
+                        </a>
+                    </div>
+                    <div class="container-beneficiu col-sm-4 col-md-4 col-lg-4">
+                        <div class="container-icon-beneficiu">
+                            <i class="fa fa-diamond fa-4x"></i><h3>Cele mai tari avatare</h3>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <br/>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <a href="#">
+                            <i class="fa fa-video-camera"></i> Urmareste clipul
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--JUCATORI container ends here-->

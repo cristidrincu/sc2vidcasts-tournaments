@@ -1480,6 +1480,10 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
+.clearFloats{
+    clear: both;
+}
+
 .top-nav-bar-landing-page{
     width: 100%;
     height: 40px;
@@ -1521,6 +1525,10 @@ body {
 
 .text-landing-page{
     margin-left: 68px;
+    -webkit-animation: 1s fadeInUp ease;
+    -moz-animation: 1s fadeInUp ease;
+    -o-animation: 1s fadeInUp ease;
+    animation: 1s fadeInUp ease;
 }
 
 .container-about-us{
@@ -1532,7 +1540,8 @@ body {
 }
 
 .container-about-us h1{
-    font-size: 50px;
+    font-size: 20px;
+    padding-top: 10px;
 }
 
 
@@ -1669,22 +1678,17 @@ h1.medium-h1-landing-page{
     padding-top: 25px;
 }
 
-.member-description{
-    display: none;
-    position: relative;
-    margin-left: 40px;
-}
-
 .member-description h3{
-    margin-top: -12px;
+    margin-top: 0;
 }
 
 .member-description{
-    width: 700px;
-    background-color: #000;
-    -webkit-opacity: 0.5;
-    opacity: 0.5;
     padding: 20px 20px;
+    margin-left: 70px;
+    -webkit-animation: 1s fadeInDown ease;
+    -moz-animation: 1s fadeInDown ease;
+    -o-animation: 1s fadeInDown ease;
+    animation: 1s fadeInDown ease;
 }
 
 /*JUCATORI*/
@@ -1693,6 +1697,21 @@ h1.medium-h1-landing-page{
     padding-left: 60px;
     color: #fff;
     background: url('../images/backgrounds-about-us-frontend/jucatori-background.jpg') no-repeat center center;
+}
+
+#cristian, #adila, #hundrei {
+    float: left;
+    margin-bottom: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -o-border-radius: 20px;
+    -ms-border-radius: 20px;
+    border-radius: 20px;
+    margin-right: 15px;
+}
+
+.team-member-role{
+    margin-top: -10px;
 }
 
 .main-container-league-players{
@@ -1726,6 +1745,20 @@ h1.medium-h1-landing-page{
 .jucatori-section-intro h1{
     margin-bottom: 40px;
     margin-left: 40px;
+}
+
+.jucatori-section-intro {
+    -webkit-animation: 1s fadeInLeft ease;
+    -moz-animation: 1s fadeInLeft ease;
+    -o-animation: 1s fadeInLeft ease;
+    animation: 1s fadeInLeft ease;
+}
+
+.jucatori-benefits{
+    -webkit-animation: 1s fadeInRight ease;
+    -moz-animation: 1s fadeInRight ease;
+    -o-animation: 1s fadeInRight ease;
+    animation: 1s fadeInRight ease;
 }
 
 .logo-liga{

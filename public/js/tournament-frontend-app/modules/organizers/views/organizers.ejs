@@ -1,20 +1,15 @@
 <div class="container-organizatori">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-12">
-                <div class="jucatori-section-intro col-sm-3 col-md-3 col-lg-3">
-                    <h1>Organizatori</h1>
-                    <div ng-controller="OrganizersController" class="main-container-organizers">
-                        <h3>{{ organizersPresent }}</h3>
-                        <ul>
-                            <li ng-repeat="organizer in organizers ">
-                                <p>{{ organizer.local.nickname }} | {{  }}</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="jucatori-benefits col-sm-9 col-md-9 col-lg-9">
-                    <div class="container-beneficiu col-sm-4 col-md-4 col-lg-4">
+
+                <!--<div class="jucatori-section-intro col-sm-3 col-md-3 col-lg-3">-->
+                    <!--<h1>Organizatori</h1>-->
+                    <!--<div ng-controller="OrganizersController" class="main-container-organizers">-->
+                        <!--<h3>{{ organizersPresent }}</h3>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="organizer-benefits col-sm-12 col-md-12 col-lg-12">
+                    <div class="container-beneficiu col-sm-3 col-md-3 col-lg-3">
                         <div class="container-icon-beneficiu">
                             <i class="fa fa-cogs fa-4x"></i><h3>Panou administrare</h3>
                         </div>
@@ -25,7 +20,7 @@
                             <i class="fa fa-video-camera"></i> Urmareste clipul
                         </a>
                     </div>
-                    <div class="container-beneficiu col-sm-4 col-md-4 col-lg-4">
+                    <div class="container-beneficiu col-sm-3 col-md-3 col-lg-3">
                         <div class="container-icon-beneficiu">
                             <i class="fa fa-envelope fa-4x"></i><h3>Notificari prin e-mail</h3>
                         </div>
@@ -36,9 +31,20 @@
                             <i class="fa fa-video-camera"></i> Urmareste clipul
                         </a>
                     </div>
-                    <div class="container-beneficiu col-sm-4 col-md-4 col-lg-4">
+                    <div class="container-beneficiu col-sm-3 col-md-3 col-lg-3">
                         <div class="container-icon-beneficiu">
-                            <i class="fa fa-diamond fa-4x"></i><h3>Cele mai tari avatare</h3>
+                            <i class="fa fa-trophy fa-4x"></i><h3>Turnee custom</h3>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <br/>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
+                        <a href="#">
+                            <i class="fa fa-video-camera"></i> Urmareste clipul
+                        </a>
+                    </div>
+                    <div class="container-beneficiu col-sm-3 col-md-3 col-lg-3">
+                        <div class="container-icon-beneficiu">
+                            <i class="fa fa-users fa-4x"></i><h3>Alege casteri pentru turneu</h3>
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dictum tellus et dui pharetra, lobortis volutpat metus semper. Sed enim magna, sagittis maximus orci ut, suscipit volutpat orci. Sed pellentesque id mi volutpat facilisis. Cras tincidunt mi vel felis varius dignissim.</p>
                         <br/>
@@ -48,7 +54,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+
         </div>
     </div>
 </div>

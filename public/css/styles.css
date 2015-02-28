@@ -110,7 +110,7 @@ body {
     cursor: pointer;
 }
 
-#main-menu-left li a.active{
+#main-menu-left li a.active, #main-menu-right li a.active{
     color: #6bd7e7;
 }
 
@@ -279,11 +279,15 @@ h1.medium-h1-landing-page{
     animation: 1s fadeInLeft ease;
 }
 
-.jucatori-benefits{
-    -webkit-animation: 1s fadeInRight ease;
-    -moz-animation: 1s fadeInRight ease;
-    -o-animation: 1s fadeInRight ease;
-    animation: 1s fadeInRight ease;
+.jucatori-benefits, .organizer-benefits{
+    -webkit-animation: 1s fadeInUp ease;
+    -moz-animation: 1s fadeInUp ease;
+    -o-animation: 1s fadeInUp ease;
+    animation: 1s fadeInUp ease;
+}
+
+.organizer-benefits{
+    padding-top: 50px;
 }
 
 .logo-liga{
@@ -305,5 +309,6 @@ h1.medium-h1-landing-page{
 
 /*TURNEE*/
 .container-tournaments{
+    padding-top: 100px;
     background: url('../images/backgrounds-about-us-frontend/turnee-background.jpg') no-repeat center center;
 }

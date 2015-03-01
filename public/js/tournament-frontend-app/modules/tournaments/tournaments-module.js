@@ -1,7 +1,7 @@
 /**
  * Created by cristiandrincu on 2/22/15.
  */
-angular.module('tournaments.tournamentsModule', ['tournaments.openTournaments.controllers', 'ui.router'])
+angular.module('tournaments.tournamentsModule', ['tournaments.openTournaments.controllers', 'tournaments.services', 'ui.router'])
 .config(['$stateProvider', function($stateProvider){
 		$stateProvider.state('tournaments', {
 			url: '/turnee',

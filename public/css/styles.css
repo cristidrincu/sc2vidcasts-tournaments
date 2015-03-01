@@ -320,10 +320,10 @@ h1.intro-about-us{
 }
 
 .jucatori-section-intro {
-    -webkit-animation: 1s fadeInLeft ease;
-    -moz-animation: 1s fadeInLeft ease;
-    -o-animation: 1s fadeInLeft ease;
-    animation: 1s fadeInLeft ease;
+    /*-webkit-animation: 1s fadeInLeft ease;*/
+    /*-moz-animation: 1s fadeInLeft ease;*/
+    /*-o-animation: 1s fadeInLeft ease;*/
+    /*animation: 1s fadeInLeft ease;*/
 }
 
 .jucatori-benefits, .organizer-benefits{

@@ -1924,6 +1924,20 @@ img#logo-nexus-club{
     margin-top: 30px;
     margin-bottom: 40px;
 }
+
+/*403 error page*/
+.container-403-error-message {
+    padding-top: 100px;
+    text-align: center;
+}
+
+.container-403-error-message h1{
+    font-size: 60px;
+}
+
+.container-403-error-message p {
+    font-size: 30px;
+}
 .welcome-title-summary-backend{
     font-size: 43px;
     color: lightslategrey;

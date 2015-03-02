@@ -70,35 +70,10 @@ app.get('/avatars-users-admin/:adminId', middleware.isLoggedIn, middleware.requi
 
 app.post('/delete-account/:userId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
 
-	//TODO - BAD CODE, THIS WILL THROW AN ERROR
-  Tournament.collection.update(
-      { tournamentName: 'Battle of the Races' },
-      { $pull: { 'players': { _id: new mongoose.Types.ObjectId(req.params.userId) } } },
-      { multi: true },
-      function(err, result){
-        if(err) throw  err;
-        console.log(result);
-      }
-  );
+	//There is a pre-remove function for the deletion of a user account in app/models/user.js
+	User.remove({_id: req.params.userId}, function(err, result){
+		if(err) throw err;
+	})
 
   res.redirect('/admin-players');
 });
-
-//function isLoggedIn(req, res, next) {
-//  if (req.isAuthenticated()) {
-//    return next();
-//  }
-//
-//  res.redirect('/');
-//}
-//
-//function requireRole(role){
-//  return function(req, res, next){
-//    if(req.user.local.role == role){
-//      next();
-//    }
-//    else{
-//      res.send(403);
-//    }
-//  }
-//}

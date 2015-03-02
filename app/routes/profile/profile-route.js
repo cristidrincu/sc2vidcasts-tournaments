@@ -101,20 +101,24 @@ app.get('/avatars-users/:userId', middleware.isLoggedIn, function(req, res){
 });
 
 app.get('/delete-account/:userId', middleware.isLoggedIn, function(req, res){
-	helperFunctions.getUserDetails(req.params.userId).then(function(user){
-		res.render('profile/profile-remove', {
-			user: user,
-			userAvatar: user
+	if(!middleware.preventIllegalActions(req.user._id, req.params.userId)){
+		res.render('error-pages/error-forbidden-403.ejs', {
+			user: req.user
 		});
-	});
+	}else{
+		helperFunctions.getUserDetails(req.params.userId).then(function(user){
+			res.render('profile/profile-remove', {
+				user: user,
+				userAvatar: user
+			});
+		});
+	}
 });
 
 app.post('/delete-account/:userId', middleware.isLoggedIn, function(req, res){
-	User.findById(req.params.userId).exec(function(err, user){
-		if(err) throw err;
+	User.remove( {_id: req.params.userId}, function(err, result){
+		if(err) throw err
+	})
 
-		user.remove();
-
-		res.redirect('/signup');
-	});
+	res.redirect('/signup');
 });

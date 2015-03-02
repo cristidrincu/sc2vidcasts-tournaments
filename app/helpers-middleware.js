@@ -77,3 +77,11 @@ exports.tournamentStatus = function(tournament){
 		return starting;
 	}
 }
+
+exports.preventIllegalActions = function(reqUserId, reqParamsUserId){
+	if(reqUserId != reqParamsUserId){
+		return false;
+	}
+
+	return true;
+}

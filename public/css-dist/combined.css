@@ -1883,7 +1883,7 @@ h1.organizer-teaser-text{
 }
 
 /*CONTACT*/
-.container-contact{
+.container-contact, .container-partners{
     height: 900px;
     padding-top: 200px;
 
@@ -1910,6 +1910,14 @@ h1.organizer-teaser-text{
     -moz-animation: 1s fadeInUp ease;
     -o-animation: 1s fadeInUp ease;
     animation: 1s fadeInUp ease;
+}
+
+.container-description-partner img{
+    margin-bottom: 20px;
+}
+
+.container-description-partner p{
+    text-align: left;
 }
 .welcome-title-summary-backend{
     font-size: 43px;

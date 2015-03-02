@@ -7,7 +7,8 @@ angular.module('tournament-frontend-app',
 			'tournaments.playersModule',
 			'tournaments.organizersModule',
 			'tournaments.tournamentsModule',
-			'tournaments.contactModule'
+			'tournaments.contactModule',
+			'tournaments.partnersModule'
 		])
 .run(['$state', function($state){
 		$state.go('home');

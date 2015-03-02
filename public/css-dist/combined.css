@@ -1919,6 +1919,11 @@ h1.organizer-teaser-text{
 .container-description-partner p{
     text-align: left;
 }
+
+img#logo-nexus-club{
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
 .welcome-title-summary-backend{
     font-size: 43px;
     color: lightslategrey;

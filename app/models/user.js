@@ -43,8 +43,6 @@ userSchema.pre('remove', function(next){
 		console.log('Removed player from tournament players array!');
 		console.log(removeResult);
 	});
-
-//	Tournament.remove({ 'players._id' : this._id }).exec();
 	next();
 });
 

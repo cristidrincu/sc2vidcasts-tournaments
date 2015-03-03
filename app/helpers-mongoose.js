@@ -257,7 +257,7 @@ exports.retrieveMessagesForUser = function(userid){
 
 exports.retrieveTournamentDetails = function(tournamentId){
 	var deferred = Q.defer();
-	Tournament.findById(tournamentId).populate('players winner').exec(function(err, tournament){
+	Tournament.findById(tournamentId).populate('players organizer winner').exec(function(err, tournament){
 		if(err){
 			deferred.reject(tournament)
 		}

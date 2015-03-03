@@ -297,6 +297,19 @@ app.post('/declare-winner/:tournamentId/:userId', middleware.isLoggedIn, middlew
 	});
 });
 
+app.get('/delete-tournament/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
+	helperFunctions.getUserDetails(req.params.userId).then(function(user){
+		helperFunctions.retrieveTournamentDetails(req.params.tournamentId).then(function(tournament){
+			res.render('tournament/delete/delete-tournament.ejs', {
+				user: req.user,
+				userAvatar: user,
+				tournament: tournament,
+				moment: moment
+			})
+		});
+	});
+});
+
 app.post('/create-brackets/:tournamentId', middleware.isLoggedIn, middleware.requireRole('Organizator'), function(req, res){
 
 });

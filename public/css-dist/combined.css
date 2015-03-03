@@ -1472,6 +1472,7 @@ a.return-to-control-panel{
 .footer{
     padding-top: 20px;
     padding-bottom: 20px;
+    text-align: center;
 }
 body {
     margin: 0;
@@ -1926,9 +1927,13 @@ img#logo-nexus-club{
 }
 
 /*403 error page*/
-.container-403-error-message {
+.container-403-error-message, .container-delete-message {
     padding-top: 100px;
     text-align: center;
+}
+
+.container-delete-message{
+    padding-top: 30px;
 }
 
 .container-403-error-message h1{
@@ -1937,6 +1942,41 @@ img#logo-nexus-club{
 
 .container-403-error-message p {
     font-size: 30px;
+}
+
+/*Delete warning*/
+.container-delete-message h1.info-title-delete-tournament{
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+
+.container-delete-tournament-details{
+    text-align: left;
+}
+
+.container-delete-tournament-details ul{
+    list-style: none;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.container-text-delete-tournament{
+    padding-top: 40px;
+    height: 300px;
+}
+
+.delete-tournament-buttons li{
+    display: inline-block;
+}
+
+.delete-tournament-winner{
+    text-align: center;
+}
+
+.last-warning{
+    max-width: 100%;
+    text-align: center;
+    margin-top: 20px;
 }
 .welcome-title-summary-backend{
     font-size: 43px;

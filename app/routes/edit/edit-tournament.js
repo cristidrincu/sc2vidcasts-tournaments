@@ -423,32 +423,15 @@ app.get('/declare-winner/:tournamentId/:userId', middleware.isLoggedIn, middlewa
 });
 
 app.post('/modify-tournament-winner/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
-		helperFunctions.retrieveTournamentDetails(req.params.tournamentId).then(function(tournament){
-			if(tournament.winner[0].local.nickname == req.body.winnerName){
+
+	helperFunctions.getUserIdFromName(req.body.winnerName).then(function(userId){
+		Tournament.update({_id: req.params.tournamentId}, {'$pop': {'winner': -1}}, function(err){
+			if(err) throw err;
+			Tournament.update({_id: req.params.tournamentId}, {'$push': {'winner': userId}}, function(err){
+				if(err) throw err;
 				req.flash('infoSuccess', 'Salvarea modificarilor a fost realizata cu succes!');
 				res.redirect('/declare-winner/' + req.params.tournamentId + '/' + req.params.userId);
-			}else{
-				User.findOne({'local.nickname': req.body.winnerName}, function(err, user){
-					if(err){
-						req.flash('infoError', 'A intervenit o eroare in gasirea jucatorului! Mai incearca!');
-						res.redirect('/declare-winner/' + req.params.tournamentId + '/' + req.params.userId);
-					}else if(user == null){
-						req.flash('infoError', 'Nu exista un astfel de utilizator in baza de date! Mai incearca!');
-						res.redirect('/declare-winner/' + req.params.tournamentId + '/' + req.params.userId);
-					}else{
-						tournament.winner = [];
-						tournament.winner.push(user._id);
-						tournament.save(function(err){
-							if(err) {
-								req.flash('infoError', 'Nu am putut salva modificarile pentru castigatorul acestui turneu!');
-							}else{
-								req.flash('infoSuccess', 'Salvarea modificarilor a fost realizata cu succes!');
-							}
-
-							res.redirect('/declare-winner/' + req.params.tournamentId + '/' + req.params.userId);
-						});
-					}
-				});
-			}
+			});
 		});
+	});
 });

@@ -49,18 +49,21 @@ app.get('/backend-admin/:adminId', middleware.isLoggedIn, middleware.requireRole
 		    helperFunctions.retrieveAllTournaments().then(function(tournaments){
 			    helperFunctions.retrieveMessagesForUser(req.params.adminId).then(function(messages){
 				    helperFunctions.retrieveAvatars().then(function(avatars){
-					    res.render('backend/backend-admin.ejs', {
-						    user: req.user,
-						    userAvatar: user,
-						    playersLength: _.size(players),
-						    playersSampled: _.sample(players, 3),
-						    organizersLength: _.size(organizers),
-						    organizersSampled: _.sample(organizers, 3),
-						    tournamentsLength: _.size(tournaments),
-						    tournamentsSampled: _.sample(tournaments, 3),
-						    messages: messages,
-						    avatarsLength: _.size(avatars),
-						    avatarsSampled: _.sample(avatars, 3)
+					    helperFunctions.retrieveQuotes().then(function(quotes){
+						    res.render('backend/backend-admin.ejs', {
+							    user: req.user,
+							    userAvatar: user,
+							    playersLength: _.size(players),
+							    playersSampled: _.sample(players, 3),
+							    organizersLength: _.size(organizers),
+							    organizersSampled: _.sample(organizers, 3),
+							    tournamentsLength: _.size(tournaments),
+							    tournamentsSampled: _.sample(tournaments, 3),
+							    messages: messages,
+							    avatarsLength: _.size(avatars),
+							    avatarsSampled: _.sample(avatars, 3),
+							    quoteSampled: _.sample(quotes, 1)
+						    });
 					    });
 				    });
 			    });

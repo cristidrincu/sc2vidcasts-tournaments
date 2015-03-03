@@ -46,17 +46,17 @@
                             <td><%= organizer.local.league %></td>
                             <td>
                                 <a href="/profile-details/<%= organizer._id %>">
-                                    <button class="btn btn-success">Detalii</button>
+                                    <button class="btn btn-success"><i class="fa fa-eye"></i> Detalii</button>
                                 </a>
                             </td>
                             <td>
                                 <a href="/organized-tournaments/<%= organizer._id %>">
-                                    <button class="btn btn-info">Vezi turneele</button>
+                                    <button class="btn btn-info"><i class="fa fa-binoculars"></i> Vezi turneele</button>
                                 </a>
                             </td>
                             <td>
                                 <form action="/delete-account/<%= organizer._id %>" method="post">
-                                    <button class="btn btn-danger">Sterge contul</button>
+                                    <button class="btn btn-danger"><i class="fa fa-trash"></i> Sterge contul</button>
                                 </form>
                             </td>
                         </tr>

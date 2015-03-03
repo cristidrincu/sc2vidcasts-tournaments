@@ -1,6 +1,6 @@
 //ALWAYS REQUIRE MONGOOSE BEFORE ANY OTHER MODELS. IF NOT, YOU'LL GET OBJECT OBJECT DOES NOT HAVE SCHEMA DEFINED
 var mongoose = require('mongoose');
-var Tournament = mongoose.model('Tournament');
+var Tournament = require('./tournament.js');
 var bcrypt = require('bcrypt-nodejs');
 
 //define the schema for our user model

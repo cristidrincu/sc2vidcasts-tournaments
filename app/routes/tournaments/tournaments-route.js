@@ -285,7 +285,7 @@ app.post('/retragere-din-turneu/:_userId/:_tournamentId', middleware.isLoggedIn,
 });
 
 app.post('/declare-winner/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){
-	helperFunctions.getUserIdName(req.body.winnerName).then(function(userId){
+	helperFunctions.getUserIdFromName(req.body.winnerName).then(function(userId){
 		Tournament.findById(req.params.tournamentId).exec(function(err, tournament){
 			tournament.winner.push(userId);
 			tournament.save(function(err){
@@ -308,6 +308,14 @@ app.get('/delete-tournament/:tournamentId/:userId', middleware.isLoggedIn, middl
 			})
 		});
 	});
+});
+
+app.post('/delete-tournament/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
+	Tournament.remove({_id: req.params.tournamentId}, function(err, result){
+		if(err) throw err;
+
+		res.redirect('/closed-tournaments/' + req.params.userId);
+	})
 });
 
 app.post('/create-brackets/:tournamentId', middleware.isLoggedIn, middleware.requireRole('Organizator'), function(req, res){

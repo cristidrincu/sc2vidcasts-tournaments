@@ -24,7 +24,7 @@ exports.getUserDetails = function(id){
 	return deferred.promise;
 }
 
-exports.getUserIdName = function(nickname){
+exports.getUserIdFromName = function(nickname){
 	var deffered = Q.defer();
 	User.findOne( {'local.nickname': nickname}).exec(function(err, user){
 		if(err){

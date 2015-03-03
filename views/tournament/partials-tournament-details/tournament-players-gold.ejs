@@ -33,9 +33,9 @@
             <td><img class="img-circle profile-pic-table-players" src="../../images/logos-ligi/gold-logo-ligi-200x200.png"/></td>
 
             <%if(player._id == userId){%>
-            <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
+            <td><a href="/profile"><button class="btn btn-danger"><i class="fa fa-eye"></i> Profilul tau</button></a></td>
             <%} else {%>
-            <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
+            <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success"><i class="fa fa-eye"></i> Vezi profil</button></a></td>
             <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
             <%}%>
         </tr>

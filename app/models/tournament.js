@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var User = require('./user.js');
 
 //define the schema for our tournament model
 var tournamentSchema = mongoose.Schema({
@@ -38,6 +39,15 @@ tournamentSchema.path('description').validate(function(description){
 tournamentSchema.path('ingameChatChannel').validate(function(ingameChatChannel){
   return ingameChatChannel.length > 4
 }, 'Numele canalului de chat trebuie sa contina minim 4 caractere');
+
+tournamentSchema.pre('remove', function(next){
+	User.update({tournaments: this._id}, {$pull: {tournaments: this._id}}, function(err, result){
+		if(err) throw err;
+		console.log(result);
+		console.log('Removed tournament for user tournament list');
+	});
+	next();
+});
 
 //create the model for users and expose it to our app
 module.exports = mongoose.model('Tournament', tournamentSchema);

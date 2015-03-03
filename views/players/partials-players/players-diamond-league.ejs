@@ -31,19 +31,19 @@
             <%if(player._id == userId){%>
             <td><a href="/profile"><button class="btn btn-danger">Profilul tau</button></a></td>
             <%} else {%>
-            <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success">Vezi profil</button></a></td>
-            <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info">Compune</button></a></td>
+            <td><a href="/profile-details/<%= player._id%>"><button class="btn btn-success"><i class="fa fa-binoculars"></i> Vezi profil</button></a></td>
+            <td><a href="/send-message/<%= player._id%>"><button class="btn btn-info"><i class="fa fa-pencil"></i> Compune</button></a></td>
             <%}%>
 
             <%if(user.local.role == 'admin'){%>
             <td>
                 <form action="/blacklist-player/<%= player._id%>" method="post">
-                    <button class="btn btn-warning">Adauga </button>
+                    <button class="btn btn-warning"><i class="fa fa-user-plus"></i> Adauga </button>
                 </form>
             </td>
             <td>
                 <form action="/blacklist-player/<%= player._id%>" method="post">
-                    <button class="btn btn-danger">Sterge </button>
+                    <button class="btn btn-danger"><i class="fa fa-trash"></i> Sterge </button>
                 </form>
             </td>
             <%}%>

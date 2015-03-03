@@ -80,7 +80,7 @@ app.post('/send-message/:_id', middleware.isLoggedIn, function(req, res){
 });
 
 app.post('/send-message', middleware.isLoggedIn, function(req, res){
-	helperFunctions.getUserIdName(req.body.messageReceiver).then(function(id){
+	helperFunctions.getUserIdFromName(req.body.messageReceiver).then(function(id){
 		var message = new Message( {messageBody: req.body.message, messageSubject: req.body.messageSubject, sentBy: req.user._id, receiver: id} );
 		message.save(function(err){
 			if(err){

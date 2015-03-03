@@ -31,11 +31,11 @@
                     </div>
                 </div>
                 <%if(user.local.role == 'User' || user.local.role == 'Organizator'){%>
-                    <a class="btn btn-success" href="/tournament-details/<%=tournament._id%>/<%=user._id%>">Detalii</a>
+                    <a class="btn btn-success" href="/tournament-details/<%=tournament._id%>/<%=user._id%>"><i class="fa fa-eye"></i> Detalii</a>
                 <%} else {%>
-                    <a class="btn btn-success" href="/tournament-details/<%=tournament._id%>/<%=user._id%>">Detalii</a>
-                    <a class="btn btn-info" href="/edit-tournament/<%=tournament._id%>/<%=user._id%>">Editeaza</a>
-                    <a class="btn btn-danger" href="/delete-tournament/<%=tournament._id%>/<%=user._id%>">Sterge turneul</a>
+                    <a class="btn btn-success" href="/tournament-details/<%=tournament._id%>/<%=user._id%>"><i class="fa fa-eye"></i> Detalii</a>
+                    <a class="btn btn-info" href="/edit-tournament/<%=tournament._id%>/<%=user._id%>"><i class="fa fa-wrench"></i> Editeaza</a>
+                    <a class="btn btn-danger" href="/delete-tournament/<%=tournament._id%>/<%=user._id%>"> <i class="fa fa-trash"></i> Sterge turneul</a>
                 <%}%>
             </div>
             <%})%>

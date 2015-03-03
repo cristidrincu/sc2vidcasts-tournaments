@@ -1002,6 +1002,11 @@ ul.titlu-turneu-signup li {
     box-shadow: 2px 2px 2px #888888;
 }
 
+.profile-pic-delete-tournament-players{
+    max-width: 60px;
+    max-height: 60px;
+}
+
 .profile-pic-send-message{
     width: 100px;
     height: 100px;
@@ -1465,8 +1470,25 @@ a.return-to-control-panel{
     margin-top: 300px;
 }
 
+#turnee-active-jucator, #turnee-inactive-jucator{
+    margin-top: 20px;
+}
+
+.edit-options-tournament-admin {
+    padding-top: 50px;
+    float: right;
+}
+
+.edit-options-tournament-admin ul li{
+    display: inline;
+}
+
 .no-edit-message h1, .no-edit-message h4{
     text-align: center;
+}
+
+.welcome-title-summary-backend{
+    padding-top: 50px;
 }
 
 .footer{
@@ -1977,6 +1999,10 @@ img#logo-nexus-club{
     max-width: 100%;
     text-align: center;
     margin-top: 20px;
+}
+
+.list-avatar-image-player {
+    display: inline-block;
 }
 .welcome-title-summary-backend{
     font-size: 43px;

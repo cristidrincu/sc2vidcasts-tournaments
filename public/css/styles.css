@@ -502,3 +502,7 @@ img#logo-nexus-club{
     text-align: center;
     margin-top: 20px;
 }
+
+.list-avatar-image-player {
+    display: inline-block;
+}

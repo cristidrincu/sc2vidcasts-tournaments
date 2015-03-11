@@ -13,7 +13,7 @@
                 <div class="col-lg-12">
                     <div class="container-summary-tournaments">
                         <h1 class="title-reports-element"><i class="fa fa-trophy fa-fw"></i> Turnee active</h1>
-                        <h4><span><%= tournamentsLength > 1 ? tournamentsLength + ' turnee' : tournamentsLength + ' turneu'%></span> in baza de date
+                        <h4><span><%= tournamentsLength > 1 || tournamentsLength == 0 ? tournamentsLength + ' turnee' : tournamentsLength + ' turneu'%></span> in baza de date
                             <a href="/open-tournaments/<%= user._id%>"><i class="fa fa-trophy fa-1x"></i> Toate turneele</a>
                         </h4>
                         <div class="container-3-tournaments">

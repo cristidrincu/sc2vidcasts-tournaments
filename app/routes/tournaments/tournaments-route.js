@@ -252,36 +252,18 @@ app.get('/user-tournaments/:userId', middleware.isLoggedIn, function(req, res){
 });
 
 app.post('/retragere-din-turneu/:_userId/:_tournamentId', middleware.isLoggedIn, function(req, res){
-  Tournament.findById(req.params._tournamentId).exec(function(err, tournament){
-    if(!err){
-      var playerId = tournament.players.indexOf(req.params._userId);
-      if(playerId != -1)
-        tournament.players.splice(playerId, 1);
-      tournament.save(function(err){
-        if(err)
-          req.flash('infoError', 'A aparut o eroare la scoaterea ta din turneu. Mai incearca!');
-        else
-          User.findById(req.params._userId).exec(function(err, user){
-            if(!err){
-              var tournamentId = user.local.tournaments.indexOf(req.params._tournamentId);
-              if(tournamentId != -1){
-                user.local.tournaments.splice(tournamentId, 1);
-                user.save(function(err){
-                  if(err)
-                    res.send(err)
-                  else
-                    req.flash('infoSuccess', 'Te-ai retras cu succes din cadrul turneului!');
-                })
-              }
-            }
-          });
+		Tournament.findByIdAndUpdate({_id: req.params._tournamentId}, {$pull: {players: req.params._userId}}, function(err){
+			if(err) res.send(err);
 
-        res.redirect('/user-tournaments/' + req.params._userId);
-      });
-    }else{
-      res.send(err);
-    }
-  });
+			User.findByIdAndUpdate({_id: req.params._userId}, {$pull: {'local.tournaments': req.params._tournamentId}}, function(err){
+				if(err) {
+					req.flash('infoError', 'A aparut o eroare la scoaterea ta din turneu. Mai incearca!');
+				}else{
+					req.flash('infoSuccess', 'Te-ai retras cu succes din cadrul turneului!');
+					res.redirect('/user-tournaments/' + req.params._userId);
+				}
+			})
+		});
 });
 
 app.post('/declare-winner/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireMultipleUserRoles('Organizator', 'admin'), function(req, res){

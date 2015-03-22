@@ -118,5 +118,4 @@ describe("A user model", function(){
 			});
 		});
 	});
-
 });

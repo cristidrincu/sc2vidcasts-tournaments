@@ -1528,48 +1528,51 @@ body {
 }
 
 .main-landing-page-container, .container-about-us, .container-jucatori, .container-organizatori, .container-tournaments{
-    width: 100%;
-    height: 900px;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .container-site-logo{
     padding-top: 30px;
 }
 
-.main-landing-page-container{
-    /*background: url('../images/sc2-tournaments-background-2.jpg') no-repeat center center;*/
-    /*background-size: 100%;*/
-    /*-webkit-background-size: cover;*/
-    /*-moz-background-size: cover;*/
-    /*-o-background-size: cover;*/
-    /*background-size: cover;*/
+.master-container{
+    background: url('../images/background-frontend-app/SC2-Tournaments-Frontend-App.jpg') no-repeat center center;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 
-    background: rgb(242,246,248); /* Old browsers */
-    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-    background: rgb(242,246,248); /* Old browsers */
-    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YyZjZmOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2Q4ZTFlNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlMGVmZjkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-    background: -moz-linear-gradient(top, rgb(242,246,248) 0%, rgb(216,225,231) 50%, rgb(224,239,249) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(242,246,248)), color-stop(50%,rgb(216,225,231)), color-stop(100%,rgb(224,239,249))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* IE10+ */
-    background: linear-gradient(to bottom, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', endColorstr='#e0eff9',GradientType=0 ); /* IE6 */
+.main-landing-page-container{
+
 }
 
 .text-landing-page{
-    width: 980px;
-    margin-left: auto;
-    margin-right: auto;
-    -webkit-animation: 1s fadeInUp ease;
-    -moz-animation: 1s fadeInUp ease;
-    -o-animation: 1s fadeInUp ease;
-    animation: 1s fadeInUp ease;
+    -webkit-animation: 1s bounce ease;
+    -moz-animation: 1s bounce ease;
+    -o-animation: 1s bounce ease;
+    animation: 1s bounce ease;
+}
+
+.text-landing-page ul {
+    margin-left: 30px;
+}
+
+.text-landing-page ul li {
+    display: inline-block;
+}
+
+.text-landing-page h3{
+    color: #fff;
+    width: 60%;
+    margin-left: 70px;
+    line-height: 36px;
+    margin-bottom: 30px;
 }
 
 .container-about-us{
-    /*background-color: #3d4148;*/
     background-color: #000;
     padding-top: 120px;
     padding-left: 75px;
@@ -1586,15 +1589,11 @@ body {
 .container-main-menu-landing-page{
     width: 100%;
     height: 100px;
-    /*background-color: #000;*/
-    position: fixed;
+    /*position: fixed;*/
     color: #fff;
 }
 
 .main-menu-landing-page{
-    width: 980px;
-    margin-left: auto;
-    margin-right: auto;
     padding-top: 35px;
 }
 
@@ -1607,9 +1606,13 @@ body {
     padding-top: 35px;
 }
 
+#main-menu-left {
+    margin-left: 35px;
+}
+
 #main-menu-left li {
     display: inline-block;
-    margin-left: 15px;
+    margin-left: 25px;
     font-size: 16px;
 }
 
@@ -1630,7 +1633,7 @@ a.teaser-login-signup:hover{
 }
 
 .text-landing-page{
-    padding-top: 150px;
+    padding-top: 50px;
     /*padding-bottom: 350px;*/
 }
 
@@ -1646,7 +1649,7 @@ p.last-item{
 }
 
 h1.huge-h1-landing-page, h1.medium-h1-landing-page{
-    color: #000;
+    color: #fff;
 }
 
 h1.huge-h1-landing-page{
@@ -1665,263 +1668,16 @@ h1.medium-h1-landing-page{
     padding-bottom: 100px;
 }
 
-/*ABOUT US*/
-.container-about-us {
-    /*background: url('../images/backgrounds-about-us-frontend/terran-background.jpg') no-repeat center center;*/
-    background: rgb(242,246,248); /* Old browsers */
-    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YyZjZmOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2Q4ZTFlNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlMGVmZjkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-    background: -moz-linear-gradient(top, rgb(242,246,248) 0%, rgb(216,225,231) 50%, rgb(224,239,249) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(242,246,248)), color-stop(50%,rgb(216,225,231)), color-stop(100%,rgb(224,239,249))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* IE10+ */
-    background: linear-gradient(to bottom, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', endColorstr='#e0eff9',GradientType=0 ); /* IE6 */
-}
-
-h1.intro-about-us{
-    font-size: 110px;
-    margin-left: 70px;
-    -webkit-animation: 1s fadeInUp ease;
-    -moz-animation: 1s fadeInUp ease;
-    -o-animation: 1s fadeInUp ease;
-    animation: 1s fadeInUp ease;
-}
-
-.about-us-text{
-    background-color: #000;
-    padding: 30px 30px;
-    -webkit-opacity: 0.5;
-    opacity: 0.5;
-}
-
-.about-us-text h3{
-    margin-top: -10px;
-    margin-bottom: 30px;
-}
-
-.about-us-text p{
-    margin-bottom: 30px;
-}
-
-.about-us-images ul li{
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.about-us-images ul li img{
-    border-radius: 20px;
-    -webkit-filter: grayscale(80%);
-    filter: grayscale(80%);
-}
-
-.about-us-images ul li img.active-image{
-    -webkit-filter: grayscale(0%);
-    filter: grayscale(0%);
-}
-
-.about-us-images ul li img:hover{
-    cursor: pointer;
-}
-
-.about-us-images {
-    padding-top: 25px;
-}
-
-.member-description h3{
-    margin-top: 0;
-}
-
-.login-btn{
-    margin-left: 60px;
-}
-
-.member-description{
-    padding: 20px 20px;
-    margin-left: 70px;
-    -webkit-animation: 1s fadeInDown ease;
-    -moz-animation: 1s fadeInDown ease;
-    -o-animation: 1s fadeInDown ease;
-    animation: 1s fadeInDown ease;
-    color: #000;
-}
-
-/*JUCATORI*/
-.container-jucatori, .container-organizatori{
-    padding-top: 200px;
-    padding-left: 60px;
-    color: #fff;
-    /*background: url('../images/backgrounds-about-us-frontend/jucatori-background.jpg') no-repeat center center;*/
-
-    background: rgb(242,246,248); /* Old browsers */
-    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YyZjZmOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2Q4ZTFlNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlMGVmZjkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-    background: -moz-linear-gradient(top, rgb(242,246,248) 0%, rgb(216,225,231) 50%, rgb(224,239,249) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(242,246,248)), color-stop(50%,rgb(216,225,231)), color-stop(100%,rgb(224,239,249))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* IE10+ */
-    background: linear-gradient(to bottom, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', endColorstr='#e0eff9',GradientType=0 ); /* IE6 */
-}
-
-#cristian, #adila, #hundrei {
-    float: left;
-    margin-bottom: 20px;
-    -moz-border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -o-border-radius: 20px;
-    -ms-border-radius: 20px;
-    border-radius: 20px;
-    margin-right: 15px;
-}
-
-.team-member-role{
-    margin-top: -10px;
-    color: #000;
-}
-
-.main-container-league-players{
-    margin-top: 60px;
-    margin-left: 30px;
-}
-
-.main-container-organizers h3{
-    margin-left: 120px;
-    font-size: 80px;
-}
-
-.main-container-organizers ul li {
-    list-style: none;
-}
-
-.main-container-organizers ul li p{
-    font-size: 30px;
-}
-
-.container-league-players{
-    text-align: center;
-    float: left;
-    margin-right: 10px;
-}
-
-.numberOfPlayers{
-    font-size: 30px;
-    color: #000;
-}
-
-.jucatori-section-intro h1{
-    margin-bottom: 40px;
-    margin-left: 40px;
-    color: #000;
-}
-
-.jucatori-section-intro {
-    /*-webkit-animation: 1s fadeInLeft ease;*/
-    /*-moz-animation: 1s fadeInLeft ease;*/
-    /*-o-animation: 1s fadeInLeft ease;*/
-    /*animation: 1s fadeInLeft ease;*/
-}
-
-.jucatori-benefits, .organizer-benefits{
-    -webkit-animation: 1s fadeInUp ease;
-    -moz-animation: 1s fadeInUp ease;
-    -o-animation: 1s fadeInUp ease;
-    animation: 1s fadeInUp ease;
-}
-
-.organizer-benefits{
-    padding-top: 50px;
-}
-
-.logo-liga{
-    border-radius: 50px;
-}
-
-.container-icon-beneficiu{
-    text-align: center;
-    color: #000;
-}
-
-.container-icon-beneficiu h3{
-    padding-bottom: 22px;
-}
-
-.container-icon-beneficiu p{
-    text-align: left;
-}
-
-/*ORGANIZATORI*/
-.container-organizatori{
-    /*background: url('../images/backgrounds-about-us-frontend/organizatori-background.jpg') no-repeat center center;*/
-}
-
-h1.organizer-teaser-text{
-    color: #000;
-    font-size: 100px;
-    text-align: center;
-    -webkit-animation: 1s fadeInUp ease;
-    -moz-animation: 1s fadeInUp ease;
-    -o-animation: 1s fadeInUp ease;
-    animation: 1s fadeInUp ease;
-}
-
-.container-organizatori {
-    padding-top: 130px;
-}
-
-/*TURNEE*/
-.container-tournaments{
-    padding-top: 100px;
-    background: rgb(242,246,248); /* Old browsers */
-    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YyZjZmOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2Q4ZTFlNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlMGVmZjkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-    background: -moz-linear-gradient(top, rgb(242,246,248) 0%, rgb(216,225,231) 50%, rgb(224,239,249) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(242,246,248)), color-stop(50%,rgb(216,225,231)), color-stop(100%,rgb(224,239,249))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* IE10+ */
-    background: linear-gradient(to bottom, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', endColorstr='#e0eff9',GradientType=0 ); /* IE6 */
-
-    /*background: url('../images/backgrounds-about-us-frontend/turnee-background.jpg') no-repeat center center;*/
-    text-align: center;
-}
-
-.container-tournaments h1, .container-contact h1{
-    font-size: 120px;
-    -webkit-animation: 1s fadeInUp ease;
-    -moz-animation: 1s fadeInUp ease;
-    -o-animation: 1s fadeInUp ease;
-    animation: 1s fadeInUp ease;
-}
-
-.active-tournaments-teaser{
-    font-size: 150px;
-    -webkit-animation: 1s fadeInDown ease;
-    -moz-animation: 1s fadeInDown ease;
-    -o-animation: 1s fadeInDown ease;
-    animation: 1s fadeInDown ease;
-}
 
 /*CONTACT*/
 .container-contact, .container-partners{
     height: 900px;
     padding-top: 200px;
-
-    background: rgb(242,246,248); /* Old browsers */
-    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YyZjZmOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2Q4ZTFlNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlMGVmZjkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-    background: -moz-linear-gradient(top, rgb(242,246,248) 0%, rgb(216,225,231) 50%, rgb(224,239,249) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(242,246,248)), color-stop(50%,rgb(216,225,231)), color-stop(100%,rgb(224,239,249))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* IE10+ */
-    background: linear-gradient(to bottom, rgb(242,246,248) 0%,rgb(216,225,231) 50%,rgb(224,239,249) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', endColorstr='#e0eff9',GradientType=0 ); /* IE6 */
-
     text-align: center;
+}
+
+.container-text-contact h1{
+    color: #fff;
 }
 
 .container-text-contact a{
@@ -1933,6 +1689,7 @@ h1.organizer-teaser-text{
     -moz-animation: 1s fadeInUp ease;
     -o-animation: 1s fadeInUp ease;
     animation: 1s fadeInUp ease;
+    color: #fff;
 }
 
 .container-description-partner img{
@@ -2003,6 +1760,58 @@ img#logo-nexus-club{
 
 .list-avatar-image-player {
     display: inline-block;
+}
+
+/*Teaser information*/
+.container-teaser-information{
+    padding-top: 100px;
+}
+
+.section-info, .section-info-teaser-text{
+    font-size: 150px;
+    color: #fff;
+}
+
+.section-info-teaser-text{
+    font-size: 80px;
+}
+
+#container-detailed-info-project-players, #container-detailed-info-project-tournaments, #container-detailed-info-project-organizers, #container-detailed-info-project-description{
+    text-align: center;
+    opacity: 0.8;
+    padding-bottom: 50px;
+    height: 320px;
+    margin-bottom: 150px;
+}
+
+#container-detailed-info-project-description{
+    text-align: left;
+}
+
+#container-detailed-info-project-players{
+    background-color: #3a6082;
+}
+
+#container-detailed-info-project-tournaments {
+    background-color: #1d132e;
+}
+
+#container-detailed-info-project-organizers {
+    background-color: #781f28;
+}
+
+#container-detailed-info-project-description{
+    background-color: #0f0b17;
+}
+
+#container-detailed-info-project-players p, #container-detailed-info-project-tournaments p, #container-detailed-info-project-organizers p, #container-detailed-info-project-description p{
+    font-size: 20px;
+    color: #fff;
+}
+
+#container-detailed-info-project-description p{
+    width: 85%;
+    font-size: 16px;
 }
 .welcome-title-summary-backend{
     font-size: 43px;

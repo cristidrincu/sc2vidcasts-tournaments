@@ -39,3 +39,15 @@ app.get('/all-organizer-tournaments/:organizerId', middleware.isLoggedIn, middle
 		});
 	});
 });
+
+app.get('/organizers', middleware.isLoggedIn, function(req, res){
+	helperFunctions.getUserDetails(req.user._id).then(function(user){
+		helperFunctions.retrieveAllOrganizers().then(function(organizers){
+			res.render('backend/organizers.ejs', {
+				user: user,
+				userAvatar: user,
+				organizers: organizers
+			})
+		})
+	})
+})

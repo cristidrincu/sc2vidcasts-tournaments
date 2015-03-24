@@ -9,6 +9,8 @@ var moment = require('moment');
 var placeHolderText = require('../../../config/validation-placeholders-text.js');
 var _ = require('underscore');
 
+var emailHelpers = require('../../helpers-email.js');
+
 var helperFunctions = require('../../helpers-mongoose.js');
 var middleware = require('../../helpers-middleware.js');
 
@@ -81,11 +83,16 @@ app.post('/create-tournament', middleware.isLoggedIn, middleware.requireRole('Or
 	    newTournament.finishedTournament = false;
       newTournament.organizer = req.user._id;
 
+	  User.find({'local.role': 'User', 'local.league': {$in: newTournament.openForLeagues.leagues}}, function(err, players){
+		  if(err) throw err;
+		  emailHelpers.newTournamentCreated(players, newTournament);
+	  });
+
     newTournament.save(function(err){
       if(err)
         req.flash('infoError', 'A aparut o eroare la creearea turneului. Mai incearca!');
       else
-        req.flash('infoSuccess', 'Turneul a fost creat cu succes!');
+        req.flash('infoSuccess', '\'' + newTournament.tournamentName + '\' a fost creat cu succes!');
 
       res.redirect('/create-tournament-results');
     });

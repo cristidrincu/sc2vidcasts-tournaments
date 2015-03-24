@@ -39,7 +39,6 @@
                     <%if(!tournament.finishedTournament){%>
                         <a class="btn btn-success" href="/tournament-details/<%=tournament._id%>/<%=user._id%>">Detalii</a>
                         <a class="btn btn-info" href="/edit-tournament/<%=tournament._id%>/<%=user._id%>">Editeaza</a>
-                        <a class="btn btn-danger" href="/delete-tournament/<%=tournament._id%>/<%=user._id%>">Sterge turneul</a>
                     <%}else{%>
                         <a class="btn btn-success" href="/tournament-details/<%=tournament._id%>/<%=user._id%>">Detalii</a>
                     <%}%>

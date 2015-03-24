@@ -32,16 +32,12 @@
             </div>
             <div class="col-lg-4">
                 <%if(user.local.role == 'Organizator' && !tournament.finishedTournament && ( user._id.toString() === tournament.organizer[0]._id.toString() )){%>
-                <!--TODO - daca turneul este terminat, arata doar un buton cu care se pot defini castigatorii turneului-->
                 <ul class="edit-menu-tournament">
                     <li>
-                        <a href="/edit-tournament/<%= tournament._id %>/<%= user._id %>"><i class="fa fa-pencil-square-o"></i> Editeaza</a>
+                        <a class="btn btn-info" href="/edit-tournament/<%= tournament._id %>/<%= user._id %>"><i class="fa fa-wrench"></i> Editeaza turneul</a>
                     </li>
                     <li>
-                        <a href="/create-brackets/<%= tournament._id%>"><i class="fa fa-exchange create-bracket-icon"></i> Creeaza brackets</a>
-                    </li>
-                    <li>
-                        <a href="/delete-tournament/<%= tournament._id %>/<%= user._id %>"><i class="fa fa-trash-o"></i> Sterge</a>
+                        <a class="btn btn-success" href="/create-brackets/<%= tournament._id%>"><i class="fa fa-exchange"></i> Creeaza brackets</a>
                     </li>
                 </ul>
 

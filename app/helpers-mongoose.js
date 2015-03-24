@@ -9,8 +9,6 @@ var _ = require('underscore');
 var Q = require('q');
 var moment = require('moment');
 
-
-//We use Q.defer when we are dealing with asynchronous callbacks, as the one below: function(err, user).
 exports.getUserDetails = function(id){
 	var deferred = Q.defer();
   User.findById(id).populate('local.avatar local.tournaments').exec(function(err, user){

@@ -1,6 +1,34 @@
 <%include ../partials/header.ejs%>
 <%if(errorMessage.length == 0){%>
-    <p><%=successMessage%></p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 success-error-messages-container">
+            <div class="col-sm-3 col-md-3 col-lg-3"></div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <p class="success-message-create-tournament">
+                    <%=successMessage%>
+                </p>
+                <!--<p class="success-message-create-tournament">Turneul lui Vassy, Editia a 2-a a fost creat cu succes</p>-->
+                <img src="../../images/checkmark-icon.png" alt="Success icon"/>
+                <p class="notify-players-message">
+                    O notificare a fost trimisa tuturor jucatorilor
+                    eligibili de participare in turneul
+                    organizat de tine
+                </p>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3"></div>
+
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <a class="btn btn-success" href="/organizer-tournaments/<%= user._id%>">Intoarce-te la turneele organizate de tine</a>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <a class="btn btn-success" href="/create-tournament/<%= user._id%>">Mai creeaza un turneu</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <%}else{%>
     <p><%=errorMessage%></p>
 <%}%>

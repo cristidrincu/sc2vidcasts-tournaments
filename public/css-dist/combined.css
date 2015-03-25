@@ -1637,7 +1637,11 @@ body {
 }
 
 #main-menu-left li a{
-    color: #000;
+    color: #6bd7e7;
+    background-color: #475657;
+    padding: 15px 15px;
+    border-radius: 20px;
+    text-decoration: none;
 }
 
 #main-menu-left li a:hover{
@@ -1645,7 +1649,11 @@ body {
 }
 
 #main-menu-left li a.active{
-    color: #6bd7e7;
+    color: #000;
+    background-color: #DAA42F;
+    padding: 15px 15px;
+    border-radius: 20px;
+    text-decoration: none;
 }
 
 a.teaser-login-signup:hover{
@@ -1654,7 +1662,6 @@ a.teaser-login-signup:hover{
 
 .text-landing-page{
     padding-top: 50px;
-    /*padding-bottom: 350px;*/
 }
 
 p.paragraph-landing-page{

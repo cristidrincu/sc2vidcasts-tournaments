@@ -47,7 +47,9 @@ app.get('/profile-details/:_id', middleware.isLoggedIn, function(req, res){
 
 app.get('/customize-profile/:nickname', middleware.isLoggedIn, function(req, res){
   res.render('profile/customize-profile.ejs', {
-    user: req.user//get the user out of session and pass to template
+    user: req.user, //get the user out of session and pass to template
+    races: _.without(['Terran', 'Zerg', 'Protoss'], req.user.local.race),
+	  leagues: _.without(['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Master', 'Grand Master'], req.user.local.league)
   });
 });
 

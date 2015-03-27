@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-sm-3 col-md-3 col-lg-3 " align="center">
+        <% userAvatar.forEach(function(avatar){ %>
+        <img alt="User Pic" width="110" height="110" src="../..<%= avatar.imagePath + '/' + avatar.imageName %>"
+             class="img-circle main-profile-image profile-small-pic"/>
+        <% }); %>
+    </div>
+    <div class="col-sm-9 col-md-9 col-lg-9  profile-information-container">
+        <h3>Nickname: <%= user.local.nickname %></h3>
+        <ul class="user-profile-data-list">
+            <li><i class="fa fa-envelope fa-fw"></i> Email: <%= user.local.email %></li>
+            <li><i class="fa fa-gamepad fa-fw"></i> Battle.Net ID: <%= user.local.battlenetid %></li>
+            <li><i class="fa fa-rocket fa-fw"></i> Race: <%= user.local.race %></li>
+            <li><i class="fa fa-gamepad fa-fw"></i> Liga: <%= user.local.league %></li>
+            <li><i class="fa fa-gamepad fa-fw"></i> Rol: <%= user.local.role %></li>
+        </ul>
+
+        <a href="/customize-profile/<%= user.local.nickname %>"
+           class="btn btn-danger btn-modifica-profilul">Modifica profilul</a>
+        <% if(user.local.role == 'admin'){ %>
+        <a href="/backend-admin/<%= user._id %>" class="btn btn-success btn-modifica-profilul">Panou
+            turnee</a>
+        <a class="btn btn-primary buton-alege-avatar" href="/avatars-users-admin/<%= user._id %>">Alege
+            un avatar</a>
+        <% }else if(user.local.role == 'Organizator'){ %>
+        <a href="/backend-organizer/<%= user._id %>" class="btn btn-success btn-modifica-profilul">Panou
+            turnee</a>
+        <a class="btn btn-primary buton-alege-avatar" href="/avatars-users/<%= user._id %>">Alege un
+            avatar</a>
+        <% }else{ %>
+        <a href="/backend-user/<%= user._id %>" class="btn btn-success btn-modifica-profilul">Panou
+            turnee</a>
+        <a class="buton-alege-avatar btn btn-primary" href="/avatars-users/<%= user._id %>">Alege un
+            avatar</a>
+        <% } %>
+    </div>
+</div>

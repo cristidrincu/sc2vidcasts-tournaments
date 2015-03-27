@@ -85,3 +85,14 @@ exports.preventIllegalActions = function(reqUserId, reqParamsUserId){
 
 	return true;
 }
+
+exports.isUpdatedLeagueInTournamentLeaguesArray = function(updatedLeague, tournamentLeaguesArray){
+	var result;
+	if(tournamentLeaguesArray.indexOf(updatedLeague) >= 0){
+		result = true;
+	}else{
+		result = false;
+	}
+
+	return result;
+}

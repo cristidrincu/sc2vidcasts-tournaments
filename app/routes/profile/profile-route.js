@@ -4,6 +4,7 @@
 var express = require('express');
 var moment = require('moment');
 var User = require('../../../app/models/user');
+var Tournament = require('../../../app/models/tournament');
 var _ = require('underscore');
 
 var helperFunctions = require('../../helpers-mongoose.js');
@@ -56,22 +57,50 @@ app.get('/customize-profile/:nickname', middleware.isLoggedIn, function(req, res
 });
 
 app.post('/customize-profile/:nickname', middleware.isLoggedIn, function(req, res){
+	var leagueMatch;
   User.findOne({ 'local.nickname': req.params.nickname}, function(err, user){
     if(err)
       res.send('Utilizatorul nu a putut fi gasit');
 
+	  var oldUserLeague = user.local.league;
+
     user = req.user;
     user.local.email = req.body.email;
     user.local.nickname = req.body.nickname;
-    user.local.race = middleware.uppercaseFirstChar(req.body.race);
-    user.local.league = middleware.uppercaseFirstChar(req.body.league);
+    user.local.race = req.body.race;
+    user.local.league = req.body.league;
 
-    user.save(function(err){
-      if(err)
-        res.send('failed to update user');
+//	  var tournamentsIds = user.local.tournaments.map(function(id){
+//		  return id;
+//	  });
 
-      res.redirect('/profile');
-    });
+	  if(oldUserLeague != user.local.league){
+
+		  Tournament.find({_id: {$in: user.local.tournaments}}).exec(function(err, tournaments){
+			  var activeTournaments = _.filter(tournaments, function(tournament){
+				  return tournament.finishedTournament == false;
+			  })
+
+			  activeTournaments.forEach(function(tournament){
+				  //if the updated league is not present in the tournament leagues array, remove user from tournament and the tournament from the user
+				  if(!( middleware.isUpdatedLeagueInTournamentLeaguesArray(user.local.league, tournament.openForLeagues.leagues) )){
+					  Tournament.findByIdAndUpdate(tournament._id, {$pull:{players: user._id}}).exec(function(err){
+						  if(err) throw err;
+						  User.findOneAndUpdate({'local.nickname': req.params.nickname}, {$pull: {'local.tournaments': tournament.id}}).exec(function(err){
+							  if(err) throw err;
+						  })
+					  })
+				  }
+			  })
+		  })
+	  }
+
+	  user.save(function(err){
+		  if(err)
+			  res.send('failed to update user');
+
+		  res.redirect('/profile');
+	  });
   });
 });
 

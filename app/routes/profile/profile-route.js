@@ -7,6 +7,7 @@ var User = require('../../../app/models/user');
 var _ = require('underscore');
 
 var helperFunctions = require('../../helpers-mongoose.js');
+var raceMessages = require('../../helpers-race-profile-messages.js');
 var middleware = require('../../helpers-middleware.js');
 
 var app = module.exports = express();
@@ -26,7 +27,8 @@ app.get('/profile', middleware.isLoggedIn, function (req, res) {
 						  organizerTournaments: organizerTournaments,
 						  tournamentsActive: tournamentsActive,
 						  moment: moment,
-						  messages: messages
+						  messages: messages,
+						  raceMessages: raceMessages
 					  });
 				  });
 				 });

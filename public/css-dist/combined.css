@@ -1200,7 +1200,7 @@ ul.edit-menu-tournament{
 }
 
 .container-general-summary-profile{
-    padding-top: 230px;
+    padding-top: 150px;
 }
 
 .profile-information-container{
@@ -1274,7 +1274,7 @@ p.no-messages{
 }
 
 .sliding-panel-main-profile{
-    padding-top: 230px;
+    padding-top: 130px;
 }
 
 .user-profile-data-list{
@@ -1515,6 +1515,55 @@ a.return-to-control-panel{
     color: #0aa645;
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+/*profile page styles*/
+.container-welcome-elements-race{
+    position: relative;
+    top: 50px;
+}
+
+.main-message-race, .message-extended-race{
+    opacity: 0.7;
+}
+
+.main-message-race{
+    width: 605px;
+    height: 75px;
+    background-color: #000;
+    margin-bottom: 2px;
+    padding-left: 10px;
+}
+
+.main-message-race ul{
+    margin:0;
+    padding: 0;
+}
+
+.main-message-race img{
+    position: relative;
+    top: -3px;
+}
+
+.main-message-race h3{
+    padding-top: 10px;
+}
+
+.main-message-race ul li {
+    display: inline-block;
+}
+
+.main-message-race ul li h3{
+    color: #fff;
+}
+
+.message-extended-race{
+    width: 935px;
+    height: 95px;
+    background-color: #000;
+    color: #fff;
+    padding-top: 25px;
+    padding-left: 15px;
 }
 body {
     margin: 0;

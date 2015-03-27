@@ -83,14 +83,16 @@ app.post('/customize-profile/:nickname', middleware.isLoggedIn, function(req, re
 
 			  activeTournaments.forEach(function(tournament){
 				  //if the updated league is not present in the tournament leagues array, remove user from tournament and the tournament from the user
-				  if(!( middleware.isUpdatedLeagueInTournamentLeaguesArray(user.local.league, tournament.openForLeagues.leagues) )){
-					  Tournament.findByIdAndUpdate(tournament._id, {$pull:{players: user._id}}).exec(function(err){
-						  if(err) throw err;
-						  User.findOneAndUpdate({'local.nickname': req.params.nickname}, {$pull: {'local.tournaments': tournament.id}}).exec(function(err){
-							  if(err) throw err;
-						  })
-					  })
-				  }
+				  middleware.isUpdatedLeagueInTournamentLeaguesArray(user.local.league, tournament.openForLeagues.leagues, function(result){
+						if(!result){
+							Tournament.findByIdAndUpdate(tournament._id, {$pull:{players: user._id}}).exec(function(err){
+								if(err) throw err;
+								User.findOneAndUpdate({'local.nickname': req.params.nickname}, {$pull: {'local.tournaments': tournament.id}}).exec(function(err){
+									if(err) throw err;
+								})
+							})
+						}
+				  })
 			  })
 		  })
 	  }

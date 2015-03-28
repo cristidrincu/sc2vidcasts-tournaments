@@ -14,7 +14,7 @@ var emailHelpers = require('../../helpers-email.js');
 var helperFunctions = require('../../helpers-mongoose.js');
 var middleware = require('../../helpers-middleware.js');
 
-require('express-expose');
+require('express-expose'); //for exposing users to auto complete functionality
 
 var app = module.exports = express();
 

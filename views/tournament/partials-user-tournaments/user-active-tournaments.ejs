@@ -36,17 +36,15 @@
                                 <%= tournament.prize ? 'Da' : 'Nu' %>
                             </td>
                             <td>
-                                <a href="/tournament-details/<%= tournament._id %>/<%= user._id %>">
-                                    <button class="no-style-button">
-                                        <i style="color: green;" class="fa fa-search fa-1x"></i>
-                                    </button>
+                                <a class="btn btn-success" href="/tournament-details/<%= tournament._id %>/<%= user._id %>">
+                                    <i class="fa fa-binoculars"></i> Afla mai multe
                                 </a>
                             </td>
                             <td>
                                 <form method="post"
                                       action="/retragere-din-turneu/<%= user._id %>/<%= tournament._id %> ">
-                                    <button type="submit" class="no-style-button">
-                                        <i style="color:red;" class="fa fa-times fa-1x"></i>
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fa fa-times fa-1x"></i> Confirma
                                     </button>
                                 </form>
                             </td>

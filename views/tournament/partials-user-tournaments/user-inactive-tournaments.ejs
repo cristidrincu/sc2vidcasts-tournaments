@@ -1,6 +1,6 @@
 <div class="tab-pane fade" id="turnee-inactive-jucator">
     <% if(inactiveTournaments.length == 0){ %>
-    <p class="message-no-players-found">Nu participi in cadrul vreunui turneu activ!</p>
+    <p class="message-no-players-found">Nu ai participat in cadrul vreunui turneu!</p>
     <% }else{ %>
     <div class="row">
         <div class="col-lg-12">
@@ -35,10 +35,8 @@
                                 <%= tournament.prize ? 'Da' : 'Nu' %>
                             </td>
                             <td>
-                                <a href="/tournament-details/<%= tournament._id %>/<%= user._id %>">
-                                    <button class="no-style-button">
-                                        <i style="color: green;" class="fa fa-search fa-1x"></i>
-                                    </button>
+                                <a class="btn btn-success" href="/tournament-details/<%= tournament._id %>/<%= user._id %>">
+                                    <i class="fa fa-binoculars"></i> Afla mai mult
                                 </a>
                             </td>
                         </tr>

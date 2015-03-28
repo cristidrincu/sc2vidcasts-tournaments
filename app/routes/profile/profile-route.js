@@ -70,11 +70,7 @@ app.post('/customize-profile/:nickname', middleware.isLoggedIn, function(req, re
     user.local.race = req.body.race;
     user.local.league = req.body.league;
 
-//	  var tournamentsIds = user.local.tournaments.map(function(id){
-//		  return id;
-//	  });
-
-	  if(oldUserLeague != user.local.league){
+	  if(oldUserLeague != user.local.league && user.local.role == 'User'){
 
 		  Tournament.find({_id: {$in: user.local.tournaments}}).exec(function(err, tournaments){
 			  var activeTournaments = _.filter(tournaments, function(tournament){
@@ -87,7 +83,7 @@ app.post('/customize-profile/:nickname', middleware.isLoggedIn, function(req, re
 						if(!result){
 							Tournament.findByIdAndUpdate(tournament._id, {$pull:{players: user._id}}).exec(function(err){
 								if(err) throw err;
-								User.findOneAndUpdate({'local.nickname': req.params.nickname}, {$pull: {'local.tournaments': tournament.id}}).exec(function(err){
+								User.findOneAndUpdate({'local.nickname': req.params.nickname}, {$pull: {'local.tournaments': tournament._id}}).exec(function(err){
 									if(err) throw err;
 								})
 							})

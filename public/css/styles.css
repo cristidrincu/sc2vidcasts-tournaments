@@ -47,10 +47,6 @@ body {
     background-size: cover;
 }
 
-.main-landing-page-container{
-
-}
-
 .text-landing-page{
     -webkit-animation: 1s bounce ease;
     -moz-animation: 1s bounce ease;
@@ -72,6 +68,9 @@ body {
     margin-left: 70px;
     line-height: 36px;
     margin-bottom: 30px;
+    background-color: #000;
+    padding: 25px 25px;
+    opacity: 0.8;
 }
 
 .container-about-us{
@@ -109,7 +108,7 @@ body {
 }
 
 #main-menu-left {
-    margin-left: 35px;
+    margin-left: 15px;
 }
 
 #main-menu-left li {
@@ -143,7 +142,7 @@ a.teaser-login-signup:hover{
 }
 
 .text-landing-page{
-    padding-top: 50px;
+    padding-top: 110px;
 }
 
 p.paragraph-landing-page{
@@ -183,6 +182,12 @@ h1.medium-h1-landing-page{
     height: 900px;
     padding-top: 200px;
     text-align: center;
+}
+
+.container-text-contact {
+    background-color: #000;
+    padding: 25px 25px;
+    opacity: 0.8;
 }
 
 .container-text-contact h1{

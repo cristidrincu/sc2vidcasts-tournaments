@@ -47,16 +47,16 @@
                             </td>
                             <td>
                                 <% if( user.local.role == 'User'){%>
-                                <a href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
-                                    <button class="btn btn-success">Detalii</button>
-                                </a>
+                                    <a class="btn btn-success" href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
+                                        <i class="fa fa-binoculars"></i> Detalii
+                                    </a>
                                 <%}else if( user.local.role == 'admin'){%>
-                                <a href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
-                                    <button class="btn btn-success">Detalii</button>
-                                </a>
+                                    <a class="btn btn-success" href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
+                                        <i class="fa fa-binoculars"></i> Detalii
+                                    </a>
                                 <%}else{%>
-                                <a href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
-                                    <button class="btn btn-success">Detalii</button>
+                                <a class="btn btn-success" href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
+                                    <i class="fa fa-binoculars"></i> Detalii
                                 </a>
                                 <%}%>
                             </td>

@@ -671,3 +671,17 @@ a.return-to-control-panel{
     padding-top: 25px;
     padding-left: 15px;
 }
+
+.container-elements-create-brackets {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.challonge-logo {
+    position: relative;
+    top: 60px;
+}
+
+.container-logos-brackets {
+    padding-top: 30px;
+}

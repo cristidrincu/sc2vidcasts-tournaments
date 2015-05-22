@@ -168,45 +168,6 @@ exports.retrieveTournamentsAndOrganizers = function(cb){
   });
 }
 
-
-//TODO - refactor method as it does not remove tournaments and users
-//exports.retireFromTournament = function(tournamentId, userId){
-//	var deferred = Q.defer();
-//	Tournament.findById(tournamentId).exec(function(err, tournament){
-//		if(!err){
-//			tournament.players = _.filter(tournament.players, function(player){
-//				if(player._id != userId){
-//					return player;
-//				}
-//			});
-//			tournament.save(function(err){
-//				if(err)
-//					deferred.reject(err);
-//				else
-//					deferred.resolve(tournament);
-//			});
-//		}
-//	});
-//
-//	User.findById(userId).populate('tournaments').exec(function(err, user){
-//		if(!err){
-//			user.local.tournaments = _.filter(user.local.tournaments, function(tournament){
-//				if(tournament._id != tournamentId){
-//					return tournament;
-//				}
-//				user.save(function(err){
-//					if(err)
-//						deferred.reject(err);
-//					else
-//						deferred.resolve(user);
-//				});
-//			});
-//		}
-//	});
-//
-//	return deferred.promise;
-//}
-
 exports.retrieveTournamentsByOrganizer = function(organizerId){
 	var deferred = Q.defer();
   Tournament.find( {'organizer': organizerId}).exec(function(err, tournaments){

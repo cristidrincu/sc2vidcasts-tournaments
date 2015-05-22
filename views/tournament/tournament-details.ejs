@@ -36,9 +36,6 @@
                     <li>
                         <a class="btn btn-info" href="/edit-tournament/<%= tournament._id %>/<%= user._id %>"><i class="fa fa-wrench"></i> Editeaza turneul</a>
                     </li>
-                    <li>
-                        <a class="btn btn-success" href="/create-brackets/<%= tournament._id%>"><i class="fa fa-exchange"></i> Creeaza brackets</a>
-                    </li>
                 </ul>
 
                 <%}else if(user.local.role == 'User'){%>
@@ -78,6 +75,7 @@
             <ul class="nav nav-tabs tabs-player-enlisted" role="tablist">
                 <li class="active"><a href="#detalii-turneu" role="tab" data-toggle="tab">Detalii turneu</a></li>
                 <li><a href="#castigator-turneu" role="tab" data-toggle="tab">Castigator turneu</a></li>
+                <li><a href="#create-brackets-panel" role="tab" data-toggle="tab">Postare brackets</a></li>
             </ul>
 
             <div class="tab-content">
@@ -133,6 +131,9 @@
 
                 <div class="tab-pane fade" id="castigator-turneu">
                     <% include ../tournament/partials-tournament-details/tournament-winner.ejs %>
+                </div>
+                <div class="tab-pane fade" id="create-brackets-panel">
+                    <% include ../tournament/partials-tournament-details/tournament-brackets.ejs %>
                 </div>
             </div>
         </div>

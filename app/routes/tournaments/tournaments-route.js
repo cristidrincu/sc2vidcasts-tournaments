@@ -307,6 +307,21 @@ app.post('/delete-tournament/:tournamentId/:userId', middleware.isLoggedIn, midd
 	})
 });
 
-app.post('/create-brackets/:tournamentId', middleware.isLoggedIn, middleware.requireRole('Organizator'), function(req, res){
+app.post('/send-brackets-players/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireRole('Organizator'), function(req, res) {
+//	TODO - Create a flag in tournament model: areBracketsPublished, with true or false values
+	//	TODO - Create a property in tournament model: brackets link, that will contain the value from the input field from the front-end
+	helperFunctions.getUserDetails(req.params.userId).then(function(user) {
+		helperFunctions.retrieveTournamentDetails(req.params.tournamentId).then(function(tournament){
+				emailHelpers.sendBracketsToTournamentPlayers(tournament.players, tournament.tournamentName, req.body.tournamentBracketLink, function(error){
+					if(error) {
+						res.render('error-pages/error-sending-email.ejs', {
+							user: req.user,
+							userAvatar: user
+						})
+					}
+				});
+			});
+		});
 
+		res.redirect('/tournament-details/' + req.params.tournamentId + '/' + req.params.userId)
 });

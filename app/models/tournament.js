@@ -25,7 +25,9 @@ var tournamentSchema = mongoose.Schema({
     sponsors: String,
     ingameChatChannel: String,
     twitchStreamChannel: String,
-		finishedTournament: Boolean
+		finishedTournament: Boolean,
+		bracketsPublished: Boolean,
+		bracketsLink: String
 });
 
 tournamentSchema.path('tournamentName').validate(function(tournamentName){

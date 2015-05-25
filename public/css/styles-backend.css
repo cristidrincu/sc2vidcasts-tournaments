@@ -672,9 +672,13 @@ a.return-to-control-panel{
     padding-left: 15px;
 }
 
-.container-elements-create-brackets {
+.container-elements-create-brackets, .container-send-notification {
     padding-top: 20px;
     text-align: center;
+}
+
+.container-send-notification {
+    padding-top: 100px;
 }
 
 .challonge-logo {

@@ -75,7 +75,12 @@
             <ul class="nav nav-tabs tabs-player-enlisted" role="tablist">
                 <li class="active"><a href="#detalii-turneu" role="tab" data-toggle="tab">Detalii turneu</a></li>
                 <li><a href="#castigator-turneu" role="tab" data-toggle="tab">Castigator turneu</a></li>
-                <li><a href="#create-brackets-panel" role="tab" data-toggle="tab">Postare brackets</a></li>
+                <% if(user.local.role === 'admin' || user.local.role === 'Organizator') {%>
+                    <li><a href="#create-brackets-panel" role="tab" data-toggle="tab">Brackets turneu</a></li>
+                    <li><a href="#send-notification-panel" role="tab" data-toggle="tab">Trimite notificari jucatorilor</a></li>
+                <%} else {%>
+                    <li><a href="#view-brackets-panel" role="tab" data-toggle="tab">Vizualizare link brackets</a></li>
+                <%}%>
             </ul>
 
             <div class="tab-content">
@@ -134,6 +139,12 @@
                 </div>
                 <div class="tab-pane fade" id="create-brackets-panel">
                     <% include ../tournament/partials-tournament-details/tournament-brackets.ejs %>
+                </div>
+                <div class="tab-pane fade" id="view-brackets-panel">
+                    <% include ../tournament/partials-tournament-details/view-tournament-brackets.ejs %>
+                </div>
+                <div class="tab-pane fade" id="send-notification-panel">
+                    <% include ../tournament/partials-tournament-details/send-notification-to-players.ejs %>
                 </div>
             </div>
         </div>

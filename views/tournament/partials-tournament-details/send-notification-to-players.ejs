@@ -1,0 +1,19 @@
+<div class="row container-send-notification">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="col-sm-3 col-md-3 col-lg-3"></div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <% if(tournament.players.length != 0){%>
+                <form class="form-horizontal" name="sendNotification" action="/send-notification-players/<%= tournament._id%>/<%= user._id%>" method="post">
+                    <div class="form-group">
+                        <label for="notification">Introdu mesajul notificarii mai jos:</label>
+                        <textarea name="notificationMsg" class="form-control" rows="7" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Trimite notificarea</button>
+                </form>
+            <%} else {%>
+                <h3>Nu exista jucatori in cadrul acestui turneu!</h3>
+            <%}%>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3"></div>
+    </div>
+</div>

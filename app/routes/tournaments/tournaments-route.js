@@ -82,6 +82,8 @@ app.post('/create-tournament', middleware.isLoggedIn, middleware.requireRole('Or
       newTournament.twitchStreamChannel = 'http://www.twitch.tv/' + req.body.twitchStreamChannel;
 	    newTournament.finishedTournament = false;
       newTournament.organizer = req.user._id;
+	    newTournament.bracketsPublished = false;
+	    newTournament.bracketsLink = '';
 
 	  User.find({'local.role': 'User', 'local.league': {$in: newTournament.openForLeagues.leagues}}, function(err, players){
 		  if(err) throw err;
@@ -308,20 +310,41 @@ app.post('/delete-tournament/:tournamentId/:userId', middleware.isLoggedIn, midd
 });
 
 app.post('/send-brackets-players/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireRole('Organizator'), function(req, res) {
-//	TODO - Create a flag in tournament model: areBracketsPublished, with true or false values
-	//	TODO - Create a property in tournament model: brackets link, that will contain the value from the input field from the front-end
 	helperFunctions.getUserDetails(req.params.userId).then(function(user) {
 		helperFunctions.retrieveTournamentDetails(req.params.tournamentId).then(function(tournament){
-				emailHelpers.sendBracketsToTournamentPlayers(tournament.players, tournament.tournamentName, req.body.tournamentBracketLink, function(error){
-					if(error) {
-						res.render('error-pages/error-sending-email.ejs', {
-							user: req.user,
-							userAvatar: user
-						})
-					}
+				Tournament.findByIdAndUpdate(req.params.tournamentId, { bracketsPublished: true, bracketsLink: req.body.tournamentBracketLink }, function(error){
+					if(error) res.send(error);
+
+					emailHelpers.sendBracketsToTournamentPlayers(tournament.players, tournament.tournamentName, req.body.tournamentBracketLink, function(error){
+						if(error) {
+							res.render('error-pages/error-sending-email.ejs', {
+								user: req.user,
+								userAvatar: user
+							});
+						}
+					});
 				});
 			});
 		});
 
 		res.redirect('/tournament-details/' + req.params.tournamentId + '/' + req.params.userId)
+});
+
+app.post('/send-notification-players/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireRole('Organizator'), function(req, res){
+	helperFunctions.getUserDetails(req.params.userId).then(function(user) {
+		helperFunctions.retrieveTournamentDetails(req.params.tournamentId).then(function(tournament){
+				emailHelpers.sendNotificationToPlayers(tournament.players, tournament.tournamentName, req.body.notificationMsg, function(error, response){
+					if(error) {
+						res.render('error-pages/error-sending-email.ejs', {
+							user: req.user,
+							userAvatar: user
+						});
+					}
+
+					console.log(response.message);
+				});
+		});
+	});
+
+	res.redirect('/tournament-details/' + req.params.tournamentId + '/' + req.params.userId)
 });

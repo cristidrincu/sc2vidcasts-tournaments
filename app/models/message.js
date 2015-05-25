@@ -19,11 +19,11 @@ var messageSchema = mongoose.Schema({
 });
 
 messageSchema.path('messageSubject').validate(function(messageSubject){
-  return messageSubject.length > 5
+  return messageSubject.length > 5;
 }, 'Mesajul trebuie sa contina minim 5 caractere');
 
 messageSchema.path('messageBody').validate(function(messageBody){
-  return messageBody.length > 10
+  return messageBody.length > 10;
 }, 'Mesajul trebuie sa contina minim 10 caractere');
 
 module.exports = mongoose.model('Message', messageSchema);

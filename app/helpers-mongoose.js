@@ -20,7 +20,7 @@ exports.getUserDetails = function(id){
   });
 
 	return deferred.promise;
-}
+};
 
 exports.getUserIdFromName = function(nickname){
 	var deffered = Q.defer();
@@ -33,7 +33,7 @@ exports.getUserIdFromName = function(nickname){
 	});
 
 	return deffered.promise;
-}
+};
 
 exports.getQuoteDetails = function(quoteId){
 	var deffered = Q.defer();
@@ -46,14 +46,14 @@ exports.getQuoteDetails = function(quoteId){
 	});
 
 	return deffered.promise;
-}
+};
 
 exports.deleteQuote = function(quoteId, cb){
 	Quote.remove( {_id: quoteId} ).exec(function(err, writeResult){
 		if(err) throw err;
 		cb(writeResult);
 	});
-}
+};
 
 exports.getDefaultAvatar = function(){
 	var deferred = Q.defer();
@@ -65,7 +65,7 @@ exports.getDefaultAvatar = function(){
 	});
 
 	return deferred.promise;
-}
+};
 
 exports.compareUserId = function(userId, anotherId, cb){
 	var comparisonResult = false;
@@ -74,7 +74,7 @@ exports.compareUserId = function(userId, anotherId, cb){
 	}
 
 		return cb(comparisonResult);
-}
+};
 
 exports.checkTournamentsStatus = function(cb){
 	var currentDate = new Date();
@@ -92,7 +92,7 @@ exports.checkTournamentsStatus = function(cb){
 
 		cb();
 	});
-}
+};
 
 exports.setAvatarForUser = function(userId, avatarId){
 	var deferred = Q.defer();
@@ -109,7 +109,7 @@ exports.setAvatarForUser = function(userId, avatarId){
   });
 
 	return deferred.promise;
-}
+};
 
 exports.retrieveAllOrganizers = function(){
 	var deferred = Q.defer();
@@ -122,7 +122,7 @@ exports.retrieveAllOrganizers = function(){
   });
 
 	return deferred.promise;
-}
+};
 
 exports.retrieveAllTournaments = function(){
 	var deferred = Q.defer();
@@ -134,7 +134,7 @@ exports.retrieveAllTournaments = function(){
   });
 
 	return deferred.promise;
-}
+};
 
 exports.retrieveClosedTournaments = function(){
 	var deferred = Q.defer();
@@ -146,7 +146,7 @@ exports.retrieveClosedTournaments = function(){
 	});
 
 	return deferred.promise;
-}
+};
 
 exports.retrieveAllPlayers = function(){
 		var deferred = Q.defer();
@@ -158,7 +158,7 @@ exports.retrieveAllPlayers = function(){
 	  });
 
 	return deferred.promise;
-}
+};
 
 exports.retrieveTournamentsAndOrganizers = function(cb){
   exports.retrieveAllTournaments().then(function(tournaments){
@@ -166,7 +166,7 @@ exports.retrieveTournamentsAndOrganizers = function(cb){
       cb(tournaments, organizers);
     });
   });
-}
+};
 
 exports.retrieveTournamentsByOrganizer = function(organizerId){
 	var deferred = Q.defer();
@@ -179,7 +179,7 @@ exports.retrieveTournamentsByOrganizer = function(organizerId){
   });
 
 	return deferred.promise;
-}
+};
 
 exports.retrievePlayersFromTournament = function(tournamentId){
 		var deferred = Q.defer();
@@ -193,13 +193,13 @@ exports.retrievePlayersFromTournament = function(tournamentId){
 		  }
 	  });
 	return deferred.promise;
-}
+};
 
 exports.retrieveAllTournamentPlayersBasedOnLeagues = function(tournamentId, cb){
 		exports.retrievePlayersFromTournament(tournamentId).then(function(players){
 				cb(players);
 		});
-}
+};
 
 exports.retrieveMessagesForUser = function(userid){
 	var deferred = Q.defer();
@@ -212,18 +212,18 @@ exports.retrieveMessagesForUser = function(userid){
 	});
 
 	return deferred.promise;
-}
+};
 
 exports.retrieveTournamentDetails = function(tournamentId){
 	var deferred = Q.defer();
 	Tournament.findById(tournamentId).populate('players organizer winner').exec(function(err, tournament){
 		if(err){
-			deferred.reject(tournament)
+			deferred.reject(tournament);
 		}
 		deferred.resolve(tournament);
 	});
 	return deferred.promise;
-}
+};
 
 exports.retrieveAvatars = function(){
 	var deferred = Q.defer();
@@ -236,7 +236,7 @@ exports.retrieveAvatars = function(){
 	});
 
 	return deferred.promise;
-}
+};
 
 exports.retrieveQuotes = function(){
 	var deferred = Q.defer();
@@ -249,4 +249,4 @@ exports.retrieveQuotes = function(){
 	});
 
 	return deferred.promise;
-}
+};

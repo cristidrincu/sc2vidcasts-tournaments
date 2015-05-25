@@ -19,7 +19,7 @@ app.get('/send-new-message', middleware.isLoggedIn, function(req, res){
 	helperFunctions.getUserDetails(req.user._id).then(function(user){
 		helperFunctions.retrieveAllPlayers().then(function(players){
 			var autoCompletePlayerNames = _.map(players, function(player){
-				return player.local.nickname
+				return player.local.nickname;
 			});
 			res.expose(autoCompletePlayerNames, 'players');
 			res.render('messaging/send-new-message.ejs', {
@@ -74,7 +74,7 @@ app.post('/send-message/:_id', middleware.isLoggedIn, function(req, res){
 	    req.flash('infoError', 'Mesajul nu a putut fi trimis!');
 	    res.redirect('/user-messages/' + req.user._id);
     }else
-      req.flash('infoSuccess', 'Mesajul a fost trimis cu success!')
+      req.flash('infoSuccess', 'Mesajul a fost trimis cu success!');
       res.redirect('/user-messages/' + req.user._id);
   });
 });
@@ -88,7 +88,7 @@ app.post('/send-message', middleware.isLoggedIn, function(req, res){
 				req.flash('infoError', 'Mesajul nu a putut fi trimis!');
 				res.redirect('/user-messages/' + req.user._id);
 			}else
-				req.flash('infoSuccess', 'Mesajul a fost trimis cu success!')
+				req.flash('infoSuccess', 'Mesajul a fost trimis cu success!');
 			res.redirect('/user-messages/' + req.user._id);
 		});
 	});

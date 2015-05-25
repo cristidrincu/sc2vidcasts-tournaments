@@ -81,8 +81,8 @@ describe('A tournament', function(){
 				tournament.openForLeagues.leagues.splice(0, 1); //remove Bronze from leagues - bad structure: openForLeagues.leagues['Bronze', 'Silver'] - cannot use $pull on such a structure
 				tournament.openForLeagues.leagues.length.should.equal(1);
 				done();
-			})
-		})
+			});
+		});
 	});
 
 	it("can add a user to tournament", function(done){

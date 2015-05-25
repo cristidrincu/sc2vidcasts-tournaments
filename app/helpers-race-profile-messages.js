@@ -20,6 +20,6 @@ var raceMessages = {
 		topMessage: 'Highly classified content. Your eyes ONLY!',
 		bottomMessage: 'Psionic Storms pentru zealotul care indrazneste sa dezvaluie secretele din Twilight Council'
 	}
-}
+};
 
 module.exports = raceMessages;

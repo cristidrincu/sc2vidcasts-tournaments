@@ -74,8 +74,8 @@ app.post('/customize-profile/:nickname', middleware.isLoggedIn, function(req, re
 
 		  Tournament.find({_id: {$in: user.local.tournaments}}).exec(function(err, tournaments){
 			  var activeTournaments = _.filter(tournaments, function(tournament){
-				  return tournament.finishedTournament == false;
-			  })
+				  return tournament.finishedTournament === false;
+			  });
 
 			  activeTournaments.forEach(function(tournament){
 				  //if the updated league is not present in the tournament leagues array, remove user from tournament and the tournament from the user
@@ -85,12 +85,12 @@ app.post('/customize-profile/:nickname', middleware.isLoggedIn, function(req, re
 								if(err) throw err;
 								User.findOneAndUpdate({'local.nickname': req.params.nickname}, {$pull: {'local.tournaments': tournament._id}}).exec(function(err){
 									if(err) throw err;
-								})
-							})
+								});
+							});
 						}
-				  })
-			  })
-		  })
+				  });
+			  });
+		  });
 	  }
 
 	  user.save(function(err){
@@ -148,8 +148,8 @@ app.get('/delete-account/:userId', middleware.isLoggedIn, function(req, res){
 
 app.post('/delete-account/:userId', middleware.isLoggedIn, function(req, res){
 	User.remove( {_id: req.params.userId}, function(err, result){
-		if(err) throw err
-	})
+		if(err) throw err;
+	});
 
 	res.redirect('/signup');
 });

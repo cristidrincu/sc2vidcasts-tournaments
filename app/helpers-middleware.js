@@ -10,7 +10,7 @@ exports.isLoggedIn = function(req, res, next){
 	}
 
 	res.redirect('/');
-}
+};
 
 exports.requireRole = function(role){
 	return function(req, res, next){
@@ -20,8 +20,8 @@ exports.requireRole = function(role){
 		else{
 			res.send(403);
 		}
-	}
-}
+	};
+};
 
 exports.requireMultipleUserRoles = function(role1, role2){
 	return function(req, res, next){
@@ -30,8 +30,8 @@ exports.requireMultipleUserRoles = function(role1, role2){
 		}else{
 			res.send(403);
 		}
-	}
-}
+	};
+};
 
 exports.checkTournamentUpdatedProps = function(oldProp, updatedProp){
 	if(oldProp == updatedProp){
@@ -39,29 +39,29 @@ exports.checkTournamentUpdatedProps = function(oldProp, updatedProp){
 	}
 
 	return updatedProp + '( a fost: ' + oldProp + ')';
-}
+};
 
 exports.checkEmptyStartHour = function(editStartHour){
 	var emptyStartHour = false;
-	if(editStartHour == undefined || editStartHour == null || editStartHour == ''){
+	if(editStartHour === undefined || editStartHour === null || editStartHour === ''){
 		emptyStartHour = true;
 	}
 
 	return emptyStartHour;
-}
+};
 
 exports.checkEmptyLeagues = function(leagues){
 	var emptyLeagues = false;
-	if(leagues == undefined || leagues == null){
+	if(leagues === undefined || leagues === null){
 		emptyLeagues = true;
 	}
 
 	return emptyLeagues;
-}
+};
 
 exports.uppercaseFirstChar = function(text){
 	return text[0].toUpperCase() + text.slice(1);
-}
+};
 
 exports.tournamentStatus = function(tournament){
 	var date = new Date();
@@ -76,7 +76,7 @@ exports.tournamentStatus = function(tournament){
 	}else{
 		return starting;
 	}
-}
+};
 
 exports.preventIllegalActions = function(reqUserId, reqParamsUserId){
 	if(reqUserId != reqParamsUserId){
@@ -84,7 +84,7 @@ exports.preventIllegalActions = function(reqUserId, reqParamsUserId){
 	}
 
 	return true;
-}
+};
 
 exports.isUpdatedLeagueInTournamentLeaguesArray = function(updatedLeague, tournamentLeaguesArray, cb){
 	var result;
@@ -95,4 +95,4 @@ exports.isUpdatedLeagueInTournamentLeaguesArray = function(updatedLeague, tourna
 	}
 
 	cb(result);
-}
+};

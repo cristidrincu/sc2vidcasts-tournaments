@@ -31,15 +31,15 @@ var tournamentSchema = mongoose.Schema({
 });
 
 tournamentSchema.path('tournamentName').validate(function(tournamentName){
-  return tournamentName.length > 4
+  return tournamentName.length > 4;
 }, 'Numele turneului trebuie sa contina mai mult de 4 caractere');
 
 tournamentSchema.path('description').validate(function(description){
-  return description.length > 10
+  return description.length > 10;
 }, 'Descrierea turneului trebuie sa contina minim 100 de caractere');
 
 tournamentSchema.path('ingameChatChannel').validate(function(ingameChatChannel){
-  return ingameChatChannel.length > 4
+  return ingameChatChannel.length > 4;
 }, 'Numele canalului de chat trebuie sa contina minim 4 caractere');
 
 tournamentSchema.pre('remove', function(next){

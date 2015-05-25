@@ -19,7 +19,7 @@ app.get('/organizer-tournaments/:organizerId', middleware.isLoggedIn, middleware
 					user: req.user,
 					userAvatar: user,
 					tournaments: _.filter(organizerTournaments, function(tournament){
-						return tournament.finishedTournament == false;
+						return tournament.finishedTournament === false;
 					}),
 					moment: moment
 				});
@@ -47,7 +47,7 @@ app.get('/organizers', middleware.isLoggedIn, function(req, res){
 				user: user,
 				userAvatar: user,
 				organizers: organizers
-			})
-		})
-	})
-})
+			});
+		});
+	});
+});

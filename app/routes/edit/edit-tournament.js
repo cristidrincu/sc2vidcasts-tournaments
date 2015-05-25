@@ -97,7 +97,7 @@ app.post('/informatii-de-baza/:tournamentId/:userId', middleware.isLoggedIn, mid
 
 			req.flash('infoSuccess', 'Informatiile de baza pentru acest turneu au fost modificate cu success!');
 
-			if(players.length != 0){
+			if(players.length !== 0){
 				//send email to all participants in the tournament
 				var mailOptions = {
 					from: 'Starcraft2 Vidcasts Romania starcraft2vidcasts@gmail.com',

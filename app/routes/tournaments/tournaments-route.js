@@ -65,7 +65,7 @@ app.post('/create-tournament', middleware.isLoggedIn, middleware.requireRole('Or
 
   Tournament.findOne({ 'tournament.edition': req.body.edition, 'tournament.tournamentName' : req.body.tournamentName }, function(err, newTournament){
     if(newTournament)
-      req.flash('infoError', 'O editie a acestui turneu exista deja')
+      req.flash('infoError', 'O editie a acestui turneu exista deja');
     else
       newTournament = new Tournament();
       newTournament.tournamentName = req.body.tournamentName;
@@ -116,14 +116,14 @@ app.get('/tournament-details/:_id/:userId', middleware.isLoggedIn, function(req,
 
     Tournament.findOne( { _id: req.params._id, players: {$in: ids}}, function(err, tournament){
       if(tournament){
-        enlistedInTournament = true
+        enlistedInTournament = true;
         return enlistedInTournament;
       }
     });
 
     Tournament.findById(req.params._id).populate('players organizer bracket winner').exec( function(err, tournament){
       if(err){
-        res.send(err)
+        res.send(err);
       }else{
         tournament.openForLeagues.leagues.forEach(function(league){
           if(req.user.local.league === league){
@@ -220,10 +220,10 @@ app.post('/signup-tournament/:_id/:userId', middleware.isLoggedIn, function(req,
               req.flash('infoError', 'Toate locurile au fost ocupate!');
             }else{
               Tournament.findByIdAndUpdate(req.params._id, { $pushAll: { players: [req.params.userId] }}, function(err){
-	              if(err) throw err
+	              if(err) throw err;
 		              User.findByIdAndUpdate(req.params.userId, { $pushAll: { 'local.tournaments': [req.params._id] }}, function(err){
 			              if(err)
-				              res.send(err)
+				              res.send(err);
 			              res.redirect('/user-tournaments/' + req.params.userId);
 		              });
               });
@@ -238,7 +238,7 @@ app.post('/signup-tournament/:_id/:userId', middleware.isLoggedIn, function(req,
 app.get('/user-tournaments/:userId', middleware.isLoggedIn, function(req, res){
   User.findById(req.params.userId).populate('local.tournaments local.avatar').exec(function(err, user){
     if(err)
-      res.send(err)
+      res.send(err);
     else
       res.render('tournament/user-tournaments.ejs', {
         user: req.user,
@@ -271,7 +271,7 @@ app.post('/retragere-din-turneu/:_userId/:_tournamentId', middleware.isLoggedIn,
 					req.flash('infoSuccess', 'Te-ai retras cu succes din cadrul turneului!');
 					res.redirect('/user-tournaments/' + req.params._userId);
 				}
-			})
+			});
 		});
 });
 
@@ -283,7 +283,7 @@ app.post('/declare-winner/:tournamentId/:userId', middleware.isLoggedIn, middlew
 				if(err) throw err;
 
 				res.redirect('/tournament-details/' + req.params.tournamentId + '/' + req.params.userId);
-			})
+			});
 		});
 	});
 });
@@ -296,7 +296,7 @@ app.get('/delete-tournament/:tournamentId/:userId', middleware.isLoggedIn, middl
 				userAvatar: user,
 				tournament: tournament,
 				moment: moment
-			})
+			});
 		});
 	});
 });
@@ -306,7 +306,7 @@ app.post('/delete-tournament/:tournamentId/:userId', middleware.isLoggedIn, midd
 		if(err) throw err;
 
 		res.redirect('/closed-tournaments/' + req.params.userId);
-	})
+	});
 });
 
 app.post('/send-brackets-players/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireRole('Organizator'), function(req, res) {
@@ -327,7 +327,7 @@ app.post('/send-brackets-players/:tournamentId/:userId', middleware.isLoggedIn, 
 			});
 		});
 
-		res.redirect('/tournament-details/' + req.params.tournamentId + '/' + req.params.userId)
+		res.redirect('/tournament-details/' + req.params.tournamentId + '/' + req.params.userId);
 });
 
 app.post('/send-notification-players/:tournamentId/:userId', middleware.isLoggedIn, middleware.requireRole('Organizator'), function(req, res){
@@ -346,5 +346,5 @@ app.post('/send-notification-players/:tournamentId/:userId', middleware.isLogged
 		});
 	});
 
-	res.redirect('/tournament-details/' + req.params.tournamentId + '/' + req.params.userId)
+	res.redirect('/tournament-details/' + req.params.tournamentId + '/' + req.params.userId);
 });

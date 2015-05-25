@@ -73,7 +73,7 @@ app.post('/delete-account/:userId', middleware.isLoggedIn, middleware.requireRol
 	//There is a pre-remove function for the deletion of a user account in app/models/user.js
 	User.remove({_id: req.params.userId}, function(err, result){
 		if(err) throw err;
-	})
+	});
 
   res.redirect('/admin-players');
 });

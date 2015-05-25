@@ -47,7 +47,7 @@ module.exports = function (app) {
         }else{
           Avatar.findOne({ 'imageName': filename }).exec(function(err, avatar){
             if(avatar){
-              res.redirect('/backend-admin')
+              res.redirect('/backend-admin');
             }else{
               var newAvatarImage = new Avatar();
               newAvatarImage.imageName = filename;
@@ -60,9 +60,8 @@ module.exports = function (app) {
               });
             }
           });
-
         }
-      })
+      });
     });
   });
 };

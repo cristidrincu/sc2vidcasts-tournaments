@@ -4,4 +4,4 @@
 
 exports.handle = function(text, err){
   throw new Error(text + err);
-}
+};

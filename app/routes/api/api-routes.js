@@ -35,7 +35,7 @@ app.get('/api/tournaments-by-organizer/:organizerId', function(req, res){
 app.get('/api/upcoming-tournaments', function(req, res){
 	helperFunctions.retrieveAllTournaments().then(function(tournaments){
 		var upcoming = _.filter(tournaments, function(tournament){
-			return tournament.finishedTournament == false;
+			return tournament.finishedTournament === false;
 		});
 
 		res.json(upcoming);

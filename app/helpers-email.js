@@ -4,7 +4,7 @@
 var nodeMailer = require('nodemailer');
 
 //nodemailer SMTP transporter - used to notify players that a new tournament has been created and to send tournament brackets link
-var transporter = nodeMailer.createTransport('SMTP', {
+var transporter = nodeMailer.createTransport({
 	service: 'Gmail',
 	auth: {
 		user: 'starcraft2vidcasts@gmail.com',

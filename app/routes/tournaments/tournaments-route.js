@@ -341,7 +341,7 @@ app.post('/send-notification-players/:tournamentId/:userId', middleware.isLogged
 						});
 					}
 
-					console.log(response.message);
+//					console.log(response);
 				});
 		});
 	});

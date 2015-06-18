@@ -45,8 +45,6 @@ tournamentSchema.path('ingameChatChannel').validate(function(ingameChatChannel){
 tournamentSchema.pre('remove', function(next){
 	User.update({tournaments: this._id}, {$pull: {tournaments: this._id}}, function(err, result){
 		if(err) throw err;
-		console.log(result);
-		console.log('Removed tournament for user tournament list');
 	});
 	next();
 });

@@ -34,18 +34,6 @@ userSchema.methods.isValid = function(password){
   return bcrypt.compareSync(password, this.local.password);
 };
 
-userSchema.pre('remove', function(next){
-
-	//always have a callback function, function(err, result) - the result holds how many indexes have been affected by the query
-	Tournament.update({ players: this._id }, {$pull: {players: this._id}}, function(err, removeResult){
-		if(err) throw err;
-
-		console.log('Removed player from tournament players array!');
-		console.log(removeResult);
-	});
-	next();
-});
-
 //create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);
 

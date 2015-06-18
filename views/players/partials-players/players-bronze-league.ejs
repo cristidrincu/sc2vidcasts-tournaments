@@ -12,8 +12,8 @@
             <th>Trimite-i mesaj</th>
 
             <%if(user.local.role == 'admin'){%>
-            <th>Adauga in blacklist</th>
-            <th>Sterge contul</th>
+                <th>Adauga in blacklist</th>
+                <th>Sterge contul</th>
             <%}%>
 
         </tr>
@@ -42,7 +42,7 @@
                 </form>
             </td>
             <td>
-                <form action="/blacklist-player/<%= player._id%>" method="post">
+                <form action="/admin-delete-account/<%= player._id%>" method="post">
                     <button class="btn btn-danger"><i class="fa fa-trash"></i> Sterge </button>
                 </form>
             </td>

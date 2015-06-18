@@ -19,7 +19,6 @@
 # .idea/libraries
 
 node_modules/
-
 ## File-based project format
 *.ipr
 *.iws

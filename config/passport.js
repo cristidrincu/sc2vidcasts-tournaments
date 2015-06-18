@@ -46,7 +46,7 @@ module.exports = function (passport) {
             if (user) {
               return done(null, false, req.flash('signupMessage', email + ' : Aceasta adresa de email este deja luata!'));
             } else {
-		          //validate the email - if email is not valid, redirect to signup form
+		        //validate the email - if email is not valid, redirect to signup form
 	            if(!utils.validateEmail(email)){
 		            return done(null, false, req.flash('signupMessage', email + ' : Adresa de email nu este una valabila! '));
 	            }
@@ -54,7 +54,7 @@ module.exports = function (passport) {
 	            //validate nickname - if not valid, stop signup process
 	            if(!utils.validateNickname(req.body.nickname)){
 		            var nickname = req.body.nickname;
-		            return done(null, false, req.flash('signupMessage', nickname + ' : Nickname-ul ales nu a putut fi validat! '));
+		            return done(null, false, req.flash('signupMessageNickname', nickname + ' : Nickname-ul ales nu a putut fi validat! Minim 3 caractere, maxim 10 caractere '));
 	            }
 
 	            //validate battlenet id - if not valid, stop signup process

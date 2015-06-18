@@ -149,6 +149,9 @@ app.get('/delete-account/:userId', middleware.isLoggedIn, function(req, res){
 app.post('/delete-account/:userId', middleware.isLoggedIn, function(req, res){
 	User.remove( {_id: req.params.userId}, function(err, result){
 		if(err) throw err;
+        Tournament.update( { players: req.params.userId }, { $pull: { players: req.params.userId } }, function(err, result) {
+            if(err) throw err;
+        });
 	});
 
 	res.redirect('/signup');

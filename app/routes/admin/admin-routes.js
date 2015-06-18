@@ -68,12 +68,14 @@ app.get('/avatars-users-admin/:adminId', middleware.isLoggedIn, middleware.requi
 	});
 });
 
-app.post('/delete-account/:userId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
+//TODO - investigate why redirect gets you to signup page instead of players page
+app.post('/admin-delete-account/:userId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
+    User.remove( {_id: req.params.userId}, function(err, result){
+        if(err) throw err;
+        Tournament.update( { players: req.params.userId }, { $pull: { players: req.params.userId } }, function(err, result) {
+            if(err) throw err;
+        });
+    });
 
-	//There is a pre-remove function for the deletion of a user account in app/models/user.js
-	User.remove({_id: req.params.userId}, function(err, result){
-		if(err) throw err;
-	});
-
-  res.redirect('/admin-players');
+    res.redirect('/players/' + req.user._id);
 });

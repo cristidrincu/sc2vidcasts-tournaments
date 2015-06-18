@@ -13,11 +13,11 @@
             <%tournaments.forEach(function(tournament){%>
                 <div class="col-lg-4 container-organizer-details-tournament">
                     <%if(!tournament.finishedTournament){%>
-                        <h3><%= tournament.tournamentName%> | <%= Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) + '% | ' %>
+                        <h3><%= tournament.tournamentName%> | <%= Math.floor(tournament.players.length * (100 / parseInt(tournament.nrOfPlayers)) ) + '% | ' %>
                             <span class="active-tournament-indicator">Activ</span>
                         </h3>
                     <%}else{%>
-                        <h3><%= tournament.tournamentName%> | <%= Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) + '% | ' %>
+                        <h3><%= tournament.tournamentName%> | <%= Math.floor(tournament.players.length * (100 / parseInt(tournament.nrOfPlayers)) ) + '% | ' %>
                             <span class="finished-tournament-indicator">Incheiat</span>
                         </h3>
                     <%}%>

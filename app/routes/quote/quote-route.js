@@ -4,8 +4,8 @@
 var express = require('express');
 var Quote = require('../../models/quote');
 
-var helperFunctions = require('../../helpers-mongoose.js');
-var middleware = require('../../helpers-middleware.js');
+var helperFunctions = require('../../helpers/helpers-mongoose.js');
+var middleware = require('../../helpers/helpers-middleware.js');
 
 var app = module.exports = express();
 

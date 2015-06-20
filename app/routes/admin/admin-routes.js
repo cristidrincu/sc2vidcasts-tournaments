@@ -3,12 +3,12 @@
  */
 var express = require('express');
 var mongoose = require('mongoose');
-var helperFunctions = require('../../../app/helpers-mongoose.js');
+var helperFunctions = require('../../helpers/helpers-mongoose.js');
 var User = require('../../../app/models/user');
 var Tournament = require('../../../app/models/tournament');
 var moment = require('moment');
 var _  = require('underscore');
-var middleware = require('../../helpers-middleware.js');
+var middleware = require('../../helpers/helpers-middleware.js');
 var app = module.exports = express();
 
 app.get('/admin-organizers/:userId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){

@@ -3,8 +3,8 @@
  */
 var express = require('express');
 var fs = require('fs');
-var helperFunctions = require('./helpers-mongoose');
-var middleware = require('./helpers-middleware.js');
+var helperFunctions = require('./helpers/helpers-mongoose');
+var middleware = require('./helpers/helpers-middleware.js');
 var Avatar = require('./models/avatar.js');
 
 module.exports = function (app) {

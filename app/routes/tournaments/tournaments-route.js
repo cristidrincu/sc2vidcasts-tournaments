@@ -5,14 +5,15 @@ var express = require('express');
 var Tournament = require('../../models/tournament');
 var User = require('../../models/user');
 var Avatar = require('../../models/avatar');
+var TournamentNotificationMessages = require('../../helpers/helpers-tournament-error-messages.js');
 var moment = require('moment');
 var placeHolderText = require('../../../config/validation-placeholders-text.js');
 var _ = require('underscore');
 
-var emailHelpers = require('../../helpers-email.js');
+var emailHelpers = require('../../helpers/helpers-email.js');
 
-var helperFunctions = require('../../helpers-mongoose.js');
-var middleware = require('../../helpers-middleware.js');
+var helperFunctions = require('../../helpers/helpers-mongoose.js');
+var middleware = require('../../helpers/helpers-middleware.js');
 
 require('express-expose'); //for exposing users to auto complete functionality
 
@@ -184,7 +185,8 @@ app.get('/tournament-details/:_id/:userId', middleware.isLoggedIn, function(req,
 					    eligibleForTournament: eligibleForTournament,
 					    allPlacesTaken: allPlacesTaken,
 					    procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers)),
-					    tournamentStatus: middleware.tournamentStatus(tournament)
+					    tournamentStatus: middleware.tournamentStatus(tournament),
+                        tournamentNotificationMessages: TournamentNotificationMessages
 				    });
 			    });
 		    });

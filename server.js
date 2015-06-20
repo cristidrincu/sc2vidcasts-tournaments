@@ -23,7 +23,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 var configDB = require('./config/database.js');
-var helperFunctions = require('./app/helpers-mongoose.js');
+var helperFunctions = require('./app/helpers/helpers-mongoose.js');
 
 //use romanian locale for moment.js
 moment.locale('ro');

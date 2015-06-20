@@ -4,8 +4,8 @@
 var express = require('express');
 var Tournament = require('../../models/tournament');
 var moment = require('moment');
-var helperFunctions = require('../../../app/helpers-mongoose.js');
-var middleware = require('../../helpers-middleware.js');
+var helperFunctions = require('../../helpers/helpers-mongoose.js');
+var middleware = require('../../helpers/helpers-middleware.js');
 var _ = require('underscore');
 
 var app = module.exports = express();

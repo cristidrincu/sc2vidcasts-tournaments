@@ -2,9 +2,9 @@
  * Created by cristiandrincu on 3/24/15.
  */
 var nodeMailer = require('nodemailer');
-var emailService = require('../config/email-service.js');
+var emailService = require('../../config/email-service.js');
 
-//nodemailer SMTP transporter - used to notify players that a new tournament has been created and to send tournament brackets link
+//nodemailer transporter - used to notify players that a new tournament has been created and to send tournament brackets link
 var transporter = nodeMailer.createTransport({
 	service: 'Gmail',
 	auth: {

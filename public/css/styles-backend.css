@@ -516,7 +516,9 @@ a.return-to-control-panel{
 }
 
 .notifier-tournament-status-ongoing, .notifier-tournament-status-completed{
-    padding-top: 45px;
+    padding-top: 15px;
+    font-size: 14px;
+    margin-top: 40px;
 }
 
 .notifier-tournament-status-ongoing{
@@ -528,7 +530,12 @@ a.return-to-control-panel{
 }
 
 .error-eligible-tournament, .error-enlisted-tournament{
-    padding-top: 55px; color: red
+    margin-top: 40px;
+    color: red
+}
+
+.error-enlisted-tournament {
+    color: green;
 }
 
 .centered-info-tournament{

@@ -3,11 +3,11 @@
  */
 var express = require('express');
 var mongoose = require('mongoose');
-var helperFunctions = require('../../../app/helpers-mongoose.js');
+var helperFunctions = require('../../helpers/helpers-mongoose.js');
 var User = require('../../../app/models/user');
 var Avatar = require('../../../app/models/avatar');
 var moment = require('moment');
-var middleware = require('../../helpers-middleware.js');
+var middleware = require('../../helpers/helpers-middleware.js');
 var app = module.exports = express();
 
 app.post('/choose-avatar/:userId/:avatarId', middleware.isLoggedIn, function(req, res){

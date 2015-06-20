@@ -2,14 +2,14 @@
  * Created by cristiandrincu on 10/10/14.
  */
 var express = require('express');
-var helperFunctions = require('../../../app/helpers-mongoose.js');
+var helperFunctions = require('../../helpers/helpers-mongoose.js');
 var User = require('../../../app/models/user');
 var Tournament = require('../../../app/models/tournament');
 var moment = require('moment');
 var _  = require('underscore');
 var Q = require('q');
 var currentDate = new Date();
-var middleware = require('../../helpers-middleware.js');
+var middleware = require('../../helpers/helpers-middleware.js');
 
 require('express-expose');
 

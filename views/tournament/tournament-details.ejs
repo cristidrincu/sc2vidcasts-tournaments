@@ -40,16 +40,28 @@
 
                 <%}else if(user.local.role == 'User'){%>
                     <%if(tournamentStatus == 1){%>
-                        <h4 class="notifier-tournament-status-ongoing">Acest turneu este in desfasurare, iar inscrierile sunt inchise!</h4>
+                        <h4 class="notifier-tournament-status-ongoing alert alert-warning">
+                            <i class="fa fa-exclamation-triangle"></i>
+                            <%= tournamentNotificationMessages.tournamentOngoing%>
+                        </h4>
                     <%} else if(tournamentStatus == 2){%>
-                        <h4 class="notifier-tournament-status-completed">Acest turneu s-a terminat!</h4>
+                        <h4 class="notifier-tournament-status-completed alert alert-info">
+                            <i class="fa fa-trophy"></i>
+                            <%= tournamentNotificationMessages.tournamentCompleted%>
+                        </h4>
                     <%} else {%>
                         <% if(!eligibleForTournament){%>
-                            <p class="error-eligible-tournament">Acest concurs nu este deschis ligii din care faci parte. Ne pare rau!</p>
+                            <p class="error-eligible-tournament alert alert-danger">
+                                <i class="fa fa-lock"></i>
+                                <%= tournamentNotificationMessages.tournamentNotOpenedForPlayer%>
+                            </p>
                         <%}%>
 
                         <% if(enlistedInTournament){%>
-                            <p class="error-enlisted-tournament">Esti deja inscris in cadrul acestui turneu</p>
+                            <p class="error-enlisted-tournament alert alert-success">
+                                <i class="fa fa-check"></i>
+                                <%= tournamentNotificationMessages.tournamentPlayerAlreadyEnlisted%>
+                            </p>
                         <%}%>
 
                         <% if(eligibleForTournament && !enlistedInTournament && (procentajOcupare != 100) ){%>
@@ -71,7 +83,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12 animated fadeInRight">
             <ul class="nav nav-tabs tabs-player-enlisted" role="tablist">
                 <li class="active"><a href="#detalii-turneu" role="tab" data-toggle="tab">Detalii turneu</a></li>
                 <li><a href="#castigator-turneu" role="tab" data-toggle="tab">Castigator turneu</a></li>

@@ -9,8 +9,8 @@ var moment = require('moment');
 var app = module.exports = express();
 var _ = require('underscore');
 
-var helperFunctions = require('../../helpers-mongoose.js');
-var middleware = require('../../helpers-middleware.js');
+var helperFunctions = require('../../helpers/helpers-mongoose.js');
+var middleware = require('../../helpers/helpers-middleware.js');
 
 app.get('/organizer-tournaments/:organizerId', middleware.isLoggedIn, middleware.requireRole('Organizator'), function(req, res){
 	helperFunctions.getUserDetails(req.params.organizerId).then(function(user){

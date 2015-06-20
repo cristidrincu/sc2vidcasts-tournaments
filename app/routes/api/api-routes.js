@@ -2,7 +2,7 @@
  * Created by cristiandrincu on 2/19/15.
  */
 var express = require('express');
-var helperFunctions = require('../../../app/helpers-mongoose.js');
+var helperFunctions = require('../../helpers/helpers-mongoose.js');
 var moment = require('moment');
 var _  = require('underscore');
 

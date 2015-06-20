@@ -7,9 +7,9 @@ var User = require('../../../app/models/user');
 var Tournament = require('../../../app/models/tournament');
 var _ = require('underscore');
 
-var helperFunctions = require('../../helpers-mongoose.js');
-var raceMessages = require('../../helpers-race-profile-messages.js');
-var middleware = require('../../helpers-middleware.js');
+var helperFunctions = require('../../helpers/helpers-mongoose.js');
+var raceMessages = require('../../helpers/helpers-race-profile-messages.js');
+var middleware = require('../../helpers/helpers-middleware.js');
 
 var app = module.exports = express();
 

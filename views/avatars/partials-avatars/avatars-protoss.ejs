@@ -1,0 +1,26 @@
+<div class="tab-pane fade" id="protoss">
+    <%if(protossAvatars.length == 0){%>
+    <p class="message-no-players-found">Nu am gasit avatare pentru Protoss in baza de date!</p>
+    <%}else{%>
+        <%protossAvatars.forEach(function(avatar){%>
+            <div class="col-xs-6 col-md-2 container-user-avatar-admin">
+                <form action="/choose-avatar/<%= user._id + '/' + avatar._id%>" method="post">
+                    <button class="btn btn-white-background">
+                        <img class="img-circle main-profile-image mouse-pointer-on" src="<%= avatar.imagePath + '/' + avatar.imageName%>">
+                    </button>
+                </form>
+                <div class="caption">
+                    <h3></h3>
+                    <div class="row">
+                        <!--TODO Fix this, as the choose avatar button does not align correctly-->
+                        <div class="col-sm-12 container-choose-avatar-btn">
+                            <form action="/choose-avatar/<%= user._id + '/' + avatar._id%>" method="post">
+                                <button class="btn btn-success" role="button">Alege avatarul</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <%});%>
+    <%}%>
+</div>

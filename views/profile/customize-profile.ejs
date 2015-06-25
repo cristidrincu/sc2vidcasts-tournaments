@@ -1,0 +1,45 @@
+<%include ../partials/header.ejs%>
+<div class="container container-customize-profile">
+
+    <div class="col-sm-6 col-sm-offset-3">
+        <!-- Update FORM -->
+        <form action="/customize-profile/<%=user.local.nickname%>" method="post">
+            <div class="form-group">
+                <label>Update Email</label>
+                <input type="text" class="form-control" name="email" value="<%=user.local.email%>">
+            </div>
+            <div class="form-group">
+                <label>Update Nickname</label>
+                <input type="text" class="form-control" name="nickname" value="<%=user.local.nickname%>">
+            </div>
+            <div class="form-group">
+                <label>Modifica rasa cu care joci</label>
+                <select name="race" class="form-control">
+                    <option value="<%=user.local.race%>"><%=user.local.race%></option>
+                    <%for(var i = 0; i < races.length; i++){%>
+                        <option value="<%=races[i]%>"><%=races[i]%></option>
+                    <%}%>
+                </select>
+                <!--<input type="text" class="form-control" name="race" value="<%=user.local.race%>">-->
+            </div>
+            <div class="form-group">
+                <label>Modifica liga din care faci parte</label>
+                <select name="league" class="form-control">
+                    <option value="<%=user.local.league%>"><%=user.local.league%></option>
+                    <%for(var i = 0; i < leagues.length; i++){%>
+                        <option value="<%=leagues[i]%>"><%=leagues[i]%></option>
+                    <%}%>
+                </select>
+                <!--<input type="text" class="form-control" name="league" value="<%=user.local.league%>">-->
+            </div>
+            <button type="submit" class="btn btn-success btn-lg">Update</button>
+            <a href="/profile">
+                <button type="submit" class="btn btn-danger btn-lg">Anuleaza</button>
+            </a>
+        </form>
+        <hr>
+    </div>
+
+</div>
+
+<%include ../partials/footer.ejs%>

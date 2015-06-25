@@ -1,0 +1,17 @@
+<% include ../partials/header.ejs %>
+    <% userAvatar.local.avatar.forEach(function(avatar){%>
+        <%if(user.local.role == 'User'){%>
+            <% include ../partials/sidebar.ejs %>
+        <%}else if(user.local.role == 'Organizator'){%>
+            <% include ../partials/sidebar-organizer.ejs%>
+        <%}else if(user.local.role == 'admin'){%>
+            <% include ../partials/sidebar-admin.ejs%>
+        <%}%>
+<%});%>
+
+<div id="page-wrapper">
+    <form action="/delete-account/<%=user._id%>" method="post">
+        <p>Esti sigur ca vrei sa stergi contul?</p>
+        <input type="submit" value="Sterge contul"/>
+    </form>
+</div>

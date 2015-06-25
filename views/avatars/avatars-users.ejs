@@ -1,0 +1,24 @@
+<%include ../partials/header%>
+<% avatarUser.local.avatar.forEach(function(avatar){ %>
+    <% if(user.local.role == 'Organizator'){%>
+        <% include ../partials/sidebar-organizer%>
+    <%}else{%>
+        <% include ../partials/sidebar%>
+    <%}%>
+<%});%>
+<div id="page-wrapper">
+    <div class="row animated fadeInUp">
+        <div class="col-lg-12">
+            <h1 class="page-header"><i class="fa fa-picture-o fa-1x"></i> Avatare</h1>
+        </div>
+
+        <% include ../avatars/partials-avatars/avatars-tabs.ejs %>
+
+        <div class="tab-content">
+            <% include ../avatars/partials-avatars/avatars-terrans.ejs %>
+            <% include ../avatars/partials-avatars/avatars-zerg.ejs %>
+            <% include ../avatars/partials-avatars/avatars-protoss.ejs %>
+        </div>
+    </div>
+</div>
+<%include ../partials/footer%>

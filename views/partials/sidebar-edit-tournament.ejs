@@ -1,0 +1,23 @@
+<div class="col-lg-2 sidebar-edit-tournament">
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                <li><a href="/informatii-de-baza/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-cogs"></i> Informatii de baza</a></li>
+                <li><a href="/locuri-disponibile/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-users"></i> Locuri disponibile</a></li>
+                <li><a href="/ligi-turneu/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-pie-chart"></i> Ligi</a></li>
+                <li><a href="/tournament-start-date/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-calendar"></i> Data inceperii</a></li>
+                <li><a href="/tournament-end-date/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-calendar-o"></i> Data terminarii</a></li>
+                <li><a href="/tournament-start-hour/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-clock-o"></i> Ora de incepere</a></li>
+                <li><a href="/tournament-prizes/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-gift"></i> Premii</a></li>
+                <li><a href="/tournament-sponsors/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-building-o"></i> Sponsori</a></li>
+                <li><a href="/declare-winner/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-trophy fa-fw"></i> Modifica castigatorul</a></li>
+                <li><a class="return-to-tournament-details" href="/tournament-details/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-arrow-circle-left"></i> Inapoi la detaliile turneului</a></li>
+                <%if(user.local.role == 'Organizator'){%>
+                    <li><a class="return-to-control-panel" href="/backend-organizer/<%= user._id%>"><i class="fa fa-arrow-circle-left"></i> Inapoi la panoul de administrare</a></li>
+                <%}else if(user.local.role == 'admin'){%>
+                    <li><a class="return-to-control-panel" href="/backend-admin/<%= user._id%>"><i class="fa fa-arrow-circle-left"></i> Inapoi la panoul de administrare</a></li>
+                <%}%>
+            </ul>
+        </div>
+    </div>
+</div>

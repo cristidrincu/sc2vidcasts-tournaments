@@ -1,0 +1,698 @@
+.header-bar{
+    background-color: #000;
+    margin-bottom: 0
+}
+
+.clearFloats{
+    clear: both;
+}
+
+#welcome-user-message{
+    margin-left:15px;
+    float: left;
+    color: #37beb9;
+    font-size: 13px;
+    padding-top: 20px;
+}
+
+#dateParagraph{
+    float: left;
+    margin-left: -20px;
+    color: #37beb9;
+    font-size: 13px;
+    padding-top: 20px;
+}
+
+.cristian-drincu-signature{
+    padding-bottom: 25px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.menu-section-text{
+    font-size: 20px;
+}
+
+.main-container-backend-elements{
+    padding-top: 40px;
+}
+
+ul.titlu-turneu-signup{
+    list-style: none;
+    display: inline;
+}
+
+ul.titlu-turneu-signup li {
+    display: inline;
+}
+
+.btn-signup-turneu-detalii{
+    margin-top: 45px;
+}
+
+.two-button-set-list, .two-button-set-list li{
+    margin: 0;
+    padding: 0;
+    display:inline-block;
+    list-style: none;
+}
+
+.tournaments-list, .players-list{
+    display:none;
+}
+
+.success-message-flash{
+    color: green;
+}
+
+.error-message-flash{
+    color: red;
+}
+
+.container-image-user{
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.btn-modifica-profilul{
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.btn-panou-turnee{
+   margin-right: 10px;
+}
+
+.main-profile-image{
+    box-shadow: 2px 2px 2px #888888;
+}
+
+.form-avatars{
+    margin-top: 30px;
+}
+
+.message-no-players-found{
+    margin-top: 20px;
+    margin-left: 15px;
+}
+
+.profile-small-pic{
+    width: 100%;
+    height: 100%;
+    box-shadow: 2px 2px 2px #888888;
+    margin-top: 55px;
+}
+
+.profile-pic-table-players{
+    max-width: 120px;
+    max-height: 120px;
+    box-shadow: 2px 2px 2px #888888;
+}
+
+.profile-pic-delete-tournament-players{
+    max-width: 60px;
+    max-height: 60px;
+}
+
+.profile-pic-send-message{
+    width: 100px;
+    height: 100px;
+    box-shadow: 2px 2px 2px #888888;
+}
+
+.profile-pic-rezumat-backend{
+    max-width: 100%;
+    max-height: 100%;
+    box-shadow: 2px 2px 2px #888888;
+    margin-bottom: 10px;
+}
+
+.profile-pic-table-tournament-details{
+    max-width: 40%;
+    max-height: 40%;
+    box-shadow: 2px 2px 2px #888888;
+}
+
+.container-user-avatar-admin{
+    margin-top: 20px;
+}
+
+.containerNicknameRaceBNet{
+    position: relative;
+    top:-15px;
+}
+
+.btn-white-background{
+    background-color: #fff;
+}
+
+.gamepad-icon{
+    position: relative;
+    top:-3px;
+}
+
+.buton-alege-avatar{
+    position: relative;
+    top:-5px;
+    left: 2px;
+}
+
+.container-summary-players, .container-summary-messages{
+    /*border-top: 5px solid #c4e3f3;*/
+    height: 325px;
+    margin-bottom: 20px;
+}
+
+.container-summary-organizers, .container-summary-avatars{
+    /*border-top: 5px solid #ec971f;*/
+    height: 325px;
+    margin-bottom: 20px;
+}
+
+.container-summary-tournaments, .container-summary-blacklist{
+    /*border: 1px solid #55cc22;*/
+    height: 325px;
+    margin-bottom: 20px;
+}
+
+.container-summary-players h1, .container-summary-organizers h1, .container-summary-tournaments h1, .container-summary-messages h1, .container-summary-avatars h1, .container-summary-blacklist h1 {
+    font-size: 30px;
+}
+
+.container-summary-players h4 {
+    color: #000;
+}
+
+.container-summary-players h4 > a, .container-summary-organizers h4 > a, .container-summary-tournaments h4 > a, .container-summary-messages h4 > a, .container-summary-avatars h4 > a{
+    margin-left: 5px; position: relative; top: -1px; font-size: 14px;
+}
+
+.container-summary-players h4 > span, .container-summary-organizers h4 > span, .container-summary-tournaments h4 > span, .container-summary-messages h4 > span, .container-summary-avatars h4 > span{
+    color:red;
+}
+
+.container-avatars-sampled{
+    margin-bottom: 20px;
+}
+
+.circleNrEntities, .circleNrEntitiesAvatar{
+    display: block;
+    height: 25px;
+    width: 25px;
+    line-height: 25px;
+    float: right;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+
+    background-color: green;
+    color: white;
+    text-align: center;
+}
+
+.circleNrEntitiesAvatar{
+    background-color: orangered;
+}
+
+.send-message-tournament-container{
+    border-bottom: 1px solid gainsboro;
+}
+
+.send-message-tournament-container:last-child{
+    border-bottom: none;
+}
+
+.container-organizer-details-tournament{
+    margin-bottom: 25px;
+    border-right: 1px dashed darkgray;
+}
+/*for a more detailed explanation on nth child: http://css-tricks.com/how-nth-child-works/*/
+.container-organizer-details-tournament:nth-child(3n + 1){ /* the last element we need to be without a border is starts at index 4*/
+    border-right: none;
+}
+
+.container-organizer-details-tournament span.active-tournament-indicator{
+    color: green;
+}
+
+.container-organizer-details-tournament span.finished-tournament-indicator{
+    color: red;
+}
+
+.container-organizer-details-tournament h3{
+    font-size: 16px;
+}
+
+.container-available-player-slots{
+    text-align: center;
+}
+
+.container-available-player-slots p span{
+    font-size: 40px; font-weight: bold;
+}
+
+ul.edit-menu-tournament, ul.edit-menu-tournament li{
+    display: inline-block;
+    font-size: 18px;
+}
+
+ul.edit-menu-tournament li{
+    margin-left: 10px;
+}
+
+ul.edit-menu-tournament{
+    padding-top: 45px;
+}
+
+.no-style-submit-button{
+    border: none;
+    background: none;
+    color: #30487b;
+}
+
+.no-style-button{
+    border: none;
+    background: none;
+}
+
+.details-tournament-user th, .details-tournament-user td{
+    text-align: center;
+}
+
+.div-gradient, .div-gradient-red, .div-gradient-green{
+    background-color:rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
+
+.div-gradient, .div-gradient-red, .div-gradient-green{
+    padding-bottom: 49px;
+}
+
+.createBrackets, .createBrackets:hover{
+    border: none;
+    background: none;
+    color: #428bca;
+}
+
+.createBrackets:hover{
+    text-decoration: underline;
+}
+
+.create-bracket-icon{
+    color: #428bca;
+}
+
+.container-profile-elements{
+    margin-top: 30px;
+    margin-left: 25px;
+}
+
+.container-general-summary-profile{
+    padding-top: 150px;
+}
+
+.profile-information-container{
+    color:white
+}
+
+.container-summary-information{
+    text-align: center
+}
+
+.container-summary-information h1{
+    font-size: 150px;
+    padding-top: 30px;
+}
+
+.container-summary-information a{
+    position:relative;
+    top: 25px;
+}
+
+.container-summary-information p{
+    position: relative;
+    top: -30px;
+    font-size: 25px;
+}
+
+.teaser-summary-category{
+    position: absolute;
+    top: 40px;
+    font-size: 12px;
+    width: 250px;
+}
+
+p.no-messages{
+    position:relative;
+    top: 30px;
+    font-size: 17px;
+}
+
+.background-profile-terran, .background-profile-zerg, .background-profile-protoss{
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.background-profile-terran{
+    background: url('../images/background-races/terran-background-2.jpg') no-repeat center center fixed;
+}
+
+.background-profile-zerg{
+    background: url('../images/background-races/zerg-background-2.jpg') no-repeat center center fixed;
+}
+
+.background-profile-protoss{
+    background: url('../images/background-races/protoss-background-2.jpg') no-repeat center center fixed;
+}
+
+@media screen and (max-width: 1024px) {
+    .background-profile-terran, .background-profile-zerg, .background-profile-protoss {
+        left: 50%;
+        margin-left: -512px;   /* 50% */
+    }
+}
+
+.sliding-panel-main-profile{
+    padding-top: 130px;
+}
+
+.user-profile-data-list{
+    list-style: none;
+    margin:0;
+    padding: 0;
+}
+
+.user-profile-data-list li {
+    background-color: black;
+    padding: 10px 10px;
+    margin-bottom: 3px;
+    background-color:rgba(0, 0, 0, 0.7);
+}
+
+.user-profile-data-list li:last-child{
+    margin-bottom: 10px;
+}
+
+.container-advice-edit-tournament h4{
+    padding-top: 15px;
+}
+
+.container-advice-edit-tournament p{
+    margin-top: 30px;
+}
+
+.container-advice-edit-tournament span{
+    color: red;
+}
+
+.sidebar-edit-tournament{
+    margin-top: 10px;
+}
+
+a.return-to-tournament-details{
+    color: green;
+}
+
+a.return-to-control-panel{
+    color: red;
+}
+
+.avatar-tabs{
+    margin-top: 25px;
+}
+
+.container-choose-avatar-btn{
+    text-align: center;
+}
+
+#successMessage{
+    color: green;
+}
+
+#errorMessage{
+    color: red;
+}
+
+.upload-avatar-btn{
+    margin-bottom: 10px;
+}
+
+.container-3-players, .container-3-tournaments{
+    padding-top: 15px;
+}
+
+.btn-info-player{
+    width:112px;
+}
+
+.progress-striped{
+    margin-top: 5px;
+}
+
+.border-dotted-container{
+    border-right: 1px dotted orangered;
+}
+
+.message-receiver-container{
+    position: relative; top: 22px;
+}
+
+.containerNicknameRaceBNet h1 > span{
+    color: green;
+}
+
+.receiver-tournaments{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sender-message-text{
+    font-weight: bold;
+}
+
+.table-players{
+    margin-top: 20px;
+}
+
+.container-customize-profile, .container-details-profile, .container-edit-quote, .container-delete-quote{
+    margin-top: 150px;
+}
+
+.container-create-quote h1{
+    font-size: 30px;
+    padding-top: 40px;
+}
+
+.info-editing-tournament-section{
+    padding-top: 15px;
+}
+
+.choose-tournament-date, .choose-tournament-hour, .add-sponsors{
+    margin-bottom: 10px;
+}
+
+.tournament-prizes-status, .tournament-sponsors-status{
+    color: red;
+}
+
+.available-slots-summary-closed-tournament{
+    text-align: center;
+}
+
+.available-slots-summary-closed-tournament p > span{
+    font-size: 40px; font-weight: bold;
+}
+
+.container-create-tournament{
+    margin-top: 100px; margin-bottom: 50px;
+}
+
+.notifier-tournament-status-ongoing, .notifier-tournament-status-completed{
+    padding-top: 15px;
+    font-size: 14px;
+    margin-top: 40px;
+}
+
+.notifier-tournament-status-ongoing{
+    color: orange;
+}
+
+.notifier-tournament-status-completed{
+    color: red;
+}
+
+.error-eligible-tournament, .error-enlisted-tournament{
+    margin-top: 40px;
+    color: red
+}
+
+.error-enlisted-tournament {
+    color: green;
+}
+
+.centered-info-tournament{
+    text-align: center;
+}
+
+.enlisted-players-main-container, .container-user-tournaments{
+    border: none;
+}
+
+.tabs-player-enlisted, .table-league-players, .user-ongoing-finished-tournaments{
+    margin-top: 20px;
+}
+
+.list-profile-player{
+    list-style: none;
+}
+
+.tournament-winner-container{
+    width: inherit;
+    text-align: center;
+}
+
+.select-tournament-players{
+    margin-bottom: 20px;
+}
+
+.no-edit-options{
+    opacity: 0.9;
+    background-color: #cccccc;
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index:1000;
+}
+
+.no-edit-message{
+    width: 980px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 1001;
+    margin-top: 300px;
+}
+
+#turnee-active-jucator, #turnee-inactive-jucator{
+    margin-top: 20px;
+}
+
+.edit-options-tournament-admin {
+    padding-top: 50px;
+    float: right;
+}
+
+.edit-options-tournament-admin ul li{
+    display: inline;
+}
+
+.no-edit-message h1, .no-edit-message h4{
+    text-align: center;
+}
+
+.welcome-title-summary-backend{
+    padding-top: 50px;
+}
+
+.footer{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+/*create tournament results*/
+.success-error-messages-container{
+    text-align: center;
+    padding-top: 100px;
+}
+
+.success-message-create-tournament{
+    font-size: 60px;
+    line-height: 60px;
+    margin-bottom: 60px;
+    /*width: 50%;*/
+}
+
+.notify-players-message{
+    font-size: 20px;
+    color: #0aa645;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/*profile page styles*/
+.container-welcome-elements-race{
+    position: relative;
+    top: 50px;
+}
+
+.main-message-race, .message-extended-race{
+    opacity: 0.7;
+}
+
+.main-message-race{
+    width: 605px;
+    height: 75px;
+    background-color: #000;
+    margin-bottom: 2px;
+    padding-left: 10px;
+}
+
+.main-message-race ul{
+    margin:0;
+    padding: 0;
+}
+
+.main-message-race img{
+    position: relative;
+    top: -3px;
+}
+
+.main-message-race h3{
+    padding-top: 10px;
+}
+
+.main-message-race ul li {
+    display: inline-block;
+}
+
+.main-message-race ul li h3{
+    color: #fff;
+}
+
+.message-extended-race{
+    width: 935px;
+    height: 95px;
+    background-color: #000;
+    color: #fff;
+    padding-top: 25px;
+    padding-left: 15px;
+}
+
+.container-elements-create-brackets, .container-send-notification {
+    padding-top: 20px;
+    text-align: center;
+}
+
+/*.container-send-notification {*/
+    /*padding-top: 100px;*/
+/*}*/
+
+.challonge-logo {
+    position: relative;
+    top: 60px;
+}
+
+.container-logos-brackets {
+    padding-top: 30px;
+}

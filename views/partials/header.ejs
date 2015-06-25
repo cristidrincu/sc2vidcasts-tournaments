@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Site-ul pentru organizarea de turnee e-sport de Starcraft 2 pentru Romania">
+    <meta name="author" content="Cristian Sergiu Drincu">
+
+    <title>Starcraft2 Vidcasts Romania - Turnee romanesti de Starcraft 2</title>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js" async></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js" async></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.0/themes/flick/jquery-ui.css"/>
+    <link rel="stylesheet" href="/js/pickadate.js-3.5.3/lib/themes/classic.css"/>
+    <link rel="stylesheet" href="/js/pickadate.js-3.5.3/lib/themes/classic.time.css"/>
+    <link rel="stylesheet" href="/css/animate/animate.css"/>
+    <link rel="stylesheet" href="/css-dist/combined.min.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <!--<script src="/js/sb-admin-2.js"></script>-->
+    <script src="/js-dist/combined.min.js"></script>
+
+</head>
+<body>
+<div id="wrapper">
+
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-static-top header-bar" role="navigation">
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <%if(user != null){%>
+        <a id="welcome-user-message" class="navbar-brand" href="/profile">Bine ai venit, <%=user.local.nickname%>.</a>
+        <p id="dateParagraph" class="navbar-brand"></p>
+        <br class="clearFloats"/>
+    <%}%>
+
+</div>
+<!-- /.navbar-header -->
+
+<%if(user !=null){%>
+<ul class="nav navbar-top-links navbar-right">
+<li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+    </a>
+    <%if(user != null){%>
+    <ul class="dropdown-menu dropdown-user">
+        <li><a href="/profile"><i class="fa fa-user fa-fw"></i> Profil</a>
+        </li>
+        <li><a href="/customize-profile/<%=user.local.nickname%>"><i class="fa fa-gear fa-fw"></i> Setari</a>
+        </li>
+        <li class="divider"></li>
+        <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+        </li>
+    </ul>
+    <%}%>
+    <!-- /.dropdown-user -->
+</li>
+<!-- /.dropdown -->
+</ul>
+<%}%>
+</nav></div>
+<!-- /.navbar-top-links -->

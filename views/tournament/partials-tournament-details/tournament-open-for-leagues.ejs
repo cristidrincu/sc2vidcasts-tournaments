@@ -1,0 +1,16 @@
+<div class="col-lg-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-diamond fa-fw"></i> Turneu deschis urmatoarelor ligi
+        </div>
+        <div class="panel-body">
+            <p>
+                <%for(var i = 0; i< tournament.openForLeagues.leagues.length; i++){%>
+                <%=tournament.openForLeagues.leagues[i] +
+                (tournament.openForLeagues.leagues[i] == tournament.openForLeagues.leagues[tournament.openForLeagues.leagues.length-1] ? '.': ', ')
+                %>
+                <%};%>
+            </p>
+        </div>
+    </div>
+</div>

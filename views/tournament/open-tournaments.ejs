@@ -1,0 +1,78 @@
+<% include ../partials/header.ejs %>
+<% avatarUser.local.avatar.forEach(function(avatar){%>
+    <%if(user.local.role == 'admin'){ %>
+        <% include ../partials/sidebar-admin.ejs %>
+    <%}else if(user.local.role == 'Organizator'){ %>
+        <% include ../partials/sidebar-organizer.ejs %>
+    <%}else{%>
+        <% include ../partials/sidebar.ejs %>
+    <%}%>
+<%});%>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"><i class="fa fa-trophy fa-1x"></i> Lista turnee deschise</h1>
+        </div>
+    </div>
+    <%if(tournaments.length == 0){%>
+        <p>Nu exista turnee deschise in acest moment!</p>
+    <%}else{%>
+    <div class="row">
+        <div class="col-lg-12 animated fadeInUp">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-clock-o fa-fw"></i> Lista turnee
+                </div>
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Numele turneului</th>
+                            <th>Locuri disponibile</th>
+                            <th>Editia</th>
+                            <th>Data inceperii</th>
+                            <th>Data terminarii</th>
+                            <th>Premii</th>
+                            <th>Detalii</th>
+                            <th>Procentaj ocupare locuri</th>
+                        </tr>
+                        <% tournaments.forEach(function(tournament){ %>
+                        <tr>
+                            <td><%= tournament.tournamentName %></td>
+                            <td><%= tournament.nrOfPlayers %></td>
+                            <td><%= tournament.edition %></td>
+                            <td><%= moment(tournament.startDate).format("DD MMMM YYYY") %></td>
+                            <td><%= moment(tournament.endDate).format("DD MMMM YYYY") %></td>
+                            <td>
+                                <%= tournament.prize ? 'Da' : 'Nu'%>
+                            </td>
+                            <td>
+                                <% if( user.local.role == 'User'){%>
+                                    <a class="btn btn-success" href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
+                                        <i class="fa fa-binoculars"></i> Detalii
+                                    </a>
+                                <%}else if( user.local.role == 'admin'){%>
+                                    <a class="btn btn-success" href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
+                                        <i class="fa fa-binoculars"></i> Detalii
+                                    </a>
+                                <%}else{%>
+                                <a class="btn btn-success" href="/tournament-details/<%= tournament._id %>/<%= user._id%>">
+                                    <i class="fa fa-binoculars"></i> Detalii
+                                </a>
+                                <%}%>
+                            </td>
+                            <td>
+                                <p>
+                                    <%= Math.floor((tournament.players.length * (100 / tournament.nrOfPlayers))) + '%' %>
+                                </p>
+                            </td>
+                        </tr>
+                        <% }); %>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%}%>
+</div>
+
+<%include ../partials/footer.ejs%>

@@ -1,0 +1,95 @@
+<% include ../partials/header.ejs%>
+<%
+    var nrOfPlayers = ['4', '8', '16', '32', '64'],
+        leagues = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Master', 'Grand Master'];
+%>
+
+<script>
+    $(document).ready(function() {
+
+        var pickerOptions = {
+            dateFormat: 'd MM yy'
+        };
+
+        $('#startDatePicker').datepicker(pickerOptions);
+        $('#endDatePicker').datepicker(pickerOptions);
+
+        $('#startHourPicker').pickatime({
+            formatSubmit: 'HH:i',
+            hiddenName: true
+        });
+    })
+</script>
+<div class="container container-create-tournament">
+    <div class="col-sm-6 col-sm-offset-3">
+        <!-- create tournament FORM -->
+        <form action="/create-tournament" method="post">
+            <div class="form-group">
+                <label>Numele turneului</label>
+                <input type="text" class="form-control" name="tournamentName" placeholder="<%= placeholders.placeholderTournamentName%>" required>
+            </div>
+            <div class="form-group">
+                <label>Locuri disponibile</label>
+                <select class="form-control" name="nrOfPlayers">
+                    <%for (var i = 0; i<nrOfPlayers.length; i++){%>
+                    <option value="<%=nrOfPlayers[i]%>"><%=nrOfPlayers[i]%></option>
+                    <%}%>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Turneu disponibil pentru urmatoarele ligi</label>
+                <%for (var i=0; i<leagues.length; i++){%>
+                    <div class="checkbox">
+                        <input type="checkbox" name="leagues" value="<%=leagues[i]%>"/> <%=leagues[i]%>
+                    </div>
+                <%}%>
+            </div>
+            <div class="form-group">
+                <label>Editia turneului</label>
+                <input type="text" class="form-control" name="edition" placeholder="<%= placeholders.placeholderTournamentEdition%>" required>
+            </div>
+            <div class="form-group">
+                <label>Canal Ingame pentru CHAT</label>
+                <input type="text" class="form-control" name="ingameChatChannel" placeholder="<%= placeholders.placeholderTournamentInGameChat%>" required>
+            </div>
+            <div class="form-group">
+                <label>Canalul de Twitch pentru LIVE STREAM</label>
+                <input type="text" class="form-control" name="twitchStreamChannel" placeholder="<%= placeholders.placeholderTwitchChannelLength%>" required>
+            </div>
+            <div class="form-group">
+                <label>Descrierea turneului(informatii suplimentare)</label>
+                <textarea class="form-control" name="description" rows="5" placeholder="<%= placeholders.placeholderTournamentDescription%>" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Data inceperii turneului</label>
+                <input type="text" class="form-control" id="startDatePicker" name="startDate" required>
+            </div>
+            <div class="form-group">
+                <label>Data terminarii turneului</label>
+                <input type="text" class="form-control" id="endDatePicker" name="endDate" required>
+            </div>
+            <div class="form-group">
+                <label>Ora inceperii turneului</label>
+                <input type="text" class="form-control" id="startHourPicker" name="startHour" required>
+            </div>
+            <div class="form-group">
+                <label>Se ofera premii in cadrul acestui turneu?</label>
+                <label>
+                    <input type="radio" name="prize" id="optionsPremii1" value="true" checked>
+                    Da
+                </label>
+                <label>
+                    <input type="radio" name="prize" id="optionsPremii2" value="false">
+                    Nu
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Sponsori pentru acest turneu, daca exista</label>
+                <input type="text" class="form-control" name="sponsors">
+            </div>
+
+            <button type="submit" class="btn btn-warning btn-lg">Creeaza acest turneu</button>
+        </form>
+    </div>
+</div>
+<% include ../partials/footer.ejs%>

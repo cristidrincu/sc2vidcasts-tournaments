@@ -28,11 +28,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <!--<script src="/js/sb-admin-2.js"></script>-->
-    <script src="/js-dist/combined.min.js"></script>
-
 </head>
 <body>
 <div id="wrapper">
@@ -50,8 +45,11 @@
         <a id="welcome-user-message" class="navbar-brand" href="/profile">Bine ai venit, <%=user.local.nickname%>.</a>
         <p id="dateParagraph" class="navbar-brand"></p>
         <br class="clearFloats"/>
-    <%}%>
-
+    <%} else {%>
+        <a id="welcome-user-message" class="navbar-brand" href="/profile">Bine ai venit!</a>
+        <p id="dateParagraph" class="navbar-brand"></p>
+        <br class="clearFloats"/>
+    <% } %>
 </div>
 <!-- /.navbar-header -->
 

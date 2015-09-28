@@ -100,8 +100,7 @@ app.use(quote);
 
 app.use(logout);
 
-
 //launch
 app.listen(app.get('port'), function() {
 	console.log("Node app is running at localhost:" + app.get('port'))
-})
+});

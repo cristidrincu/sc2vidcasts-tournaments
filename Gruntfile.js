@@ -13,7 +13,7 @@ module.exports = function(grunt){
 				dest: 'public/css-dist/combined.css'
 			},
 			js: {
-				src: ['public/js/sidebar-menus.js', 'public/js/site-date.js', 'public/js/slidingProfilePanels.js', 'public/js/flash-messages.js'],
+				src: ['public/js/tournament-backend-scripts/sidebar-menus.js', 'public/js/tournament-backend-scripts/site-date.js', 'public/js/tournament-backend-scripts/slidingProfilePanels.js', 'public/js/tournament-backend-scripts/flash-messages.js'],
 				dest: 'public/js-dist/combined.js'
 
 			}

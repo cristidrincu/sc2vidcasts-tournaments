@@ -78,7 +78,7 @@
                 return currentMonth;
         }
 
-        return 'Astazi este: ' + currentDay + ',' + currentDateDay + ' ' + currentMonth + ' ' + year;
+        return 'Astazi este: ' + currentDay + ', ' + currentDateDay + ' ' + currentMonth + ' ' + year;
     };
 
 

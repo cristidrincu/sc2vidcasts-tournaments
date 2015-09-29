@@ -15,16 +15,18 @@ var blockUIEvent = new EventEmitter();
 var app = module.exports = express();
 
 blockUIEvent.on('blockUI', function() {
+    //TODO - investigate event emmiters in NodeJS
     console.log('Blocking UI...');
 });
 
 blockUIEvent.on('stopBlockingUI', function() {
+    //TODO - investigate event emmiters in NodeJS
     console.log('Stopped blocking UI!');
 });
 
 app.post('/choose-avatar/:userId/:avatarId', middleware.isLoggedIn, function(req, res){
   blockUIEvent.emit('blockUI', function() {
-
+       //TODO - investigate event emmiters in NodeJS
   });
 
   helperFunctions.setAvatarForUser(req.params.userId, req.params.avatarId).then(function(user){
@@ -37,7 +39,7 @@ app.post('/choose-avatar/:userId/:avatarId', middleware.isLoggedIn, function(req
     }
 
   blockUIEvent.emit('stopBlockingUI', function() {
-
+      //TODO - investigate event emmiters in NodeJS
   });
  });
 });

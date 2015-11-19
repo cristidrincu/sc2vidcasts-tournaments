@@ -48,6 +48,7 @@ var pageElements = (function() {
 app.get('/signup', function (req, res) {
   res.render('signup.ejs', {
       messages: req.flash('error'),
+      //this gets used in the signup page when there are errors(messages), so the form fields get repopulated with previous values entered by the user
       previousFormValues: req.session.userCompletedFormValues,
       user: null,
       pageElements: pageElements

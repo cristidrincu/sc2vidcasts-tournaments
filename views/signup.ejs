@@ -1,25 +1,28 @@
 <% include partials/header.ejs %>
-
-<%
-    var races = ['Terran', 'Zerg', 'Protoss'];
-    var leagues = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Master', 'Grand Master'];
-    var roles = ['User', 'Organizator'];
-%>
+<script>
+    $(document).ready(function() {
+       $battleNetIdField = $('.battlenetId');
+       $battleNetIdField.on('focus', function() {
+           console.log('Battle Net Id Field has focus');
+           //TODO - create ajax request to battlenet api and block UI until response comes back
+       });
+    });
+</script>
 <div class="container">
     <div class="col-sm-6 col-sm-offset-3">
         <h1><span class="fa fa-sign-in"></span> Signup</h1>
-
-        <% if (messageBNet.length > 0) { %>
-            <div class="alert alert-danger"><%= messageBNet %></div>
-        <% } %>
-
         <!-- LOGIN FORM -->
         <form action="/signup" method="post">
             <div class="form-group">
+                <% for(var i in messages) { %>
+                    <div class="alert alert-danger" role="alert"><%= messages[i] %></div>
+                <% } %>
                 <label>Email</label>
                 <!-- show any messages that come back with authentication -->
-                <% if ( message.length > 0 ) {%>
-                    <input style="color: red;" type="text" class="form-control" name="email" required value="<%= message %>">
+                <!-- TODO - place all fields that are appearing if there are errors inside the if(messages.length > 0)-->
+                <!-- TODO - place all fields that are appearing by default when user navigates to signup page in the else clause-->
+                <% if ( messages.length > 0 ) {%>
+                    <input style="color: #66CD00" type="text" class="form-control" name="email" value="<%=previousFormValues.userEmail%>" required>
                 <%}else { %>
                     <input type="text" class="form-control" name="email" required placeholder="Introdu un email valid">
                 <%}%>
@@ -34,39 +37,85 @@
             </div>
             <div class="form-group">
                 <label>Nickname</label>
-                <% if ( messageNick.length > 0 ) {%>
-                    <input type="text" class="form-control" name="nickname" required value="<%= messageNick %>">
+                <% if ( messages.length > 0 ) {%>
+                    <input style="color: #66CD00" type="text" class="form-control" name="nickname" value="<%=previousFormValues.userNickname%>" required>
                 <%} else { %>
-                    <input type="text" class="form-control" name="nickname" required placeholder="Minim 3 caractere, maxim 10 caractere">
+                    <input type="text" class="form-control" name="nickname" required placeholder="Minim 3 caractere, maxim 30 caractere">
                 <%}%>
             </div>
             <div class="form-group">
                 <label>Doresc un cont de</label>
-                <select class="form-control" name="role" required>
-                    <%for(var i=0; i<roles.length; i++){%>
-                        <option value="<%=roles[i]%>"><%=roles[i]%></option>
-                    <%}%>
-                </select>
+                <%if(messages.length > 0) {%>
+                    <% var filteredRoles = pageElements.filteredRoles(previousFormValues.userAccount) %>
+                    <select style="border:1px solid #66CD00" class="form-control" name="role" required>
+                        <optgroup label="Ai ales urmatorul tip de cont: ">
+                            <option value="<%= previousFormValues.userAccount%>"><%= previousFormValues.userAccount %></option>
+                        </optgroup>
+                        <optgroup label="Alte tipuri de conturi: ">
+                            <%for(var i = 0; i < filteredRoles.length; i++){%>
+                                <option value="<%= filteredRoles[i]%>"><%= filteredRoles[i] %></option>
+                            <%}%>
+                        </optgroup>
+                    </select>
+                <%} else {%>
+                    <select class="form-control" name="role" required>
+                        <%for(var i = 0; i < pageElements.roles.length; i++){%>
+                            <option value="<%= pageElements.roles[i]%>"><%= pageElements.roles[i]%></option>
+                        <%}%>
+                    </select>
+                <%}%>
             </div>
             <div class="form-group">
                 <label>Battle.net ID (fara #)</label>
-                <input type="text" class="form-control" name="battlenetid" required placeholder="Introdu un cod de BattlenetID valid, fara #">
+                <%if(messages.length > 0) {%>
+                    <input style="color: #66CD00" type="text" class="form-control battlenetId" name="battlenetid" value="<%=previousFormValues.userBNetId%>" required>
+                <%} else {%>
+                    <input type="text" class="form-control battlenetId" name="battlenetid" required placeholder="Introdu un cod de BattlenetID valid, fara #">
+                <%}%>
             </div>
             <div class="form-group">
                 <label>Rasa cu care joci</label>
+                <%if(messages.length > 0) {%>
+                    <%var filteredRaces = pageElements.filteredRaces(previousFormValues.userRace)%>
+                <select style="border:1px solid #66CD00" class="form-control" name="race" required>
+                    <optgroup label="Ai ales urmatoarea rasa: ">
+                        <option value="<%= previousFormValues.userRace%>"><%= previousFormValues.userRace%></option>
+                    </optgroup>
+                    <optgroup label="Alte rase disponibile: ">
+                        <% for (var i = 0; i < filteredRaces.length; i++){%>
+                            <option value="<%= filteredRaces[i]%>"><%= filteredRaces[i]%></option>
+                        <%}%>
+                    </optgroup>
+                </select>
+                <%} else {%>
                 <select class="form-control" name="race" required>
-                    <% for (var i=0; i<races.length; i++){%>
-                    <option value="<%=races[i]%>"><%=races[i]%></option>
+                    <% for (var i = 0; i < pageElements.races.length; i++){%>
+                        <option value="<%= pageElements.races[i]%>"><%= pageElements.races[i]%></option>
                     <%}%>
                 </select>
+                <%}%>
             </div>
             <div class="form-group">
                 <label>Liga din care faci parte</label>
-                <select class="form-control" name="league" required>
-                    <%for (var i = 0; i<leagues.length; i++){%>
-                    <option value="<%=leagues[i]%>"><%=leagues[i]%></option>
-                    <%}%>
-                </select>
+                <%if(messages.length > 0){%>
+                    <%var filteredLeagues = pageElements.filteredLeagues(previousFormValues.userLeague)%>
+                    <select style="border:1px solid #66CD00" class="form-control" name="league" required>
+                        <optgroup label="Ai ales urmatoarea liga: ">
+                            <option value="<%=previousFormValues.userLeague%>"><%=previousFormValues.userLeague%></option>
+                        </optgroup>
+                        <optgroup label="Alte ligi disponibile">
+                            <%for (var i = 0; i < filteredLeagues.length; i++){%>
+                                <option value="<%= filteredLeagues[i]%>"><%= filteredLeagues[i]%></option>
+                            <%}%>
+                        </optgroup>
+                    </select>
+                <%} else {%>
+                    <select class="form-control" name="league" required>
+                        <%for (var i = 0; i < pageElements.leagues.length; i++){%>
+                            <option value="<%= pageElements.leagues[i]%>"><%= pageElements.leagues[i]%></option>
+                        <%}%>
+                    </select>
+                <%}%>
             </div>
             <input type="hidden" value="5425982be4b0b7147c91e951" name="defaultAvatar"/>
 

@@ -12,6 +12,6 @@ exports.validateBNetId = function(bnet){
 }
 
 exports.validateNickname = function(nickname){
-	var re = /^[a-zA-Z0-9]{3,10}$/;
+	var re = /^[a-zA-Z0-9]{3,30}$/;
 	return re.test(nickname);
 }

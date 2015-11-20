@@ -1,6 +1,68 @@
 <% include partials/header.ejs %>
 <script>
     $(document).ready(function() {
+        //TODO - create a module and expose it as an API
+        var formLockDownModule = (function() {
+
+        }());
+
+        var self = this;
+        this.formErrors = 0;
+        var inputFields = {
+            $inputTextEmail: $("input[name = 'email']")
+        }
+        this.errorTexts = {
+            emailErrorText: $('#error-invalid-email')
+        }
+        this.regexCollection = {
+             emailRegex: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        }
+
+        this.increaseErrors = function() {
+            this.formErrors++;
+        }
+
+        this.getNumberOfErrors = function () {
+            return this.formErrors;
+        }
+
+        this.disableSubmitButton = function() {
+            $("button[type='submit']").prop('disabled', true).text('Exista erori in formularul de inscriere!').attr('class', 'btn btn-danger btn-lg');
+        }
+
+        this.enableSubmitButton = function () {
+            $("button[type='submit']").prop('disabled', false).text('Signup').attr('class', 'btn btn-success btn-lg');
+        }
+
+        this.checkInputForErrors = function(inputField, regex, errorTextParagraph, cb) {
+            var isWithoutErrors = false;
+            if( !regex.test(inputField.val()) && inputField.val().length > 0) {
+                errorTextParagraph.css({'display': 'block'});
+            } else {
+                isWithoutErrors = true;
+                errorTextParagraph.css({'display': 'none'});
+            }
+
+            cb(isWithoutErrors);
+        }
+
+        this.formLockDown = function () {
+            this.increaseErrors();
+            this.getNumberOfErrors();
+            this.disableSubmitButton();
+        }
+
+        //TODO - keydown sau blur
+        inputFields.$inputTextEmail.on('keydown', function() {
+            self.checkInputForErrors(inputFields.$inputTextEmail, self.regexCollection.emailRegex, self.errorTexts.emailErrorText, function(isWithoutErrors) {
+                if(!isWithoutErrors) {
+                    self.formLockDown();
+                } else {
+                    self.enableSubmitButton();
+                }
+            });
+        });
+
        $battleNetIdField = $('.battlenetId');
        $battleNetIdField.on('focus', function() {
            console.log('Battle Net Id Field has focus');
@@ -24,7 +86,24 @@
                 <% if ( messages.length > 0 ) {%>
                     <input style="color: #66CD00" type="text" class="form-control" name="email" value="<%=previousFormValues.userEmail%>" required>
                 <%}else { %>
-                    <input type="text" class="form-control" name="email" required placeholder="Introdu un email valid">
+                    <input type="text" class="form-control" name="email" required placeholder="Introdu un email valid" />
+                    <!-- required for JQuery validation-->
+                <div id="error-invalid-email" class="error-message-container" style="background-color: #f05a5c; display:none; width: 100%;
+                       height: 50px; color: white; border-radius: 5px; margin-top: 15px;
+                       text-align: left; padding-top: 15px; padding-left: 10px; font-style: italic; position: relative;">
+                    <div style="width: 20px; height: 20px; margin-left: auto; margin-right: auto;
+                        background-color: #f05a5c;
+                        position: absolute;
+                        left: 270px;
+                        top: -5px;
+                        transform: rotate(45deg);
+                        -ms-transform:rotate(45deg); /* IE9 */
+	                    -moz-transform: rotate(45deg);  /* FF3.5/3.6 */
+	                    -o-transform: rotate(45deg);  /* Opera 10.5 */
+	                    -webkit-transform: rotate(45deg);  /* Saf3.1+ */
+                        "></div>
+                    <p>ERREMADDR - Acest tip de email nu exista in sectorul Koprulu! Esti zerg?</p>
+                </div>
                 <%}%>
             </div>
             <div class="form-group">
@@ -119,7 +198,7 @@
             </div>
             <input type="hidden" value="5425982be4b0b7147c91e951" name="defaultAvatar"/>
 
-            <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+            <button type="submit" class="btn btn-success btn-lg">Signup</button>
         </form>
         <hr>
         <p>Ai deja un cont? <a href="/login">Login</a></p>

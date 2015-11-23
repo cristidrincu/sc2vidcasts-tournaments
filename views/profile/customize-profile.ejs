@@ -6,11 +6,11 @@
         <form action="/customize-profile/<%=user.local.nickname%>" method="post">
             <div class="form-group">
                 <label>Update Email</label>
-                <input type="text" class="form-control" name="email" value="<%=user.local.email%>">
+                <input type="text" class="form-control" name="email" value="<%=user.local.email%>" required>
             </div>
             <div class="form-group">
                 <label>Update Nickname</label>
-                <input type="text" class="form-control" name="nickname" value="<%=user.local.nickname%>">
+                <input type="text" class="form-control" name="nickname" value="<%=user.local.nickname%>" required>
             </div>
             <div class="form-group">
                 <label>Modifica rasa cu care joci</label>
@@ -20,7 +20,6 @@
                         <option value="<%=races[i]%>"><%=races[i]%></option>
                     <%}%>
                 </select>
-                <!--<input type="text" class="form-control" name="race" value="<%=user.local.race%>">-->
             </div>
             <div class="form-group">
                 <label>Modifica liga din care faci parte</label>
@@ -30,7 +29,6 @@
                         <option value="<%=leagues[i]%>"><%=leagues[i]%></option>
                     <%}%>
                 </select>
-                <!--<input type="text" class="form-control" name="league" value="<%=user.local.league%>">-->
             </div>
             <button type="submit" class="btn btn-success btn-lg">Update</button>
             <a href="/profile">

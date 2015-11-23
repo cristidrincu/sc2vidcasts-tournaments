@@ -1,105 +1,39 @@
 <% include partials/header.ejs %>
+
 <script>
     $(document).ready(function () {
-        var formLockDownModule = (function () {
-            var $submitBtnReference = $("button[type='submit']");
-            var $errorOverlay = $("#error-signup-overlay");
+        var $signupFormReference = $("#signupForm");
+        var $submitBtnReference = $("button[type='submit']");
+        var $errorOverlay = $("#error-signup-overlay");
 
-            var pvInputFields = {
-                $inputTextEmail: $("input[name = 'email']"),
-                $inputTextNickname: $("input[name = 'nickname']"),
-                $inputTextBNetId: $("input[name = 'battlenetid']")
-            }
-            var pvErrorTexts = {
-                emailErrorText: $('#error-invalid-email'),
-                nicknameErrorText: $('#error-invalid-nickname'),
-                bnetIdErrorText: $('#error-invalid-bnetid')
-            }
-            var pvRegexCollection = {
-                emailRegex: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                nicknameRegex: /^[a-zA-Z0-9]{3,10}$/,
-                bnetRegex: /^[0-9]{3,4}$/
-            }
+        var pvInputFields = {
+            $inputTextEmail: $("input[name = 'email']"),
+            $inputTextNickname: $("input[name = 'nickname']"),
+            $inputTextBNetId: $("input[name = 'battlenetid']")
+        }
+        var pvErrorTexts = {
+            emailErrorText: $('#error-invalid-email'),
+            nicknameErrorText: $('#error-invalid-nickname'),
+            bnetIdErrorText: $('#error-invalid-bnetid')
+        }
+        var pvRegexCollection = {
+            emailRegex: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            nicknameRegex: /^[a-zA-Z0-9]{3,30}$/,
+            bnetRegex: /^[0-9]{3,4}$/
+        }
 
-            function disableSubmitButton() {
-                $submitBtnReference.prop('disabled', true).text('Exista erori in formularul de inscriere!').attr('class', 'btn btn-danger btn-lg');
-            }
+        var signupLockdownModule = formLockDownModule($submitBtnReference, $errorOverlay,'Signup', 'Exista erori in formularul de inscriere!');
 
-            function enableSubmitButton() {
-                $submitBtnReference.prop('disabled', false).text('Signup').attr('class', 'btn btn-success btn-lg');
-            }
-
-            function enableErrorOverlay() {
-                $errorOverlay.css({"display": "block"});
-            }
-
-            function disableErrorOverlay() {
-                $errorOverlay.css({"display": "none"});
-            }
-
-            function checkInputForErrors(inputField, regex, errorTextParagraph, cb) {
-                inputField.on('blur', function () {
-                    if (!regex.test(inputField.val()) && inputField.val().length > 0) {
-                        var isWithoutErrors = false;
-
-                        $("#signupForm").find('input').each(function() {
-                            if($(this).prop('required')) {
-                                $(this).prop('disabled', true);
-                            }
-                            inputField.css({"position": "relative", "z-index": 103}).prop('disabled', false);
-                        });
-
-                        errorTextParagraph.css({'display': 'block', 'position': 'relative', 'z-index': 102});
-
-                        enableErrorOverlay();
-                    } else {
-                        isWithoutErrors = true;
-
-                        $("#signupForm").find('input').each(function() {
-                            if($(this).prop('required')) {
-                                $(this).prop('disabled', false);
-                            }
-                            inputField.css({"position": "relative", "z-index": 102}).prop('disabled', false);
-                        });
-
-                        errorTextParagraph.css({'display': 'none', 'position': 'relative', 'z-index': 102});
-
-                        disableErrorOverlay();
-                    }
-                    cb(isWithoutErrors);
-                });
-            }
-
-            function formLockDown() {
-                disableSubmitButton();
-            }
-
-            function formUnlock() {
-                enableSubmitButton();
-            }
-
-            return {
-                inputFields: pvInputFields,
-                errorTexts: pvErrorTexts,
-                regexCollection: pvRegexCollection,
-                disableSubmitButton: disableSubmitButton,
-                enableSubmitButton: enableSubmitButton,
-                checkInputForErrors: checkInputForErrors,
-                formLockDown: formLockDown,
-                formUnlock: formUnlock
-            }
-        }());
-
-        formLockDownModule.checkInputForErrors(formLockDownModule.inputFields.$inputTextEmail, formLockDownModule.regexCollection.emailRegex, formLockDownModule.errorTexts.emailErrorText, function (isWithoutErrorsEmail) {
-            isWithoutErrorsEmail ? formLockDownModule.formUnlock() : formLockDownModule.formLockDown();
+        signupLockdownModule.checkInputForErrors(pvInputFields.$inputTextEmail, pvRegexCollection.emailRegex, pvErrorTexts.emailErrorText, $signupFormReference, function (isWithoutErrorsEmail) {
+            isWithoutErrorsEmail ? signupLockdownModule.formUnlock() : signupLockdownModule.formLockDown();
         });
 
-        formLockDownModule.checkInputForErrors(formLockDownModule.inputFields.$inputTextNickname, formLockDownModule.regexCollection.nicknameRegex, formLockDownModule.errorTexts.nicknameErrorText, function (isWithoutErrorsNickname) {
-            isWithoutErrorsNickname ? formLockDownModule.formUnlock() : formLockDownModule.formLockDown();
+        signupLockdownModule.checkInputForErrors(pvInputFields.$inputTextNickname, pvRegexCollection.nicknameRegex, pvErrorTexts.nicknameErrorText, $signupFormReference, function (isWithoutErrorsNickname) {
+            isWithoutErrorsNickname ? signupLockdownModule.formUnlock() : signupLockdownModule.formLockDown();
         });
 
-        formLockDownModule.checkInputForErrors(formLockDownModule.inputFields.$inputTextBNetId, formLockDownModule.regexCollection.bnetRegex, formLockDownModule.errorTexts.bnetIdErrorText, function (isWithoutErrorsBnetId) {
-            isWithoutErrorsBnetId ? formLockDownModule.formUnlock() : formLockDownModule.formLockDown();
+        signupLockdownModule.checkInputForErrors(pvInputFields.$inputTextBNetId, pvRegexCollection.bnetRegex, pvErrorTexts.bnetIdErrorText, $signupFormReference, function (isWithoutErrorsBnetId) {
+            isWithoutErrorsBnetId ? signupLockdownModule.formUnlock() : signupLockdownModule.formLockDown();
         });
 
         $battleNetIdField = $('.battlenetId');
@@ -157,15 +91,15 @@
 
                 <div id="error-invalid-nickname" class="error-message-container">
                     <div class="error-message-div"></div>
-                    <p>ERRNICK - Un nickname trebuie sa fie format din minim 3 caractere, maxim 10!</p>
+                    <p>ERRNICK - Un nickname trebuie sa fie format din minim 3 caractere, maxim 30!</p>
                 </div>
                 <% } else { %>
                 <input type="text" class="form-control" name="nickname" required
-                       placeholder="Minim 3 caractere, maxim 10 caractere">
+                       placeholder="Minim 3 caractere, maxim 30 caractere">
                 <!-- Required for JQuery validation-->
                 <div id="error-invalid-nickname" class="error-message-container">
                     <div class="error-message-div"></div>
-                    <p>ERRNICK - Un nickname trebuie sa fie format din minim 3 caractere, maxim 10!</p>
+                    <p>ERRNICK - Un nickname trebuie sa fie format din minim 3 caractere, maxim 30!</p>
                 </div>
                 <% } %>
             </div>

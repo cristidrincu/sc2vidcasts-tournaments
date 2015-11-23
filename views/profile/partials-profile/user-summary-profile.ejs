@@ -41,24 +41,25 @@
     </div>
 </div>
 <%}%>
-<div class="col-lg-4">
-    <div class="panel div-gradient-red">
-        <div class="panel-heading">
-            <h3 class="panel-title">Ai strans in inbox...</h3>
-            <p class="teaser-summary-category">Mesaje de la prieteni, good news, bad news, blacklist...</p>
-        </div>
-        <div class="container-summary-information">
-            <h1><%= messages.length %></h1>
-            <p><%= messages.length == 0 || messages.length > 1 ? 'mesaje' : 'mesaj'%></p>
+<!--TODO - reactivate this div when the messaging feature has been released!-->
+<!--<div class="col-lg-4">-->
+    <!--<div class="panel div-gradient-red">-->
+        <!--<div class="panel-heading">-->
+            <!--<h3 class="panel-title">Ai strans in inbox...</h3>-->
+            <!--<p class="teaser-summary-category">Mesaje de la prieteni, good news, bad news, blacklist...</p>-->
+        <!--</div>-->
+        <!--<div class="container-summary-information">-->
+            <!--<h1><%= messages.length %></h1>-->
+            <!--<p><%= messages.length == 0 || messages.length > 1 ? 'mesaje' : 'mesaj'%></p>-->
 
-            <% if(messages.length == 0){%>
-            <p class="no-messages">Pff... <i class="fa fa-frown-o"></i></p>
-            <%} else {%>
-            <a class="btn btn-info" href="/user-messages/<%= detailedUser._id%>">Mesajele tale</a>
-            <%}%>
-        </div>
-    </div>
-</div>
+            <!--<% if(messages.length == 0){%>-->
+            <!--<p class="no-messages">Pff... <i class="fa fa-frown-o"></i></p>-->
+            <!--<%} else {%>-->
+            <!--<a class="btn btn-info" href="/user-messages/<%= detailedUser._id%>">Mesajele tale</a>-->
+            <!--<%}%>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 <div class="col-lg-4">
     <div class="panel div-gradient-green">
         <div class="panel-heading">

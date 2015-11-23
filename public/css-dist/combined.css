@@ -1590,6 +1590,56 @@ a.return-to-control-panel{
 .container-logos-brackets {
     padding-top: 30px;
 }
+
+/*styles for signup page error containers and messages*/
+.error-message-container {
+    width: 100%;
+    height: 50px;
+    background-color: #f05a5c;
+    display:none;
+    color: white;
+    border-radius: 5px;
+    margin-top: 15px;
+    padding-top: 15px;
+    padding-left: 10px;
+    text-align: left;
+    font-style: italic;
+    position: relative;
+}
+
+.error-message-div {
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #f05a5c;
+    position: absolute;
+    left: 270px;
+    top: -5px;
+    transform: rotate(45deg);
+    -ms-transform:rotate(45deg); /* IE9 */
+    -moz-transform: rotate(45deg);  /* FF3.5/3.6 */
+    -o-transform: rotate(45deg);  /* Opera 10.5 */
+    -webkit-transform: rotate(45deg);  /* Saf3.1+ */
+}
+
+#error-signup-overlay {
+    display: none;
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #000000;
+    opacity: .3;
+    filter: alpha(opacity=30);
+    -moz-opacity: .3;
+    z-index: 101;
+}
 body {
     margin: 0;
     padding: 0;

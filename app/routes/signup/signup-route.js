@@ -19,7 +19,7 @@ var pageElements = (function() {
     pvFilteredRaces = function(userRace) {
         return pvRaces.filter(function(race) {
             return race !== userRace;
-        })
+        });
     };
 
     pvFilteredLeagues = function(userLeague) {
@@ -31,7 +31,7 @@ var pageElements = (function() {
     pvFilteredRoles = function(userRole) {
         return pvRoles.filter(function(role) {
             return role !== userRole;
-        })
+        });
     };
 
     return {
@@ -41,7 +41,7 @@ var pageElements = (function() {
         filteredRaces: pvFilteredRaces,
         filteredLeagues: pvFilteredLeagues,
         filteredRoles: pvFilteredRoles
-    }
+    };
 }());
 
 /*SIGN-UP ROUTES*/

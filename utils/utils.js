@@ -7,7 +7,7 @@ exports.validateEmail = function(email){
 };
 
 exports.validateBNetId = function(bnet){
-	var re = /^[0-9]+$/;
+	var re = /^[0-9]{3,4}$/;
 	return re.test(bnet);
 };
 

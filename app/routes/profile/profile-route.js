@@ -39,13 +39,21 @@ app.get('/profile', middleware.isLoggedIn, function (req, res) {
 });
 
 app.get('/profile-details/:_id', middleware.isLoggedIn, function(req, res){
-  helperFunctions.getUserDetails(req.params._id).then(function(user){
-    res.render('profile/profile-details.ejs', {
-      user: req.user,
-      detailedUser: user,
-	    userAvatar: user
-    });
-  });
+	try {
+		helperFunctions.getUserDetails(req.params._id).then(function(user){
+			res.render('profile/profile-details.ejs', {
+				user: req.user,
+				detailedUser: user,
+				userAvatar: user
+			});
+		});
+	} catch(mongooseEntityNotFound) {
+		res.render('error-pages/error-forbidden-403', {
+			user: req.user,
+			errorType: mongooseEntityNotFound.type,
+			errorMessage: mongooseEntityNotFound.message
+		});
+	}
 });
 
 app.get('/customize-profile/:nickname', middleware.isLoggedIn, function(req, res){

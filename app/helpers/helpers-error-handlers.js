@@ -3,5 +3,6 @@
  */
 
 exports.handle = function(text, err){
-  throw new Error(text + err);
+  err = err ? err.length > 0 : '';
+  throw new Error(text, err);
 };

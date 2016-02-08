@@ -79,6 +79,7 @@ var avatar = require('./app/routes/avatar/avatar-routes');
 var editTournament = require('./app/routes/edit/edit-tournament');
 var editQuote = require('./app/routes/edit/edit-quote');
 var quote = require('./app/routes/quote/quote-route');
+var error = require('./app/routes/error/error-route');
 
 var logout = require('./app/routes/logout/logout-route');
 
@@ -97,6 +98,7 @@ app.use(avatar);
 app.use(editTournament);
 app.use(editQuote);
 app.use(quote);
+app.use(error);
 
 app.use(logout);
 

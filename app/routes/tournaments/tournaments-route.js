@@ -111,94 +111,159 @@ app.post('/create-tournament', middleware.isLoggedIn, middleware.requireRole('Or
 //TODO - REFACTOR MONGOOSE QUERY METHODS FOR TOURNAMENT INTO METHODS THAT RESIDE INSIDE NODE MODULES - SEE HELPER-MONGOOSE.JS
 app.get('/tournament-details/:_id/:userId', middleware.isLoggedIn, function (req, res) {
 
-    var enlistedInTournament = false;
-    var eligibleForTournament = false;
-    var allPlacesTaken = false;
+    //TODO - please write unit tests for these methods - isUserEnlisted etc
+    //TODO - also, do not allow user to change his league, that will automatically get pulled from Blizzards API
+    helperFunctions.getUserDetails(req.params.userId).then(function(user) {
+        helperFunctions.retrieveTournamentDetails(req.params._id).then(function(tournament) {
+            var enlistedInTournament = isUserEnlistedInTournament(user, tournament);
+            var eligibleForTournament = isUserEligibleForTournament(user, tournament);
+            var allPlacesTaken = areAllPlacesTaken(tournament);
 
-
-    User.find({_id: req.params.userId}).populate('local.avatar').exec(function (err, playersRetrieved) {
-        var ids = playersRetrieved.map(function (player) {
-            return player._id;
-        });
-
-        Tournament.findOne({_id: req.params._id, players: {$in: ids}}, function (err, tournament) {
-            if (tournament) {
-                enlistedInTournament = true;
-                return enlistedInTournament;
-            }
-        });
-
-        Tournament.findById(req.params._id).populate('players organizer bracket winner').exec(function (err, tournament) {
-            if (err) {
-                res.send(err);
-            } else {
-                tournament.openForLeagues.leagues.forEach(function (league) {
-                    if (req.user.local.league === league) {
-                        eligibleForTournament = true;
-                        return eligibleForTournament;
-                    }
+            //TODO - why is there an autocompletePlayersTournament variable that is not used on the view?
+            //TODO - why are we not using the promise pattern -> then(), because both helperFunctions return promises
+            helperFunctions.retrieveAllTournamentPlayersBasedOnLeagues(req.params._id, function (playersFromCollection) {
+                var autocompletePlayersTournament = _.map(playersFromCollection, function (player) {
+                    return player.local.nickname;
                 });
-
-                helperFunctions.retrieveAllTournamentPlayersBasedOnLeagues(req.params._id, function (playersFromCollection) {
-                    var autocompletePlayersTournament = _.map(playersFromCollection, function (player) {
-                        return player.local.nickname;
-                    });
-                    helperFunctions.getUserDetails(req.params.userId).then(function (user) {
-                        res.expose(autocompletePlayersTournament, 'playersTournament');
-                        res.render('tournament/tournament-details.ejs', {
-                            user: req.user,
-                            tournament: tournament,
-                            currentDate: new Date(),
-                            userAvatar: user,
-                            userId: req.params.userId,
-                            bronzePlayers: _.filter(playersFromCollection, function (player) {
-                                if (player.local.league === 'Bronze') {
-                                    return player;
-                                }
-                            }),
-                            silverPlayers: _.filter(playersFromCollection, function (player) {
-                                if (player.local.league === 'Silver') {
-                                    return player;
-                                }
-                            }),
-                            goldPlayers: _.filter(playersFromCollection, function (player) {
-                                if (player.local.league === 'Gold') {
-                                    return player;
-                                }
-                            }),
-                            platinumPlayers: _.filter(playersFromCollection, function (player) {
-                                if (player.local.league === 'Platinum') {
-                                    return player;
-                                }
-                            }),
-                            diamondPlayers: _.filter(playersFromCollection, function (player) {
-                                if (player.local.league === 'Diamond') {
-                                    return player;
-                                }
-                            }),
-                            mastersPlayers: _.filter(playersFromCollection, function (player) {
-                                if (player.local.league === 'Master') {
-                                    return player;
-                                }
-                            }),
-                            grandMasterPlayers: _.filter(playersFromCollection, function (player) {
-                                if (player.local.league === 'Grand Master') {
-                                    return player;
-                                }
-                            }),
-                            moment: moment,
-                            enlistedInTournament: enlistedInTournament,
-                            eligibleForTournament: eligibleForTournament,
-                            allPlacesTaken: allPlacesTaken,
-                            procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers)),
-                            tournamentStatus: middleware.tournamentStatus(tournament),
-                            tournamentNotificationMessages: TournamentNotificationMessages
-                        });
+                helperFunctions.getUserDetails(req.params.userId).then(function (user) {
+                    res.expose(autocompletePlayersTournament, 'playersTournament');
+                    res.render('tournament/tournament-details.ejs', {
+                        user: req.user,
+                        tournament: tournament,
+                        currentDate: new Date(),
+                        userAvatar: user,
+                        userId: req.params.userId,
+                        bronzePlayers: _.filter(playersFromCollection, function (player) {
+                            if (player.local.league === 'Bronze') {
+                                return player;
+                            }
+                        }),
+                        silverPlayers: _.filter(playersFromCollection, function (player) {
+                            if (player.local.league === 'Silver') {
+                                return player;
+                            }
+                        }),
+                        goldPlayers: _.filter(playersFromCollection, function (player) {
+                            if (player.local.league === 'Gold') {
+                                return player;
+                            }
+                        }),
+                        platinumPlayers: _.filter(playersFromCollection, function (player) {
+                            if (player.local.league === 'Platinum') {
+                                return player;
+                            }
+                        }),
+                        diamondPlayers: _.filter(playersFromCollection, function (player) {
+                            if (player.local.league === 'Diamond') {
+                                return player;
+                            }
+                        }),
+                        mastersPlayers: _.filter(playersFromCollection, function (player) {
+                            if (player.local.league === 'Master') {
+                                return player;
+                            }
+                        }),
+                        grandMasterPlayers: _.filter(playersFromCollection, function (player) {
+                            if (player.local.league === 'Grand Master') {
+                                return player;
+                            }
+                        }),
+                        moment: moment,
+                        enlistedInTournament: enlistedInTournament,
+                        eligibleForTournament: eligibleForTournament,
+                        allPlacesTaken: allPlacesTaken,
+                        procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers)),
+                        tournamentStatus: middleware.tournamentStatus(tournament),
+                        tournamentNotificationMessages: TournamentNotificationMessages
                     });
                 });
-            }
+            });
         });
     });
+
+    //User.find({_id: req.params.userId}).populate('local.avatar').exec(function (err, playersRetrieved) {
+    //    var ids = playersRetrieved.map(function (player) {
+    //        return player._id;
+    //    });
+    //
+    //    Tournament.findOne({_id: req.params._id, players: {$in: ids}}, function (err, tournament) {
+    //        if (tournament) {
+    //            enlistedInTournament = true;
+    //            return enlistedInTournament;
+    //        }
+    //    });
+    //
+    //    Tournament.findById(req.params._id).populate('players organizer bracket winner').exec(function (err, tournament) {
+    //        if (err) {
+    //            res.send(err);
+    //        } else {
+    //            tournament.openForLeagues.leagues.forEach(function (league) {
+    //                if (req.user.local.league === league) {
+    //                    eligibleForTournament = true;
+    //                    return eligibleForTournament;
+    //                }
+    //            });
+    //
+    //            helperFunctions.retrieveAllTournamentPlayersBasedOnLeagues(req.params._id, function (playersFromCollection) {
+    //                var autocompletePlayersTournament = _.map(playersFromCollection, function (player) {
+    //                    return player.local.nickname;
+    //                });
+    //                helperFunctions.getUserDetails(req.params.userId).then(function (user) {
+    //                    res.expose(autocompletePlayersTournament, 'playersTournament');
+    //                    res.render('tournament/tournament-details.ejs', {
+    //                        user: req.user,
+    //                        tournament: tournament,
+    //                        currentDate: new Date(),
+    //                        userAvatar: user,
+    //                        userId: req.params.userId,
+    //                        bronzePlayers: _.filter(playersFromCollection, function (player) {
+    //                            if (player.local.league === 'Bronze') {
+    //                                return player;
+    //                            }
+    //                        }),
+    //                        silverPlayers: _.filter(playersFromCollection, function (player) {
+    //                            if (player.local.league === 'Silver') {
+    //                                return player;
+    //                            }
+    //                        }),
+    //                        goldPlayers: _.filter(playersFromCollection, function (player) {
+    //                            if (player.local.league === 'Gold') {
+    //                                return player;
+    //                            }
+    //                        }),
+    //                        platinumPlayers: _.filter(playersFromCollection, function (player) {
+    //                            if (player.local.league === 'Platinum') {
+    //                                return player;
+    //                            }
+    //                        }),
+    //                        diamondPlayers: _.filter(playersFromCollection, function (player) {
+    //                            if (player.local.league === 'Diamond') {
+    //                                return player;
+    //                            }
+    //                        }),
+    //                        mastersPlayers: _.filter(playersFromCollection, function (player) {
+    //                            if (player.local.league === 'Master') {
+    //                                return player;
+    //                            }
+    //                        }),
+    //                        grandMasterPlayers: _.filter(playersFromCollection, function (player) {
+    //                            if (player.local.league === 'Grand Master') {
+    //                                return player;
+    //                            }
+    //                        }),
+    //                        moment: moment,
+    //                        enlistedInTournament: enlistedInTournament,
+    //                        eligibleForTournament: eligibleForTournament,
+    //                        allPlacesTaken: allPlacesTaken,
+    //                        procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers)),
+    //                        tournamentStatus: middleware.tournamentStatus(tournament),
+    //                        tournamentNotificationMessages: TournamentNotificationMessages
+    //                    });
+    //                });
+    //            });
+    //        }
+    //    });
+    //});
 });
 
 app.post('/signup-tournament/:_id/:userId', middleware.isLoggedIn, function (req, res) {
@@ -359,3 +424,33 @@ app.post('/send-notification-players/:tournamentId/:userId', middleware.isLogged
 
     res.redirect('/tournament-details/' + req.params.tournamentId + '/' + req.params.userId);
 });
+
+function isUserEnlistedInTournament(user, tournament) {
+    var isEnlisted = [];
+    if(user && tournament) {
+        isEnlisted = tournament.players.filter(function(player) {
+            return player.local.nickname === user.local.nickname;
+        });
+        return isEnlisted.length > 0 ? true : false;
+    }
+}
+
+function isUserEligibleForTournament(user, tournament) {
+    var isEligible = [];
+    if(user && tournament) {
+        isEligible = tournament.openForLeagues.leagues.filter(function(league) {
+            return league === user.local.league;
+        });
+
+        return isEligible.length > 0 ? true : false;
+    }
+}
+
+function areAllPlacesTaken(tournament) {
+    var availablePlaces = null;
+    if(tournament) {
+        availablePlaces = tournament.players.length < tournament.nrOfPlayers;
+    }
+
+    return availablePlaces;
+}

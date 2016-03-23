@@ -42,25 +42,25 @@
                     <%if(tournamentStatus == 1){%>
                         <h4 class="notifier-tournament-status-ongoing alert alert-warning animated fadeIn">
                             <i class="fa fa-exclamation-triangle"></i>
-                            <%= tournamentNotificationMessages.tournamentOngoing%>
+                            <%= tournamentNotificationMessages.tournamentOngoing %>
                         </h4>
                     <%} else if(tournamentStatus == 2){%>
                         <h4 class="notifier-tournament-status-completed alert alert-info animated fadeIn">
                             <i class="fa fa-trophy"></i>
-                            <%= tournamentNotificationMessages.tournamentCompleted%>
+                            <%= tournamentNotificationMessages.tournamentCompleted %>
                         </h4>
                     <%} else {%>
                         <% if(!eligibleForTournament){%>
                             <p class="error-eligible-tournament alert alert-danger animated fadeIn">
                                 <i class="fa fa-lock"></i>
-                                <%= tournamentNotificationMessages.tournamentNotOpenedForPlayer%>
+                                <%= tournamentNotificationMessages.tournamentNotOpenedForPlayer %>
                             </p>
                         <%}%>
 
                         <% if(enlistedInTournament){%>
                             <p class="error-enlisted-tournament alert alert-success animated fadeIn">
                                 <i class="fa fa-check"></i>
-                                <%= tournamentNotificationMessages.tournamentPlayerAlreadyEnlisted%>
+                                <%= tournamentNotificationMessages.tournamentPlayerAlreadyEnlisted %>
                             </p>
                         <%}%>
 

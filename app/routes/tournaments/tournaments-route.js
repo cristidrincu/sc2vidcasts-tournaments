@@ -431,7 +431,7 @@ function isUserEnlistedInTournament(user, tournament) {
         isEnlisted = tournament.players.filter(function(player) {
             return player.local.nickname === user.local.nickname;
         });
-        return isEnlisted.length > 0 ? true : false;
+        return isEnlisted.length > 0;
     }
 }
 
@@ -442,7 +442,7 @@ function isUserEligibleForTournament(user, tournament) {
             return league === user.local.league;
         });
 
-        return isEligible.length > 0 ? true : false;
+        return isEligible.length > 0;
     }
 }
 

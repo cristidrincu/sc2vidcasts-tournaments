@@ -13,7 +13,7 @@ var emailHelpers = require('../../helpers/helpers-email.js');
 
 var helperFunctions = require('../../helpers/helpers-mongoose.js');
 var middleware = require('../../helpers/helpers-middleware.js');
-var tournamentViewHelper = require('../../helpers/view-helpers/tournament');
+var tournamentsViewHelper = require('../../helpers/view-helpers/tournament');
 var userViewHelper = require('../../helpers/view-helpers/user');
 
 require('express-expose'); //for exposing users to auto complete functionality
@@ -22,36 +22,16 @@ var app = module.exports = express();
 
 /* TOURNAMENT ROUTES */
 app.get('/open-tournaments/:userId', middleware.isLoggedIn, function (req, res) {
-<<<<<<< Updated upstream
     helperFunctions.getUserDetails(req.params.userId).then(function (user) {
         helperFunctions.retrieveAllTournaments().then(function (tournaments) {
             res.render('tournament/open-tournaments.ejs', {
                 user: req.user,
                 avatarUser: user,
-                tournaments: tournaments,
+                tournaments: tournamentsViewHelper.renderTournamentsIfAnyAvailable(tournaments),
                 moment: moment
             });
         });
     });
-=======
->>>>>>> Stashed changes
-    res.render('tournament/open-tournaments.ejs', {
-        user: req.user,
-        avatarUser: userViewHelper.userAvatarDetails(req.params.userId),
-        tournaments: tournamentViewHelper.allTournaments(),
-        moment: moment
-    });
-
-    // helperFunctions.getUserDetails(req.params.userId).then(function (user) {
-    //     helperFunctions.retrieveAllTournaments().then(function (tournaments) {
-    //         res.render('tournament/open-tournaments.ejs', {
-    //             user: req.user,
-    //             avatarUser: user,
-    //             tournaments: tournaments,
-    //             moment: moment
-    //         });
-    //     });
-    // });
 });
 
 app.get('/closed-tournaments/:userId', middleware.isLoggedIn, function (req, res) {
@@ -60,7 +40,7 @@ app.get('/closed-tournaments/:userId', middleware.isLoggedIn, function (req, res
             res.render('tournament/closed-tournaments.ejs', {
                 user: req.user,
                 avatarUser: user,
-                tournaments: tournaments,
+                tournaments: tournamentsViewHelper.renderTournamentsIfAnyAvailable(tournaments),
                 moment: moment
             });
         });
@@ -200,91 +180,7 @@ app.get('/tournament-details/:_id/:userId', middleware.isLoggedIn, function (req
                 });
             });
         });
-    });
-
-    //User.find({_id: req.params.userId}).populate('local.avatar').exec(function (err, playersRetrieved) {
-    //    var ids = playersRetrieved.map(function (player) {
-    //        return player._id;
-    //    });
-    //
-    //    Tournament.findOne({_id: req.params._id, players: {$in: ids}}, function (err, tournament) {
-    //        if (tournament) {
-    //            enlistedInTournament = true;
-    //            return enlistedInTournament;
-    //        }
-    //    });
-    //
-    //    Tournament.findById(req.params._id).populate('players organizer bracket winner').exec(function (err, tournament) {
-    //        if (err) {
-    //            res.send(err);
-    //        } else {
-    //            tournament.openForLeagues.leagues.forEach(function (league) {
-    //                if (req.user.local.league === league) {
-    //                    eligibleForTournament = true;
-    //                    return eligibleForTournament;
-    //                }
-    //            });
-    //
-    //            helperFunctions.retrieveAllTournamentPlayersBasedOnLeagues(req.params._id, function (playersFromCollection) {
-    //                var autocompletePlayersTournament = _.map(playersFromCollection, function (player) {
-    //                    return player.local.nickname;
-    //                });
-    //                helperFunctions.getUserDetails(req.params.userId).then(function (user) {
-    //                    res.expose(autocompletePlayersTournament, 'playersTournament');
-    //                    res.render('tournament/tournament-details.ejs', {
-    //                        user: req.user,
-    //                        tournament: tournament,
-    //                        currentDate: new Date(),
-    //                        userAvatar: user,
-    //                        userId: req.params.userId,
-    //                        bronzePlayers: _.filter(playersFromCollection, function (player) {
-    //                            if (player.local.league === 'Bronze') {
-    //                                return player;
-    //                            }
-    //                        }),
-    //                        silverPlayers: _.filter(playersFromCollection, function (player) {
-    //                            if (player.local.league === 'Silver') {
-    //                                return player;
-    //                            }
-    //                        }),
-    //                        goldPlayers: _.filter(playersFromCollection, function (player) {
-    //                            if (player.local.league === 'Gold') {
-    //                                return player;
-    //                            }
-    //                        }),
-    //                        platinumPlayers: _.filter(playersFromCollection, function (player) {
-    //                            if (player.local.league === 'Platinum') {
-    //                                return player;
-    //                            }
-    //                        }),
-    //                        diamondPlayers: _.filter(playersFromCollection, function (player) {
-    //                            if (player.local.league === 'Diamond') {
-    //                                return player;
-    //                            }
-    //                        }),
-    //                        mastersPlayers: _.filter(playersFromCollection, function (player) {
-    //                            if (player.local.league === 'Master') {
-    //                                return player;
-    //                            }
-    //                        }),
-    //                        grandMasterPlayers: _.filter(playersFromCollection, function (player) {
-    //                            if (player.local.league === 'Grand Master') {
-    //                                return player;
-    //                            }
-    //                        }),
-    //                        moment: moment,
-    //                        enlistedInTournament: enlistedInTournament,
-    //                        eligibleForTournament: eligibleForTournament,
-    //                        allPlacesTaken: allPlacesTaken,
-    //                        procentajOcupare: (tournament.players.length * (100 / tournament.nrOfPlayers)),
-    //                        tournamentStatus: middleware.tournamentStatus(tournament),
-    //                        tournamentNotificationMessages: TournamentNotificationMessages
-    //                    });
-    //                });
-    //            });
-    //        }
-    //    });
-    //});
+    });    
 });
 
 app.post('/signup-tournament/:_id/:userId', middleware.isLoggedIn, function (req, res) {
@@ -437,8 +333,6 @@ app.post('/send-notification-players/:tournamentId/:userId', middleware.isLogged
                         userAvatar: user
                     });
                 }
-
-//					console.log(response);
             });
         });
     });

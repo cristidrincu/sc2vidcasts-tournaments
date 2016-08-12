@@ -20,7 +20,7 @@
 
 node_modules/
 app/tests
-config/
+#config/
 ## File-based project format
 .ipr
 .iws

@@ -1195,7 +1195,7 @@ ul.edit-menu-tournament{
 }
 
 .container-profile-elements{
-    margin-top: 30px;
+    /*margin-top: 30px;*/
     margin-left: 25px;
 }
 
@@ -1245,9 +1245,8 @@ p.no-messages{
     min-width: 1024px;
     width: 100%;
     height: auto;
-    position: fixed;
-    top: 50px;
-    left: 0;
+    /*top: 50px;*/
+    /*left: 0;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

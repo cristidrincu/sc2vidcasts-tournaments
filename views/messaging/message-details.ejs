@@ -1,0 +1,50 @@
+<% include ../partials/header.ejs %>
+    <% userAvatar.local.avatar.forEach(function(avatar){%>
+        <%if(user.local.role == 'admin'){%>
+            <% include ../partials/sidebar-admin.ejs %>
+        <%}else if(user.local.role == 'Organizator'){%>
+            <% include ../partials/sidebar-organizer.ejs %>
+        <%}else{%>
+            <% include ../partials/sidebar.ejs %>
+    <%}%>
+<%})%>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Mesaje primite</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- /.panel -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-clock-o fa-fw"></i> Continut mesaj
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <% messageDetails.sentBy.forEach(function(sender){%>
+                        <a href="/profile-details/<%= sender._id%>"><%= sender.local.nickname%></a> a scris:
+                        <h3><%= messageDetails.messageSubject.replace(/(<([^>]+)>)/ig, "")%></h3>
+                        <p><%= messageDetails.messageBody.replace(/(<([^>]+)>)/ig, "")%></p>
+                        <ul class="two-button-set-list">
+                            <li><a class="btn btn-success" href="/send-reply/<%= sender._id%>/<%= messageDetails._id%>">Raspunde</a></li>
+                            <li>
+                                <form action="/delete-message/<%= messageDetails._id%>" method="post">
+                                    <button class="btn btn-danger">Sterge mesajul</button>
+                                </form>
+                            </li>
+                        </ul>
+
+
+                    <%});%>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<% include ../partials/footer.ejs %>

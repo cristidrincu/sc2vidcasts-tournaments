@@ -1,37 +1,27 @@
+//ALWAYS REQUIRE MONGOOSE BEFORE ANY OTHER MODELS. IF NOT, YOU'LL GET OBJECT OBJECT DOES NOT HAVE SCHEMA DEFINED
 var mongoose = require('mongoose');
+var Tournament = require('./tournament.js');
 var bcrypt = require('bcrypt-nodejs');
 
 //define the schema for our user model
 var userSchema = mongoose.Schema({
-
   local : {
+    nickname: String,
+    battlenetid: String,
     email: String,
     password: String,
     race: String,
-    league: String
-  },
-
-  facebook: {
-    id: String,
-    token: String,
-    email: String,
-    name: String
-  },
-
-  twitter: {
-    id: String,
-    token: String,
-    displayName: String,
-    username: String
-  },
-
-  google: {
-    id: String,
-    token: String,
-    email: String,
-    name: String
+    league: String,
+    role: String,
+    website: String,
+    avatarImage: String,
+    tournaments: [{
+       type: mongoose.Schema.Types.ObjectId, ref: "Tournament"
+    }],
+    avatar: [{
+      type: mongoose.Schema.Types.ObjectId, ref: "Avatar"
+    }]
   }
-
 });
 
 //generating a hash

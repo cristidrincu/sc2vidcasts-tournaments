@@ -1,0 +1,166 @@
+<% include ../partials/header.ejs %>
+<% userAvatar.local.avatar.forEach(function(avatar){%>
+    <%if(user.local.role == 'User'){%>
+        <% include ../partials/sidebar.ejs %>
+    <%}else if(user.local.role == 'Organizator'){%>
+        <% include ../partials/sidebar-organizer.ejs%>
+    <%}else if(user.local.role == 'admin'){%>
+        <% include ../partials/sidebar-admin.ejs%>
+    <%}%>
+
+<%});%>
+
+<script>
+    <%- javascript %>
+    $(function() {
+        $( "#playerNicks" ).autocomplete({
+            source: $.map(playersTournament, function(nickname){
+                return nickname;
+            })
+        });
+    });
+</script>
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <h1 class="page-header">Detalii <i>
+                        <%= tournament.tournamentName %>, editia <%= tournament.edition > 1 ? 'a ' + tournament.edition + '-a' : '1' %>
+                    </i>
+                </h1>
+            </div>
+            <div class="col-lg-4">
+                <%if(user.local.role == 'Organizator' && !tournament.finishedTournament && ( user._id.toString() === tournament.organizer[0]._id.toString() )){%>
+                <ul class="edit-menu-tournament">
+                    <li>
+                        <a class="btn btn-info" href="/edit-tournament/<%= tournament._id %>/<%= user._id %>"><i class="fa fa-wrench"></i> Editeaza turneul</a>
+                    </li>
+                </ul>
+
+                <%}else if(user.local.role == 'User'){%>
+                    <%if(tournamentStatus == 1){%>
+                        <h4 class="notifier-tournament-status-ongoing alert alert-warning animated fadeIn">
+                            <i class="fa fa-exclamation-triangle"></i>
+                            <%= tournamentNotificationMessages.tournamentOngoing %>
+                        </h4>
+                    <%} else if(tournamentStatus == 2){%>
+                        <h4 class="notifier-tournament-status-completed alert alert-info animated fadeIn">
+                            <i class="fa fa-trophy"></i>
+                            <%= tournamentNotificationMessages.tournamentCompleted %>
+                        </h4>
+                    <%} else {%>
+                        <% if(!eligibleForTournament){%>
+                            <p class="error-eligible-tournament alert alert-danger animated fadeIn">
+                                <i class="fa fa-lock"></i>
+                                <%= tournamentNotificationMessages.tournamentNotOpenedForPlayer %>
+                            </p>
+                        <%}%>
+
+                        <% if(enlistedInTournament){%>
+                            <p class="error-enlisted-tournament alert alert-success animated fadeIn">
+                                <i class="fa fa-check"></i>
+                                <%= tournamentNotificationMessages.tournamentPlayerAlreadyEnlisted %>
+                            </p>
+                        <%}%>
+
+                        <% if(eligibleForTournament && !enlistedInTournament && (procentajOcupare != 100) ){%>
+                            <form class="btn-signup-turneu-detalii" action="/signup-tournament/<%= tournament._id %>/<%= user._id %>" method="post">
+                                <button class="btn btn-success">Inscrie-te</button>
+                            </form>
+                        <%}%>
+                    <%}%>
+                <%}else if(user.local.role == 'admin'){%>
+                    <div class="edit-options-tournament-admin">
+                        <ul>
+                            <li><a class="btn btn-info" href="/edit-tournament/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-wrench"></i> Editeaza turneul</a></li>
+                            <li><a class="btn btn-danger" href="/delete-tournament/<%= tournament._id%>/<%= user._id%>"><i class="fa fa-trash"></i> Sterge turneul</a></li>
+                        </ul>
+                    </div>
+                    <br class="clearFloats"/>
+                <%}%>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 animated fadeInRight">
+            <ul class="nav nav-tabs tabs-player-enlisted" role="tablist">
+                <li class="active"><a href="#detalii-turneu" role="tab" data-toggle="tab">Detalii turneu</a></li>
+                <li><a href="#castigator-turneu" role="tab" data-toggle="tab">Castigator turneu</a></li>
+                <% if(user.local.role === 'admin' || user.local.role === 'Organizator') {%>
+                    <li><a href="#create-brackets-panel" role="tab" data-toggle="tab">Brackets turneu</a></li>
+                    <li><a href="#send-notification-panel" role="tab" data-toggle="tab">Trimite notificari jucatorilor</a></li>
+                <%} else {%>
+                    <li><a href="#view-brackets-panel" role="tab" data-toggle="tab">Vizualizare link brackets</a></li>
+                <%}%>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="detalii-turneu">
+                    <% include ../tournament/partials-tournament-details/grad-ocupare-locuri.ejs %>
+                    <% include ../tournament/partials-tournament-details/date-hour-spots-details.ejs %>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default enlisted-players-main-container">
+                            <div class="panel-heading">
+                                <i class="fa fa-user-plus fa-fw"></i> Jucatori inscrisi: <%= tournament.players.length%>
+                            </div>
+
+                            <% include ../tournament/partials-tournament-details/tournament-players-tabs.ejs %>
+                                <div class="tab-content">
+                                    <!--BRONZE PLAYERS TAB-->
+                                    <% include ../tournament/partials-tournament-details/tournament-players-bronze.ejs %>
+
+                                    <!--SILVER PLAYERS TAB-->
+                                    <% include ../tournament/partials-tournament-details/tournament-players-silver.ejs %>
+
+                                    <!--GOLD PLAYERS TAB-->
+                                    <% include ../tournament/partials-tournament-details/tournament-players-gold.ejs %>
+
+                                    <!--PLATINUM PLAYERS TAB-->
+                                    <% include ../tournament/partials-tournament-details/tournament-players-platinum.ejs %>
+
+                                    <!--DIAMOND PLAYERS TAB-->
+                                    <% include ../tournament/partials-tournament-details/tournament-players-diamond.ejs %>
+
+                                    <!--MASTERS PLAYERS TAB-->
+                                    <% include ../tournament/partials-tournament-details/tournament-players-masters.ejs %>
+
+                                    <!--GRAND MASTERS PLAYERS TAB-->
+                                    <% include ../tournament/partials-tournament-details/tournament-players-grand-master.ejs %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <% include ../tournament/partials-tournament-details/tournament-details-text.ejs %>
+                        <% include ../tournament/partials-tournament-details/tournament-organizer.ejs %>
+                    </div>
+
+                    <div class="row">
+                        <% include ../tournament/partials-tournament-details/tournament-open-for-leagues.ejs %>
+                        <% include ../tournament/partials-tournament-details/tournament-chat-channel.ejs %>
+                        <% include ../tournament/partials-tournament-details/tournament-twitch-channel.ejs %>
+                        <% include ../tournament/partials-tournament-details/tournament-prizes.ejs %>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="castigator-turneu">
+                    <% include ../tournament/partials-tournament-details/tournament-winner.ejs %>
+                </div>
+                <div class="tab-pane fade" id="create-brackets-panel">
+                    <% include ../tournament/partials-tournament-details/tournament-brackets.ejs %>
+                </div>
+                <div class="tab-pane fade" id="view-brackets-panel">
+                    <% include ../tournament/partials-tournament-details/view-tournament-brackets.ejs %>
+                </div>
+                <div class="tab-pane fade" id="send-notification-panel">
+                    <% include ../tournament/partials-tournament-details/send-notification-to-players.ejs %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%include ../partials/footer.ejs%>

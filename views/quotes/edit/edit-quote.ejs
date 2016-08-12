@@ -1,0 +1,25 @@
+<% include ../../partials/header.ejs%>
+<div class="container container-edit-quote">
+
+    <div class="col-sm-6 col-sm-offset-3">
+        <!-- Update FORM -->
+        <form action="/edit-quote/<%=quote._id%>" method="post">
+            <div class="form-group">
+                <label>Update Quote Author</label>
+                <input type="text" class="form-control" name="quoteAuthor" value="<%=quote.quoteAuthor%>">
+            </div>
+            <div class="form-group">
+                <label>Update Quote Text</label>
+                <textarea class="form-control" name="quoteText" rows="5" wrap="soft"><%= quote.quoteText%></textarea>
+            </div>
+            <button type="submit" class="btn btn-success btn-lg">Update</button>
+            <a href="/profile">
+                <button type="submit" class="btn btn-danger btn-lg">Anuleaza</button>
+            </a>
+        </form>
+        <hr>
+    </div>
+
+</div>
+
+<% include ../../partials/footer.ejs%>

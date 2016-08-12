@@ -1,0 +1,66 @@
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="container-image-user">
+                <a href="/profile">
+                    <img alt="User Pic" width="200" height="200" src="../..<%=avatar.imagePath + '/' + avatar.imageName%>" class="img-circle main-profile-image"/>
+                </a>
+            </li>
+            <li class="sidebar-search">
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                </div>
+                <!-- /input-group -->
+            </li>
+
+            <!--PERSONAL section of the website-->
+            <!--<li class="menu-section-text"><a class="active" href="#"><i class="fa fa-eye fa-fw"></i> Personal</a></li>-->
+            <!-- TODO - Implement this feature in a future release-->
+            <!--<li>-->
+                <!--<a href="/user-messages/<%= user._id%>"><i class="fa fa-envelope fa-fw"></i> Mesajele tale<span class="fa arrow"></span></a>-->
+            <!--</li>-->
+
+            <!--ACTIUNI section of the website-->
+            <li class="menu-section-text">
+                <a class="active" href="#"><i class="fa fa-cog fa-fw"></i> Actiuni</a>
+            </li>
+            <li>
+                <a href="/upload-avatar/<%=user._id%>"><i class="fa fa-cog fa-fw"></i> Adauga imagini avatar<span class="fa arrow"></span></a>
+            </li>
+            <li>
+                <a href="/create-new-quote/<%=user._id%>"><i class="fa fa-university fa-fw"></i> Adauga un citat<span class="fa arrow"></span></a>
+            </li>
+
+            <!--ALTE INFORMATII section of the website-->
+            <li class="menu-section-text">
+                <a class="active" href="/backend-admin/<%= user._id%>"><i class="fa fa-tachometer fa-fw"></i> Alte informatii</a>
+            </li>
+            <li>
+                <a href="/avatars-users-admin/<%=user._id%>"><i class="fa fa-picture-o fa-fw"></i> Colectie avatare<span class="fa arrow"></span></a>
+            </li>
+            <li>
+                <a href="/quotes-admin/<%=user._id%>"><i class="fa fa-university fa-fw"></i> Colectie citate<span class="fa arrow"></span></a>
+            </li>
+            <li>
+                <a href="/players/<%=user._id%>"><i class="fa fa-gamepad fa-fw"></i> Jucatori<span class="fa arrow"></span></a>
+            </li>
+            <li>
+                <a href="/admin-organizers/<%=user._id%>"><i class="fa fa-users fa-fw"></i> Organizatori<span class="fa arrow"></span></a>
+            </li>
+            <li>
+                <a href="/open-tournaments/<%=user._id%>" class="display-active-tournaments"><i class="fa fa-trophy fa-fw"></i> Turnee deschise<span class="fa arrow"></span></a>
+            </li>
+            <li>
+                <a href="/closed-tournaments/<%=user._id%>" class="display-leagues-players"><i class="fa fa-trophy fa-fw"></i> Turnee terminate<span class="fa arrow"></span></a>
+            </li>
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>
+<!-- /.navbar-public-side -->
+</nav>

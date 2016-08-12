@@ -1,0 +1,91 @@
+<% include ../partials/header.ejs %>
+<% userAvatar.local.avatar.forEach(function(avatar){%>
+    <%if(user.local.role == 'admin'){%>
+        <% include ../partials/sidebar-admin.ejs %>
+    <%}else if(user.local.role == 'Organizator'){%>
+        <% include ../partials/sidebar-organizer.ejs %>
+    <%}else{%>
+        <% include ../partials/sidebar.ejs %>
+    <%}%>
+<%})%>
+<script>
+    tinymce.init({
+        selector:'textarea',
+        force_br_newlines : false,
+        force_p_newlines : false,
+        forced_root_block : ''
+    });
+</script>
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Compune un mesaj</h1>
+            <form action="/send-message/<%= messageReceiver._id%>" method="post" role="form">
+                <div class="col-lg-8">
+                    <div class="form-group">
+                        <label for="messageSubject">Subiectul mesajului</label>
+                        <input type="text" name="messageSubject" id="messageSubject" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="10" name="message"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-success" type="submit" value="Trimite mesajul"/>
+                        <%if(user.local.role == 'admin'){%>
+                            <a href="/backend-admin/<%= user._id%>"><input class="btn btn-danger" value="Anuleaza"/></a>
+                        <%}else if(user.local.role == 'Organizator'){%>
+                            <a href="/backend-organizer/<%= user._id%>"><input class="btn btn-danger" value="Anuleaza"/></a>
+                        <%}else{%>
+                            <a href="/user-messages/<%= user._id%>"><input class="btn btn-danger" value="Anuleaza"/></a>
+                        <%}%>
+                    </div>
+                </div>
+            </form>
+            <div class="col-lg-4">
+                <div class="panel panel-default message-receiver-container">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Acest mesaj va ajunge la...</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-lg-4">
+                            <% messageReceiver.local.avatar.forEach(function(avatar){%>
+                            <img class="img-circle profile-pic-send-message" src="<%= avatar.imagePath + '/' + avatar.imageName%>"/>
+                            <%})%>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="containerNicknameRaceBNet">
+                                <h1><span> <%=messageReceiver.local.nickname%></span></h1>
+                                <h5><%= messageReceiver.local.race%> | BnetID: <%= messageReceiver.local.battlenetid%> | <%= messageReceiver.local.league%></h5>
+                                <a href="/profile-details/<%=messageReceiver._id%>">Profil complet</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default receiver-tournaments">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Turneele in care participa</h3>
+                        </div>
+                        <div class="panel-body">
+                            <% if(messageReceiver.local.tournaments.length == 0){%>
+                                <h5>Nu participa in cadrul niciunui turneu</h5>
+                            <%}%>
+                            <% messageReceiver.local.tournaments.forEach(function(tournament){%>
+                                <div class="send-message-tournament-container">
+                                    <h5>
+                                        <%= tournament.tournamentName%> |
+                                            Grad ocupare: <%= Math.floor(tournament.players.length * (100 / tournament.nrOfPlayers)) + '%' %>|
+                                            <a href="/tournament-details/<%=tournament._id%>/<%=user._id%>">Detalii</a>
+                                    </h5>
+                                </div>
+                            <%})%>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer.ejs %>

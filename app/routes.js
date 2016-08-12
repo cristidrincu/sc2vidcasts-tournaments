@@ -1,61 +1,68 @@
 /**
  * Created by cristiandrincu on 7/28/14.
+ * Routes file
  */
+var express = require('express');
+var fs = require('fs');
+var helperFunctions = require('./helpers/helpers-mongoose');
+var middleware = require('./helpers/helpers-middleware.js');
+var Avatar = require('./models/avatar.js');
 
-//pass the routes to our app, as well as to passport
-module.exports = function(app, passport){
+module.exports = function (app) {
 
-  app.get('/', function(req, res){
-    res.render('index.ejs');
-  });
+  /*RULES FOR ACCESS*/
+  app.all('/profile/*', middleware.isLoggedIn);
+  app.all('/customize-profile/*', middleware.isLoggedIn);
 
-  app.get('/login', function(req, res){
-    res.render('login.ejs', { message: req.flash('loginMessage') });
-  });
 
-  //process the login form
-  app.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/profile', // redirect to the secure profile section
-    failureRedirect : '/login', // redirect back to the signup page if there is an error
-    failureFlash : true // allow flash messages
-  }));
-
-  app.get('/signup', function(req, res){
-      res.render('signup.ejs', { message: req.flash('signupMessage')} );
-  });
-
-  //process the signup form
-  app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/profile', // redirect to the secure profile section
-    failureRedirect : '/signup', // redirect back to the signup page if there is an error
-    failureFlash : true // allow flash messages
-  }));
-
-  //PROFILE SELECTION
-  // we will want this protected so you have to be logged in to visit
-  // we will use route middleware to verify this (the isLoggedIn function)
-  app.get('/profile', isLoggedIn, function(req, res){
-    res.render('profile.ejs', {
-      message: req.flash('signupSuccess'), //get the message out of the session and pass to template
-      user: req.user//get the user out of session and pass to template
+  app.get('/upload-avatar/:userId', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
+    helperFunctions.getUserDetails(req.params.userId).then(function(user){
+      helperFunctions.retrieveAllTournaments().then(function(tournaments){
+        res.render('backend/admin-upload-avatars.ejs', {
+          user: req.user,
+          avatarUser: user,
+          tournaments: tournaments
+        });
+      });
     });
   });
 
-  //LOGOUT
-  app.get('/logout', function(req, res){
-    req.logout();
-    res.redirect('/');
+  app.post('/upload-avatar', middleware.isLoggedIn, middleware.requireRole('admin'), function(req, res){
+
+    var avatarRaceCategory = null;
+
+    req.busboy.on('field', function(fieldname, value){
+      avatarRaceCategory = value;
+      return avatarRaceCategory;
+    });
+
+    var fstream;
+    req.pipe(req.busboy);
+    req.busboy.on('file', function(fieldname, file, filename){
+      console.log('Uploading: ' + filename);
+      fstream = fs.createWriteStream(__dirname + '/../public/uploads/user-profile-images/' + avatarRaceCategory + '/' + filename);
+      file.pipe(fstream);
+      fstream.on('close', function(err){
+        if(err){
+          console.log(err);
+        }else{
+          Avatar.findOne({ 'imageName': filename }).exec(function(err, avatar){
+            if(avatar){
+              res.redirect('/backend-admin');
+            }else{
+              var newAvatarImage = new Avatar();
+              newAvatarImage.imageName = filename;
+              newAvatarImage.imageRaceCategory = avatarRaceCategory;
+              newAvatarImage.imagePath = '/uploads/user-profile-images/' + avatarRaceCategory;
+              newAvatarImage.save(function(err){
+                if(err)
+                  throw err;
+                res.redirect('/backend-admin/' + req.user._id);
+              });
+            }
+          });
+        }
+      });
+    });
   });
-
 };
-
-//route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next){
-  //if user is authenticated in the session, carry on
-  if(req.isAuthenticated()){
-    return next();
-  }
-
-  //if they aren't, redirect them to homepage
-  res.redirect('/');
-}

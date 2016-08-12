@@ -1,0 +1,11 @@
+<div class="row container-elements-create-brackets">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <% if( !tournament.bracketsPublished ) {%>
+            <h3>Brackets-urile nu au fost inca publicate!</h3>
+            <p  style="color: red">Vei primi un e-mail de notificare atunci cand vor fi postate!</p>
+        <%}else {%>
+            <h3>Brackets-urile pentru acest turneu pot fi accesate mai jos:</h3>
+            <a href="<%= tournament.bracketsLink%>" target="_blank">Click aici pentru brackets</a>
+        <%}%>
+    </div>
+</div>

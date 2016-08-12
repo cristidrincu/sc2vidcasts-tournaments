@@ -1,0 +1,21 @@
+.welcome-title-summary-backend{
+    font-size: 43px;
+    color: lightslategrey;
+}
+
+.welcome-text-summary-backend{
+    font-size: 21px;
+    margin-bottom: 10px;
+    color: #808080
+}
+
+.cristian-drincu-signature{
+    margin-right: 50px;
+    font-size: 18px;
+    color: lightslategrey;
+    font-style: italic;
+}
+
+.title-reports-element{
+    font-size: 30px;
+}
